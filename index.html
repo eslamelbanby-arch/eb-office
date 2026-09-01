@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EB OFFICE - حلول الأعمال، الأنظمة المحاسبية، السير الذاتية ATS، الأعمال والذكاء الاصطناعي" />
+  <meta name="description" content="EB OFFICE - حلول الأعمال والأنظمة المحاسبية وتطوير المواقع والخدمات الرقمية" />
   <title>EB OFFICE | Business & Digital Solutions</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,166 +14,137 @@
     :root{
       --black:#090909; --dark:#111214; --gold:#d4af37; --gold2:#f0cf68;
       --white:#fff; --soft:#f8f9fa; --muted:#6c757d; --line:#e9ecef;
-      --shadow:0 20px 40px rgba(0,0,0,.08);
-      --card-border:rgba(212,175,55,0.18);
+      --shadow:0 15px 35px rgba(0,0,0,.08);
+      --card-border:rgba(212,175,55,0.2);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
-    body{font-family:"Cairo",sans-serif;color:#1a1a1a;background:#fff;line-height:1.8}
+    body{font-family:"Cairo",sans-serif;color:#1a1a1a;background:#fff;line-height:1.8;overflow-x:hidden}
     a{text-decoration:none;color:inherit}
     .container{width:min(1180px,92%);margin:auto}
-    header{position:sticky;top:0;z-index:50;background:rgba(9,9,9,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(212,175,55,.25)}
-    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-    .brand{display:flex;align-items:center;gap:12px;color:#fff;font-weight:900;letter-spacing:1px}
-    .brand-mark{width:44px;height:36px;display:grid;place-items:center;font-size:24px;font-weight:900;border-left:3px solid var(--gold);transform:skew(-10deg);background:rgba(212,175,55,0.08);border-radius:4px}
+    
+    header{position:sticky;top:0;z-index:100;background:#090909;border-bottom:1px solid rgba(212,175,55,.25)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900}
+    .brand-mark{width:42px;height:36px;display:grid;place-items:center;font-size:22px;font-weight:900;border-left:3px solid var(--gold);transform:skew(-10deg);background:rgba(212,175,55,0.1);border-radius:4px}
     .brand-mark span{color:var(--gold)}
-    .brand small{display:block;font-size:9px;letter-spacing:1.5px;color:#bbb;margin-top:-3px;font-weight:600}
-    nav{display:flex;gap:24px;color:#ddd;font-size:15px;font-weight:600}
-    nav a{transition:.25s;position:relative;padding:6px 0}
+    .brand small{display:block;font-size:9px;letter-spacing:1px;color:#bbb;margin-top:-2px}
+    nav{display:flex;gap:20px;color:#ddd;font-size:15px;font-weight:600}
+    nav a{transition:.25s;padding:6px 0}
     nav a:hover,nav a.active{color:var(--gold)}
+    
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:10px;border:1px solid var(--gold);font-weight:700;font-size:15px;cursor:pointer;transition:all .3s ease}
-    .btn-gold{background:var(--gold);color:#111;box-shadow:0 4px 15px rgba(212,175,55,0.3)}
-    .btn-gold:hover{background:var(--gold2);transform:translateY(-3px);box-shadow:0 8px 25px rgba(212,175,55,0.4)}
+    .btn-gold{background:var(--gold);color:#111}
+    .btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
     .btn-dark{background:transparent;color:#fff}
-    .btn-dark:hover{background:rgba(212,175,55,.12);transform:translateY(-3px)}
+    .btn-dark:hover{background:rgba(212,175,55,.12)}
     .menu{display:none;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
 
-    .hero{background:radial-gradient(circle at 75% 30%,#202020 0,#101113 50%,#080808 100%);color:#fff;overflow:hidden;padding-bottom:50px}
-    .hero-grid{min-height:580px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:35px}
-    .hero-copy{padding:60px 0}
-    .eyebrow{color:var(--gold);font-size:14px;letter-spacing:2px;font-weight:800;margin-bottom:12px;text-transform:uppercase}
-    h1{font-size:clamp(36px,4.5vw,62px);line-height:1.25;margin-bottom:18px;font-weight:900}
+    .hero{background:radial-gradient(circle at 75% 30%,#202020 0,#101113 50%,#080808 100%);color:#fff;padding:50px 0 70px}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:35px}
+    .eyebrow{color:var(--gold);font-size:14px;letter-spacing:1.5px;font-weight:800;margin-bottom:10px}
+    h1{font-size:clamp(32px,4vw,56px);line-height:1.3;margin-bottom:18px;font-weight:900}
     h1 span{color:var(--gold)}
-    .hero-copy p{color:#d6d6d6;font-size:17px;max-width:580px;margin-bottom:28px}
-    .actions{display:flex;gap:14px;flex-wrap:wrap}
-    .hero-art{position:relative;min-height:420px;display:flex;align-items:center;justify-content:center}
-    .laptop{width:min(500px,100%);height:290px;border:10px solid #252525;border-radius:18px;background:#030303;box-shadow:0 35px 75px rgba(0,0,0,0.8);transform:perspective(900px) rotateY(-6deg);display:flex;align-items:center;justify-content:center;padding:12px}
-    .screen{width:100%;height:100%;background:linear-gradient(145deg,#0a0a0a,#161616);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid #333;padding:15px}
-    .screen .big-eb{font-size:62px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}.screen .big-eb b{color:var(--gold)}
-    .screen .brand-title{font-size:13px;letter-spacing:2px;color:#fff;font-weight:700;margin-bottom:2px}
-    .screen .brand-sub{font-size:10px;letter-spacing:2px;color:#aaa}
-    .base{position:absolute;bottom:8%;width:76%;height:18px;background:#2c2c2c;border-radius:50% 50% 8px 8px;box-shadow:0 15px 25px #000}
+    .hero-copy p{color:#d6d6d6;font-size:16.5px;max-width:560px;margin-bottom:28px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-art{display:flex;align-items:center;justify-content:center}
+    .laptop{width:min(460px,100%);height:260px;border:9px solid #252525;border-radius:16px;background:#030303;box-shadow:0 25px 60px rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;padding:10px}
+    .screen{width:100%;height:100%;background:linear-gradient(145deg,#0a0a0a,#161616);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid #333}
+    .screen .big-eb{font-size:54px;font-weight:900;color:#fff;line-height:1.1}.screen .big-eb b{color:var(--gold)}
+    .screen .brand-title{font-size:12px;letter-spacing:1.5px;color:#fff;font-weight:700;margin-top:4px}
 
-    .stats{margin-top:-45px;position:relative;z-index:3}
-    .stats-box{background:#fff;border-radius:16px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(2,1fr);padding:25px;border:1px solid var(--line);max-width:700px;margin:auto}
+    .stats{margin-top:-40px;position:relative;z-index:10}
+    .stats-box{background:#fff;border-radius:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(2,1fr);padding:20px;border:1px solid var(--line);max-width:600px;margin:auto}
     .stat{text-align:center;border-left:1px solid #eee}
     .stat:last-child{border-left:0}
-    .stat strong{display:block;font-size:32px;font-weight:900;color:#111}
-    .stat span{color:var(--muted);font-size:15px;font-weight:600}
+    .stat strong{display:block;font-size:30px;font-weight:900;color:#111}
+    .stat span{color:var(--muted);font-size:14px;font-weight:600}
 
-    section{padding:90px 0}
-    .section-head{text-align:center;margin-bottom:40px}
-    .section-head .eyebrow{margin-bottom:6px}
-    .section-head h2{font-size:36px;font-weight:800}
-    .section-head p{color:var(--muted);margin-top:8px;font-size:16px}
+    section{padding:80px 0}
+    .section-head{text-align:center;margin-bottom:35px}
+    .section-head h2{font-size:34px;font-weight:800}
+    .section-head p{color:var(--muted);margin-top:6px;font-size:15px}
     
     .services{background:var(--soft)}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .card{background:#fff;border:1px solid var(--card-border);border-radius:18px;padding:32px;transition:all .3s ease}
-    .card:hover{transform:translateY(-8px);box-shadow:0 22px 45px rgba(0,0,0,.09);border-color:var(--gold)}
-    .icon{width:56px;height:56px;border-radius:14px;background:#111;color:var(--gold);display:grid;place-items:center;font-size:24px;margin-bottom:20px}
-    .card h3{margin-bottom:10px;font-size:20px;font-weight:700}.card p{color:var(--muted);font-size:14px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:#fff;border:1px solid var(--card-border);border-radius:16px;padding:28px;transition:all .3s ease}
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--gold)}
+    .icon{width:50px;height:50px;border-radius:12px;background:#111;color:var(--gold);display:grid;place-items:center;font-size:22px;margin-bottom:16px}
+    .card h3{margin-bottom:8px;font-size:19px;font-weight:700}.card p{color:var(--muted);font-size:13.5px}
 
     /* أزرار الفلترة */
-    .filter-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:35px}
-    .filter-btn{padding:9px 20px;border-radius:30px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:14px;font-weight:700;color:#444;cursor:pointer;transition:all .25s ease}
-    .filter-btn:hover,.filter-btn.active{background:var(--gold);color:#111;border-color:var(--gold);transform:translateY(-2px);box-shadow:0 6px 15px rgba(212,175,55,0.25)}
+    .filter-tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+    .filter-btn{padding:8px 18px;border-radius:25px;border:1px solid #ddd;background:#fff;font-family:inherit;font-size:14px;font-weight:700;color:#444;cursor:pointer;transition:.2s}
+    .filter-btn.active,.filter-btn:hover{background:var(--gold);color:#111;border-color:var(--gold)}
 
-    /* معرض الأعمال الشامل */
+    /* المعرض */
     .portfolio{background:#fff}
-    .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-    .port-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:all .35s ease;display:flex;flex-direction:column}
-    .port-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 45px rgba(0,0,0,.1)}
-    .port-img{width:100%;height:230px;background:#181818;position:relative;overflow:hidden;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center}
-    .port-img img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .4s ease;display:block}
-    .port-card:hover .port-img img{transform:scale(1.06)}
-    .port-tag{position:absolute;top:14px;right:14px;background:rgba(9,9,9,0.85);color:var(--gold);padding:5px 14px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid rgba(212,175,55,0.35);backdrop-filter:blur(6px);z-index:2}
-    .port-body{padding:24px;display:flex;flex-direction:column;flex-grow:1}
-    .port-body h3{font-size:18px;font-weight:800;margin-bottom:10px;color:#111}
-    .port-body p{font-size:13.5px;color:var(--muted);margin-bottom:20px;line-height:1.7;flex-grow:1}
+    .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .port-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 25px rgba(0,0,0,0.04);transition:.3s;display:flex;flex-direction:column}
+    .port-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:var(--shadow)}
+    .port-img{width:100%;height:220px;background:#1a1a1a;position:relative;overflow:hidden}
+    .port-img img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+    .port-tag{position:absolute;top:12px;right:12px;background:rgba(9,9,9,0.85);color:var(--gold);padding:4px 12px;border-radius:6px;font-size:11px;font-weight:700;border:1px solid rgba(212,175,55,0.4)}
+    .port-body{padding:20px;display:flex;flex-direction:column;flex-grow:1}
+    .port-body h3{font-size:17px;font-weight:800;margin-bottom:8px;color:#111}
+    .port-body p{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.6;flex-grow:1}
 
-    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
-    .about-box{background:linear-gradient(145deg,#0e0e0e,#1c1c1c);color:#fff;border-radius:20px;padding:48px;min-height:340px;display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(212,175,55,.25)}
-    .about-box .eb{font-size:84px;font-weight:900;line-height:1;color:#fff}.about-box .eb b{color:var(--gold)}
-    .about-copy h2{font-size:38px;font-weight:800;margin-bottom:16px}.about-copy p{color:#555;margin-bottom:18px;font-size:16px}
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
-    .feature{padding:20px;border:1px solid var(--line);border-radius:14px;background:#fafafa;transition:.25s}.feature:hover{border-color:var(--gold)}.feature b{display:block;color:#222;font-size:16px;margin-bottom:4px}.feature span{font-size:13px;color:var(--muted)}
+    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:45px;align-items:center}
+    .about-box{background:#111;color:#fff;border-radius:18px;padding:40px;text-align:center;border:1px solid rgba(212,175,55,.25)}
+    .about-box .eb{font-size:70px;font-weight:900;color:#fff;line-height:1}.about-box .eb b{color:var(--gold)}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+    .feature{padding:16px;border:1px solid var(--line);border-radius:12px;background:#fafafa}.feature b{display:block;color:#222;font-size:15px;margin-bottom:3px}.feature span{font-size:12.5px;color:var(--muted)}
 
     .testimonials{background:var(--soft)}
-    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .testi-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px;position:relative}
-    .testi-stars{color:var(--gold);font-size:18px;margin-bottom:12px}
-    .testi-card p{color:#444;font-size:14px;margin-bottom:18px;font-style:italic}
-    .testi-author{display:flex;align-items:center;gap:12px}
-    .testi-avatar{width:42px;height:42px;border-radius:50%;background:#111;color:var(--gold);display:grid;place-items:center;font-weight:800;font-size:14px}
-    .testi-info b{display:block;font-size:14px;color:#111}
-    .testi-info span{font-size:12px;color:var(--muted)}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .testi-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:25px}
+    .testi-stars{color:var(--gold);font-size:16px;margin-bottom:10px}
+    .testi-card p{color:#444;font-size:13.5px;margin-bottom:15px;font-style:italic}
+    .testi-author b{display:block;font-size:13.5px;color:#111}.testi-author span{font-size:12px;color:var(--muted)}
 
     .contact{background:#0b0b0b;color:#fff}
-    .contact-box{border:1px solid rgba(212,175,55,.35);border-radius:22px;padding:55px;display:flex;align-items:center;justify-content:space-between;gap:35px}
-    .contact-box p{color:#bbb;margin-top:8px}
-    footer{background:#050505;color:#999;padding:30px 0;border-top:1px solid #1a1a1a}
-    .footer{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:14px}
-    .footer strong{color:#fff}.gold{color:var(--gold)}
-
-    .float-wa{
-      position:fixed;bottom:24px;left:24px;z-index:100;
-      width:60px;height:60px;border-radius:50%;
-      display:grid;place-items:center;background:#25D366;color:#fff;
-      font-size:28px;box-shadow:0 12px 30px rgba(0,0,0,.28);
-      border:3px solid #fff;transition:.3s;
-    }
-    .float-wa:hover{transform:translateY(-5px) scale(1.06)}
-    .float-wa svg{width:32px;height:32px;display:block}
+    .contact-box{border:1px solid rgba(212,175,55,.35);border-radius:18px;padding:40px;display:flex;flex-direction:column;gap:25px}
     
     .service-form{
-      max-width:850px;margin:35px auto 0;background:#fff;color:#111;
-      padding:35px;border-radius:20px;box-shadow:var(--shadow);
-      display:grid;grid-template-columns:1fr 1fr;gap:18px;
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;background:#fff;color:#111;
+      padding:30px;border-radius:16px;
     }
     .service-form .full{grid-column:1/-1}
-    .service-form label{font-size:14px;font-weight:700;margin-bottom:6px;display:block}
+    .service-form label{font-size:13.5px;font-weight:700;margin-bottom:5px;display:block}
     .service-form input,.service-form select,.service-form textarea{
-      width:100%;padding:14px;border:1px solid #ddd;border-radius:10px;
-      font:inherit;outline:none;background:#fafafa;transition:.25s;
+      width:100%;padding:12px;border:1px solid #ddd;border-radius:8px;font:inherit;outline:none;background:#fafafa;
     }
     .service-form input:focus,.service-form select:focus,.service-form textarea:focus{
-      border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.15);background:#fff;
+      border-color:var(--gold);background:#fff;
     }
-    .service-form textarea{min-height:120px;resize:vertical}
-    .form-note{font-size:13px;color:var(--muted);margin-top:6px}
-    .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
-    .reveal.show{opacity:1;transform:none}
+    .service-form textarea{min-height:100px;resize:vertical}
 
-    @media(max-width:950px){
-      .port-grid{grid-template-columns:repeat(2,1fr)}
+    .float-wa{
+      position:fixed;bottom:24px;left:24px;z-index:999;
+      width:56px;height:56px;border-radius:50%;
+      display:grid;place-items:center;background:#25D366;color:#fff;
+      font-size:26px;box-shadow:0 10px 25px rgba(0,0,0,.3);border:2px solid #fff;
     }
+    .float-wa svg{width:30px;height:30px;display:block}
+
+    footer{background:#050505;color:#999;padding:25px 0;border-top:1px solid #1a1a1a;font-size:13px}
+    .footer{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+
     @media(max-width:850px){
+      nav{display:none}
       nav.mobile-open{
         display:flex;position:absolute;top:70px;right:4%;left:4%;
-        flex-direction:column;gap:0;background:#111;
-        border:1px solid rgba(212,175,55,.35);border-radius:14px;
-        padding:10px;box-shadow:0 20px 40px rgba(0,0,0,.4);
+        flex-direction:column;gap:0;background:#111;border:1px solid rgba(212,175,55,.35);border-radius:12px;padding:10px;z-index:101;
       }
-      nav.mobile-open a{padding:12px 16px;border-bottom:1px solid #222}
+      nav.mobile-open a{padding:10px 14px;border-bottom:1px solid #222}
       nav.mobile-open a:last-child{border-bottom:0}
-      nav,.nav>.btn{display:none}.menu{display:block}
-      .hero-grid{grid-template-columns:1fr;text-align:center;min-height:auto}.hero-copy{padding:60px 0 20px}.hero-copy p{margin-inline:auto}
-      .actions{justify-content:center}.hero-art{min-height:340px}
-      .stats-box{grid-template-columns:repeat(2,1fr);gap:18px}
-      .cards,.port-grid,.testi-grid{grid-template-columns:1fr}
-      .about-grid{grid-template-columns:1fr}.about-box{min-height:260px}
-      .contact-box{flex-direction:column;text-align:center}
-    }
-    @media(max-width:560px){
-      .nav{height:66px}.hero-copy{padding-top:45px}h1{font-size:36px}
-      .stats-box{padding:16px}.stat strong{font-size:26px}
-      section{padding:65px 0}.section-head h2{font-size:30px}
-      .service-form{grid-template-columns:1fr;padding:22px}
+      .nav>.btn{display:none}.menu{display:block}
+      .hero-grid{grid-template-columns:1fr;text-align:center}
+      .actions{justify-content:center}
+      .cards,.port-grid,.testi-grid,.about-grid{grid-template-columns:1fr}
+      .service-form{grid-template-columns:1fr;padding:20px}
       .service-form .full{grid-column:auto}
       .features{grid-template-columns:1fr}
-      .contact-box{padding:35px 20px}.footer{flex-direction:column;text-align:center}
-      .laptop{width:92%;height:250px}
     }
   </style>
 </head>
@@ -181,7 +152,7 @@
 
 <header>
   <div class="container nav">
-    <a class="brand" href="#home" aria-label="EB OFFICE">
+    <a class="brand" href="#home">
       <div class="brand-mark">E<span>B</span></div>
       <div>EB OFFICE<small>BUSINESS & DIGITAL SOLUTIONS</small></div>
     </a>
@@ -215,10 +186,8 @@
           <div class="screen">
             <div class="big-eb">E<b>B</b></div>
             <div class="brand-title">EB OFFICE</div>
-            <div class="brand-sub">BUSINESS & DIGITAL SOLUTIONS</div>
           </div>
         </div>
-        <div class="base"></div>
       </div>
     </div>
   </section>
@@ -230,7 +199,7 @@
     </div>
   </div>
 
-  <section class="reveal services" id="services">
+  <section class="services" id="services">
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">خدمات متخصصة</div>
@@ -248,8 +217,8 @@
     </div>
   </section>
 
-  <!-- معرض الأعمال الشامل بروابط ملفاتك الفعلية المضمونة -->
-  <section class="reveal portfolio" id="portfolio">
+  <!-- معرض الأعمال الشامل -->
+  <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">معرض الأعمال المنفذة</div>
@@ -257,19 +226,19 @@
         <p>اختر المجال لمعاينة كافة النماذج والأعمال الخاصة به.</p>
       </div>
 
-      <!-- أزرار التصفية -->
+      <!-- أزرار الفلترة -->
       <div class="filter-tabs">
-        <button class="filter-btn active" data-filter="all">عرض الكل</button>
-        <button class="filter-btn" data-filter="excel">Excel ومحاسبة</button>
-        <button class="filter-btn" data-filter="cv">CV ومستندات</button>
-        <button class="filter-btn" data-filter="design">هوية وتصميم</button>
-        <button class="filter-btn" data-filter="social">سوشيال ميديا</button>
+        <button class="filter-btn active" onclick="filterPort('all')">عرض الكل</button>
+        <button class="filter-btn" onclick="filterPort('excel')">Excel ومحاسبة</button>
+        <button class="filter-btn" onclick="filterPort('cv')">CV ومستندات</button>
+        <button class="filter-btn" onclick="filterPort('design')">هوية وتصميم</button>
+        <button class="filter-btn" onclick="filterPort('social')">سوشيال ميديا</button>
       </div>
 
       <div class="port-grid">
         
-        <!-- Excel 1: الداشبورد -->
-        <article class="port-card" data-category="excel">
+        <!-- Excel 1 -->
+        <article class="port-card" data-cat="excel">
           <div class="port-img">
             <span class="port-tag">Excel & Dashboard</span>
             <img src="dashboard.jpg.jpg" alt="داشبورد الوكيل الرقمي">
@@ -277,12 +246,12 @@
           <div class="port-body">
             <h3>لوحة تحكم الوكيل الرقمي (Dashboard)</h3>
             <p>داشبورد تفاعلية لحساب الوقت والمال الموفر، مراقبة الإنجاز الشهري وتوزيع المهام بيانيّاً.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20داشبورد%20إكسيل%20مماثلة" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب داشبورد مماثلة ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20داشبورد%20إكسيل%20مماثلة" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب داشبورد مماثلة ↗</a>
           </div>
         </article>
 
-        <!-- Excel 2: برامج على لابتوب -->
-        <article class="port-card" data-category="excel">
+        <!-- Excel 2 -->
+        <article class="port-card" data-cat="excel">
           <div class="port-img">
             <span class="port-tag">أنظمة محاسبية</span>
             <img src="excel-laptop.jpg.jpg" alt="نظام محاسبي على إكسيل">
@@ -290,98 +259,98 @@
           <div class="port-body">
             <h3>برامج محاسبة وإدارة تدفقات مالية</h3>
             <p>دفاتر يومية، شيتات إيرادات ومصروفات تلقائية وقوائم دخل مبسطة لاتخاذ القرارات.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20برنامج%20محاسبي%20إكسيل" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب نظام مالي ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20برنامج%20محاسبي%20إكسيل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب نظام مالي ↗</a>
           </div>
         </article>
 
-        <!-- CV 1: Emma Thompson -->
-        <article class="port-card" data-category="cv">
+        <!-- CV 1 -->
+        <article class="port-card" data-cat="cv">
           <div class="port-img">
-            <span class="port-tag">CV & ATS Compliant</span>
+            <span class="port-tag">CV & ATS</span>
             <img src="cv-ats-1.jpg.jpg" alt="سيرة ذاتية ATS نموذج 1">
           </div>
           <div class="port-body">
             <h3>سيرة ذاتية احترافية متوافقة مع ATS</h3>
             <p>صياغة سيرة ذاتية مهيكلة بدقة لاجتياز الفرز الإلكتروني وزيادة فرص المقابلات الوظيفية.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20ATS" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم CV ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20ATS" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب تصميم CV ↗</a>
           </div>
         </article>
 
-        <!-- CV 2: Sophia Walker -->
-        <article class="port-card" data-category="cv">
+        <!-- CV 2 -->
+        <article class="port-card" data-cat="cv">
           <div class="port-img">
-            <span class="port-tag">CV & Modern Executive</span>
+            <span class="port-tag">CV Modern</span>
             <img src="cv-ats-2.jpg.jpg" alt="سيرة ذاتية مودرن نموذج 2">
           </div>
           <div class="port-body">
             <h3>سيرة ذاتية قيادية وعصرية (Modern CV)</h3>
             <p>تنسيق أنيق لأصحاب الخبرات والإداريين يبرز المهارات والإنجازات بلغة عمل احترافية.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20مودرن" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب تصميم CV ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20مودرن" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب تصميم CV ↗</a>
           </div>
         </article>
 
-        <!-- الهوية 1: موك آب الكروت والشاشات -->
-        <article class="port-card" data-category="design">
+        <!-- الهوية 1 -->
+        <article class="port-card" data-cat="design">
           <div class="port-img">
-            <span class="port-tag">هوية بصرية وبراندينج</span>
+            <span class="port-tag">هوية بصرية</span>
             <img src="branding-mockup.png.png" alt="تصميم هوية بصرية">
           </div>
           <div class="port-body">
             <h3>تصميم الهوية البصرية وتطبيقاتها</h3>
             <p>باقة هوية متكاملة تشمل الشعار، كروت العمل الفاخرة، موك آب الشاشات وأدوات المكاتب.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20كاملة" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم هوية ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20كاملة" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب تصميم هوية ↗</a>
           </div>
         </article>
 
-        <!-- الهوية 2: عروض المدارس -->
-        <article class="port-card" data-category="design">
+        <!-- الهوية 2 -->
+        <article class="port-card" data-cat="design">
           <div class="port-img">
-            <span class="port-tag">إعلانات وعروض تجارية</span>
+            <span class="port-tag">إعلانات وعروض</span>
             <img src="social-ad.jpg.webp" alt="إعلان عروض تجارية">
           </div>
           <div class="port-body">
             <h3>تصاميم العروض والخصومات للمتاجر</h3>
             <p>تصاميم بوستات إعلانية إبداعية تبرز نسب الخصم وتفاصيل أنظمة التقسيط والشراكات.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20إعلان%20عروض%20أو%20خصومات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم إعلان ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20إعلان%20عروض%20أو%20خصومات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب تصميم إعلان ↗</a>
           </div>
         </article>
 
-        <!-- السوشيال 1: أيقونات 3D -->
-        <article class="port-card" data-category="social">
+        <!-- السوشيال 1 -->
+        <article class="port-card" data-cat="social">
           <div class="port-img">
-            <span class="port-tag">إدارة منصات وتفاعل</span>
+            <span class="port-tag">سوشيال ميديا 3D</span>
             <img src="social-icons-3d.jpg.jpg" alt="إدارة منصات السوشيال ميديا">
           </div>
           <div class="port-body">
             <h3>إدارة منصات التواصل ونمو التفاعل</h3>
             <p>إدارة شاملة لحسابات السوشيال ميديا تشمل النشر الدوري والتفاعل لبناء تواجد قوي.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20باقة%20إدارة%20سوشيال%20ميديا" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب باقة سوشيال ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20باقة%20إدارة%20سوشيال%20ميديا" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب باقة سوشيال ↗</a>
           </div>
         </article>
 
-        <!-- السوشيال 2: نيون السوشيال -->
-        <article class="port-card" data-category="social">
+        <!-- السوشيال 2 -->
+        <article class="port-card" data-cat="social">
           <div class="port-img">
-            <span class="port-tag">حملات إعلانية وسوشيال</span>
+            <span class="port-tag">حملات إعلانية</span>
             <img src="social-neon.jpg.jpg" alt="تصاميم وحملات سوشيال ميديا">
           </div>
           <div class="port-body">
             <h3>صناعة وتصميم الهوية الرقمية للإعلانات</h3>
             <p>تصاميم بصرية مضيئة وجذابة مخصصة للحملات الإعلانية على مختلف المنصات.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصاميم%20إعلانية%20للسوشيال%20ميديا" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب تصميم إعلاني ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصاميم%20إعلانية%20للسوشيال%20ميديا" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب تصميم إعلاني ↗</a>
           </div>
         </article>
 
-        <!-- السوشيال 3: جدولة الوقت والمحتوى -->
-        <article class="port-card" data-category="social">
+        <!-- السوشيال 3 -->
+        <article class="port-card" data-cat="social">
           <div class="port-img">
-            <span class="port-tag">صناعة محتوى وجدولة</span>
+            <span class="port-tag">صناعة محتوى</span>
             <img src="social-time.jpg.jpg" alt="تخطيط المحتوى وجدولة النشر">
           </div>
           <div class="port-body">
             <h3>تخطيط المحتوى وجدولة النشر الذكية</h3>
             <p>خطط نشر محكمة لتنظيم الوقت، كتابة كابشن جذاب واختيار أوقات الذروة للوصول للعملاء.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20خطة%20محتوى%20وجدولة%20نشر" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب خطة محتوى ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20خطة%20محتوى%20وجدولة%20نشر" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب خطة محتوى ↗</a>
           </div>
         </article>
 
@@ -389,17 +358,16 @@
     </div>
   </section>
 
-  <section class="reveal" id="about">
+  <section id="about">
     <div class="container about-grid">
       <div class="about-box">
-        <div class="eb">E<span class="gold">B</span></div>
-        <h3>BUSINESS & DIGITAL SOLUTIONS</h3>
-        <p style="color:#bbb;margin-top:10px">شريكك نحو إدارة أعمال عصرية ومبتكرة</p>
+        <div class="eb">E<b>B</b></div>
+        <p style="color:#bbb;margin-top:10px;font-size:14px">BUSINESS & DIGITAL SOLUTIONS</p>
       </div>
-      <div class="about-copy">
+      <div>
         <div class="eyebrow">من نحن</div>
         <h2>نبتكر الحلول لتنمية عملك</h2>
-        <p>مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال، الشركات، والباحثين عن عمل في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
+        <p style="color:#555;font-size:15px">مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
         <div class="features">
           <div class="feature"><b>دقة واحترافية</b><span>التزام تام بأدق المعايير والمخرجات.</span></div>
           <div class="feature"><b>تنفيذ سريع</b><span>تسليم المشروعات في المواعيد المحددة.</span></div>
@@ -410,52 +378,38 @@
     </div>
   </section>
 
-  <section class="reveal testimonials" id="testimonials">
+  <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">آراء العملاء</div>
         <h2>ماذا يقول عملاؤنا عنا؟</h2>
-        <p>نفخر بثقة عملائنا ونسعى دائماً لتقديم الأفضل.</p>
       </div>
       <div class="testi-grid">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
           <p>"الـ CV الـ ATS كان منسقاً بطريقة ممتازة وساعدني في الحصول على مقابلات عمل في كبرى الشركات."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">م.ع</div>
-            <div class="testi-info"><b>محمد عبد الله</b><span>مهندس برمجيات</span></div>
-          </div>
+          <div class="testi-author"><b>محمد عبد الله</b><span>مهندس برمجيات</span></div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
           <p>"شيتات المحاسبة وإدارة المخزون نظمت لنا الحسابات تماماً ووفرت الكثير من الجهد اليدوي. شغل في قمة الاحترافية."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">ع.م</div>
-            <div class="testi-info"><b>أحمد محمود</b><span>صاحب متجر تجاري</span></div>
-          </div>
+          <div class="testi-author"><b>أحمد محمود</b><span>صاحب متجر تجاري</span></div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
           <p>"تصميم الهوية البصرية وإدارة السوشيال ميديا رفعت مبيعاتنا ونقلت تواجدنا لمستوى آخر."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">س.ع</div>
-            <div class="testi-info"><b>سارة علي</b><span>مؤسسة براند تجاري</span></div>
-          </div>
+          <div class="testi-author"><b>سارة علي</b><span>مؤسسة براند تجاري</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="reveal contact" id="contact">
+  <section class="contact" id="contact">
     <div class="container contact-box">
       <div>
         <div class="eyebrow">تواصل معنا</div>
         <h2>جاهز لتطوير أعمالك اليوم؟</h2>
-        <p>املأ النموذج وسنتواصل معك مباشرة لاقتراح أفضل خطة عمل تناسب احتياجاتك.</p>
-      </div>
-      <div class="actions">
-        <a class="btn btn-gold" href="https://wa.me/201207641934" target="_blank" rel="noopener">محادثة واتساب سريعة</a>
-        <a class="btn btn-dark" href="mailto:eslam.elbanby@gmail.com">إرسال بريد إلكتروني</a>
+        <p style="color:#bbb;margin-top:6px;font-size:14px">املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.</p>
       </div>
 
       <form class="service-form" id="serviceForm">
@@ -481,34 +435,21 @@
         </div>
         <div>
           <label for="budget">الميزانية المقترحة</label>
-          <div style="display:grid;grid-template-columns:1fr 135px;gap:8px">
-            <input id="budget" name="budget" inputmode="decimal" placeholder="مثال: 1000">
-            <select id="currency" name="currency" aria-label="العملة">
-              <option value="EGP">جنيه مصري (EGP)</option>
-              <option value="SAR">ريال سعودي (SAR)</option>
-              <option value="AED">درهم إماراتي (AED)</option>
-              <option value="USD">دولار أمريكي (USD)</option>
-              <option value="EUR">يورو (EUR)</option>
-              <option value="KWD">دينار كويتي (KWD)</option>
-              <option value="QAR">ريال قطري (QAR)</option>
-              <option value="Other">عملة أخرى</option>
-            </select>
-          </div>
+          <input id="budget" name="budget" placeholder="مثال: 1000 جنيه">
         </div>
         <div class="full">
           <label for="details">تفاصيل المشروع والطلب</label>
           <textarea id="details" name="details" required placeholder="وضح طبيعة المشروع وأهم المتطلبات..."></textarea>
-          <div class="form-note">عند الضغط سيتم تحويل الطلب تلقائياً لرسالة واتساب مجهزة.</div>
         </div>
         <div class="full">
-          <button class="btn btn-gold" type="submit">إرسال الطلب مباشرة عبر واتساب ↗</button>
+          <button class="btn btn-gold" type="submit" style="width:100%">إرسال الطلب مباشرة عبر واتساب ↗</button>
         </div>
       </form>
     </div>
   </section>
 </main>
 
-<a class="float-wa" href="https://wa.me/201207641934" target="_blank" rel="noopener" aria-label="واتساب EB OFFICE">
+<a class="float-wa" href="https://wa.me/201207641934" target="_blank" rel="noopener" aria-label="واتساب">
   <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.2c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.84c.14.18 1.93 2.95 4.67 4.13.65.28 1.16.45 1.55.58.65.21 1.24.18 1.71.11.52-.08 1.58-.65 1.8-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32zM16.01 3.2c-7.08 0-12.82 5.74-12.82 12.82 0 2.26.59 4.39 1.63 6.24L3.2 28.8l6.72-1.58a12.77 12.77 0 0 0 6.09 1.55h.01c7.08 0 12.82-5.74 12.82-12.82S23.1 3.2 16.01 3.2zm0 23.35h-.01c-2.02 0-4-.54-5.72-1.57l-.41-.24-3.99.94.95-3.89-.27-.4a10.5 10.5 0 0 1-1.61-5.59c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.1 7.44 3.09a10.46 10.46 0 0 1 3.08 7.45c0 5.8-4.72 10.52-10.53 10.52z"/></svg>
 </a>
 
@@ -516,7 +457,7 @@
   <div class="container footer">
     <div><strong>EB OFFICE</strong> — BUSINESS & DIGITAL SOLUTIONS</div>
     <div>© 2026 EB OFFICE. جميع الحقوق محفوظة.</div>
-    <div><span class="gold">+201207641934</span> · eslam.elbanby@gmail.com</div>
+    <div>+201207641934 · eslam.elbanby@gmail.com</div>
   </div>
 </footer>
 
@@ -526,35 +467,18 @@
   menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
   nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
 
-  // كود التصفية
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const portCards = document.querySelectorAll('.port-card');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filterValue = btn.getAttribute('data-filter');
-
-      portCards.forEach(card => {
-        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-        revealObserver.unobserve(entry.target);
+  function filterPort(category) {
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    document.querySelectorAll('.port-card').forEach(card => {
+      if (category === 'all' || card.getAttribute('data-cat') === category) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
       }
     });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  }
 
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
@@ -562,7 +486,6 @@
     const phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
     const budget = document.getElementById('budget').value.trim();
-    const currency = document.getElementById('currency').value;
     const details = document.getElementById('details').value.trim();
 
     const message =
@@ -571,7 +494,7 @@
       `الاسم: ${encodeURIComponent(name)}%0A` +
       `رقم الهاتف: ${encodeURIComponent(phone)}%0A` +
       `الخدمة: ${encodeURIComponent(service)}%0A` +
-      `الميزانية: ${encodeURIComponent(budget ? `${budget} ${currency}` : 'غير محددة')}%0A` +
+      `الميزانية: ${encodeURIComponent(budget || 'غير محددة')}%0A` +
       `التفاصيل: ${encodeURIComponent(details)}`;
 
     window.open(`https://wa.me/201207641934?text=${message}`, '_blank');
