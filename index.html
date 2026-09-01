@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EB OFFICE - حلول الأعمال والخدمات الرقمية" />
+  <meta name="description" content="EB OFFICE - حلول الأعمال، الأنظمة المحاسبية، السير الذاتية ATS، الأعمال والذكاء الاصطناعي" />
   <title>EB OFFICE | Business & Digital Solutions</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,18 +74,18 @@
     .icon{width:56px;height:56px;border-radius:14px;background:#111;color:var(--gold);display:grid;place-items:center;font-size:24px;margin-bottom:20px}
     .card h3{margin-bottom:10px;font-size:20px;font-weight:700}.card p{color:var(--muted);font-size:14px}
 
-    /* قسم معرض الأعمال التفاعلي */
+    /* معرض الأعمال الشامل */
     .portfolio{background:#fff}
-    .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-    .port-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.04);transition:all .35s ease}
-    .port-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 40px rgba(0,0,0,.1)}
-    .port-img{width:100%;height:200px;background:#111;position:relative;overflow:hidden}
-    .port-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
-    .port-card:hover .port-img img{transform:scale(1.08)}
-    .port-tag{position:absolute;top:12px;right:12px;background:rgba(9,9,9,0.85);color:var(--gold);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;border:1px solid rgba(212,175,55,0.3)}
-    .port-body{padding:22px}
-    .port-body h3{font-size:18px;font-weight:800;margin-bottom:8px;color:#111}
-    .port-body p{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.6}
+    .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+    .port-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:all .35s ease;display:flex;flex-direction:column}
+    .port-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 45px rgba(0,0,0,.1)}
+    .port-img{width:100%;height:230px;background:#0d0d0d;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+    .port-img img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s ease}
+    .port-card:hover .port-img img{transform:scale(1.06)}
+    .port-tag{position:absolute;top:14px;right:14px;background:rgba(9,9,9,0.85);color:var(--gold);padding:5px 14px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid rgba(212,175,55,0.35);backdrop-filter:blur(6px)}
+    .port-body{padding:24px;display:flex;flex-direction:column;flex-grow:1}
+    .port-body h3{font-size:18px;font-weight:800;margin-bottom:10px;color:#111}
+    .port-body p{font-size:13.5px;color:var(--muted);margin-bottom:20px;line-height:1.7;flex-grow:1}
 
     .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
     .about-box{background:linear-gradient(145deg,#0e0e0e,#1c1c1c);color:#fff;border-radius:20px;padding:48px;min-height:340px;display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(212,175,55,.25)}
@@ -140,6 +140,9 @@
     .reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
     .reveal.show{opacity:1;transform:none}
 
+    @media(max-width:950px){
+      .port-grid{grid-template-columns:repeat(2,1fr)}
+    }
     @media(max-width:850px){
       nav.mobile-open{
         display:flex;position:absolute;top:70px;right:4%;left:4%;
@@ -153,14 +156,14 @@
       .hero-grid{grid-template-columns:1fr;text-align:center;min-height:auto}.hero-copy{padding:60px 0 20px}.hero-copy p{margin-inline:auto}
       .actions{justify-content:center}.hero-art{min-height:340px}
       .stats-box{grid-template-columns:repeat(2,1fr);gap:18px}
-      .cards,.port-grid,.testi-grid{grid-template-columns:repeat(2,1fr)}
+      .cards,.port-grid,.testi-grid{grid-template-columns:1fr}
       .about-grid{grid-template-columns:1fr}.about-box{min-height:260px}
       .contact-box{flex-direction:column;text-align:center}
     }
     @media(max-width:560px){
       .nav{height:66px}.hero-copy{padding-top:45px}h1{font-size:36px}
       .stats-box{padding:16px}.stat strong{font-size:26px}
-      section{padding:65px 0}.section-head h2{font-size:30px}.cards,.port-grid,.testi-grid{grid-template-columns:1fr}
+      section{padding:65px 0}.section-head h2{font-size:30px}
       .service-form{grid-template-columns:1fr;padding:22px}
       .service-form .full{grid-column:auto}
       .features{grid-template-columns:1fr}
@@ -227,62 +230,97 @@
       <div class="section-head">
         <div class="eyebrow">خدمات متخصصة</div>
         <h2>حلول ذكية تناسب احتياجاتك</h2>
-        <p>نجمع بين الدقة المحاسبية والحلول التقنية لتقديم نتائج عملية ومباشرة.</p>
+        <p>نجمع بين الدقة المحاسبية والحلول التقنية والتصميمية لتقديم نتائج عملية ومباشرة.</p>
       </div>
       <div class="cards">
         <article class="card"><div class="icon">📊</div><h3>Excel & Accounting</h3><p>تصميم أنظمة محاسبية متكاملة، نماذج تقارير مالية، وحسابات أوتوماتيكية دقيقة توفر وقتك.</p></article>
-        <article class="card"><div class="icon">🌐</div><h3>تطوير المواقع</h3><p>بناء مواقع تعريفية وصفحات هبوط عصرية وسريعة متجاوبة مع كافة الشاشات.</p></article>
+        <article class="card"><div class="icon">🤖</div><h3>الأعمال والذكاء الاصطناعي</h3><p>دمج أدوات الذكاء الاصطناعي وأتمتة العمليات اليومية لزيادة الإنتاجية وتقليل التكاليف.</p></article>
+        <article class="card"><div class="icon">📄</div><h3>السير الذاتية ATS والمستندات</h3><p>صياغة وتصميم CV متوافق 100% مع أنظمة ATS، فواتير وسندات رسمية، ومستندات أعمال.</p></article>
         <article class="card"><div class="icon">🎨</div><h3>الهوية البصرية والتصميم</h3><p>تصميم شعارات احترافية، منشورات سوشيال ميديا، ومطبوعات تسويقية متناسقة.</p></article>
         <article class="card"><div class="icon">📱</div><h3>إدارة السوشيال ميديا</h3><p>صناعة محتوى هادف وتصميم خطط نشر دورية تزيد من تفاعل عملائك المستهدفين.</p></article>
-        <article class="card"><div class="icon">📄</div><h3>السير الذاتية والمستندات</h3><p>صياغة وتصميم CV متوافق مع أنظمة الـ ATS وتجهيز مكاتبات وعقود أعمال رسمية.</p></article>
-        <article class="card"><div class="icon">🤖</div><h3>أتمتة الأعمال والذكاء الاصطناعي</h3><p>تطبيق أحدث أدوات الذكاء الاصطناعي لتسريع المهام اليومية وتقليل التكاليف.</p></article>
+        <article class="card"><div class="icon">🌐</div><h3>تطوير المواقع</h3><p>بناء مواقع تعريفية وصفحات هبوط عصرية وسريعة متجاوبة مع كافة الشاشات.</p></article>
       </div>
     </div>
   </section>
 
-  <!-- قسم معرض الأعمال الجاهز بالصور والروابط -->
   <section class="reveal portfolio" id="portfolio">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">معرض الأعمال</div>
-        <h2>نماذج من مشاريعنا المنفذة</h2>
-        <p>استكشف عينات من النماذج المحاسبية، المواقع الرقمية، وتصاميم الهوية الاحترافية.</p>
+        <div class="eyebrow">معرض الأعمال المنفذة</div>
+        <h2>نماذج من مشاريعنا في الذكاء الاصطناعي، السير الذاتية، والتصميم</h2>
+        <p>استعراض حي لأحدث حلول الذكاء الاصطناعي، نماذج ATS، الهويات البصرية، والداشبورد.</p>
       </div>
       <div class="port-grid">
         
         <article class="port-card">
           <div class="port-img">
-            <span class="port-tag">Excel & Analysis</span>
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=80" alt="نظام محاسبي داشبورد">
+            <span class="port-tag">الأعمال والذكاء الاصطناعي</span>
+            <img src="ai-solutions.jpg" alt="حلول الأعمال والذكاء الاصطناعي">
           </div>
           <div class="port-body">
-            <h3>لوحة تحكم وتحليل مالي شاملة</h3>
-            <p>شيت إكسيل تفاعلي لمتابعة الإيرادات والمصروفات، وحساب صافي الأرباح مع مؤشرات أداء بصرية (KPIs).</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20نموذج%20محاسبي%20مماثل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب نموذج مماثل ↗</a>
+            <h3>حلول الأعمال والذكاء الاصطناعي (AI & Automation)</h3>
+            <p>تطبيق أدوات الذكاء الاصطناعي المتقدمة في توليد المحتوى، تحليل البيانات، وأتمتة المهام المكتبية لتوفير الوقت والمال.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20استشارة%20وحلول%20الذكاء%20الاصطناعي%20والأعمال" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب حلول الذكاء الاصطناعي ↗</a>
           </div>
         </article>
 
         <article class="port-card">
           <div class="port-img">
-            <span class="port-tag">Web Development</span>
-            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80" alt="تصميم وتطوير موقع شركة">
+            <span class="port-tag">CV & ATS Compliant</span>
+            <img src="cv-ats-1.jpg" alt="تصميم سيرة ذاتية متوافقة مع ATS">
           </div>
           <div class="port-body">
-            <h3>موقع تعريفي لشركة استشارات</h3>
-            <p>واجهة موقع سريعة ومتجاوبة تماماً مع الهواتف الذكية مع نظام تواصل فوري عبر واتساب.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20موقع%20إلكتروني%20لنشاطي" target="_blank" class="btn btn-dark" style="width:100%;font-size:13px;padding:10px 0;border-color:#333;color:#111">طلب موقع إلكتروني ↗</a>
+            <h3>سيرة ذاتية احترافية متوافقة مع ATS</h3>
+            <p>صياغة سيرة ذاتية إنجليزية/عربية مهيكلة خصيصاً لاجتياز أنظمة الفرز الإلكتروني (ATS) وزيادة فرص القبول الوظيفي.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20احترافية%20ATS" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب تصميم CV ↗</a>
           </div>
         </article>
 
         <article class="port-card">
           <div class="port-img">
-            <span class="port-tag">Graphic & Branding</span>
-            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&auto=format&fit=crop&q=80" alt="تصميم هوية بصرية">
+            <span class="port-tag">مستندات مالية وإدارية</span>
+            <img src="voucher-template.jpg" alt="تصميم سندات قبض وصرف وفواتير">
           </div>
           <div class="port-body">
-            <h3>هوية بصرية ومحتوى تسويقي</h3>
-            <p>باقة هوية متكاملة تتضمن الشعار، كروت العمل، وتنسيق قوالب منشورات التواصل الاجتماعي.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وسوشيال%20ميديا" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب تصميم هوية ↗</a>
+            <h3>تصميم فواتير وسندات قبض وصرف</h3>
+            <p>تجهيز وتصميم مطبوعات الشركات الرسمية (سند قبض، سند صرف، فواتير مبيعات ضريبية) جاهزة للطباعة والاستخدام الفوري.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20فواتير%20أو%20سندات%20قبض%20وصرف" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم مستندات ↗</a>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="port-img">
+            <span class="port-tag">إدارة سوشيال ميديا</span>
+            <img src="social-icons-3d.jpg" alt="إدارة منصات التواصل الاجتماعي">
+          </div>
+          <div class="port-body">
+            <h3>إدارة منصات التواصل ونمو التفاعل</h3>
+            <p>إدارة شاملة لحسابات السوشيال ميديا (فيسبوك، إنستجرام، تيك توك)، تشمل النشر الدوري والتفاعل لبناء تواجد قوي.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20الاستفسار%20عن%20باقات%20إدارة%20السوشيال%20ميديا" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب باقة سوشيال ↗</a>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="port-img">
+            <span class="port-tag">هوية بصرية وبراندينج</span>
+            <img src="branding-mockup.png" alt="تصميم هوية بصرية وكروت عمل">
+          </div>
+          <div class="port-body">
+            <h3>تصميم الهوية البصرية وتطبيقاتها</h3>
+            <p>باقة براندينج متكاملة تشمل الشعار الرسمي، كروت العمل الفاخرة، موك آب الشاشات، وأدوات المكاتب المتناسقة.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وبراندينج%20كامل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم هوية ↗</a>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="port-img">
+            <span class="port-tag">داشبورد وتحليل مالي</span>
+            <img src="excel-dashboard.jpg" alt="لوحة تحكم الوكيل الرقمي إكسيل">
+          </div>
+          <div class="port-body">
+            <h3>داشبورد وتحليل مالي وإداري متكامل</h3>
+            <p>لوحات تحكم تفاعلية لحساب الإنجاز وتوزيع المهام، ومتابعة الأرباح وحركة المخازن بدقة واحترافية.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20داشبورد%20إكسيل%20تفاعلية" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب داشبورد محاسبية ↗</a>
           </div>
         </article>
 
@@ -300,7 +338,7 @@
       <div class="about-copy">
         <div class="eyebrow">من نحن</div>
         <h2>نبتكر الحلول لتنمية عملك</h2>
-        <p>مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال، الشركات، والأفراد في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية المتطورة.</p>
+        <p>مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال، الشركات، والباحثين عن عمل في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
         <div class="features">
           <div class="feature"><b>دقة واحترافية</b><span>التزام تام بأدق المعايير والمخرجات.</span></div>
           <div class="feature"><b>تنفيذ سريع</b><span>تسليم المشروعات في المواعيد المحددة.</span></div>
@@ -321,6 +359,14 @@
       <div class="testi-grid">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
+          <p>"الـ CV الـ ATS كان منسقاً بطريقة ممتازة وساعدني في الحصول على مقابلات عمل في كبرى الشركات."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">م.ع</div>
+            <div class="testi-info"><b>محمد عبد الله</b><span>مهندس برمجيات</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
           <p>"شيتات المحاسبة وإدارة المخزون نظمت لنا الحسابات تماماً ووفرت الكثير من الجهد اليدوي. شغل في قمة الاحترافية."</p>
           <div class="testi-author">
             <div class="testi-avatar">ع.م</div>
@@ -329,18 +375,10 @@
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p>"تصميم الموقع التعريفي كان سريعاً ومنظماً جداً ومتوافق مع الهاتف بشكل رائع. شكراً على الالتزام بالمواعيد."</p>
+          <p>"تصميم الهوية البصرية وإدارة السوشيال ميديا رفعت مبيعاتنا ونقلت تواجدنا لمستوى آخر."</p>
           <div class="testi-author">
             <div class="testi-avatar">س.ع</div>
-            <div class="testi-info"><b>سارة علي</b><span>مؤسسة شركة ناشئة</span></div>
-          </div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p>"خدمة ممتازة ودعم متواصل حتى بعد التسليم لتوضيح كيفية استخدام النماذج وتعديلها."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">م.ح</div>
-            <div class="testi-info"><b>محمد حسن</b><span>استشاري أعمال</span></div>
+            <div class="testi-info"><b>سارة علي</b><span>مؤسسة براند تجاري</span></div>
           </div>
         </div>
       </div>
@@ -373,11 +411,11 @@
           <select id="service" name="service" required>
             <option value="">اختر الخدمة</option>
             <option>Excel & Accounting</option>
-            <option>Websites</option>
-            <option>Graphic Design</option>
+            <option>الأعمال والذكاء الاصطناعي</option>
+            <option>CV & ATS Documents</option>
+            <option>Graphic Design & Branding</option>
             <option>Social Media</option>
-            <option>CV & Documents</option>
-            <option>AI & Digital Solutions</option>
+            <option>Websites</option>
           </select>
         </div>
         <div>
