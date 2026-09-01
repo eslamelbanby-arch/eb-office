@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="EB OFFICE - حلول الأعمال والخدمات الرقمية" />
+  <title>EB OFFICE | Business & Digital Solutions</title>
+  <style>
+    :root{
+      --black:#090909; --dark:#111214; --gold:#d4af37; --gold2:#f0cf68;
+      --white:#fff; --soft:#f7f7f5; --muted:#777; --line:#e8e8e8;
+      --shadow:0 18px 45px rgba(0,0,0,.10);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:"Tahoma","Arial",sans-serif;color:#151515;background:#fff;line-height:1.7}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1180px,92%);margin:auto}
+    header{position:sticky;top:0;z-index:50;background:rgba(9,9,9,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,175,55,.25)}
+    .nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;letter-spacing:3px}
+    .brand-mark{width:43px;height:34px;display:grid;place-items:center;font-size:26px;font-weight:900;border-left:3px solid var(--gold);transform:skew(-10deg)}
+    .brand-mark span{color:var(--gold)}
+    .brand small{display:block;font-size:8px;letter-spacing:2px;color:#bbb;margin-top:-3px}
+    nav{display:flex;gap:28px;color:#ddd;font-size:14px}
+    nav a{transition:.25s}
+    nav a:hover,nav a.active{color:var(--gold)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 23px;border-radius:8px;border:1px solid var(--gold);font-weight:700;cursor:pointer;transition:.25s}
+    .btn-gold{background:var(--gold);color:#111}
+    .btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
+    .btn-dark{background:transparent;color:#fff}
+    .btn-dark:hover{background:rgba(212,175,55,.1)}
+    .menu{display:none;background:none;border:0;color:#fff;font-size:28px}
+
+    .hero{background:radial-gradient(circle at 75% 30%,#262626 0,#111 40%,#080808 100%);color:#fff;overflow:hidden}
+    .hero-grid{min-height:600px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:30px}
+    .hero-copy{padding:65px 0}
+    .eyebrow{color:var(--gold);font-size:14px;letter-spacing:2px;font-weight:700;margin-bottom:12px}
+    h1{font-size:clamp(38px,5vw,68px);line-height:1.18;margin-bottom:18px}
+    h1 span{color:var(--gold)}
+    .hero-copy p{color:#d6d6d6;font-size:18px;max-width:590px;margin-bottom:28px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-art{position:relative;min-height:450px;display:flex;align-items:center;justify-content:center}
+    .laptop{width:min(520px,100%);aspect-ratio:1.5/1;border:10px solid #252525;border-radius:15px;background:#030303;box-shadow:0 30px 70px #000;transform:perspective(900px) rotateY(-7deg)}
+    .screen{height:82%;margin:12px;background:linear-gradient(145deg,#080808,#191919);border-radius:6px;display:grid;place-items:center;text-align:center;border:1px solid #333}
+    .screen .big-eb{font-size:74px;font-weight:900;color:#fff}.screen .big-eb b{color:var(--gold)}
+    .screen p{font-size:11px;letter-spacing:3px;color:#ddd}
+    .base{position:absolute;bottom:10%;width:78%;height:20px;background:#303030;border-radius:50% 50% 8px 8px;box-shadow:0 15px 20px #000}
+
+    .stats{margin-top:-45px;position:relative;z-3}
+    .stats-box{background:#fff;border-radius:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);padding:22px}
+    .stat{text-align:center;border-left:1px solid #ddd}
+    .stat:last-child{border-left:0}
+    .stat strong{display:block;font-size:27px;color:#111}
+    .stat span{color:#777;font-size:13px}
+
+    section{padding:90px 0}
+    .section-head{text-align:center;margin-bottom:42px}
+    .section-head .eyebrow{margin-bottom:5px}
+    .section-head h2{font-size:34px}
+    .section-head p{color:var(--muted);margin-top:8px}
+    .services{background:var(--soft)}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:30px;transition:.25s}
+    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#e2ca7c}
+    .icon{width:52px;height:52px;border-radius:12px;background:#111;color:var(--gold);display:grid;place-items:center;font-size:24px;margin-bottom:18px}
+    .card h3{margin-bottom:7px}.card p{color:#777;font-size:14px}
+
+    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
+    .about-box{background:#0b0b0b;color:#fff;border-radius:18px;padding:48px;min-height:320px;display:flex;flex-direction:column;justify-content:center}
+    .about-box .eb{font-size:86px;font-weight:900;line-height:1;color:#fff}.about-box .eb b{color:var(--gold)}
+    .about-copy h2{font-size:38px;margin-bottom:15px}.about-copy p{color:#666;margin-bottom:20px}
+    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:25px}
+    .feature{padding:17px;border:1px solid var(--line);border-radius:12px}.feature b{display:block;color:#222}.feature span{font-size:13px;color:#777}
+
+    .contact{background:#0b0b0b;color:#fff}
+    .contact-box{border:1px solid rgba(212,175,55,.4);border-radius:18px;padding:55px;display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .contact-box p{color:#bbb;margin-top:7px}
+    footer{background:#050505;color:#aaa;padding:28px 0}
+    .footer{display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:13px}
+    .footer strong{color:#fff}.gold{color:var(--gold)}
+
+    .float-wa{
+      position:fixed;bottom:22px;left:22px;z-index:100;
+      width:58px;height:58px;border-radius:50%;
+      display:grid;place-items:center;background:#25D366;color:#fff;
+      font-size:27px;box-shadow:0 10px 28px rgba(0,0,0,.25);
+      border:3px solid #fff;transition:.25s;
+    }
+    .float-wa:hover{transform:translateY(-4px) scale(1.04)}
+    .float-wa svg{width:31px;height:31px;display:block}
+    .service-form{
+      max-width:850px;margin:35px auto 0;background:#fff;color:#111;
+      padding:30px;border-radius:18px;box-shadow:var(--shadow);
+      display:grid;grid-template-columns:1fr 1fr;gap:16px;
+    }
+    .service-form .full{grid-column:1/-1}
+    .service-form label{font-size:13px;font-weight:700;margin-bottom:5px;display:block}
+    .service-form input,.service-form select,.service-form textarea{
+      width:100%;padding:13px 14px;border:1px solid #ddd;border-radius:9px;
+      font:inherit;outline:none;background:#fafafa;
+    }
+    .service-form input:focus,.service-form select:focus,.service-form textarea:focus{
+      border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,.12)
+    }
+    .service-form textarea{min-height:120px;resize:vertical}
+    .form-note{font-size:12px;color:#777;margin-top:5px}
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.show{opacity:1;transform:none}
+    @media(max-width:560px){
+      .service-form{grid-template-columns:1fr;padding:22px}
+      .service-form .full{grid-column:auto}
+      .float-wa{width:54px;height:54px;bottom:16px;left:16px}
+    }
+
+    .portfolio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
+    .project{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;transition:.25s}
+    .project:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:#dfc36c}
+    .project-top{display:flex;justify-content:space-between;padding:15px 17px;color:#777;font-size:11px;letter-spacing:1px}
+    .project-top b{color:#111}
+    .project-visual{height:175px;margin:0 12px;border-radius:11px;background:#0d0d0d;position:relative;overflow:hidden}
+    .web-visual{padding:17px;background:linear-gradient(145deg,#0b0b0b,#242424)}
+    .pv-bar{height:12px;width:70%;background:#d4af37;border-radius:3px;margin-bottom:20px}
+    .pv-lines{width:55%;height:55px;border-top:5px solid #fff;border-bottom:5px solid #777;opacity:.7}
+    .pv-card{position:absolute;bottom:17px;right:18px;width:105px;height:55px;border:1px solid #d4af37;border-radius:8px}
+    .excel-visual{background:#f4f4f1;padding:22px;display:flex;gap:7px;align-items:center}
+    .sheet{height:105px;flex:1;border:1px solid #bbb;background:repeating-linear-gradient(0deg,#fff 0 15px,#ddd 16px),repeating-linear-gradient(90deg,transparent 0 24px,#ddd 25px)}
+    .brand-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff}
+    .mini-eb{font-size:58px;font-weight:900;line-height:1}.mini-eb span{color:#d4af37}.brand-visual small{font-size:8px;letter-spacing:2px;color:#aaa}
+    .social-visual{background:#111;display:grid;grid-template-columns:repeat(3,1fr);gap:9px;padding:20px;align-items:end}
+    .social-visual div{background:#d4af37;border-radius:8px 8px 2px 2px}.social-visual div:nth-child(1){height:75%}.social-visual div:nth-child(2){height:48%}.social-visual div:nth-child(3){height:90%}
+    .project-body{padding:18px}.project-body h3{font-size:17px;margin-bottom:5px}.project-body p{font-size:12px;color:#777}
+    @media(max-width:850px){.portfolio-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.portfolio-grid{grid-template-columns:1fr}}
+
+    @media(max-width:850px){
+      nav.mobile-open{
+        display:flex;
+        position:absolute;
+        top:66px;
+        right:4%;
+        left:4%;
+        flex-direction:column;
+        gap:0;
+        background:#111;
+        border:1px solid rgba(212,175,55,.35);
+        border-radius:12px;
+        padding:8px;
+        box-shadow:0 20px 40px rgba(0,0,0,.35);
+      }
+      nav.mobile-open a{padding:11px 14px;border-bottom:1px solid #222}
+      nav.mobile-open a:last-child{border-bottom:0}
+    }
+
+    @media(max-width:850px){
+      nav,.nav>.btn{display:none}.menu{display:block}
+      .hero-grid{grid-template-columns:1fr;text-align:center;min-height:auto}.hero-copy{padding:70px 0 20px}.hero-copy p{margin-inline:auto}
+      .actions{justify-content:center}.hero-art{min-height:350px}
+      .stats{margin-top:-25px}.stats-box{grid-template-columns:repeat(2,1fr);gap:18px}.stat:nth-child(2){border-left:0}.stat:nth-child(-n+2){padding-bottom:12px}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .about-grid{grid-template-columns:1fr}.about-box{min-height:250px}
+      .contact-box{flex-direction:column;text-align:center}
+    }
+    @media(max-width:560px){
+      .nav{height:66px}.hero-copy{padding-top:52px}.hero-copy p{font-size:16px}h1{font-size:39px}
+      .stats-box{grid-template-columns:1fr 1fr;padding:15px}.stat{border-left:0!important}.stat strong{font-size:23px}
+      section{padding:65px 0}.section-head h2{font-size:29px}.cards{grid-template-columns:1fr}
+      .about-box{padding:32px}.about-box .eb{font-size:65px}.features{grid-template-columns:1fr}
+      .contact-box{padding:35px 20px}.footer{flex-direction:column;text-align:center}
+      .laptop{width:92%}
+    }
+  </style>
+
+  <meta name="keywords" content="تصميم مواقع, Excel, محاسبة, تصميم جرافيك, سوشيال ميديا, EB OFFICE" />
+  <meta name="author" content="EB OFFICE" />
+  <meta property="og:title" content="EB OFFICE | Business & Digital Solutions" />
+  <meta property="og:description" content="حلول الأعمال والخدمات الرقمية" />
+  <link rel="icon" href="favicon.ico" />
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="EB OFFICE">
+      <div class="brand-mark">E<span>B</span></div>
+      <div>EB OFFICE<small>BUSINESS & DIGITAL SOLUTIONS</small></div>
+    </a>
+    <nav>
+      <a class="active" href="#home">الرئيسية</a>
+      <a href="#about">من نحن</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#why">لماذا نحن</a>
+      <a href="#portfolio">أعمالنا</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+    <a class="btn btn-gold" href="#contact">تواصل الآن</a>
+    <button class="menu" aria-label="القائمة">☰</button>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">EB OFFICE</div>
+        <h1>حلول أعمالك<br><span>باحترافية</span></h1>
+        <p>نقدم لك خدمات متكاملة تساعدك على تطوير عملك، تنظيم مهامك وتحقيق أهدافك بحلول عملية ورقمية.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#services">خدماتنا ←</a>
+          <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener">تواصل معنا عبر واتساب</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="laptop">
+          <div class="screen">
+            <div><div class="big-eb">E<b>B</b></div><p>EB OFFICE</p><p>BUSINESS & DIGITAL SOLUTIONS</p></div>
+          </div>
+        </div>
+        <div class="base"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container stats">
+    <div class="stats-box">
+      <div class="stat"><strong>+150</strong><span>عميل</span></div>
+      <div class="stat"><strong>+200</strong><span>مشروع مكتمل</span></div>
+      <div class="stat"><strong>+3</strong><span>سنوات خبرة</span></div>
+      <div class="stat"><strong>24/7</strong><span>دعم دائم</span></div>
+    </div>
+  </div>
+
+  <section class="reveal" id="services" class="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">خدماتنا</div>
+        <h2>خدمات متكاملة لتلبية احتياجاتك</h2>
+        <p>حلول عملية ورقمية تساعدك على إنجاز أعمالك بشكل أفضل.</p>
+      </div>
+      <div class="cards">
+        <article class="card"><div class="icon">▥</div><h3>Excel & Accounting</h3><p>تصميم شيتات محاسبية احترافية، معادلات Excel وحلول لتنظيم البيانات والحسابات.</p></article>
+        <article class="card"><div class="icon">◎</div><h3>Websites</h3><p>تصميم مواقع عصرية ومتجاوبة للشركات والأفراد مع تجربة استخدام احترافية.</p></article>
+        <article class="card"><div class="icon">✎</div><h3>Graphic Design</h3><p>تصميم شعارات وهويات بصرية وبوستات وبنرات تناسب نشاطك وبراندك.</p></article>
+        <article class="card"><div class="icon">◌</div><h3>Social Media</h3><p>إدارة صفحات السوشيال ميديا، كتابة المحتوى وتصميم المنشورات بشكل جذاب.</p></article>
+        <article class="card"><div class="icon">▤</div><h3>CV & Documents</h3><p>تصميم CV احترافي متوافق مع ATS ومستندات ومكاتبات رسمية أنيقة.</p></article>
+        <article class="card"><div class="icon">AI</div><h3>AI & Digital Solutions</h3><p>حلول ذكية باستخدام أدوات الذكاء الاصطناعي لأتمتة المهام وتطوير أعمالك.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" id="about">
+    <div class="container about-grid">
+      <div class="about-box">
+        <div class="eb">E<span class="gold">B</span></div>
+        <h3>BUSINESS & DIGITAL SOLUTIONS</h3>
+        <p style="color:#aaa;margin-top:8px">حلول الأعمال والخدمات الرقمية</p>
+      </div>
+      <div class="about-copy">
+        <div class="eyebrow">من نحن</div>
+        <h2>شريكك الرقمي لإنجاز أعمالك</h2>
+        <p>EB OFFICE هو مكتب خدمات أعمال وحلول رقمية يقدّم خدمات عملية للأفراد وأصحاب المشاريع والشركات، من تنظيم البيانات والمحاسبة وExcel إلى تصميم المواقع والهوية والمحتوى والحلول الرقمية.</p>
+        <p>هدفنا بسيط: نفهم احتياجك، نختار الحل المناسب، ونقدمه لك بشكل احترافي وسهل الاستخدام.</p>
+        <div class="features">
+          <div class="feature"><b>جودة عالية</b><span>نهتم بالتفاصيل في كل مشروع.</span></div>
+          <div class="feature"><b>فهم احتياجاتك</b><span>نبدأ من احتياجك ونقدم الحل المناسب.</span></div>
+          <div class="feature"><b>التزام بالمواعيد</b><span>تنفيذ منظم وتسليم في الوقت المتفق عليه.</span></div>
+          <div class="feature"><b>أسعار مناسبة</b><span>حلول احترافية بتكلفة مناسبة.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" id="why" class="services">
+    <div class="container">
+      <div class="section-head"><div class="eyebrow">لماذا EB OFFICE؟</div><h2>نحوّل احتياجك إلى حل عملي</h2></div>
+      <div class="cards">
+        <article class="card"><h3>احترافية</h3><p>نهتم بجودة التنفيذ والشكل النهائي لكل خدمة.</p></article>
+        <article class="card"><h3>سرعة وتنظيم</h3><p>نرتب خطوات العمل بوضوح من البداية حتى التسليم.</p></article>
+        <article class="card"><h3>دعم مستمر</h3><p>نبقى معك لتوضيح التفاصيل ومتابعة احتياجاتك.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" id="portfolio">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">أعمالنا</div>
+        <h2>نماذج من أعمال EB OFFICE</h2>
+        <p>تصميمات وحلول رقمية نقدر ننفذها حسب احتياج مشروعك.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="icon">▦</div>
+          <h3>مواقع الشركات</h3>
+          <p>مواقع تعريفية عصرية ومتجاوبة مع الموبايل والكمبيوتر.</p>
+        </article>
+        <article class="card">
+          <div class="icon">▥</div>
+          <h3>شيتات Excel</h3>
+          <p>أنظمة متابعة وحسابات آلية تقلل العمل اليدوي وتوضح البيانات.</p>
+        </article>
+        <article class="card">
+          <div class="icon">✦</div>
+          <h3>هوية وتصميم</h3>
+          <p>شعارات، بوستات وهوية بصرية متناسقة للعلامات التجارية.</p>
+        </article>
+        <article class="card">
+          <div class="icon">◉</div>
+          <h3>إدارة المحتوى</h3>
+          <p>محتوى وتصميمات للسوشيال ميديا تساعد البراند يظهر باحترافية.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" id="service-details" class="services">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">تفاصيل الخدمات</div>
+        <h2>ماذا يمكننا أن نقدم لك؟</h2>
+      </div>
+      <div class="cards">
+        <article class="card"><h3>📊 المحاسبة وExcel</h3><p>شيتات مبيعات، مشتريات، مصروفات، مخزون، شيكات، تقارير ومعادلات مخصصة.</p></article>
+        <article class="card"><h3>🌐 تصميم المواقع</h3><p>موقع تعريفي احترافي، صفحات خدمات، معرض أعمال، نموذج تواصل وزر واتساب.</p></article>
+        <article class="card"><h3>🎨 التصميم الجرافيكي</h3><p>لوجو، هوية بصرية، منشورات، Stories، إعلانات وبنرات.</p></article>
+        <article class="card"><h3>📱 السوشيال ميديا</h3><p>تنظيم الصفحة، كتابة المحتوى، تصميم المنشورات وتجهيز خطة نشر.</p></article>
+        <article class="card"><h3>📄 CV والمستندات</h3><p>CV احترافي وATS، عروض أسعار، خطابات ومكاتبات ومستندات أعمال.</p></article>
+        <article class="card"><h3>🤖 الحلول الرقمية والذكاء الاصطناعي</h3><p>أتمتة المهام وتبسيط العمليات باستخدام أدوات رقمية وذكاء اصطناعي.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal" id="contact" class="contact">
+    <div class="container contact-box">
+      <div><div class="eyebrow">ابدأ مشروعك الآن</div><h2>جاهز نبدأ شغل معًا؟</h2><p>تواصل معنا واحكي لنا عن فكرتك، وسنقترح لك أفضل حل.</p></div>
+      <div class="actions">
+        <a class="btn btn-gold" href="https://wa.me/201207641934" target="_blank" rel="noopener">تواصل عبر واتساب</a>
+        <a class="btn btn-dark" href="mailto:eslam.elbanby@gmail.com">راسلنا بالإيميل</a>
+      </div>
+
+      <form class="service-form" id="serviceForm">
+        <div>
+          <label for="name">الاسم</label>
+          <input id="name" name="name" required placeholder="اكتب اسمك">
+        </div>
+        <div>
+          <label for="phone">رقم الهاتف</label>
+          <input id="phone" name="phone" required placeholder="رقم التواصل">
+        </div>
+        <div>
+          <label for="service">الخدمة المطلوبة</label>
+          <select id="service" name="service" required>
+            <option value="">اختر الخدمة</option>
+            <option>Excel & Accounting</option>
+            <option>Websites</option>
+            <option>Graphic Design</option>
+            <option>Social Media</option>
+            <option>CV & Documents</option>
+            <option>AI & Digital Solutions</option>
+          </select>
+        </div>
+        <div>
+          <label for="budget">الميزانية التقريبية</label>
+          <div style="display:grid;grid-template-columns:1fr 135px;gap:8px">
+            <input id="budget" name="budget" inputmode="decimal" placeholder="مثال: 1000">
+            <select id="currency" name="currency" aria-label="العملة">
+              <option value="EGP">جنيه مصري (EGP)</option>
+              <option value="SAR">ريال سعودي (SAR)</option>
+              <option value="AED">درهم إماراتي (AED)</option>
+              <option value="USD">دولار أمريكي (USD)</option>
+              <option value="EUR">يورو (EUR)</option>
+              <option value="GBP">جنيه إسترليني (GBP)</option>
+              <option value="KWD">دينار كويتي (KWD)</option>
+              <option value="QAR">ريال قطري (QAR)</option>
+              <option value="BHD">دينار بحريني (BHD)</option>
+              <option value="OMR">ريال عُماني (OMR)</option>
+              <option value="JOD">دينار أردني (JOD)</option>
+              <option value="DZD">دينار جزائري (DZD)</option>
+              <option value="MAD">درهم مغربي (MAD)</option>
+              <option value="TRY">ليرة تركية (TRY)</option>
+              <option value="CAD">دولار كندي (CAD)</option>
+              <option value="AUD">دولار أسترالي (AUD)</option>
+              <option value="Other">عملة أخرى</option>
+            </select>
+          </div>
+        </div>
+        <div class="full">
+          <label for="details">تفاصيل الطلب</label>
+          <textarea id="details" name="details" required placeholder="احكي لنا عن مشروعك واحتياجاتك..."></textarea>
+          <div class="form-note">عند الإرسال سيتم تجهيز رسالة واتساب بالبيانات المدخلة.</div>
+        </div>
+        <div class="full">
+          <button class="btn btn-gold" type="submit">إرسال الطلب عبر واتساب ↗</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<a class="float-wa" href="https://wa.me/201207641934" target="_blank" rel="noopener" aria-label="واتساب EB OFFICE">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.2c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.84c.14.18 1.93 2.95 4.67 4.13.65.28 1.16.45 1.55.58.65.21 1.24.18 1.71.11.52-.08 1.58-.65 1.8-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32zM16.01 3.2c-7.08 0-12.82 5.74-12.82 12.82 0 2.26.59 4.39 1.63 6.24L3.2 28.8l6.72-1.58a12.77 12.77 0 0 0 6.09 1.55h.01c7.08 0 12.82-5.74 12.82-12.82S23.1 3.2 16.01 3.2zm0 23.35h-.01c-2.02 0-4-.54-5.72-1.57l-.41-.24-3.99.94.95-3.89-.27-.4a10.5 10.5 0 0 1-1.61-5.59c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.1 7.44 3.09a10.46 10.46 0 0 1 3.08 7.45c0 5.8-4.72 10.52-10.53 10.52z"/></svg>
+</a>
+<footer>
+  <div class="container footer">
+    <div><strong>EB OFFICE</strong> — BUSINESS & DIGITAL SOLUTIONS</div>
+    <div>© 2026 EB OFFICE. جميع الحقوق محفوظة.</div>
+    <div><span class="gold">+201207641934</span> · eslam.elbanby@gmail.com</div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.querySelector('.menu');
+  const nav = document.querySelector('nav');
+
+  menuBtn?.addEventListener('click', () => {
+    nav.classList.toggle('mobile-open');
+  });
+
+  nav?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => nav.classList.remove('mobile-open'));
+  });
+</script>
+
+<script>
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  document.getElementById('serviceForm')?.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const budget = document.getElementById('budget').value.trim();
+    const currency = document.getElementById('currency').value;
+    const details = document.getElementById('details').value.trim();
+
+    const message =
+      `مرحباً EB OFFICE%0A` +
+      `أرغب في طلب خدمة جديدة.%0A%0A` +
+      `الاسم: ${encodeURIComponent(name)}%0A` +
+      `رقم الهاتف: ${encodeURIComponent(phone)}%0A` +
+      `الخدمة: ${encodeURIComponent(service)}%0A` +
+      `الميزانية: ${encodeURIComponent(budget ? `${budget} ${currency}` : 'غير محددة')}%0A` +
+      `التفاصيل: ${encodeURIComponent(details)}`;
+
+    window.open(`https://wa.me/201207641934?text=${message}`, '_blank');
+  });
+</script>
+</body>
+</html>
