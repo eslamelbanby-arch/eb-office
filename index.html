@@ -84,10 +84,10 @@
     .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
     .port-card{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.04);transition:all .35s ease;display:flex;flex-direction:column}
     .port-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 45px rgba(0,0,0,.1)}
-    .port-img{width:100%;height:230px;background:#0d0d0d;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-    .port-img img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .4s ease}
+    .port-img{width:100%;height:230px;background:#181818;position:relative;overflow:hidden;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+    .port-img img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .4s ease;display:block}
     .port-card:hover .port-img img{transform:scale(1.06)}
-    .port-tag{position:absolute;top:14px;right:14px;background:rgba(9,9,9,0.85);color:var(--gold);padding:5px 14px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid rgba(212,175,55,0.35);backdrop-filter:blur(6px)}
+    .port-tag{position:absolute;top:14px;right:14px;background:rgba(9,9,9,0.85);color:var(--gold);padding:5px 14px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid rgba(212,175,55,0.35);backdrop-filter:blur(6px);z-index:2}
     .port-body{padding:24px;display:flex;flex-direction:column;flex-grow:1}
     .port-body h3{font-size:18px;font-weight:800;margin-bottom:10px;color:#111}
     .port-body p{font-size:13.5px;color:var(--muted);margin-bottom:20px;line-height:1.7;flex-grow:1}
@@ -248,6 +248,7 @@
     </div>
   </section>
 
+  <!-- معرض الأعمال الشامل بروابط ملفاتك الفعلية المضمونة -->
   <section class="reveal portfolio" id="portfolio">
     <div class="container">
       <div class="section-head">
@@ -256,6 +257,7 @@
         <p>اختر المجال لمعاينة كافة النماذج والأعمال الخاصة به.</p>
       </div>
 
+      <!-- أزرار التصفية -->
       <div class="filter-tabs">
         <button class="filter-btn active" data-filter="all">عرض الكل</button>
         <button class="filter-btn" data-filter="excel">Excel ومحاسبة</button>
@@ -266,6 +268,7 @@
 
       <div class="port-grid">
         
+        <!-- Excel 1: الداشبورد -->
         <article class="port-card" data-category="excel">
           <div class="port-img">
             <span class="port-tag">Excel & Dashboard</span>
@@ -278,6 +281,7 @@
           </div>
         </article>
 
+        <!-- Excel 2: برامج على لابتوب -->
         <article class="port-card" data-category="excel">
           <div class="port-img">
             <span class="port-tag">أنظمة محاسبية</span>
@@ -290,18 +294,7 @@
           </div>
         </article>
 
-        <article class="port-card" data-category="excel">
-          <div class="port-img">
-            <span class="port-tag">حزمة نماذج جاهزة</span>
-            <img src="excel-templates.jp...jpg" onerror="this.src='excel-laptop.jpg.jpg'" alt="مكتبة ملفات إكسيل">
-          </div>
-          <div class="port-body">
-            <h3>حزمة شيتات إدارة الأعمال والمخازن</h3>
-            <p>إدارة المخزون والمبيعات، حساب الأجور والمرتبات، طباعة الشيكات، وتقييم الأداء.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20حزمة%20شيتات%20المحاسبة" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">استفسر عن الحزمة ↗</a>
-          </div>
-        </article>
-
+        <!-- CV 1: Emma Thompson -->
         <article class="port-card" data-category="cv">
           <div class="port-img">
             <span class="port-tag">CV & ATS Compliant</span>
@@ -314,6 +307,7 @@
           </div>
         </article>
 
+        <!-- CV 2: Sophia Walker -->
         <article class="port-card" data-category="cv">
           <div class="port-img">
             <span class="port-tag">CV & Modern Executive</span>
@@ -326,30 +320,7 @@
           </div>
         </article>
 
-        <article class="port-card" data-category="cv">
-          <div class="port-img">
-            <span class="port-tag">مستندات ومطبوعات رسمية</span>
-            <img src="voucher-template.jpg" onerror="this.src='invoice-template.j...jpg'" alt="سندات قبض وصرف">
-          </div>
-          <div class="port-body">
-            <h3>تصميم سندات قبض وصرف رسمية</h3>
-            <p>نماذج سندات مالية مجهزة للطباعة باسم وشعار شركتك بتنسيق محاسبي دقيق.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سندات%20قبض%20وصرف" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم سندات ↗</a>
-          </div>
-        </article>
-
-        <article class="port-card" data-category="cv">
-          <div class="port-img">
-            <span class="port-tag">فواتير مبيعات ضريبية</span>
-            <img src="invoice-template.j...jpg" onerror="this.src='documents-study.j...jpg'" alt="فاتورة مبيعات">
-          </div>
-          <div class="port-body">
-            <h3>تصميم فواتير مبيعات احترافية</h3>
-            <p>قوالب فواتير مبيعات منظمة تشمل جدول الأصناف والأسعار والملاحظات جاهزة للاستخدام.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20فواتير%20مبيعات" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب تصميم فاتورة ↗</a>
-          </div>
-        </article>
-
+        <!-- الهوية 1: موك آب الكروت والشاشات -->
         <article class="port-card" data-category="design">
           <div class="port-img">
             <span class="port-tag">هوية بصرية وبراندينج</span>
@@ -362,18 +333,7 @@
           </div>
         </article>
 
-        <article class="port-card" data-category="design">
-          <div class="port-img">
-            <span class="port-tag">بوسترات وإعلانات</span>
-            <img src="services-poster.p...png" onerror="this.src='social-ad.jpg.webp'" alt="بوستر تسويقي للخدمات">
-          </div>
-          <div class="port-body">
-            <h3>تصميم البوسترات والحملات الترويجية</h3>
-            <p>بوسترات إعلانية شاملة للخدمات، منشورات فيسبوك وإنستجرام لزيادة التفاعل والمبيعات.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20بوسترات%20إعلانية" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب تصميم بوستر ↗</a>
-          </div>
-        </article>
-
+        <!-- الهوية 2: عروض المدارس -->
         <article class="port-card" data-category="design">
           <div class="port-img">
             <span class="port-tag">إعلانات وعروض تجارية</span>
@@ -386,6 +346,7 @@
           </div>
         </article>
 
+        <!-- السوشيال 1: أيقونات 3D -->
         <article class="port-card" data-category="social">
           <div class="port-img">
             <span class="port-tag">إدارة منصات وتفاعل</span>
@@ -398,6 +359,20 @@
           </div>
         </article>
 
+        <!-- السوشيال 2: نيون السوشيال -->
+        <article class="port-card" data-category="social">
+          <div class="port-img">
+            <span class="port-tag">حملات إعلانية وسوشيال</span>
+            <img src="social-neon.jpg.jpg" alt="تصاميم وحملات سوشيال ميديا">
+          </div>
+          <div class="port-body">
+            <h3>صناعة وتصميم الهوية الرقمية للإعلانات</h3>
+            <p>تصاميم بصرية مضيئة وجذابة مخصصة للحملات الإعلانية على مختلف المنصات.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصاميم%20إعلانية%20للسوشيال%20ميديا" target="_blank" class="btn btn-dark" style="width:100%;font-size:13.5px;padding:11px 0;border-color:#333;color:#111">طلب تصميم إعلاني ↗</a>
+          </div>
+        </article>
+
+        <!-- السوشيال 3: جدولة الوقت والمحتوى -->
         <article class="port-card" data-category="social">
           <div class="port-img">
             <span class="port-tag">صناعة محتوى وجدولة</span>
@@ -551,7 +526,7 @@
   menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
   nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
 
-  // كود فلترة المعرض التفاعلي
+  // كود التصفية
   const filterBtns = document.querySelectorAll('.filter-btn');
   const portCards = document.querySelectorAll('.port-card');
 
