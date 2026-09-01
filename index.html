@@ -164,8 +164,9 @@
     }
     .float-wa svg{width:28px;height:28px;display:block}
 
-    footer{background:#050505;color:#999;padding:22px 0;border-top:1px solid #1a1a1a;font-size:13px}
+    footer{background:#050505;color:#aaa;padding:26px 0;border-top:1px solid #1a1a1a;font-size:13.5px}
     .footer{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+    .creator-badge{color:#d4af37;font-weight:700;letter-spacing:.3px}
 
     @media(max-width:850px){
       nav{display:none}
@@ -183,6 +184,7 @@
       .service-form{grid-template-columns:1fr;padding:18px}
       .service-form .full{grid-column:auto}
       .features{grid-template-columns:1fr}
+      .footer{flex-direction:column;text-align:center;gap:10px}
     }
   </style>
 </head>
@@ -443,8 +445,20 @@
           </select>
         </div>
         <div>
-          <label for="budget">الميزانية المقترحة</label>
-          <input id="budget" name="budget" placeholder="مثال: 1000 جنيه">
+          <label for="budget">الميزانية المقترحة والعملة</label>
+          <div style="display:grid;grid-template-columns:1fr 130px;gap:8px">
+            <input id="budget" name="budget" inputmode="decimal" placeholder="المبلغ">
+            <select id="currency" name="currency" aria-label="العملة">
+              <option value="EGP">جنيه (EGP)</option>
+              <option value="SAR">ريال (SAR)</option>
+              <option value="AED">درهم (AED)</option>
+              <option value="USD">دولار (USD)</option>
+              <option value="EUR">يورو (EUR)</option>
+              <option value="KWD">دينار (KWD)</option>
+              <option value="QAR">ريال (QAR)</option>
+              <option value="Other">أخرى</option>
+            </select>
+          </div>
         </div>
         <div class="full">
           <label for="details">تفاصيل المشروع والطلب</label>
@@ -465,7 +479,7 @@
 <footer>
   <div class="container footer">
     <div><strong>EB OFFICE</strong> — BUSINESS & DIGITAL SOLUTIONS</div>
-    <div>© 2026 EB OFFICE. جميع الحقوق محفوظة.</div>
+    <div class="creator-badge">تم تصميم وتطوير الموقع بواسطة Eslam Elbanby</div>
     <div>+201207641934 · eslam.elbanby@gmail.com</div>
   </div>
 </footer>
@@ -490,7 +504,10 @@
     const phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
     const budget = document.getElementById('budget').value.trim();
+    const currency = document.getElementById('currency').value;
     const details = document.getElementById('details').value.trim();
+
+    const formattedBudget = budget ? `${budget} ${currency}` : 'غير محددة';
 
     const message =
       `مرحباً EB OFFICE%0A` +
@@ -498,7 +515,7 @@
       `الاسم: ${encodeURIComponent(name)}%0A` +
       `رقم الهاتف: ${encodeURIComponent(phone)}%0A` +
       `الخدمة: ${encodeURIComponent(service)}%0A` +
-      `الميزانية: ${encodeURIComponent(budget || 'غير محددة')}%0A` +
+      `الميزانية: ${encodeURIComponent(formattedBudget)}%0A` +
       `التفاصيل: ${encodeURIComponent(details)}`;
 
     window.open(`https://wa.me/201207641934?text=${message}`, '_blank');
