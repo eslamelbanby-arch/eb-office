@@ -6,7 +6,6 @@
   <meta name="description" content="EB OFFICE - حلول الأعمال والخدمات الرقمية" />
   <title>EB OFFICE | Business & Digital Solutions</title>
   
-  <!-- استدعاء خط Cairo الاحترافي -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -67,12 +66,26 @@
     .section-head .eyebrow{margin-bottom:6px}
     .section-head h2{font-size:36px;font-weight:800}
     .section-head p{color:var(--muted);margin-top:8px;font-size:16px}
+    
     .services{background:var(--soft)}
     .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     .card{background:#fff;border:1px solid var(--card-border);border-radius:18px;padding:32px;transition:all .3s ease}
     .card:hover{transform:translateY(-8px);box-shadow:0 22px 45px rgba(0,0,0,.09);border-color:var(--gold)}
     .icon{width:56px;height:56px;border-radius:14px;background:#111;color:var(--gold);display:grid;place-items:center;font-size:24px;margin-bottom:20px}
     .card h3{margin-bottom:10px;font-size:20px;font-weight:700}.card p{color:var(--muted);font-size:14px}
+
+    /* قسم معرض الأعمال التفاعلي */
+    .portfolio{background:#fff}
+    .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .port-card{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,0.04);transition:all .35s ease}
+    .port-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 20px 40px rgba(0,0,0,.1)}
+    .port-img{width:100%;height:200px;background:#111;position:relative;overflow:hidden}
+    .port-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+    .port-card:hover .port-img img{transform:scale(1.08)}
+    .port-tag{position:absolute;top:12px;right:12px;background:rgba(9,9,9,0.85);color:var(--gold);padding:4px 12px;border-radius:6px;font-size:12px;font-weight:700;border:1px solid rgba(212,175,55,0.3)}
+    .port-body{padding:22px}
+    .port-body h3{font-size:18px;font-weight:800;margin-bottom:8px;color:#111}
+    .port-body p{font-size:13px;color:var(--muted);margin-bottom:18px;line-height:1.6}
 
     .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
     .about-box{background:linear-gradient(145deg,#0e0e0e,#1c1c1c);color:#fff;border-radius:20px;padding:48px;min-height:340px;display:flex;flex-direction:column;justify-content:center;border:1px solid rgba(212,175,55,.25)}
@@ -81,9 +94,9 @@
     .features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
     .feature{padding:20px;border:1px solid var(--line);border-radius:14px;background:#fafafa;transition:.25s}.feature:hover{border-color:var(--gold)}.feature b{display:block;color:#222;font-size:16px;margin-bottom:4px}.feature span{font-size:13px;color:var(--muted)}
 
-    .testimonials{background:#fff}
+    .testimonials{background:var(--soft)}
     .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .testi-card{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:30px;position:relative}
+    .testi-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px;position:relative}
     .testi-stars{color:var(--gold);font-size:18px;margin-bottom:12px}
     .testi-card p{color:#444;font-size:14px;margin-bottom:18px;font-style:italic}
     .testi-author{display:flex;align-items:center;gap:12px}
@@ -140,14 +153,14 @@
       .hero-grid{grid-template-columns:1fr;text-align:center;min-height:auto}.hero-copy{padding:60px 0 20px}.hero-copy p{margin-inline:auto}
       .actions{justify-content:center}.hero-art{min-height:340px}
       .stats-box{grid-template-columns:repeat(2,1fr);gap:18px}
-      .cards,.testi-grid{grid-template-columns:repeat(2,1fr)}
+      .cards,.port-grid,.testi-grid{grid-template-columns:repeat(2,1fr)}
       .about-grid{grid-template-columns:1fr}.about-box{min-height:260px}
       .contact-box{flex-direction:column;text-align:center}
     }
     @media(max-width:560px){
       .nav{height:66px}.hero-copy{padding-top:45px}h1{font-size:36px}
       .stats-box{padding:16px}.stat strong{font-size:26px}
-      section{padding:65px 0}.section-head h2{font-size:30px}.cards,.testi-grid{grid-template-columns:1fr}
+      section{padding:65px 0}.section-head h2{font-size:30px}.cards,.port-grid,.testi-grid{grid-template-columns:1fr}
       .service-form{grid-template-columns:1fr;padding:22px}
       .service-form .full{grid-column:auto}
       .features{grid-template-columns:1fr}
@@ -168,6 +181,7 @@
       <a class="active" href="#home">الرئيسية</a>
       <a href="#about">من نحن</a>
       <a href="#services">خدماتنا</a>
+      <a href="#portfolio">معرض الأعمال</a>
       <a href="#testimonials">آراء العملاء</a>
       <a href="#contact">تواصل معنا</a>
     </nav>
@@ -184,7 +198,7 @@
         <h1>حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span></h1>
         <p>نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.</p>
         <div class="actions">
-          <a class="btn btn-gold" href="#services">استكشف خدماتنا ←</a>
+          <a class="btn btn-gold" href="#portfolio">معرض الأعمال ←</a>
           <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener">محادثة مباشرة عبر واتساب</a>
         </div>
       </div>
@@ -222,6 +236,56 @@
         <article class="card"><div class="icon">📱</div><h3>إدارة السوشيال ميديا</h3><p>صناعة محتوى هادف وتصميم خطط نشر دورية تزيد من تفاعل عملائك المستهدفين.</p></article>
         <article class="card"><div class="icon">📄</div><h3>السير الذاتية والمستندات</h3><p>صياغة وتصميم CV متوافق مع أنظمة الـ ATS وتجهيز مكاتبات وعقود أعمال رسمية.</p></article>
         <article class="card"><div class="icon">🤖</div><h3>أتمتة الأعمال والذكاء الاصطناعي</h3><p>تطبيق أحدث أدوات الذكاء الاصطناعي لتسريع المهام اليومية وتقليل التكاليف.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- قسم معرض الأعمال الجاهز بالصور والروابط -->
+  <section class="reveal portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">معرض الأعمال</div>
+        <h2>نماذج من مشاريعنا المنفذة</h2>
+        <p>استكشف عينات من النماذج المحاسبية، المواقع الرقمية، وتصاميم الهوية الاحترافية.</p>
+      </div>
+      <div class="port-grid">
+        
+        <article class="port-card">
+          <div class="port-img">
+            <span class="port-tag">Excel & Analysis</span>
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=80" alt="نظام محاسبي داشبورد">
+          </div>
+          <div class="port-body">
+            <h3>لوحة تحكم وتحليل مالي شاملة</h3>
+            <p>شيت إكسيل تفاعلي لمتابعة الإيرادات والمصروفات، وحساب صافي الأرباح مع مؤشرات أداء بصرية (KPIs).</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20نموذج%20محاسبي%20مماثل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب نموذج مماثل ↗</a>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="port-img">
+            <span class="port-tag">Web Development</span>
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80" alt="تصميم وتطوير موقع شركة">
+          </div>
+          <div class="port-body">
+            <h3>موقع تعريفي لشركة استشارات</h3>
+            <p>واجهة موقع سريعة ومتجاوبة تماماً مع الهواتف الذكية مع نظام تواصل فوري عبر واتساب.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20موقع%20إلكتروني%20لنشاطي" target="_blank" class="btn btn-dark" style="width:100%;font-size:13px;padding:10px 0;border-color:#333;color:#111">طلب موقع إلكتروني ↗</a>
+          </div>
+        </article>
+
+        <article class="port-card">
+          <div class="port-img">
+            <span class="port-tag">Graphic & Branding</span>
+            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&auto=format&fit=crop&q=80" alt="تصميم هوية بصرية">
+          </div>
+          <div class="port-body">
+            <h3>هوية بصرية ومحتوى تسويقي</h3>
+            <p>باقة هوية متكاملة تتضمن الشعار، كروت العمل، وتنسيق قوالب منشورات التواصل الاجتماعي.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وسوشيال%20ميديا" target="_blank" class="btn btn-gold" style="width:100%;font-size:13px;padding:10px 0">طلب تصميم هوية ↗</a>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
