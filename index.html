@@ -65,7 +65,7 @@
     .section-head h2{font-size:32px;font-weight:800}
     .section-head p{color:var(--muted);margin-top:6px;font-size:15px}
     
-    /* تعديل 1: خدمات مدمجة وأنيقة بدون استهلاك مساحات كبيرة */
+    /* خدمات مدمجة وأنيقة */
     .services{background:var(--soft)}
     .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .service-compact{
@@ -82,7 +82,7 @@
     .service-compact h3{font-size:16px;font-weight:800;margin-bottom:4px;color:#111}
     .service-compact p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
 
-    /* تعديل 2: معرض أعمال مقسم لـ 4 بطاقات تفاعلية بسلايدر سحب يمين وشمال */
+    /* معرض الأعمال مع السلايدر التفاعلي */
     .portfolio{background:#fff}
     .port-categories{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
     .port-category-card{
@@ -91,7 +91,6 @@
       display:flex;flex-direction:column;
     }
     
-    /* حاوية السلايدر التفاعلي */
     .carousel-container{position:relative;width:100%;height:320px;background:#0d0d0d;overflow:hidden}
     .carousel-track{
       display:flex;width:100%;height:100%;
@@ -104,10 +103,9 @@
       display:flex;align-items:center;justify-content:center;position:relative;background:#111;
     }
     .carousel-slide img{
-      width:100%;height:100%;object-fit:contain;padding:8px;display:block;
+      width:100%;height:100%;object-fit:contain;padding:6px;display:block;
     }
     
-    /* أزرار التنقل يمين ويسار */
     .slide-arrow{
       position:absolute;top:50%;transform:translateY(-50%);
       width:36px;height:36px;border-radius:50%;background:rgba(9,9,9,0.75);
@@ -119,9 +117,9 @@
     .slide-arrow.prev{right:10px}
     .slide-arrow.next{left:10px}
     .swipe-hint{
-      position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,0.7);
-      color:#eee;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;
-      border:1px solid rgba(255,255,255,0.15);pointer-events:none;
+      position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,0.75);
+      color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;
+      border:1px solid rgba(212,175,55,0.3);pointer-events:none;z-index:2;
     }
     
     .port-category-body{padding:22px;display:flex;flex-direction:column;flex-grow:1}
@@ -181,7 +179,7 @@
       .hero-grid{grid-template-columns:1fr;text-align:center}
       .actions{justify-content:center}
       .services-grid,.port-categories,.testi-grid,.about-grid{grid-template-columns:1fr}
-      .carousel-container{height:280px}
+      .carousel-container{height:290px}
       .service-form{grid-template-columns:1fr;padding:18px}
       .service-form .full{grid-column:auto}
       .features{grid-template-columns:1fr}
@@ -239,7 +237,7 @@
     </div>
   </div>
 
-  <!-- قسم الخدمات المدمج والأنيق -->
+  <!-- قسم الخدمات المدمج -->
   <section class="services" id="services">
     <div class="container">
       <div class="section-head">
@@ -275,27 +273,29 @@
     </div>
   </section>
 
-  <!-- قسم معرض الأعمال التفاعلي بالسحب لليمين واليسار -->
+  <!-- معرض الأعمال التفاعلي بالسحب لكافة الصور -->
   <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">معرض الأعمال المنفذة</div>
         <h2>نماذج من مشاريعنا حسب التخصص</h2>
-        <p>اسحب يميناً ويساراً ⟷ داخل كل قسم لاستعراض كافة الصور والمشاريع كاملة.</p>
+        <p>اسحب يميناً ويساراً ⟷ أو استخدم الأسهم لمعاينة جميع الصور والنماذج كاملة.</p>
       </div>
 
       <div class="port-categories">
         
-        <!-- قسم 1: Excel والمحاسبة والداشبورد -->
+        <!-- قسم 1: Excel والمحاسبة (4 صور كاملة) -->
         <article class="port-category-card">
           <div class="carousel-container">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
             <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
-              <div class="carousel-slide"><img src="dashboard.jpg.jpg" alt="داشبورد تفاعلية إكسيل"></div>
-              <div class="carousel-slide"><img src="excel-laptop.jpg.jpg" alt="نظام محاسبي متكامل"></div>
+              <div class="carousel-slide"><img src="dashboard.jpg.jpg" alt="داشبورد الوكيل الرقمي"></div>
+              <div class="carousel-slide"><img src="excel-laptop.jpg.jpg" alt="برامج محاسبة على لابتوب"></div>
+              <div class="carousel-slide"><img src="excel-systems.jpg.jpg" onerror="this.src='excel-laptop.jpg.jpg'" alt="معادلات وأنظمة إكسيل"></div>
+              <div class="carousel-slide"><img src="excel-templates.jpg.jpg" onerror="this.src='dashboard.jpg.jpg'" alt="مكتبة نماذج إكسيل"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور ⟷</div>
+            <div class="swipe-hint">اسحب للصور (4) ⟷</div>
           </div>
           <div class="port-category-body">
             <h3>أنظمة المحاسبة وشيتات Excel و Dashboard</h3>
@@ -304,16 +304,19 @@
           </div>
         </article>
 
-        <!-- قسم 2: السير الذاتية والمستندات الرسمية -->
+        <!-- قسم 2: السير الذاتية والمستندات (5 صور كاملة) -->
         <article class="port-category-card">
           <div class="carousel-container">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
             <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
-              <div class="carousel-slide"><img src="cv-ats-1.jpg.jpg" alt="سيرة ذاتية ATS نموذج 1"></div>
-              <div class="carousel-slide"><img src="cv-ats-2.jpg.jpg" alt="سيرة ذاتية Modern نموذج 2"></div>
+              <div class="carousel-slide"><img src="cv-ats-1.jpg.jpg" alt="سيرة ذاتية ATS Emma"></div>
+              <div class="carousel-slide"><img src="cv-ats-2.jpg.jpg" alt="سيرة ذاتية Modern Sophia"></div>
+              <div class="carousel-slide"><img src="voucher-template.jpg.jpg" onerror="this.src='invoice-template.jpg.jpg'" alt="سندات قبض وصرف"></div>
+              <div class="carousel-slide"><img src="invoice-template.jpg.jpg" onerror="this.src='voucher-template.jpg.jpg'" alt="فواتير مبيعات"></div>
+              <div class="carousel-slide"><img src="documents-study.jpg.jpg" onerror="this.src='cv-ats-1.jpg.jpg'" alt="مستندات وأعمال مكتبية"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور ⟷</div>
+            <div class="swipe-hint">اسحب للصور (5) ⟷</div>
           </div>
           <div class="port-category-body">
             <h3>السير الذاتية الاحترافية (ATS) والمستندات</h3>
@@ -322,7 +325,7 @@
           </div>
         </article>
 
-        <!-- قسم 3: الهوية البصرية والتصميم -->
+        <!-- قسم 3: الهوية البصرية والتصميم (3 صور كاملة) -->
         <article class="port-category-card">
           <div class="carousel-container">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
@@ -330,17 +333,18 @@
             <div class="carousel-track">
               <div class="carousel-slide"><img src="branding-mockup.png.png" alt="تصميم هوية بصرية"></div>
               <div class="carousel-slide"><img src="social-ad.jpg.webp" alt="إعلان عروض تجارية"></div>
+              <div class="carousel-slide"><img src="services-poster.png.png" onerror="this.src='branding-mockup.png.png'" alt="بوستر تسويقي للخدمات"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور ⟷</div>
+            <div class="swipe-hint">اسحب للصور (3) ⟷</div>
           </div>
           <div class="port-category-body">
-            <h3>الهوية البصرية وتصاميم الإعلانات</h3>
+            <h3>الهوية البصرية وتصاميم الإعلانات والبوسترات</h3>
             <p>باقات براندينج كاملة، كروت عمل فاخرة، موك آب الشاشات، وتصاميم إعلانات تسويقية مبتكرة للمتاجر والشركات.</p>
             <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وإعلانات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم هوية / إعلانات ↗</a>
           </div>
         </article>
 
-        <!-- قسم 4: إدارة السوشيال ميديا والمحتوى -->
+        <!-- قسم 4: إدارة السوشيال ميديا (3 صور كاملة) -->
         <article class="port-category-card">
           <div class="carousel-container">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
@@ -350,7 +354,7 @@
               <div class="carousel-slide"><img src="social-neon.jpg.jpg" alt="تصاميم نيون وسوشيال"></div>
               <div class="carousel-slide"><img src="social-time.jpg.jpg" alt="جدولة وصناعة محتوى"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور ⟷</div>
+            <div class="swipe-hint">اسحب للصور (3) ⟷</div>
           </div>
           <div class="port-category-body">
             <h3>إدارة منصات السوشيال ميديا وصناعة المحتوى</h3>
@@ -472,7 +476,7 @@
   menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
   nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
 
-  // كود تحريك السلايدر عبر الأسهم
+  // كود تحريك السلايدر
   function slidePort(btn, direction) {
     const container = btn.closest('.carousel-container');
     const track = container.querySelector('.carousel-track');
