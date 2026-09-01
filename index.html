@@ -48,18 +48,19 @@
     .hero-copy p{color:#d6d6d6;font-size:17px;max-width:580px;margin-bottom:28px}
     .actions{display:flex;gap:14px;flex-wrap:wrap}
     .hero-art{position:relative;min-height:420px;display:flex;align-items:center;justify-content:center}
-    .laptop{width:min(500px,100%);aspect-ratio:1.5/1;border:10px solid #252525;border-radius:18px;background:#030303;box-shadow:0 35px 75px rgba(0,0,0,0.8);transform:perspective(900px) rotateY(-6deg)}
-    .screen{height:84%;margin:10px;background:linear-gradient(145deg,#0a0a0a,#161616);border-radius:8px;display:grid;place-items:center;text-align:center;border:1px solid #333}
-    .screen .big-eb{font-size:70px;font-weight:900;color:#fff}.screen .big-eb b{color:var(--gold)}
-    .screen p{font-size:11px;letter-spacing:3px;color:#aaa}
-    .base{position:absolute;bottom:10%;width:76%;height:18px;background:#2c2c2c;border-radius:50% 50% 8px 8px;box-shadow:0 15px 25px #000}
+    .laptop{width:min(500px,100%);height:290px;border:10px solid #252525;border-radius:18px;background:#030303;box-shadow:0 35px 75px rgba(0,0,0,0.8);transform:perspective(900px) rotateY(-6deg);display:flex;align-items:center;justify-content:center;padding:12px}
+    .screen{width:100%;height:100%;background:linear-gradient(145deg,#0a0a0a,#161616);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid #333;padding:15px}
+    .screen .big-eb{font-size:62px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px}.screen .big-eb b{color:var(--gold)}
+    .screen .brand-title{font-size:13px;letter-spacing:2px;color:#fff;font-weight:700;margin-bottom:2px}
+    .screen .brand-sub{font-size:10px;letter-spacing:2px;color:#aaa}
+    .base{position:absolute;bottom:8%;width:76%;height:18px;background:#2c2c2c;border-radius:50% 50% 8px 8px;box-shadow:0 15px 25px #000}
 
     .stats{margin-top:-45px;position:relative;z-index:3}
-    .stats-box{background:#fff;border-radius:16px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr);padding:25px;border:1px solid var(--line)}
+    .stats-box{background:#fff;border-radius:16px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(2,1fr);padding:25px;border:1px solid var(--line);max-width:700px;margin:auto}
     .stat{text-align:center;border-left:1px solid #eee}
     .stat:last-child{border-left:0}
-    .stat strong{display:block;font-size:30px;font-weight:900;color:#111}
-    .stat span{color:var(--muted);font-size:14px;font-weight:600}
+    .stat strong{display:block;font-size:32px;font-weight:900;color:#111}
+    .stat span{color:var(--muted);font-size:15px;font-weight:600}
 
     section{padding:90px 0}
     .section-head{text-align:center;margin-bottom:48px}
@@ -80,7 +81,6 @@
     .features{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
     .feature{padding:20px;border:1px solid var(--line);border-radius:14px;background:#fafafa;transition:.25s}.feature:hover{border-color:var(--gold)}.feature b{display:block;color:#222;font-size:16px;margin-bottom:4px}.feature span{font-size:13px;color:var(--muted)}
 
-    /* قسم آراء العملاء */
     .testimonials{background:#fff}
     .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
     .testi-card{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:30px;position:relative}
@@ -139,20 +139,20 @@
       nav,.nav>.btn{display:none}.menu{display:block}
       .hero-grid{grid-template-columns:1fr;text-align:center;min-height:auto}.hero-copy{padding:60px 0 20px}.hero-copy p{margin-inline:auto}
       .actions{justify-content:center}.hero-art{min-height:340px}
-      .stats-box{grid-template-columns:repeat(2,1fr);gap:18px}.stat:nth-child(2){border-left:0}
+      .stats-box{grid-template-columns:repeat(2,1fr);gap:18px}
       .cards,.testi-grid{grid-template-columns:repeat(2,1fr)}
       .about-grid{grid-template-columns:1fr}.about-box{min-height:260px}
       .contact-box{flex-direction:column;text-align:center}
     }
     @media(max-width:560px){
       .nav{height:66px}.hero-copy{padding-top:45px}h1{font-size:36px}
-      .stats-box{grid-template-columns:1fr 1fr;padding:16px}.stat{border-left:0!important}.stat strong{font-size:24px}
+      .stats-box{padding:16px}.stat strong{font-size:26px}
       section{padding:65px 0}.section-head h2{font-size:30px}.cards,.testi-grid{grid-template-columns:1fr}
       .service-form{grid-template-columns:1fr;padding:22px}
       .service-form .full{grid-column:auto}
       .features{grid-template-columns:1fr}
       .contact-box{padding:35px 20px}.footer{flex-direction:column;text-align:center}
-      .laptop{width:92%}
+      .laptop{width:92%;height:250px}
     }
   </style>
 </head>
@@ -191,7 +191,9 @@
       <div class="hero-art">
         <div class="laptop">
           <div class="screen">
-            <div><div class="big-eb">E<b>B</b></div><p>EB OFFICE</p><p>BUSINESS & DIGITAL SOLUTIONS</p></div>
+            <div class="big-eb">E<b>B</b></div>
+            <div class="brand-title">EB OFFICE</div>
+            <div class="brand-sub">BUSINESS & DIGITAL SOLUTIONS</div>
           </div>
         </div>
         <div class="base"></div>
@@ -201,8 +203,6 @@
 
   <div class="container stats">
     <div class="stats-box">
-      <div class="stat"><strong>+150</strong><span>عميل يثق بنا</span></div>
-      <div class="stat"><strong>+200</strong><span>مشروع منجز</span></div>
       <div class="stat"><strong>+3</strong><span>سنوات خبرة</span></div>
       <div class="stat"><strong>24/7</strong><span>دعم مستمر</span></div>
     </div>
