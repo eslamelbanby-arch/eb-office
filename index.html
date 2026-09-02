@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EB OFFICE | خدمات أعمال احترافية</title>
+  <title>EB OFFICE | حلول أعمال وخدمات احترافية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -20,31 +20,49 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Cairo', sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
     body.en { font-family: 'Poppins', sans-serif; direction: ltr; }
+    
     header { background: var(--card-bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
     .header-container { max-width: 1200px; margin: auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
     .logo span { color: var(--accent); }
-    .btn { padding: 0.5rem 1rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: 0.2s; }
+    
+    .btn { padding: 0.6rem 1.25rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: 0.2s; display: inline-block; }
     .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: var(--accent-hover); }
     .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
-    .hero { padding: 4rem 1.5rem; text-align: center; background: radial-gradient(circle at center, #EFF6FF 0%, var(--bg-light) 70%); }
-    .hero h1 { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 1rem; }
-    .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
+
+    .hero { padding: 5rem 1.5rem; text-align: center; background: radial-gradient(circle at center, #EFF6FF 0%, var(--bg-light) 70%); }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; color: var(--primary); margin-bottom: 1rem; }
+    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2rem auto; }
+    
     .section { max-width: 1200px; margin: auto; padding: 4rem 1.5rem; }
-    .section-title { text-align: center; font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 2.5rem; }
+    .section-title { text-align: center; font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 2.5rem; }
+    
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+    .service-card { background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 12px; text-align: center; }
+    .service-card h3 { margin-bottom: 0.75rem; color: var(--primary); }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+    .gallery-item { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card-bg); }
+    .gallery-item img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    .gallery-item p { padding: 0.75rem; text-align: center; font-weight: 600; }
+
     .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .testi-card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); }
+    .testi-card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
     .testi-stars { color: var(--gold); margin-bottom: 0.75rem; font-size: 1.1rem; }
     .testi-author { margin-top: 1rem; display: flex; flex-direction: column; }
     .testi-author b { color: var(--primary); }
     .testi-author span { font-size: 0.85rem; color: var(--text-muted); }
+
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
     .modal-content { background: var(--card-bg); width: 100%; max-width: 500px; border-radius: 12px; padding: 2rem; }
     .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
     .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
     .form-group { margin-bottom: 1.25rem; }
     .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; }
+    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.95rem; }
+
+    footer { text-align: center; padding: 2.5rem 1rem; border-top: 1px solid var(--border); background: var(--card-bg); color: var(--text-muted); }
   </style>
 </head>
 <body>
@@ -57,14 +75,54 @@
   </header>
 
   <section class="hero">
-    <h1 id="heroTitle">خدمات أعمال احترافية ومتكاملة</h1>
-    <p id="heroDesc">نساعدك في تحويل وتطوير أعمالك بحلول إلكترونية وحسابية دقيقة.</p>
-    <a href="https://wa.me/201000000000" target="_blank" class="btn btn-primary">تواصل عبر واتساب</a>
+    <h1 id="heroTitle">EB OFFICE للحلول الإدارية والمحاسبية</h1>
+    <p id="heroDesc">نقدم خدمات مهنية متخصصة تشمل إعداد السير الذاتية الاحترافية، الأنظمة المالية والمكتبية، والتصاميم الإعلانية بدقة وكفاءة عالية.</p>
+    <a href="https://wa.me/201000000000" target="_blank" class="btn btn-primary" id="heroCta">تواصل معنا عبر واتساب</a>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title" id="servicesHeading">خدمات المكتب</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>📄 السير الذاتية (CV)</h3>
+        <p>صياغة وتصميم سير ذاتية احترافية تتطابق مع معايير الـ ATS لمختلف التخصصات.</p>
+      </div>
+      <div class="service-card">
+        <h3>📊 الأنظمة المحاسبية</h3>
+        <p>تنظيم الجداول والملفات المالية وإعداد التقارير الدورية بكفاءة وسرعة.</p>
+      </div>
+      <div class="service-card">
+        <h3>🎨 خدمات التصميم</h3>
+        <p>تصميم بوسترات وهويات تجارية وإعلانات تسويقية ملفتة للأنظار.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background: #FFF; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+    <h2 class="section-title" id="workHeading">نماذج من أعمالنا</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="cv-1.jpg" alt="نموذج سيرة ذاتية" onerror="this.src='https://via.placeholder.com/300x400?text=CV+Sample'">
+        <p>نماذج السير الذاتية</p>
+      </div>
+      <div class="gallery-item">
+        <img src="design-1.png" alt="نموذج تصميم" onerror="this.src='https://via.placeholder.com/300x400?text=Design+Sample'">
+        <p>التصاميم الإعلانية</p>
+      </div>
+      <div class="gallery-item">
+        <img src="cv-2.jpg" alt="نموذج عمل" onerror="this.src='https://via.placeholder.com/300x400?text=Professional+Work'">
+        <p>حلول مكتبية متكاملة</p>
+      </div>
+      <div class="gallery-item">
+        <img src="design-2.png" alt="تصميم جرافيك" onerror="this.src='https://via.placeholder.com/300x400?text=Graphic+Work'">
+        <p>تصاميم السوشيال ميديا</p>
+      </div>
+    </div>
   </section>
 
   <section class="section">
     <h2 class="section-title" id="testiHeading">آراء عملائنا</h2>
-    <div style="text-align: center; margin-bottom: 2rem;">
+    <div style="text-align: center; margin-bottom: 2.5rem;">
       <button id="openAddReviewBtn" class="btn btn-primary">أضف رأيك الآن</button>
     </div>
     <div class="testi-grid" id="testiContainer">
@@ -80,12 +138,12 @@
       </div>
       <form id="reviewForm">
         <div class="form-group">
-          <label>الاسم</label>
-          <input type="text" id="revName" required placeholder="مثال: أحمد محمد">
+          <label>الاسم بالكامل</label>
+          <input type="text" id="revName" required placeholder="مثال: محمد أحمد">
         </div>
         <div class="form-group">
-          <label>الصفة / النشاط</label>
-          <input type="text" id="revRole" required placeholder="مثال: صاحب متجر">
+          <label>الصفة / المسمى الوظيفي</label>
+          <input type="text" id="revRole" required placeholder="مثال: مدير شركة / عميل مستقل">
         </div>
         <div class="form-group">
           <label>التقييم</label>
@@ -96,13 +154,17 @@
           </select>
         </div>
         <div class="form-group">
-          <label>رأيك بالتفصيل</label>
+          <label>رأيك وتجربتك معنا</label>
           <textarea id="revText" rows="3" required placeholder="اكتب تقييمك هنا..."></textarea>
         </div>
         <button type="submit" id="btnSubmitRev" class="btn btn-primary" style="width: 100%;">إرسال التقييم للمراجعة</button>
       </form>
     </div>
   </div>
+
+  <footer>
+    <p>© 2026 EB OFFICE. جميع الحقوق محفوظة.</p>
+  </footer>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
@@ -134,7 +196,7 @@
         });
 
         if (approved.length === 0) {
-          container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:var(--text-muted);">لا توجد آراء معتمدة بعد.</p>`;
+          container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:var(--text-muted);">لا توجد آراء معتمدة بعد، كن أول من يضيف تقييماً!</p>`;
           return;
         }
 
@@ -146,7 +208,7 @@
           </div>
         `).join('');
       } catch (e) {
-        container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:red;">خطأ في جلب البيانات.</p>`;
+        container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:red;">تعذر جلب الآراء حالياً.</p>`;
       }
     }
 
@@ -164,11 +226,11 @@
           approved: false,
           createdAt: Date.now()
         });
-        alert("تم إرسال التقييم بنجاح وسيظهر بعد المراجعة!");
+        alert("تم إرسال تقييمك بنجاح! سيتم نشره بعد المراجعة.");
         document.getElementById("reviewForm").reset();
         document.getElementById("addReviewModal").style.display = "none";
       } catch (err) {
-        alert("حدث خطأ أثناء الإرسال");
+        alert("حدث خطأ أثناء الإرسال، تأكد من اتصال الإنترنت أو قواعد Firebase.");
       } finally {
         btn.disabled = false;
         btn.innerText = "إرسال التقييم للمراجعة";
@@ -192,8 +254,10 @@
       document.documentElement.lang = isEn ? "en" : "ar";
       langBtn.innerText = isEn ? "العربية" : "English";
 
-      document.getElementById("heroTitle").innerText = isEn ? "Professional Business Solutions" : "خدمات أعمال احترافية ومتكاملة";
-      document.getElementById("heroDesc").innerText = isEn ? "Helping you grow with precise electronic and financial services." : "نساعدك في تحويل وتطوير أعمالك بحلول إلكترونية وحسابية دقيقة.";
+      document.getElementById("heroTitle").innerText = isEn ? "EB OFFICE | Professional Business & Office Solutions" : "EB OFFICE للحلول الإدارية والمحاسبية";
+      document.getElementById("heroDesc").innerText = isEn ? "Delivering high-standard CV writing, financial reporting, and graphic design services." : "نقدم خدمات مهنية متخصصة تشمل إعداد السير الذاتية الاحترافية، الأنظمة المالية والمكتبية، والتصاميم الإعلانية بدقة وكفاءة عالية.";
+      document.getElementById("servicesHeading").innerText = isEn ? "Our Services" : "خدمات المكتب";
+      document.getElementById("workHeading").innerText = isEn ? "Our Portfolio" : "نماذج من أعمالنا";
       document.getElementById("testiHeading").innerText = isEn ? "Client Testimonials" : "آراء عملائنا";
       document.getElementById("openAddReviewBtn").innerText = isEn ? "Add Your Review" : "أضف رأيك الآن";
     });
