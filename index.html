@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EB OFFICE | Business & Digital Solutions</title>
   
+  <!-- أيقونة الموقع (Favicon) وتوسيع المعاينة التلقائية للرابط -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta property="og:title" content="EB OFFICE | Business & Digital Solutions">
+  <meta property="og:description" content="نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.">
+  <meta property="og:image" content="https://eslamelbanby-arch.github.io/eboffice/logo.png">
+  <meta property="og:url" content="https://eslamelbanby-arch.github.io/eboffice/">
+  <meta property="og:type" content="website">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -525,19 +533,16 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  // الآراء الافتراضية
   const defaultReviews = [
     { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
     { name: "أحمد البدري", role: "محاسب مالي", text: "الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة." },
     { name: "م/ طارق خليل", role: "مدير شركة استيراد", text: "تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل." }
   ];
 
-  // جلب الآراء المنشورة وعرضها للزوار من السيرفر
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
     container.innerHTML = "";
     
-    // عرض الافتراضية أولاً
     defaultReviews.forEach(r => {
       const card = document.createElement("div");
       card.className = "testi-card";
@@ -570,7 +575,6 @@
     }
   };
 
-  // إرسال الرأي الجديد إلى Firebase
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
@@ -600,7 +604,6 @@
     }
   });
 
-  // إدارة الآراء (المعلقة والمنشورة)
   window.renderAdminLists = async function() {
     const pendingList = document.getElementById("pendingReviewsList");
     const approvedList = document.getElementById("approvedReviewsList");
@@ -825,7 +828,6 @@
       carousel.addEventListener('touchend', startScroll);
     });
 
-    // 5 ضغطات سريعة على اللوجو لفتح الإدارة
     let clickCount = 0;
     let clickTimer = null;
     const trigger = document.getElementById('adminSecretTrigger');
