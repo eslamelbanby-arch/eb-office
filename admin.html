@@ -1,1 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم | EB OFFICE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #2563EB;
+      --bg: #F8FAFC;
+      --border: #E2E8F0;
+      --success: #10B981;
+      --danger: #EF4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--primary); padding: 1.5rem; }
+    .container { max-width: 650px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    h2 { margin-bottom: 1.5rem; text-align: center; }
+    .form-group { margin-bottom: 1.25rem; }
+    input { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 1rem; }
+    .btn { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; font-family: inherit; }
+    .btn-primary { background: var(--accent); color: #fff; width: 100%; }
+    .btn-success { background: var(--success); color: #fff; }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .review-item { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .status { font-size: 0.85rem; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="loginBox">
+    <h2>تسجيل دخول الإدارة</h2>
+    <div class="form-group">
+      <input type="password" id="pinInput" placeholder="أدخل كلمة السر">
+    </div>
+    <button class="btn btn-primary" id="loginBtn">دخول</button>
+  </div>
+
+  <div class="container" id="panelBox" style="display: none;">
+    <h2>إدارة آراء العملاء</h2>
+    <div id="reviewsList">جاري التحميل...</div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, updateDoc, deleteDoc, doc, query, orderBy } 
+      from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCOYYorZLlEJ9ctnFrw8I3fGkK_y5yN50",
+      authDomain: "eb-office-29420.firebaseapp.com",
+      projectId: "eb-office-29420",
+      storageBucket: "eb-office-29420.firebasestorage.app",
+      messagingSenderId: "390372927142",
+      appId: "1:390372927142:web:bfe321db80f2d70cb99478",
+      measurementId: "G-Z4FWKVPZ24"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const pin = document.getElementById("pinInput").value;
+      if (pin === "1712199678") {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("panelBox").style.display = "block";
+        loadAdminReviews();
+      } else {
+        alert("كلمة المرور غير صحيحة!");
+      }
+    });
+
+    async function loadAdminReviews() {
+      const list = document.getElementById("reviewsList");
+      list.innerHTML = "<p>جاري تحميل المراجعات...</p>";
+      
+      try {
+        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+
+        if (snapshot.empty) {
+          list.innerHTML = "<p>لا توجد تقييمات مسجلة.</p>";
+          return;
+        }
+
+        list.innerHTML = "";
+        snapshot.forEach(docSnap => {
+          const rev = docSnap.data();
+          const id = docSnap.id;
+          const item = document.createElement("div");
+          item.className = "review-item";
+          item.innerHTML = `
+            <div>
+              <b>${rev.name}</b> (${rev.role}) - ${"★".repeat(rev.stars)}<br>
+              <p style="margin: 0.3rem 0;">${rev.text}</p>
+              <span class="status" style="color: ${rev.approved ? 'var(--success)' : '#D97706'}">
+                ${rev.approved ? '● منشور للجميع' : '● معلق بانتظار الموافقة'}
+              </span>
+            </div>
+            <div style="display: flex; gap: 0.5rem;">
+              ${!rev.approved ? `<button class="btn btn-success" data-action="approve" data-id="${id}">موافقة</button>` : ''}
+              <button class="btn btn-danger" data-action="delete" data-id="${id}">حذف</button>
+            </div>
+          `;
+          list.appendChild(item);
+        });
+
+        list.querySelectorAll("button").forEach(b => {
+          b.onclick = async (e) => {
+            const action = e.target.getAttribute("data-action");
+            const docId = e.target.getAttribute("data-id");
+            if (action === "approve") {
+              await updateDoc(doc(db, "reviews", docId), { approved: true });
+              loadAdminReviews();
+            } else if (action === "delete") {
+              if (confirm("هل أنت متأكد من حذف هذا التقييم نهائياً؟")) {
+                await deleteDoc(doc(db, "reviews", docId));
+                loadAdminReviews();
+              }
+            }
+          };
+        });
+      } catch (e) {
+        list.innerHTML = "<p style='color:red;'>تعذر جلب البيانات.</p>";
+      }
+    }
+  </script>
+</body>
+</html>
 
