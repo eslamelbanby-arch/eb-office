@@ -30,7 +30,7 @@
     
     header { position: sticky; top: 0; z-index: 100; background: #090909; border-bottom: 1px solid rgba(212,175,55,.25); }
     .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-    .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 900; }
+    .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 900; user-select: none; }
     .brand-mark { width: 42px; height: 36px; display: grid; place-items: center; font-size: 22px; font-weight: 900; border-left: 3px solid var(--gold); transform: skew(-10deg); background: rgba(212,175,55,0.1); border-radius: 4px; }
     .brand-mark span { color: var(--gold); }
     .brand small { display: block; font-size: 9px; letter-spacing: 1px; color: #bbb; margin-top: -2px; }
@@ -132,7 +132,6 @@
     .review-action-box { margin-top: 35px; background: #fff; border: 1px dashed var(--gold); padding: 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
 
-    .admin-badge-btn { font-size: 11px; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; margin-top: 10px; }
     .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; place-items: center; padding: 15px; }
     .admin-content { background: #fff; border-radius: 14px; max-width: 550px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
 
@@ -175,10 +174,10 @@
 
 <header>
   <div class="container nav">
-    <a class="brand" href="#home">
+    <div class="brand" id="adminSecretTrigger" style="cursor: pointer;">
       <div class="brand-mark">E<span>B</span></div>
       <div>EB OFFICE<small>BUSINESS & DIGITAL SOLUTIONS</small></div>
-    </a>
+    </div>
     <nav>
       <a class="active" href="#home" data-i18n="nav_home">الرئيسية</a>
       <a href="#about" data-i18n="nav_about">من نحن</a>
@@ -436,17 +435,14 @@
           </div>
         </form>
       </div>
-
-      <div style="text-align:center;margin-top:15px">
-        <button class="admin-badge-btn" type="button" onclick="openAdminPanel()">لوحة إدارة واعتماد الآراء (خاص بك)</button>
-      </div>
     </div>
   </section>
 
+  <!-- لوحة الإدارة المخفية تماماً عن الزوار -->
   <div class="admin-panel" id="adminPanel">
     <div class="admin-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
-        <h3 style="font-size:18px">إدارة واعتماد آراء العملاء</h3>
+        <h3 style="font-size:18px">لوحة إدارة واعتماد الآراء</h3>
         <button type="button" onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
       </div>
       <p style="font-size:13px;color:var(--muted);margin-bottom:15px">الآراء المعلقة التي أرسلها الزوار، يمكنك اعتماد نشرها أو حذفها:</p>
@@ -524,7 +520,6 @@
 </footer>
 
 <script>
-  // نصوص الترجمة الثنائية
   const translations = {
     ar: {
       nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "خدماتنا", nav_portfolio: "معرض الأعمال",
@@ -600,7 +595,6 @@
     }
   };
 
-  // نظام تبديل اللغة وتخزينها
   let currentLang = localStorage.getItem('eb_lang') || 'ar';
 
   function applyLanguage(lang) {
@@ -625,7 +619,6 @@
     applyLanguage(next);
   }
 
-  // تحريك السلايدر اليدوي
   function slidePort(btn, direction) {
     const container = btn.closest('.carousel-container');
     const track = container.querySelector('.carousel-track');
@@ -635,11 +628,9 @@
     track.scrollBy({ left: move, behavior: 'smooth' });
   }
 
-  // تنفيذ الأكواد بعد تحميل الصفحة
   document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(currentLang);
 
-    // التحريك التلقائي للسلايدر للأقسام التي تحتوي على تراك
     const autoCarousels = document.querySelectorAll('.carousel-container[data-autoplay="true"]');
     autoCarousels.forEach(carousel => {
       const track = carousel.querySelector('.carousel-track');
@@ -671,15 +662,30 @@
     });
 
     renderApprovedReviews();
+
+    // طريقة الدخول السرية: الضغط 5 مرات متتالية وسريعة على اللوجو بالأعلى
+    let clickCount = 0;
+    let clickTimer = null;
+    const trigger = document.getElementById('adminSecretTrigger');
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimer);
+        // مهلة 1.5 ثانية لإتمام الضغطات الـ 5
+        clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+        if (clickCount >= 5) {
+          clickCount = 0;
+          openAdminPanel();
+        }
+      });
+    }
   });
 
-  // قائمة الهاتف
   const menuBtn = document.querySelector('.menu');
   const nav = document.querySelector('nav');
   menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
   nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
 
-  // نموذج إضافة الرأي
   function toggleReviewForm() {
     const wrap = document.getElementById('reviewFormWrap');
     wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
@@ -719,11 +725,10 @@
     });
   }
 
-  // لوحة الإدارة (PIN: 1234)
   function openAdminPanel() {
-    const pin = prompt(currentLang === 'ar' ? 'أدخل الرمز السري للإدارة (PIN):' : 'Enter Admin PIN:');
-    if (pin !== '1234') {
-      alert(currentLang === 'ar' ? 'رمز سري غير صحيح!' : 'Invalid PIN!');
+    const pin = prompt(currentLang === 'ar' ? 'أدخل الرمز السري للإدارة:' : 'Enter Admin Password:');
+    if (pin !== 'Eslam1712199678') {
+      alert(currentLang === 'ar' ? 'الرمز السري غير صحيح!' : 'Invalid Password!');
       return;
     }
     document.getElementById('adminPanel').style.display = 'grid';
@@ -780,7 +785,6 @@
     renderPendingList();
   };
 
-  // إرسال طلب الخدمة عبر واتساب
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
