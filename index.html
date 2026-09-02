@@ -270,8 +270,8 @@
       <div class="port-categories">
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="excel-1.jpg" alt="Daily Activity Dashboard"></div>
               <div class="carousel-slide"><img src="excel-2.jpg" alt="Cash Flow Statement"></div>
@@ -290,8 +290,8 @@
 
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="cv-1.jpg" alt="CV ATS Eslam Elbanby"></div>
               <div class="carousel-slide"><img src="cv-2.jpg" alt="CV Professional Mohamed Salah"></div>
@@ -309,8 +309,8 @@
 
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="design-1.png" alt="موك آب الهوية البصرية"></div>
               <div class="carousel-slide"><img src="design-2.png" alt="لوجو EB الفاخر"></div>
@@ -326,8 +326,8 @@
 
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="social-1.jpg" alt="نيون السوشيال ميديا"></div>
               <div class="carousel-slide"><img src="social-2.jpg" alt="سحابة الأيقونات 3D"></div>
@@ -511,6 +511,8 @@
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
   import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, orderBy } 
     from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword, signOut }
+    from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCOYYorZLlEJ9ctnFrw8I3fGkK_y5yN50",
@@ -524,6 +526,14 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  const auth = getAuth(app);
+
+  // دالة تنظيف النصوص لمنع حقن أكواد HTML/JS خبيثة (حماية من XSS)
+  function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
 
   // الآراء الافتراضية
   const defaultReviews = [
@@ -543,8 +553,8 @@
       card.className = "testi-card";
       card.innerHTML = `
         <div class="testi-stars">★★★★★</div>
-        <p>"${r.text}"</p>
-        <div class="testi-author"><b>${r.name}</b><span>${r.role}</span></div>
+        <p>"${escapeHTML(r.text)}"</p>
+        <div class="testi-author"><b>${escapeHTML(r.name)}</b><span>${escapeHTML(r.role)}</span></div>
       `;
       container.appendChild(card);
     });
@@ -559,8 +569,8 @@
           card.className = "testi-card";
           card.innerHTML = `
             <div class="testi-stars">★★★★★</div>
-            <p>"${d.text}"</p>
-            <div class="testi-author"><b>${d.name}</b><span>${d.role}</span></div>
+            <p>"${escapeHTML(d.text)}"</p>
+            <div class="testi-author"><b>${escapeHTML(d.name)}</b><span>${escapeHTML(d.role)}</span></div>
           `;
           container.appendChild(card);
         }
@@ -626,8 +636,8 @@
           const item = document.createElement("div");
           item.style.cssText = "border:1px solid #ffeeba;padding:12px;border-radius:8px;background:#fffdf5";
           item.innerHTML = `
-            <strong>${rev.name}</strong> (${rev.role})
-            <p style="font-size:13px;color:#444;margin:6px 0">"${rev.text}"</p>
+            <strong>${escapeHTML(rev.name)}</strong> (${escapeHTML(rev.role)})
+            <p style="font-size:13px;color:#444;margin:6px 0">"${escapeHTML(rev.text)}"</p>
             <div style="display:flex;gap:8px;margin-top:8px">
               <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="approveReview('${id}')">موافقة ونشر ✅</button>
               <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
@@ -640,8 +650,8 @@
           item.style.cssText = "border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:10px";
           item.innerHTML = `
             <div style="flex-grow:1">
-              <strong>${rev.name}</strong> <small style="color:var(--muted)">(${rev.role})</small>
-              <p style="font-size:13px;color:#444;margin-top:4px">"${rev.text}"</p>
+              <strong>${escapeHTML(rev.name)}</strong> <small style="color:var(--muted)">(${escapeHTML(rev.role)})</small>
+              <p style="font-size:13px;color:#444;margin-top:4px">"${escapeHTML(rev.text)}"</p>
             </div>
             <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteReview('${id}')">حذف ✕</button>
           `;
@@ -653,8 +663,8 @@
       if (approvedCount === 0) approvedList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء إضافية منشورة بعد.</p>";
 
     } catch(err) {
-      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
-      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر (تأكد من تسجيل الدخول).</p>";
+      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر (تأكد من تسجيل الدخول).</p>";
     }
   };
 
@@ -678,6 +688,27 @@
         alert("حدث خطأ أثناء الحذف.");
       }
     }
+  };
+
+  // فتح لوحة الأدمن بتسجيل دخول حقيقي عبر Firebase Authentication
+  window.openAdminPanel = async function() {
+    const email = prompt(currentLang === 'ar' ? 'إيميل الأدمن:' : 'Admin Email:');
+    if (!email) return;
+    const password = prompt(currentLang === 'ar' ? 'كلمة المرور:' : 'Password:');
+    if (!password) return;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      document.getElementById('adminPanel').style.display = 'grid';
+      window.renderAdminLists();
+    } catch (err) {
+      alert(currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!');
+    }
+  };
+
+  window.closeAdminPanel = function() {
+    document.getElementById('adminPanel').style.display = 'none';
+    signOut(auth).catch(() => {});
   };
 
   loadPublicReviews();
@@ -836,7 +867,7 @@
         clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
         if (clickCount >= 5) {
           clickCount = 0;
-          openAdminPanel();
+          window.openAdminPanel();
         }
       });
     }
@@ -851,20 +882,6 @@
     const wrap = document.getElementById('reviewFormWrap');
     wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
     if(wrap.style.display === 'block') wrap.scrollIntoView({behavior:'smooth'});
-  }
-
-  function openAdminPanel() {
-    const pin = prompt(currentLang === 'ar' ? 'أدخل الرمز السري للإدارة:' : 'Enter Admin Password:');
-    if (pin !== 'Eslam1712199678') {
-      alert(currentLang === 'ar' ? 'الرمز السري غير صحيح!' : 'Invalid Password!');
-      return;
-    }
-    document.getElementById('adminPanel').style.display = 'grid';
-    window.renderAdminLists();
-  }
-
-  function closeAdminPanel() {
-    document.getElementById('adminPanel').style.display = 'none';
   }
 
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
