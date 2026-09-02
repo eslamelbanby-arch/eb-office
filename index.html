@@ -133,7 +133,7 @@
     .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
 
     .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; place-items: center; padding: 15px; }
-    .admin-content { background: #fff; border-radius: 14px; max-width: 550px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
+    .admin-content { background: #fff; border-radius: 14px; max-width: 580px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
 
     .contact { background: #0b0b0b; color: #fff; }
     .contact-box { border: 1px solid rgba(212,175,55,.35); border-radius: 16px; padding: 35px; display: flex; flex-direction: column; gap: 20px; }
@@ -438,15 +438,21 @@
     </div>
   </section>
 
-  <!-- لوحة الإدارة المخفية تماماً عن الزوار -->
+  <!-- لوحة الإدارة المخفية (إدارة المعلقة والمنشورة) -->
   <div class="admin-panel" id="adminPanel">
     <div class="admin-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
         <h3 style="font-size:18px">لوحة إدارة واعتماد الآراء</h3>
         <button type="button" onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
       </div>
-      <p style="font-size:13px;color:var(--muted);margin-bottom:15px">الآراء المعلقة التي أرسلها الزوار، يمكنك اعتماد نشرها أو حذفها:</p>
-      <div id="pendingReviewsList" style="display:flex;flex-direction:column;gap:12px"></div>
+      
+      <!-- قسم الآراء بانتظار الاعتماد -->
+      <h4 style="font-size:14px;color:var(--gold);margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المعلقة (بانتظار الموافقة):</h4>
+      <div id="pendingReviewsList" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px"></div>
+
+      <!-- قسم الآراء المنشورة في الموقع بالفعل -->
+      <h4 style="font-size:14px;color:#111;margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المنشورة حالياً بالموقع:</h4>
+      <div id="approvedReviewsList" style="display:flex;flex-direction:column;gap:10px"></div>
     </div>
   </div>
 
@@ -663,7 +669,7 @@
 
     renderApprovedReviews();
 
-    // طريقة الدخول السرية: الضغط 5 مرات متتالية وسريعة على اللوجو بالأعلى
+    // طريقة الدخول السرية: الضغط 5 مرات متتالية وسريعة على اللوجو
     let clickCount = 0;
     let clickTimer = null;
     const trigger = document.getElementById('adminSecretTrigger');
@@ -671,7 +677,6 @@
       trigger.addEventListener('click', () => {
         clickCount++;
         clearTimeout(clickTimer);
-        // مهلة 1.5 ثانية لإتمام الضغطات الـ 5
         clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
         if (clickCount >= 5) {
           clickCount = 0;
@@ -713,9 +718,14 @@
   function renderApprovedReviews() {
     const approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
     const container = document.getElementById('testiContainer');
+    
+    // إزالة التعليقات المضافة مسبقاً لمنع التكرار عند إعادة الرسم
+    const dynamicCards = container.querySelectorAll('.dynamic-review-card');
+    dynamicCards.forEach(c => c.remove());
+
     approved.forEach(item => {
       const card = document.createElement('div');
-      card.className = 'testi-card';
+      card.className = 'testi-card dynamic-review-card';
       card.innerHTML = `
         <div class="testi-stars">★★★★★</div>
         <p>"${item.text}"</p>
@@ -732,38 +742,61 @@
       return;
     }
     document.getElementById('adminPanel').style.display = 'grid';
-    renderPendingList();
+    renderAdminLists();
   }
 
   function closeAdminPanel() {
     document.getElementById('adminPanel').style.display = 'none';
   }
 
-  function renderPendingList() {
-    const list = document.getElementById('pendingReviewsList');
+  function renderAdminLists() {
+    // 1. عرض الآراء المعلقة
+    const pendingList = document.getElementById('pendingReviewsList');
     const pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
-    list.innerHTML = '';
+    pendingList.innerHTML = '';
 
     if (pending.length === 0) {
-      list.innerHTML = '<p style="font-size:13px;color:#888;text-align:center;padding:20px">لا توجد آراء جديدة بانتظار الاعتماد.</p>';
-      return;
+      pendingList.innerHTML = '<p style="font-size:12.5px;color:#888;padding:8px">لا توجد آراء جديدة معلقة.</p>';
+    } else {
+      pending.forEach(rev => {
+        const item = document.createElement('div');
+        item.style.cssText = 'border:1px solid #ffeeba;padding:12px;border-radius:8px;background:#fffdf5';
+        item.innerHTML = `
+          <strong>${rev.name}</strong> (${rev.job})
+          <p style="font-size:13px;color:#444;margin:6px 0">"${rev.text}"</p>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="approveReview(${rev.id})">موافقة ونشر ✅</button>
+            <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="rejectPendingReview(${rev.id})">حذف ✕</button>
+          </div>
+        `;
+        pendingList.appendChild(item);
+      });
     }
 
-    pending.forEach(rev => {
-      const item = document.createElement('div');
-      item.style.cssText = 'border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa';
-      item.innerHTML = `
-        <strong>${rev.name}</strong> (${rev.job})
-        <p style="font-size:13px;color:#444;margin:6px 0">"${rev.text}"</p>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <button class="btn btn-gold" style="padding:6px 14px;font-size:12px" onclick="approveReview(${rev.id})">موافقة ونشر ✅</button>
-          <button style="padding:6px 14px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="rejectReview(${rev.id})">حذف ✕</button>
-        </div>
-      `;
-      list.appendChild(item);
-    });
+    // 2. عرض الآراء المنشورة مسبقاً لإمكانية حذف أي منها
+    const approvedList = document.getElementById('approvedReviewsList');
+    const approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
+    approvedList.innerHTML = '';
+
+    if (approved.length === 0) {
+      approvedList.innerHTML = '<p style="font-size:12.5px;color:#888;padding:8px">لا توجد آراء منشورة بعد.</p>';
+    } else {
+      approved.forEach(rev => {
+        const item = document.createElement('div');
+        item.style.cssText = 'border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:10px';
+        item.innerHTML = `
+          <div style="flex-grow:1">
+            <strong>${rev.name}</strong> <small style="color:var(--muted)">(${rev.job})</small>
+            <p style="font-size:13px;color:#444;margin-top:4px">"${rev.text}"</p>
+          </div>
+          <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteApprovedReview(${rev.id})">حذف ✕</button>
+        `;
+        approvedList.appendChild(item);
+      });
+    }
   }
 
+  // موافقة على رأي معلق ونشره
   window.approveReview = function(id) {
     let pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
     let approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
@@ -773,16 +806,28 @@
       pending = pending.filter(r => r.id !== id);
       localStorage.setItem(approvedKey, JSON.stringify(approved));
       localStorage.setItem(pendingKey, JSON.stringify(pending));
-      renderPendingList();
-      location.reload();
+      renderAdminLists();
+      renderApprovedReviews();
     }
   };
 
-  window.rejectReview = function(id) {
+  // حذف رأي من قائمة المعلق
+  window.rejectPendingReview = function(id) {
     let pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
     pending = pending.filter(r => r.id !== id);
     localStorage.setItem(pendingKey, JSON.stringify(pending));
-    renderPendingList();
+    renderAdminLists();
+  };
+
+  // حذف رأي منشور بالفعل في الموقع
+  window.deleteApprovedReview = function(id) {
+    if(confirm('هل تريد حذف هذا التقييم المنشور من الموقع نهائياً؟')) {
+      let approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
+      approved = approved.filter(r => r.id !== id);
+      localStorage.setItem(approvedKey, JSON.stringify(approved));
+      renderAdminLists();
+      renderApprovedReviews();
+    }
   };
 
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
