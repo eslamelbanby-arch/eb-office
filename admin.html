@@ -4,43 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>لوحة التحكم | EB OFFICE</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
   <style>
     :root {
       --primary: #0F172A;
       --accent: #2563EB;
       --bg: #F8FAFC;
+      --card: #FFFFFF;
       --border: #E2E8F0;
+      --text: #1E293B;
+      --muted: #64748B;
       --success: #10B981;
+      --warning: #D97706;
       --danger: #EF4444;
+      --gold: #F59E0B;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--primary); padding: 1.5rem; }
-    .container { max-width: 650px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
-    h2 { margin-bottom: 1.5rem; text-align: center; }
+    body { font-family: 'Cairo', sans-serif; background-color: var(--bg); color: var(--text); padding: 1.5rem; }
+    .container { max-width: 700px; margin: 2rem auto; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    h2 { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 1.5rem; text-align: center; }
     .form-group { margin-bottom: 1.25rem; }
-    input { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 1rem; }
-    .btn { padding: 0.6rem 1.2rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; font-family: inherit; }
+    input[type="password"] { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 1rem; outline: none; }
+    input[type="password"]:focus { border-color: var(--accent); }
+    .btn { padding: 0.6rem 1.25rem; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 0.95rem; transition: 0.2s; }
     .btn-primary { background: var(--accent); color: #fff; width: 100%; }
+    .btn-primary:hover { background: #1D4ED8; }
     .btn-success { background: var(--success); color: #fff; }
     .btn-danger { background: var(--danger); color: #fff; }
-    .review-item { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-    .status { font-size: 0.85rem; font-weight: bold; }
+    .review-item { border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; margin-bottom: 1rem; background: #fff; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .review-info { flex: 1; }
+    .stars { color: var(--gold); margin-bottom: 0.25rem; }
+    .status-badge { display: inline-block; font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 20px; margin-top: 0.5rem; }
+    .status-badge.pending { background: #FEF3C7; color: var(--warning); }
+    .status-badge.approved { background: #D1FAE5; color: var(--success); }
+    .actions { display: flex; gap: 0.5rem; }
+    .header-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+    .header-bar a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
   </style>
 </head>
 <body>
 
+  <!-- واجهة تسجيل الدخول للأدمن -->
   <div class="container" id="loginBox">
     <h2>تسجيل دخول الإدارة</h2>
     <div class="form-group">
-      <input type="password" id="pinInput" placeholder="أدخل كلمة السر">
+      <input type="password" id="pinInput" placeholder="أدخل الرقم السري">
     </div>
     <button class="btn btn-primary" id="loginBtn">دخول</button>
   </div>
 
+  <!-- لوحة التحكم لإدارة التقييمات -->
   <div class="container" id="panelBox" style="display: none;">
-    <h2>إدارة آراء العملاء</h2>
-    <div id="reviewsList">جاري التحميل...</div>
+    <div class="header-bar">
+      <h2>لوحة إدارة الآراء</h2>
+      <a href="./index.html" target="_blank">عرض الموقع ↗</a>
+    </div>
+    <div id="reviewsList">
+      <p style="text-align: center; color: var(--muted);">جاري تحميل التقييمات...</p>
+    </div>
   </div>
 
   <script type="module">
@@ -61,27 +82,29 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // تسجيل الدخول بالرقم السري
     document.getElementById("loginBtn").addEventListener("click", () => {
-      const pin = document.getElementById("pinInput").value;
+      const pin = document.getElementById("pinInput").value.trim();
       if (pin === "1712199678") {
         document.getElementById("loginBox").style.display = "none";
         document.getElementById("panelBox").style.display = "block";
         loadAdminReviews();
       } else {
-        alert("كلمة المرور غير صحيحة!");
+        alert("الرقم السري غير صحيح!");
       }
     });
 
+    // جلب التقييمات من Firebase
     async function loadAdminReviews() {
       const list = document.getElementById("reviewsList");
-      list.innerHTML = "<p>جاري تحميل المراجعات...</p>";
+      list.innerHTML = "<p style='text-align: center; color: var(--muted);'>جاري تحميل البيانات...</p>";
       
       try {
         const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
 
         if (snapshot.empty) {
-          list.innerHTML = "<p>لا توجد تقييمات مسجلة.</p>";
+          list.innerHTML = "<p style='text-align: center; color: var(--muted);'>لا توجد تقييمات مسجلة حتى الآن.</p>";
           return;
         }
 
@@ -92,14 +115,15 @@
           const item = document.createElement("div");
           item.className = "review-item";
           item.innerHTML = `
-            <div>
-              <b>${rev.name}</b> (${rev.role}) - ${"★".repeat(rev.stars)}<br>
-              <p style="margin: 0.3rem 0;">${rev.text}</p>
-              <span class="status" style="color: ${rev.approved ? 'var(--success)' : '#D97706'}">
+            <div class="review-info">
+              <div class="stars">${"★".repeat(rev.stars)}${"☆".repeat(5 - rev.stars)}</div>
+              <strong>${rev.name}</strong> <span style="color: var(--muted); font-size: 0.9rem;">(${rev.role})</span>
+              <p style="margin: 0.4rem 0; color: var(--text);">${rev.text}</p>
+              <span class="status-badge ${rev.approved ? 'approved' : 'pending'}">
                 ${rev.approved ? '● منشور للجميع' : '● معلق بانتظار الموافقة'}
               </span>
             </div>
-            <div style="display: flex; gap: 0.5rem;">
+            <div class="actions">
               ${!rev.approved ? `<button class="btn btn-success" data-action="approve" data-id="${id}">موافقة</button>` : ''}
               <button class="btn btn-danger" data-action="delete" data-id="${id}">حذف</button>
             </div>
@@ -107,26 +131,30 @@
           list.appendChild(item);
         });
 
-        list.querySelectorAll("button").forEach(b => {
-          b.onclick = async (e) => {
+        // تفعيل أزرار الموافقة والحذف
+        list.querySelectorAll("button").forEach(btn => {
+          btn.onclick = async (e) => {
             const action = e.target.getAttribute("data-action");
             const docId = e.target.getAttribute("data-id");
+
             if (action === "approve") {
+              e.target.innerText = "...";
               await updateDoc(doc(db, "reviews", docId), { approved: true });
               loadAdminReviews();
             } else if (action === "delete") {
-              if (confirm("هل أنت متأكد من حذف هذا التقييم نهائياً؟")) {
+              if (confirm("هل تريد حذف هذا التقييم نهائياً؟")) {
+                e.target.innerText = "...";
                 await deleteDoc(doc(db, "reviews", docId));
                 loadAdminReviews();
               }
             }
           };
         });
-      } catch (e) {
-        list.innerHTML = "<p style='color:red;'>تعذر جلب البيانات.</p>";
+
+      } catch (err) {
+        list.innerHTML = "<p style='text-align: center; color: red;'>خطأ في جلب البيانات، تأكد من إعدادات Firestore Rules.</p>";
       }
     }
   </script>
 </body>
 </html>
-
