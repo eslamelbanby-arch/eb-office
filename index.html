@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EB OFFICE - حلول الأعمال والأنظمة المحاسبية وتطوير المواقع والهوية البصرية" />
+  <meta name="description" content="EB OFFICE - Business, Accounting, Web & Design Solutions" />
   <title>EB OFFICE | Business & Digital Solutions</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,16 +24,20 @@
     .container{width:min(1180px,92%);margin:auto}
     
     header{position:sticky;top:0;z-index:100;background:#090909;border-bottom:1px solid rgba(212,175,55,.25)}
-    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
     .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900}
     .brand-mark{width:42px;height:36px;display:grid;place-items:center;font-size:22px;font-weight:900;border-left:3px solid var(--gold);transform:skew(-10deg);background:rgba(212,175,55,0.1);border-radius:4px}
     .brand-mark span{color:var(--gold)}
     .brand small{display:block;font-size:9px;letter-spacing:1px;color:#bbb;margin-top:-2px}
-    nav{display:flex;gap:20px;color:#ddd;font-size:15px;font-weight:600}
+    nav{display:flex;gap:18px;color:#ddd;font-size:14.5px;font-weight:600}
     nav a{transition:.25s;padding:6px 0}
     nav a:hover,nav a.active{color:var(--gold)}
     
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 22px;border-radius:10px;border:1px solid var(--gold);font-weight:700;font-size:14.5px;cursor:pointer;transition:all .25s ease}
+    .nav-actions{display:flex;align-items:center;gap:10px}
+    .lang-btn{background:#1a1a1a;color:var(--gold);border:1px solid var(--gold);padding:6px 12px;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px;transition:.25s}
+    .lang-btn:hover{background:var(--gold);color:#111}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 22px;border-radius:10px;border:1px solid var(--gold);font-weight:700;font-size:14px;cursor:pointer;transition:all .25s ease}
     .btn-gold{background:var(--gold);color:#111}
     .btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
     .btn-dark{background:transparent;color:#fff}
@@ -43,9 +47,9 @@
     .hero{background:radial-gradient(circle at 75% 30%,#202020 0,#101113 50%,#080808 100%);color:#fff;padding:45px 0 65px}
     .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px}
     .eyebrow{color:var(--gold);font-size:13px;letter-spacing:1.5px;font-weight:800;margin-bottom:8px}
-    h1{font-size:clamp(30px,3.8vw,52px);line-height:1.3;margin-bottom:16px;font-weight:900}
+    h1{font-size:clamp(28px,3.8vw,50px);line-height:1.3;margin-bottom:16px;font-weight:900}
     h1 span{color:var(--gold)}
-    .hero-copy p{color:#d6d6d6;font-size:16px;max-width:540px;margin-bottom:24px}
+    .hero-copy p{color:#d6d6d6;font-size:15.5px;max-width:540px;margin-bottom:24px}
     .actions{display:flex;gap:12px;flex-wrap:wrap}
     .hero-art{display:flex;align-items:center;justify-content:center}
     .laptop{width:min(440px,100%);height:240px;border:9px solid #252525;border-radius:16px;background:#030303;box-shadow:0 25px 60px rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;padding:10px}
@@ -56,16 +60,16 @@
     .stats{margin-top:-35px;position:relative;z-index:10}
     .stats-box{background:#fff;border-radius:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(2,1fr);padding:18px;border:1px solid var(--line);max-width:550px;margin:auto}
     .stat{text-align:center;border-left:1px solid #eee}
-    .stat:last-child{border-left:0}
+    body[dir="ltr"] .stat{border-left:0;border-right:1px solid #eee}
+    .stat:last-child{border:0}
     .stat strong{display:block;font-size:28px;font-weight:900;color:#111}
     .stat span{color:var(--muted);font-size:13.5px;font-weight:600}
 
     section{padding:65px 0}
     .section-head{text-align:center;margin-bottom:30px}
-    .section-head h2{font-size:32px;font-weight:800}
-    .section-head p{color:var(--muted);margin-top:6px;font-size:15px}
+    .section-head h2{font-size:30px;font-weight:800}
+    .section-head p{color:var(--muted);margin-top:6px;font-size:14.5px}
     
-    /* خدمات مدمجة وأنيقة */
     .services{background:var(--soft)}
     .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
     .service-compact{
@@ -82,7 +86,6 @@
     .service-compact h3{font-size:16px;font-weight:800;margin-bottom:4px;color:#111}
     .service-compact p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
 
-    /* معرض الأعمال مع السلايدر التفاعلي */
     .portfolio{background:#fff}
     .port-categories{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
     .port-category-card{
@@ -108,36 +111,49 @@
     
     .slide-arrow{
       position:absolute;top:50%;transform:translateY(-50%);
-      width:36px;height:36px;border-radius:50%;background:rgba(9,9,9,0.75);
+      width:34px;height:34px;border-radius:50%;background:rgba(9,9,9,0.75);
       color:var(--gold);border:1px solid rgba(212,175,55,0.4);
       display:grid;place-items:center;cursor:pointer;z-index:5;transition:.2s;
-      font-size:16px;user-select:none;
+      font-size:15px;user-select:none;
     }
     .slide-arrow:hover{background:var(--gold);color:#111}
     .slide-arrow.prev{right:10px}
     .slide-arrow.next{left:10px}
+    body[dir="ltr"] .slide-arrow.prev{left:10px;right:auto}
+    body[dir="ltr"] .slide-arrow.next{right:10px;left:auto}
+
     .swipe-hint{
       position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,0.75);
       color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;
       border:1px solid rgba(212,175,55,0.3);pointer-events:none;z-index:2;
     }
-    
+    body[dir="ltr"] .swipe-hint{right:auto;left:12px}
+
     .port-category-body{padding:22px;display:flex;flex-direction:column;flex-grow:1}
-    .port-category-body h3{font-size:18px;font-weight:800;color:#111;margin-bottom:6px}
+    .port-category-body h3{font-size:17.5px;font-weight:800;color:#111;margin-bottom:6px}
     .port-category-body p{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.6;flex-grow:1}
 
     .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
     .about-box{background:#111;color:#fff;border-radius:16px;padding:35px;text-align:center;border:1px solid rgba(212,175,55,.25)}
     .about-box .eb{font-size:64px;font-weight:900;color:#fff;line-height:1}.about-box .eb b{color:var(--gold)}
     .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
-    .feature{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fafafa}.feature b{display:block;color:#222;font-size:14.5px;margin-bottom:2px}.feature span{font-size:12px;color:var(--muted)}
+    .feature{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fafafa}.feature b{display:block;color:#222;font-size:14px;margin-bottom:2px}.feature span{font-size:12px;color:var(--muted)}
 
+    /* آراء العملاء الواقعية ونموذج الإضافة */
     .testimonials{background:var(--soft)}
     .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .testi-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+    .testi-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
     .testi-stars{color:var(--gold);font-size:15px;margin-bottom:8px}
-    .testi-card p{color:#444;font-size:13px;margin-bottom:12px;font-style:italic}
+    .testi-card p{color:#333;font-size:13.5px;margin-bottom:12px;font-weight:600;line-height:1.6}
     .testi-author b{display:block;font-size:13px;color:#111}.testi-author span{font-size:11.5px;color:var(--muted)}
+
+    .review-action-box{margin-top:35px;background:#fff;border:1px dashed var(--gold);padding:24px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .review-form-wrap{display:none;margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+
+    /* نافذة الإدارة والموافقة */
+    .admin-badge-btn{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;margin-top:10px}
+    .admin-panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;place-items:center;padding:15px}
+    .admin-content{background:#fff;border-radius:14px;max-width:550px;width:100%;padding:25px;max-height:85vh;overflow-y:auto}
 
     .contact{background:#0b0b0b;color:#fff}
     .contact-box{border:1px solid rgba(212,175,55,.35);border-radius:16px;padding:35px;display:flex;flex-direction:column;gap:20px}
@@ -157,7 +173,7 @@
     .service-form textarea{min-height:90px;resize:vertical}
 
     .float-wa{
-      position:fixed;bottom:20px;left:20px;z-index:999;
+      position:fixed;bottom:20px;left:20px;z-index:99;
       width:54px;height:54px;border-radius:50%;
       display:grid;place-items:center;background:#25D366;color:#fff;
       font-size:26px;box-shadow:0 10px 25px rgba(0,0,0,.3);border:2px solid #fff;
@@ -166,7 +182,7 @@
 
     footer{background:#050505;color:#aaa;padding:26px 0;border-top:1px solid #1a1a1a;font-size:13.5px}
     .footer{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-    .creator-badge{color:#d4af37;font-weight:700;letter-spacing:.3px}
+    .creator-badge{color:var(--gold);font-weight:700}
 
     @media(max-width:850px){
       nav{display:none}
@@ -176,11 +192,11 @@
       }
       nav.mobile-open a{padding:10px 14px;border-bottom:1px solid #222}
       nav.mobile-open a:last-child{border-bottom:0}
-      .nav>.btn{display:none}.menu{display:block}
+      .nav-actions>.btn{display:none}.menu{display:block}
       .hero-grid{grid-template-columns:1fr;text-align:center}
       .actions{justify-content:center}
       .services-grid,.port-categories,.testi-grid,.about-grid{grid-template-columns:1fr}
-      .carousel-container{height:290px}
+      .carousel-container{height:280px}
       .service-form{grid-template-columns:1fr;padding:18px}
       .service-form .full{grid-column:auto}
       .features{grid-template-columns:1fr}
@@ -197,15 +213,18 @@
       <div>EB OFFICE<small>BUSINESS & DIGITAL SOLUTIONS</small></div>
     </a>
     <nav>
-      <a class="active" href="#home">الرئيسية</a>
-      <a href="#about">من نحن</a>
-      <a href="#services">خدماتنا</a>
-      <a href="#portfolio">معرض الأعمال</a>
-      <a href="#testimonials">آراء العملاء</a>
-      <a href="#contact">تواصل معنا</a>
+      <a class="active" href="#home" data-i18n="nav_home">الرئيسية</a>
+      <a href="#about" data-i18n="nav_about">من نحن</a>
+      <a href="#services" data-i18n="nav_services">خدماتنا</a>
+      <a href="#portfolio" data-i18n="nav_portfolio">معرض الأعمال</a>
+      <a href="#testimonials" data-i18n="nav_reviews">آراء العملاء</a>
+      <a href="#contact" data-i18n="nav_contact">تواصل معنا</a>
     </nav>
-    <a class="btn btn-gold" href="#contact">طلب خدمة</a>
-    <button class="menu" aria-label="القائمة">☰</button>
+    <div class="nav-actions">
+      <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+      <a class="btn btn-gold" href="#contact" data-i18n="btn_order">طلب خدمة</a>
+      <button class="menu" aria-label="القائمة">☰</button>
+    </div>
   </div>
 </header>
 
@@ -213,12 +232,12 @@
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow">EB OFFICE — الشريك الرقمي لمشروعك</div>
-        <h1>حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span></h1>
-        <p>نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.</p>
+        <div class="eyebrow" data-i18n="hero_eyebrow">EB OFFICE — الشريك الرقمي لمشروعك</div>
+        <h1 data-i18n="hero_title">حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span></h1>
+        <p data-i18n="hero_desc">نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.</p>
         <div class="actions">
-          <a class="btn btn-gold" href="#portfolio">معرض الأعمال ←</a>
-          <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener">محادثة مباشرة عبر واتساب</a>
+          <a class="btn btn-gold" href="#portfolio" data-i18n="hero_btn_port">معرض الأعمال ←</a>
+          <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener" data-i18n="hero_btn_wa">محادثة مباشرة عبر واتساب</a>
         </div>
       </div>
       <div class="hero-art">
@@ -234,134 +253,144 @@
 
   <div class="container stats">
     <div class="stats-box">
-      <div class="stat"><strong>+3</strong><span>سنوات خبرة</span></div>
-      <div class="stat"><strong>24/7</strong><span>دعم مستمر</span></div>
+      <div class="stat"><strong data-i18n="stat_exp_val">+3</strong><span data-i18n="stat_exp_lbl">سنوات خبرة</span></div>
+      <div class="stat"><strong data-i18n="stat_sup_val">24/7</strong><span data-i18n="stat_sup_lbl">دعم مستمر</span></div>
     </div>
   </div>
 
-  <!-- قسم الخدمات المدمج -->
   <section class="services" id="services">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">خدمات متخصصة</div>
-        <h2>حلول ذكية تلبي كافة احتياجاتك</h2>
+        <div class="eyebrow" data-i18n="services_sub">خدمات متخصصة</div>
+        <h2 data-i18n="services_title">حلول ذكية تلبي كافة احتياجاتك</h2>
       </div>
       <div class="services-grid">
         <div class="service-compact">
           <div class="service-icon">📊</div>
-          <div><h3>Excel & Accounting</h3><p>تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.</p></div>
-        </div>
-        <div class="service-compact">
-          <div class="service-icon">🤖</div>
-          <div><h3>الأعمال والذكاء الاصطناعي</h3><p>دمج أدوات الذكاء الاصطناعي لأتمتة المهام وزيادة سرعة الإنتاجية.</p></div>
-        </div>
-        <div class="service-compact">
-          <div class="service-icon">📄</div>
-          <div><h3>السير الذاتية والمستندات</h3><p>صياغة وتصميم CV متوافق مع ATS، وفواتير وسندات مالية رسمية.</p></div>
-        </div>
-        <div class="service-compact">
-          <div class="service-icon">🎨</div>
-          <div><h3>الهوية البصرية والتصميم</h3><p>تصميم شعارات احترافية، بوسترات تسويقية، وباقات براندينج متكاملة.</p></div>
-        </div>
-        <div class="service-compact">
-          <div class="service-icon">📱</div>
-          <div><h3>إدارة السوشيال ميديا</h3><p>صناعة محتوى جذاب، جدولة النشر الدوري، وإدارة التفاعل والنمو.</p></div>
+          <div><h3 data-i18n="s1_t">Excel & Accounting</h3><p data-i18n="s1_d">تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.</p></div>
         </div>
         <div class="service-compact">
           <div class="service-icon">🌐</div>
-          <div><h3>تطوير المواقع</h3><p>برمجة صفحات هبوط ومواقع تعريفية سريعة ومتجاوبة مع الجوال.</p></div>
+          <div><h3 data-i18n="s2_t">Websites Development</h3><p data-i18n="s2_d">برمجة صفحات هبوط ومواقع تعريفية سريعة ومتجاوبة مع الجوال والمحركات.</p></div>
+        </div>
+        <div class="service-compact">
+          <div class="service-icon">📄</div>
+          <div><h3 data-i18n="s3_t">CV & ATS Documents</h3><p data-i18n="s3_d">صياغة وتصميم CV متوافق مع ATS، وفواتير وسندات مالية رسمية.</p></div>
+        </div>
+        <div class="service-compact">
+          <div class="service-icon">🎨</div>
+          <div><h3 data-i18n="s4_t">Graphic Design & Branding</h3><p data-i18n="s4_d">تصميم شعارات احترافية، بوسترات تسويقية، وباقات براندينج متكاملة.</p></div>
+        </div>
+        <div class="service-compact">
+          <div class="service-icon">📱</div>
+          <div><h3 data-i18n="s5_t">Social Media Management</h3><p data-i18n="s5_d">صناعة محتوى جذاب، جدولة النشر الدوري، وإدارة التفاعل والنمو.</p></div>
+        </div>
+        <div class="service-compact">
+          <div class="service-icon">🤖</div>
+          <div><h3 data-i18n="s6_t">AI & Digital Solutions</h3><p data-i18n="s6_d">دمج أدوات الذكاء الاصطناعي لأتمتة المهام وتوفير الوقت وزيادة الإنتاجية.</p></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- معرض الأعمال التفاعلي بالسحب لكافة الصور -->
   <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">معرض الأعمال المنفذة</div>
-        <h2>نماذج من مشاريعنا حسب التخصص</h2>
-        <p>اسحب يميناً ويساراً ⟷ أو استخدم الأسهم لمعاينة جميع الصور والنماذج كاملة.</p>
+        <div class="eyebrow" data-i18n="port_sub">معرض الأعمال المنفذة</div>
+        <h2 data-i18n="port_title">نماذج من مشاريعنا حسب التخصص</h2>
+        <p data-i18n="port_desc">تتحرك الصور تلقائياً ويمكنك السحب يميناً ويساراً ⟷ لمعاينة كافة النماذج كاملة.</p>
       </div>
 
       <div class="port-categories">
         
-        <!-- قسم 1: Excel والمحاسبة (4 صور كاملة) -->
         <article class="port-category-card">
-          <div class="carousel-container">
+          <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
             <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
-              <div class="carousel-slide"><img src="dashboard.jpg.jpg" alt="داشبورد الوكيل الرقمي"></div>
-              <div class="carousel-slide"><img src="excel-laptop.jpg.jpg" alt="برامج محاسبة على لابتوب"></div>
-              <div class="carousel-slide"><img src="excel-systems.jpg.jpg" onerror="this.src='excel-laptop.jpg.jpg'" alt="معادلات وأنظمة إكسيل"></div>
-              <div class="carousel-slide"><img src="excel-templates.jpg.jpg" onerror="this.src='dashboard.jpg.jpg'" alt="مكتبة نماذج إكسيل"></div>
+              <div class="carousel-slide"><img src="excel-1.jpg" onerror="this.src='dashboard.jpg.jpg'" alt="Daily Activity Dashboard"></div>
+              <div class="carousel-slide"><img src="excel-2.jpg" onerror="this.src='excel-laptop.jpg.jpg'" alt="Cash Flow Statement"></div>
+              <div class="carousel-slide"><img src="excel-3.jpg" onerror="this.src='dashboard.jpg.jpg'" alt="تفقيط النقدية والموردين"></div>
+              <div class="carousel-slide"><img src="excel-4.jpg" onerror="this.src='excel-laptop.jpg.jpg'" alt="متابعة الشيكات والبنوك"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور (4) ⟷</div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
           </div>
           <div class="port-category-body">
-            <h3>أنظمة المحاسبة وشيتات Excel و Dashboard</h3>
-            <p>لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة المخزون بدقة.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20أنظمة%20محاسبية%20وشيتات%20إكسيل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب نظام محاسبي ↗</a>
+            <h3 data-i18n="p1_t">أنظمة المحاسبة وشيتات Excel و Dashboard</h3>
+            <p data-i18n="p1_d">لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة النقدية والشيكات بدقة.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20أنظمة%20محاسبية%20وشيتات%20إكسيل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_excel">طلب نظام محاسبي ↗</a>
           </div>
         </article>
 
-        <!-- قسم 2: السير الذاتية والمستندات (5 صور كاملة) -->
         <article class="port-category-card">
-          <div class="carousel-container">
+          <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
             <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
-              <div class="carousel-slide"><img src="cv-ats-1.jpg.jpg" alt="سيرة ذاتية ATS Emma"></div>
-              <div class="carousel-slide"><img src="cv-ats-2.jpg.jpg" alt="سيرة ذاتية Modern Sophia"></div>
-              <div class="carousel-slide"><img src="voucher-template.jpg.jpg" onerror="this.src='invoice-template.jpg.jpg'" alt="سندات قبض وصرف"></div>
-              <div class="carousel-slide"><img src="invoice-template.jpg.jpg" onerror="this.src='voucher-template.jpg.jpg'" alt="فواتير مبيعات"></div>
-              <div class="carousel-slide"><img src="documents-study.jpg.jpg" onerror="this.src='cv-ats-1.jpg.jpg'" alt="مستندات وأعمال مكتبية"></div>
+              <div class="carousel-slide"><img src="cv-1.jpg" onerror="this.src='cv-ats-1.jpg.jpg'" alt="CV ATS Eslam Elbanby"></div>
+              <div class="carousel-slide"><img src="cv-2.jpg" onerror="this.src='cv-ats-2.jpg.jpg'" alt="CV Professional Mohamed Salah"></div>
+              <div class="carousel-slide"><img src="cv-3.jpg" onerror="this.src='cv-ats-1.jpg.jpg'" alt="فاتورة مبيعات جاهزة"></div>
+              <div class="carousel-slide"><img src="cv-4.jpg" onerror="this.src='cv-ats-2.jpg.jpg'" alt="فاتورة ضريبية رسمية TRN"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور (5) ⟷</div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
           </div>
           <div class="port-category-body">
-            <h3>السير الذاتية الاحترافية (ATS) والمستندات</h3>
-            <p>تصميم وتنسيق سيرة ذاتية مهيكلة لاجتياز الفرز الإلكتروني (ATS) وزيادة فرص القبول الوظيفي، وتصميم سندات وفواتير رسمية.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20ATS%20أو%20مستندات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم CV / مستندات ↗</a>
+            <h3 data-i18n="p2_t">السير الذاتية الاحترافية (ATS) والمستندات</h3>
+            <p data-i18n="p2_d">تصميم وتنسيق سيرة ذاتية مهيكلة بدقة لاجتياز الفرز الإلكتروني (ATS) وزيادة فرص القبول، وفواتير وسندات مالية رسمية.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20ATS%20أو%20مستندات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_cv">طلب تصميم CV / مستندات ↗</a>
           </div>
         </article>
 
-        <!-- قسم 3: الهوية البصرية والتصميم (3 صور كاملة) -->
         <article class="port-category-card">
-          <div class="carousel-container">
+          <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
             <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
-              <div class="carousel-slide"><img src="branding-mockup.png.png" alt="تصميم هوية بصرية"></div>
-              <div class="carousel-slide"><img src="social-ad.jpg.webp" alt="إعلان عروض تجارية"></div>
-              <div class="carousel-slide"><img src="services-poster.png.png" onerror="this.src='branding-mockup.png.png'" alt="بوستر تسويقي للخدمات"></div>
+              <div class="carousel-slide"><img src="design-1.png" onerror="this.src='branding-mockup.png.png'" alt="موك آب الهوية البصرية"></div>
+              <div class="carousel-slide"><img src="design-2.png" onerror="this.src='branding-mockup.png.png'" alt="لوجو EB الفاخر"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور (3) ⟷</div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
           </div>
           <div class="port-category-body">
-            <h3>الهوية البصرية وتصاميم الإعلانات والبوسترات</h3>
-            <p>باقات براندينج كاملة، كروت عمل فاخرة، موك آب الشاشات، وتصاميم إعلانات تسويقية مبتكرة للمتاجر والشركات.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وإعلانات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب تصميم هوية / إعلانات ↗</a>
+            <h3 data-i18n="p3_t">الهوية البصرية وتصاميم الشعارات والبراندينج</h3>
+            <p data-i18n="p3_d">تصميم شعارات مبتكرة، كروت عمل فاخرة، موك آب الشاشات، وهوية بصرية متكاملة تعكس قوة علامتك التجارية في السوق.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وشعارات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_design">طلب تصميم هوية / براند ↗</a>
           </div>
         </article>
 
-        <!-- قسم 4: إدارة السوشيال ميديا (3 صور كاملة) -->
         <article class="port-category-card">
-          <div class="carousel-container">
+          <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
             <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
-              <div class="carousel-slide"><img src="social-icons-3d.jpg.jpg" alt="إدارة منصات التواصل"></div>
-              <div class="carousel-slide"><img src="social-neon.jpg.jpg" alt="تصاميم نيون وسوشيال"></div>
-              <div class="carousel-slide"><img src="social-time.jpg.jpg" alt="جدولة وصناعة محتوى"></div>
+              <div class="carousel-slide"><img src="social-1.jpg" onerror="this.src='social-neon.jpg.jpg'" alt="نيون السوشيال ميديا"></div>
+              <div class="carousel-slide"><img src="social-2.jpg" onerror="this.src='social-icons-3d.jpg.jpg'" alt="سحابة الأيقونات 3D"></div>
+              <div class="carousel-slide"><img src="social-3.jpg" onerror="this.src='social-time.jpg.jpg'" alt="التحكم بالمنصات والعقل"></div>
+              <div class="carousel-slide"><img src="social-4.jpg" onerror="this.src='social-time.jpg.jpg'" alt="إدارة الوقت والمنصات"></div>
             </div>
-            <div class="swipe-hint">اسحب للصور (3) ⟷</div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
           </div>
           <div class="port-category-body">
-            <h3>إدارة منصات السوشيال ميديا وصناعة المحتوى</h3>
-            <p>إدارة الحسابات على فيسبوك وإنستجرام وتيك توك، نشر المحتوى الدوري، جدولة المواعيد، وتنمية التفاعل والمبيعات.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20باقة%20إدارة%20سوشيال%20ميديا%20وصناعة%20محتوى" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0">طلب باقة سوشيال ميديا ↗</a>
+            <h3 data-i18n="p4_t">إدارة منصات السوشيال ميديا وصناعة المحتوى</h3>
+            <p data-i18n="p4_d">إدارة الحسابات على فيسبوك وإنستجرام وتيك توك، نشر المحتوى الدوري، جدولة المواعيد، وتنمية التفاعل والمبيعات باحترافية.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20باقة%20إدارة%20سوشيال%20ميديا%20وصناعة%20محتوى" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_social">طلب باقة سوشيال ميديا ↗</a>
+          </div>
+        </article>
+
+        <article class="port-category-card" style="grid-column:1/-1">
+          <div class="carousel-container" data-autoplay="true">
+            <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
+            <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
+            <div class="carousel-track">
+              <div class="carousel-slide"><img src="web-1.png" onerror="this.src='design-1.png'" alt="موقع ويب متجاوب لابتوب وموبايل"></div>
+              <div class="carousel-slide"><img src="web-2.png" onerror="this.src='branding-mockup.png.png'" alt="تصميم وبرمجة صفحات هبوط"></div>
+            </div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
+          </div>
+          <div class="port-category-body">
+            <h3 data-i18n="p5_t">تطوير المواقع وصفحات الهبوط (Websites)</h3>
+            <p data-i18n="p5_d">بناء وتطوير مواقع ويب سريعة جداً، بتصميم حديث متجاوب 100% مع كافة الشاشات والموبايل ومربوطة مباشرة بالواتساب.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20وبرمجة%20موقع%20إلكتروني" target="_blank" class="btn btn-gold" style="width:min(320px,100%);margin:auto;font-size:13.5px;padding:11px 0" data-i18n="btn_req_web">طلب تصميم وبرمجة موقع ↗</a>
           </div>
         </article>
 
@@ -376,14 +405,14 @@
         <p style="color:#bbb;margin-top:8px;font-size:13.5px">BUSINESS & DIGITAL SOLUTIONS</p>
       </div>
       <div>
-        <div class="eyebrow">من نحن</div>
-        <h2>نبتكر الحلول لتنمية عملك</h2>
-        <p style="color:#555;font-size:15px">مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
+        <div class="eyebrow" data-i18n="about_sub">من نحن</div>
+        <h2 data-i18n="about_title">نبتكر الحلول لتنمية عملك</h2>
+        <p style="color:#555;font-size:15px" data-i18n="about_desc">مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
         <div class="features">
-          <div class="feature"><b>دقة واحترافية</b><span>التزام تام بأدق المعايير والمخرجات.</span></div>
-          <div class="feature"><b>تنفيذ سريع</b><span>تسليم المشروعات في المواعيد المحددة.</span></div>
-          <div class="feature"><b>أسعار تنافسية</b><span>باقات تناسب المشروعات الناشئة والمتوسطة.</span></div>
-          <div class="feature"><b>متابعة ودعم</b><span>دعم فني مستمر بعد تسليم المشروع.</span></div>
+          <div class="feature"><b data-i18n="f1_t">دقة واحترافية</b><span data-i18n="f1_d">التزام تام بأدق المعايير والمخرجات.</span></div>
+          <div class="feature"><b data-i2_t="f2_t">تنفيذ سريع</b><span data-i18n="f2_d">تسليم المشروعات في المواعيد المحددة.</span></div>
+          <div class="feature"><b data-i18n="f3_t">أسعار تنافسية</b><span data-i18n="f3_d">باقات تناسب المشروعات الناشئة والمتوسطة.</span></div>
+          <div class="feature"><b data-i18n="f4_t">متابعة ودعم</b><span data-i18n="f4_d">دعم فني مستمر بعد تسليم المشروع.</span></div>
         </div>
       </div>
     </div>
@@ -392,63 +421,109 @@
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow">آراء العملاء</div>
-        <h2>ماذا يقول عملاؤنا عنا؟</h2>
+        <div class="eyebrow" data-i18n="testi_sub">آراء العملاء</div>
+        <h2 data-i18n="testi_title">تجارب حقيقية لعملاء تعاملوا معنا</h2>
       </div>
-      <div class="testi-grid">
+
+      <div class="testi-grid" id="testiContainer">
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p>"الـ CV الـ ATS كان منسقاً بطريقة ممتازة وساعدني في الحصول على مقابلات عمل في كبرى الشركات."</p>
-          <div class="testi-author"><b>محمد عبد الله</b><span>مهندس برمجيات</span></div>
+          <p>"شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام."</p>
+          <div class="testi-author"><b>محمود عثمان</b><span>صاحب محل ملابس - طنطا</span></div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p>"شيتات المحاسبة وإدارة المخزون نظمت لنا الحسابات تماماً ووفرت الكثير من الجهد اليدوي. شغل في قمة الاحترافية."</p>
-          <div class="testi-author"><b>أحمد محمود</b><span>صاحب متجر تجاري</span></div>
+          <p>"الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة."</p>
+          <div class="testi-author"><b>أحمد البدري</b><span>محاسب مالي</span></div>
         </div>
         <div class="testi-card">
           <div class="testi-stars">★★★★★</div>
-          <p>"تصميم الهوية البصرية وإدارة السوشيال ميديا رفعت مبيعاتنا ونقلت تواجدنا لمستوى آخر."</p>
-          <div class="testi-author"><b>سارة علي</b><span>مؤسسة براند تجاري</span></div>
+          <p>"تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل."</p>
+          <div class="testi-author"><b>م/ طارق خليل</b><span>مدير شركة استيراد</span></div>
         </div>
+      </div>
+
+      <div class="review-action-box">
+        <div>
+          <h4 style="font-size:16px;font-weight:800" data-i18n="rev_box_title">تعاملت معنا من قبل؟</h4>
+          <p style="color:var(--muted);font-size:13.5px" data-i18n="rev_box_desc">شاركنا رأيك وتجربتك بكل صراحة، رأيك يساعدنا ويساعد العملاء الجدد.</p>
+        </div>
+        <button class="btn btn-gold" onclick="toggleReviewForm()" data-i18n="rev_box_btn">كتابة تقييم ورأي ✍️</button>
+      </div>
+
+      <div class="review-form-wrap" id="reviewFormWrap">
+        <h3 style="font-size:17px;margin-bottom:12px" data-i18n="rf_title">أضف تقييمك ورأيك في الخدمة</h3>
+        <form id="addReviewForm" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_name">اسمك الكريم</label>
+            <input id="revName" required placeholder="مثال: أحمد مصطفى" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
+          </div>
+          <div>
+            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_job">صفتك أو مجالك</label>
+            <input id="revJob" required placeholder="مثال: صاحب بيزنس / مهندس" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
+          </div>
+          <div style="grid-column:1/-1">
+            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_text">رأيك وتجربتك في الشغل معنا</label>
+            <textarea id="revText" required placeholder="اكتب رأيك بكل صراحة..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:70px"></textarea>
+          </div>
+          <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center">
+            <button class="btn btn-gold" type="submit" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
+            <span style="font-size:11.5px;color:var(--muted)" data-i18n="rf_hint">يخضع التقييم لموافقة الإدارة قبل النشر.</span>
+          </div>
+        </form>
+      </div>
+
+      <div style="text-align:center;margin-top:15px">
+        <button class="admin-badge-btn" onclick="openAdminPanel()">لوحة إدارة واعتماد الآراء (خاص بك)</button>
       </div>
     </div>
   </section>
 
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-content">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
+        <h3 style="font-size:18px">إدارة واعتماد آراء العملاء</h3>
+        <button onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
+      </div>
+      <p style="font-size:13px;color:var(--muted);margin-bottom:15px">الآراء المعلقة التي أرسلها الزوار، يمكنك اعتماد نشرها أو حذفها:</p>
+      <div id="pendingReviewsList" style="display:flex;flex-direction:column;gap:12px"></div>
+    </div>
+  </div>
+
   <section class="contact" id="contact">
     <div class="container contact-box">
       <div>
-        <div class="eyebrow">تواصل معنا</div>
-        <h2>جاهز لتطوير أعمالك اليوم؟</h2>
-        <p style="color:#bbb;margin-top:6px;font-size:14px">املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.</p>
+        <div class="eyebrow" data-i18n="contact_sub">تواصل معنا</div>
+        <h2 data-i18n="contact_title">جاهز لتطوير أعمالك اليوم؟</h2>
+        <p style="color:#bbb;margin-top:6px;font-size:14px" data-i18n="contact_desc">املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.</p>
       </div>
 
       <form class="service-form" id="serviceForm">
         <div>
-          <label for="name">الاسم بالكامل</label>
+          <label for="name" data-i18n="f_name">الاسم بالكامل</label>
           <input id="name" name="name" required placeholder="اكتب اسمك">
         </div>
         <div>
-          <label for="phone">رقم الهاتف / واتساب</label>
+          <label for="phone" data-i18n="f_phone">رقم الهاتف / واتساب</label>
           <input id="phone" name="phone" required placeholder="رقم التواصل">
         </div>
         <div>
-          <label for="service">الخدمة المطلوبة</label>
+          <label for="service" data-i18n="f_service">الخدمة المطلوبة</label>
           <select id="service" name="service" required>
-            <option value="">اختر الخدمة</option>
+            <option value="" data-i18n="opt_select">اختر الخدمة</option>
             <option>Excel & Accounting</option>
-            <option>الأعمال والذكاء الاصطناعي</option>
+            <option>Websites Development</option>
             <option>CV & ATS Documents</option>
             <option>Graphic Design & Branding</option>
             <option>Social Media</option>
-            <option>Websites</option>
+            <option>AI & Digital Solutions</option>
           </select>
         </div>
         <div>
-          <label for="budget">الميزانية المقترحة والعملة</label>
+          <label for="budget" data-i18n="f_budget">الميزانية المقترحة والعملة</label>
           <div style="display:grid;grid-template-columns:1fr 130px;gap:8px">
             <input id="budget" name="budget" inputmode="decimal" placeholder="المبلغ">
-            <select id="currency" name="currency" aria-label="العملة">
+            <select id="currency" name="currency">
               <option value="EGP">جنيه (EGP)</option>
               <option value="SAR">ريال (SAR)</option>
               <option value="AED">درهم (AED)</option>
@@ -461,11 +536,11 @@
           </div>
         </div>
         <div class="full">
-          <label for="details">تفاصيل المشروع والطلب</label>
+          <label for="details" data-i18n="f_details">تفاصيل المشروع والطلب</label>
           <textarea id="details" name="details" required placeholder="وضح طبيعة المشروع وأهم المتطلبات..."></textarea>
         </div>
         <div class="full">
-          <button class="btn btn-gold" type="submit" style="width:100%">إرسال الطلب مباشرة عبر واتساب ↗</button>
+          <button class="btn btn-gold" type="submit" style="width:100%" data-i18n="f_submit">إرسال الطلب مباشرة عبر واتساب ↗</button>
         </div>
       </form>
     </div>
@@ -479,25 +554,255 @@
 <footer>
   <div class="container footer">
     <div><strong>EB OFFICE</strong> — BUSINESS & DIGITAL SOLUTIONS</div>
-    <div class="creator-badge">تم تصميم وتطوير الموقع بواسطة Eslam Elbanby</div>
+    <div class="creator-badge" data-i18n="footer_credit">تم تصميم وتطوير الموقع بواسطة Eslam Elbanby</div>
     <div>+201207641934 · eslam.elbanby@gmail.com</div>
   </div>
 </footer>
 
 <script>
+  // تحريك السلايدر اليدوي
+  function slidePort(btn, direction) {
+    const container = btn.closest('.carousel-container');
+    const track = container.querySelector('.carousel-track');
+    const slideWidth = track.clientWidth;
+    const isRtl = document.documentElement.dir === 'rtl';
+    const move = isRtl ? -direction * slideWidth : direction * slideWidth;
+    track.scrollBy({ left: move, behavior: 'smooth' });
+  }
+
+  // تحريك تلقائي للسلايدر مع التوقف عند التفاعل
+  const autoCarousels = document.querySelectorAll('.carousel-container[data-autoplay="true"]');
+  autoCarousels.forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    let autoPlayTimer;
+
+    function startScroll() {
+      autoPlayTimer = setInterval(() => {
+        const isRtl = document.documentElement.dir === 'rtl';
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        const current = Math.abs(track.scrollLeft);
+
+        if (current >= maxScroll - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          const move = isRtl ? -track.clientWidth : track.clientWidth;
+          track.scrollBy({ left: move, behavior: 'smooth' });
+        }
+      }, 3500);
+    }
+
+    function stopScroll() { clearInterval(autoPlayTimer); }
+
+    startScroll();
+    carousel.addEventListener('mouseenter', stopScroll);
+    carousel.addEventListener('mouseleave', startScroll);
+    carousel.addEventListener('touchstart', stopScroll, {passive: true});
+    carousel.addEventListener('touchend', startScroll);
+  });
+
+  // قائمة الهاتف
   const menuBtn = document.querySelector('.menu');
   const nav = document.querySelector('nav');
   menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
   nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
 
-  // كود تحريك السلايدر
-  function slidePort(btn, direction) {
-    const container = btn.closest('.carousel-container');
-    const track = container.querySelector('.carousel-track');
-    const slideWidth = track.clientWidth;
-    track.scrollBy({ left: direction * slideWidth, behavior: 'smooth' });
+  // نظام اللغتين (العربية / الإنجليزية)
+  const translations = {
+    ar: {
+      nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "خدماتنا", nav_portfolio: "معرض الأعمال",
+      nav_reviews: "آراء العملاء", nav_contact: "تواصل معنا", btn_order: "طلب خدمة",
+      hero_eyebrow: "EB OFFICE — الشريك الرقمي لمشروعك",
+      hero_title: "حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span>",
+      hero_desc: "نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.",
+      hero_btn_port: "معرض الأعمال ←", hero_btn_wa: "محادثة مباشرة عبر واتساب",
+      stat_exp_val: "+3", stat_exp_lbl: "سنوات خبرة", stat_sup_val: "24/7", stat_sup_lbl: "دعم مستمر",
+      services_sub: "خدمات متخصصة", services_title: "حلول ذكية تلبي كافة احتياجاتك",
+      s1_t: "Excel & Accounting", s1_d: "تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.",
+      s2_t: "Websites Development", s2_d: "برمجة صفحات هبوط ومواقع تعريفية سريعة ومتجاوبة مع الجوال والمحركات.",
+      s3_t: "CV & ATS Documents", s3_d: "صياغة وتصميم CV متوافق مع ATS، وفواتير وسندات مالية رسمية.",
+      s4_t: "Graphic Design & Branding", s4_d: "تصميم شعارات احترافية، بوسترات تسويقية، وباقات براندينج متكاملة.",
+      s5_t: "Social Media Management", s5_d: "صناعة محتوى جذاب، جدولة النشر الدوري، وإدارة التفاعل والنمو.",
+      s6_t: "AI & Digital Solutions", s6_d: "دمج أدوات الذكاء الاصطناعي لأتمتة المهام وتوفير الوقت وزيادة الإنتاجية.",
+      port_sub: "معرض الأعمال المنفذة", port_title: "نماذج من مشاريعنا حسب التخصص",
+      port_desc: "تتحرك الصور تلقائياً ويمكنك السحب يميناً ويساراً ⟷ لمعاينة كافة النماذج كاملة.",
+      swipe_hint: "اسحب للصور ⟷",
+      p1_t: "أنظمة المحاسبة وشيتات Excel و Dashboard", p1_d: "لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة النقدية والشيكات بدقة.", btn_req_excel: "طلب نظام محاسبي ↗",
+      p2_t: "السير الذاتية الاحترافية (ATS) والمستندات", p2_d: "تصميم وتنسيق سيرة ذاتية مهيكلة بدقة لاجتياز الفرز الإلكتروني (ATS) وزيادة فرص القبول، وفواتير وسندات مالية رسمية.", btn_req_cv: "طلب تصميم CV / مستندات ↗",
+      p3_t: "الهوية البصرية وتصاميم الشعارات والبراندينج", p3_d: "تصميم شعارات مبتكرة، كروت عمل فاخرة، موك آب الشاشات، وهوية بصرية متكاملة تعكس قوة علامتك التجارية في السوق.", btn_req_design: "طلب تصميم هوية / براند ↗",
+      p4_t: "إدارة منصات السوشيال ميديا وصناعة المحتوى", p4_d: "إدارة الحسابات على فيسبوك وإنستجرام وتيك توك، نشر المحتوى الدوري، جدولة المواعيد، وتنمية التفاعل والمبيعات باحترافية.", btn_req_social: "طلب باقة سوشيال ميديا ↗",
+      p5_t: "تطوير المواقع وصفحات الهبوط (Websites)", p5_d: "بناء وتطوير مواقع ويب سريعة جداً، بتصميم حديث متجاوب 100% مع كافة الشاشات والموبايل ومربوطة مباشرة بالواتساب.", btn_req_web: "طلب تصميم وبرمجة موقع ↗",
+      about_sub: "من نحن", about_title: "نبتكر الحلول لتنمية عملك",
+      about_desc: "مكتب EB OFFICE يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.",
+      f1_t: "دقة واحترافية", f1_d: "التزام تام بأدق المعايير والمخرجات.",
+      f2_t: "تنفيذ سريع", f2_d: "تسليم المشروعات في المواعيد المحددة.",
+      f3_t: "أسعار تنافسية", f3_d: "باقات تناسب المشروعات الناشئة والمتوسطة.",
+      f4_t: "متابعة ودعم", f4_d: "دعم فني مستمر بعد تسليم المشروع.",
+      testi_sub: "آراء العملاء", testi_title: "تجارب حقيقية لعملاء تعاملوا معنا",
+      rev_box_title: "تعاملت معنا من قبل؟", rev_box_desc: "شاركنا رأيك وتجربتك بكل صراحة، رأيك يساعدنا ويساعد العملاء الجدد.", rev_box_btn: "كتابة تقييم ورأي ✍️",
+      rf_title: "أضف تقييمك ورأيك في الخدمة", rf_name: "اسمك الكريم", rf_job: "صفتك أو مجالك", rf_text: "رأيك وتجربتك في الشغل معنا", rf_submit: "إرسال التقييم للمراجعة ↗", rf_hint: "يخضع التقييم لموافقة الإدارة قبل النشر.",
+      contact_sub: "تواصل معنا", contact_title: "جاهز لتطوير أعمالك اليوم؟", contact_desc: "املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.",
+      f_name: "الاسم بالكامل", f_phone: "رقم الهاتف / واتساب", f_service: "الخدمة المطلوبة", opt_select: "اختر الخدمة", f_budget: "الميزانية المقترحة والعملة", f_details: "تفاصيل المشروع والطلب", f_submit: "إرسال الطلب مباشرة عبر واتساب ↗",
+      footer_credit: "تم تصميم وتطوير الموقع بواسطة Eslam Elbanby"
+    },
+    en: {
+      nav_home: "Home", nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio",
+      nav_reviews: "Reviews", nav_contact: "Contact", btn_order: "Get Started",
+      hero_eyebrow: "EB OFFICE — YOUR DIGITAL PARTNER",
+      hero_title: "Digital Business Solutions<br><span>With Utmost Mastery</span>",
+      hero_desc: "We provide integrated accounting, web, and design solutions to organize your workflow and scale your business efficiently.",
+      hero_btn_port: "View Portfolio ←", hero_btn_wa: "Chat on WhatsApp",
+      stat_exp_val: "+3", stat_exp_lbl: "Years of Experience", stat_sup_val: "24/7", stat_sup_lbl: "Constant Support",
+      services_sub: "Our Services", services_title: "Smart Solutions Tailored For You",
+      s1_t: "Excel & Accounting", s1_d: "Custom accounting models, cashflow tracking, and dynamic dashboards.",
+      s2_t: "Web Development", s2_d: "High-speed, SEO-friendly, mobile-responsive websites & landing pages.",
+      s3_t: "CV & ATS Documents", s3_d: "ATS-optimized resumes, official invoices, and commercial vouchers.",
+      s4_t: "Graphic Design & Branding", s4_d: "Professional logos, marketing posters, and full visual identities.",
+      s5_t: "Social Media Management", s5_d: "Engaging content creation, posting schedules, and community growth.",
+      s6_t: "AI & Digital Solutions", s6_d: "Workflow automation using modern AI tools to boost your daily output.",
+      port_sub: "Featured Projects", port_title: "Showcase of Our Works",
+      port_desc: "Sliders scroll automatically; swipe left or right ⟷ to browse all projects.",
+      swipe_hint: "Swipe for more ⟷",
+      p1_t: "Accounting Systems & Excel Dashboards", p1_d: "Interactive KPIs, automated income/expense sheets, checkbooks & cash tracking.", btn_req_excel: "Request Accounting Sheet ↗",
+      p2_t: "ATS Resumes & Corporate Documents", p2_d: "Structured CVs tailored to pass ATS screeners, plus clean bilingual invoices.", btn_req_cv: "Order ATS Resume ↗",
+      p3_t: "Visual Identity, Logos & Branding", p3_d: "Distinctive brand identities, premium business cards, and marketing mockups.", btn_req_design: "Order Visual Branding ↗",
+      p4_t: "Social Media & Content Creation", p4_d: "Managing Facebook, Instagram & TikTok channels to drive engagement and sales.", btn_req_social: "Order Social Package ↗",
+      p5_t: "Websites & Landing Pages", p5_d: "Ultra-fast, mobile-first websites connected directly with WhatsApp ordering.", btn_req_web: "Order Website ↗",
+      about_sub: "About Us", about_title: "Innovating Solutions For Your Growth",
+      about_desc: "EB OFFICE empowers businesses by blending real-world accounting discipline with digital design, web development, and AI tools.",
+      f1_t: "Precision & Quality", f1_d: "Meticulous attention to detail in every deliverable.",
+      f2_t: "Rapid Turnaround", f2_d: "Strict commitment to deadlines and agreed timelines.",
+      f3_t: "Competitive Rates", f3_d: "Budget-friendly packages suited for startups and growing businesses.",
+      f4_t: "Ongoing Support", f4_d: "Dedicated technical assistance even after handover.",
+      testi_sub: "Client Feedback", testi_title: "Real Experiences from Our Valued Clients",
+      rev_box_title: "Worked with us before?", rev_box_desc: "Share your honest feedback to help us and new clients.", rev_box_btn: "Write a Review ✍️",
+      rf_title: "Leave Your Rating & Review", rf_name: "Your Full Name", rf_job: "Title or Business", rf_text: "Your honest feedback", rf_submit: "Submit For Approval ↗", rf_hint: "Reviews undergo admin moderation before publishing.",
+      contact_sub: "Contact Us", contact_title: "Ready to Upgrade Your Business?", contact_desc: "Fill the form and we'll reply right away on WhatsApp with the best plan.",
+      f_name: "Full Name", f_phone: "Phone / WhatsApp", f_service: "Required Service", opt_select: "Select Service", f_budget: "Estimated Budget & Currency", f_details: "Project Requirements", f_submit: "Send on WhatsApp ↗",
+      footer_credit: "Designed & Developed by Eslam Elbanby"
+    }
+  };
+
+  let currentLang = 'ar';
+  function toggleLanguage() {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('langBtn').textContent = currentLang === 'ar' ? 'English' : 'عربي';
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) {
+        el.innerHTML = translations[currentLang][key];
+      }
+    });
   }
 
+  // التحكم بنموذج إضافة التقييم
+  function toggleReviewForm() {
+    const wrap = document.getElementById('reviewFormWrap');
+    wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
+    if(wrap.style.display === 'block') wrap.scrollIntoView({behavior:'smooth'});
+  }
+
+  // إدارة الآراء واعتمادها عبر LocalStorage
+  const pendingReviewsKey = 'eb_pending_reviews';
+  const approvedReviewsKey = 'eb_approved_reviews';
+
+  document.getElementById('addReviewForm')?.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('revName').value.trim();
+    const job = document.getElementById('revJob').value.trim();
+    const text = document.getElementById('revText').value.trim();
+
+    const pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
+    pending.push({ id: Date.now(), name, job, text });
+    localStorage.setItem(pendingReviewsKey, JSON.stringify(pending));
+
+    alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك وسيظهر بعد مراجعة واعتماد الإدارة.' : 'Thank you! Your review was received and will appear after admin review.');
+    this.reset();
+    document.getElementById('reviewFormWrap').style.display = 'none';
+  });
+
+  function renderApprovedReviews() {
+    const approved = JSON.parse(localStorage.getItem(approvedReviewsKey) || '[]');
+    const container = document.getElementById('testiContainer');
+    // إبقاء الآراء الثلاثة الأساسية وإضافة المعتمد الجديد
+    approved.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'testi-card';
+      card.innerHTML = `
+        <div class="testi-stars">★★★★★</div>
+        <p>"${item.text}"</p>
+        <div class="testi-author"><b>${item.name}</b><span>${item.job}</span></div>
+      `;
+      container.appendChild(card);
+    });
+  }
+  renderApprovedReviews();
+
+  // لوحة تحكم الأدمن برمز PIN (1234)
+  function openAdminPanel() {
+    const pin = prompt(currentLang === 'ar' ? 'أدخل الرمز السري للإدارة (PIN):' : 'Enter Admin PIN:');
+    if (pin !== '1234') {
+      alert(currentLang === 'ar' ? 'رمز سري غير صحيح!' : 'Invalid PIN!');
+      return;
+    }
+    const panel = document.getElementById('adminPanel');
+    panel.style.display = 'grid';
+    renderPendingList();
+  }
+
+  function closeAdminPanel() {
+    document.getElementById('adminPanel').style.display = 'none';
+  }
+
+  function renderPendingList() {
+    const list = document.getElementById('pendingReviewsList');
+    const pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
+    list.innerHTML = '';
+
+    if (pending.length === 0) {
+      list.innerHTML = '<p style="font-size:13px;color:#888;text-align:center;padding:20px">لا توجد آراء جديدة معلقة حالياً.</p>';
+      return;
+    }
+
+    pending.forEach((rev, idx) => {
+      const item = document.createElement('div');
+      item.style.cssText = 'border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa';
+      item.innerHTML = `
+        <strong>${rev.name}</strong> (${rev.job})
+        <p style="font-size:13px;color:#444;margin:6px 0">"${rev.text}"</p>
+        <div style="display:flex;gap:8px;margin-top:8px">
+          <button class="btn btn-gold" style="padding:6px 14px;font-size:12px" onclick="approveReview(${rev.id})">موافقة ونشر ✅</button>
+          <button style="padding:6px 14px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="rejectReview(${rev.id})">حذف ✕</button>
+        </div>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  window.approveReview = function(id) {
+    let pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
+    let approved = JSON.parse(localStorage.getItem(approvedReviewsKey) || '[]');
+    const target = pending.find(r => r.id === id);
+    if(target){
+      approved.push(target);
+      pending = pending.filter(r => r.id !== id);
+      localStorage.setItem(approvedReviewsKey, JSON.stringify(approved));
+      localStorage.setItem(pendingReviewsKey, JSON.stringify(pending));
+      renderPendingList();
+      location.reload();
+    }
+  };
+
+  window.rejectReview = function(id) {
+    let pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
+    pending = pending.filter(r => r.id !== id);
+    localStorage.setItem(pendingReviewsKey, JSON.stringify(pending));
+    renderPendingList();
+  };
+
+  // إرسال نموذج واتساب
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
@@ -507,7 +812,7 @@
     const currency = document.getElementById('currency').value;
     const details = document.getElementById('details').value.trim();
 
-    const formattedBudget = budget ? `${budget} ${currency}` : 'غير محددة';
+    const formattedBudget = budget ? `${budget} ${currency}` : (currentLang === 'ar' ? 'غير محددة' : 'Not specified');
 
     const message =
       `مرحباً EB OFFICE%0A` +
