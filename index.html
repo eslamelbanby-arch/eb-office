@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="EB OFFICE - Business, Accounting, Web & Design Solutions" />
   <title>EB OFFICE | Business & Digital Solutions</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,196 +10,161 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --black:#090909; --dark:#121316; --gold:#d4af37; --gold2:#f0cf68;
-      --white:#fff; --soft:#f8f9fa; --muted:#6c757d; --line:#e9ecef;
-      --shadow:0 12px 30px rgba(0,0,0,.07);
-      --card-border:rgba(212,175,55,0.22);
+    :root {
+      --black: #090909;
+      --dark: #121316;
+      --gold: #d4af37;
+      --gold2: #f0cf68;
+      --white: #ffffff;
+      --soft: #f8f9fa;
+      --muted: #6c757d;
+      --line: #e9ecef;
+      --shadow: 0 10px 25px rgba(0,0,0,0.06);
+      --card-border: rgba(212,175,55,0.22);
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{font-family:"Cairo",sans-serif;color:#1a1a1a;background:#fff;line-height:1.7;overflow-x:hidden}
-    a{text-decoration:none;color:inherit}
-    .container{width:min(1180px,92%);margin:auto}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Cairo", sans-serif; color: #1a1a1a; background: #fff; line-height: 1.7; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1180px, 92%); margin: auto; }
     
-    header{position:sticky;top:0;z-index:100;background:#090909;border-bottom:1px solid rgba(212,175,55,.25)}
-    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
-    .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:900}
-    .brand-mark{width:42px;height:36px;display:grid;place-items:center;font-size:22px;font-weight:900;border-left:3px solid var(--gold);transform:skew(-10deg);background:rgba(212,175,55,0.1);border-radius:4px}
-    .brand-mark span{color:var(--gold)}
-    .brand small{display:block;font-size:9px;letter-spacing:1px;color:#bbb;margin-top:-2px}
-    nav{display:flex;gap:18px;color:#ddd;font-size:14.5px;font-weight:600}
-    nav a{transition:.25s;padding:6px 0}
-    nav a:hover,nav a.active{color:var(--gold)}
+    header { position: sticky; top: 0; z-index: 100; background: #090909; border-bottom: 1px solid rgba(212,175,55,.25); }
+    .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 900; }
+    .brand-mark { width: 42px; height: 36px; display: grid; place-items: center; font-size: 22px; font-weight: 900; border-left: 3px solid var(--gold); transform: skew(-10deg); background: rgba(212,175,55,0.1); border-radius: 4px; }
+    .brand-mark span { color: var(--gold); }
+    .brand small { display: block; font-size: 9px; letter-spacing: 1px; color: #bbb; margin-top: -2px; }
     
-    .nav-actions{display:flex;align-items:center;gap:10px}
-    .lang-btn{background:#1a1a1a;color:var(--gold);border:1px solid var(--gold);padding:6px 12px;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px;transition:.25s}
-    .lang-btn:hover{background:var(--gold);color:#111}
-
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 22px;border-radius:10px;border:1px solid var(--gold);font-weight:700;font-size:14px;cursor:pointer;transition:all .25s ease}
-    .btn-gold{background:var(--gold);color:#111}
-    .btn-gold:hover{background:var(--gold2);transform:translateY(-2px)}
-    .btn-dark{background:transparent;color:#fff}
-    .btn-dark:hover{background:rgba(212,175,55,.12)}
-    .menu{display:none;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
-
-    .hero{background:radial-gradient(circle at 75% 30%,#202020 0,#101113 50%,#080808 100%);color:#fff;padding:45px 0 65px}
-    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px}
-    .eyebrow{color:var(--gold);font-size:13px;letter-spacing:1.5px;font-weight:800;margin-bottom:8px}
-    h1{font-size:clamp(28px,3.8vw,50px);line-height:1.3;margin-bottom:16px;font-weight:900}
-    h1 span{color:var(--gold)}
-    .hero-copy p{color:#d6d6d6;font-size:15.5px;max-width:540px;margin-bottom:24px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap}
-    .hero-art{display:flex;align-items:center;justify-content:center}
-    .laptop{width:min(440px,100%);height:240px;border:9px solid #252525;border-radius:16px;background:#030303;box-shadow:0 25px 60px rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;padding:10px}
-    .screen{width:100%;height:100%;background:linear-gradient(145deg,#0a0a0a,#161616);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid #333}
-    .screen .big-eb{font-size:50px;font-weight:900;color:#fff;line-height:1.1}.screen .big-eb b{color:var(--gold)}
-    .screen .brand-title{font-size:12px;letter-spacing:1.5px;color:#fff;font-weight:700;margin-top:4px}
-
-    .stats{margin-top:-35px;position:relative;z-index:10}
-    .stats-box{background:#fff;border-radius:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(2,1fr);padding:18px;border:1px solid var(--line);max-width:550px;margin:auto}
-    .stat{text-align:center;border-left:1px solid #eee}
-    body[dir="ltr"] .stat{border-left:0;border-right:1px solid #eee}
-    .stat:last-child{border:0}
-    .stat strong{display:block;font-size:28px;font-weight:900;color:#111}
-    .stat span{color:var(--muted);font-size:13.5px;font-weight:600}
-
-    section{padding:65px 0}
-    .section-head{text-align:center;margin-bottom:30px}
-    .section-head h2{font-size:30px;font-weight:800}
-    .section-head p{color:var(--muted);margin-top:6px;font-size:14.5px}
+    nav { display: flex; gap: 18px; color: #ddd; font-size: 14.5px; font-weight: 600; }
+    nav a { transition: .25s; padding: 6px 0; }
+    nav a:hover, nav a.active { color: var(--gold); }
     
-    .services{background:var(--soft)}
-    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .service-compact{
-      background:#fff;border:1px solid var(--card-border);border-radius:14px;
-      padding:18px 20px;display:flex;align-items:flex-start;gap:14px;
-      transition:all .25s ease;
-    }
-    .service-compact:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:var(--shadow)}
-    .service-icon{
-      width:44px;height:44px;min-width:44px;border-radius:10px;
-      background:#111;color:var(--gold);display:grid;place-items:center;
-      font-size:20px;
-    }
-    .service-compact h3{font-size:16px;font-weight:800;margin-bottom:4px;color:#111}
-    .service-compact p{font-size:13px;color:var(--muted);line-height:1.5;margin:0}
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-btn { background: #1a1a1a; color: var(--gold); border: 1.5px solid var(--gold); padding: 6px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 13px; font-family: inherit; transition: .25s; }
+    .lang-btn:hover { background: var(--gold); color: #111; }
 
-    .portfolio{background:#fff}
-    .port-categories{display:grid;grid-template-columns:repeat(2,1fr);gap:25px}
-    .port-category-card{
-      background:#fff;border:1px solid var(--line);border-radius:18px;
-      overflow:hidden;box-shadow:var(--shadow);border-top:4px solid var(--gold);
-      display:flex;flex-direction:column;
-    }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 10px; border: 1px solid var(--gold); font-weight: 700; font-size: 14px; cursor: pointer; transition: all .25s ease; }
+    .btn-gold { background: var(--gold); color: #111; }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-dark { background: transparent; color: #fff; }
+    .btn-dark:hover { background: rgba(212,175,55,.12); }
+    .menu { display: none; background: none; border: 0; color: #fff; font-size: 28px; cursor: pointer; }
+
+    .hero { background: radial-gradient(circle at 75% 30%, #202020 0, #101113 50%, #080808 100%); color: #fff; padding: 45px 0 65px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 30px; }
+    .eyebrow { color: var(--gold); font-size: 13px; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 8px; }
+    h1 { font-size: clamp(28px, 3.8vw, 50px); line-height: 1.3; margin-bottom: 16px; font-weight: 900; }
+    h1 span { color: var(--gold); }
+    .hero-copy p { color: #d6d6d6; font-size: 15.5px; max-width: 540px; margin-bottom: 24px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-art { display: flex; align-items: center; justify-content: center; }
+    .laptop { width: min(440px, 100%); height: 240px; border: 9px solid #252525; border-radius: 16px; background: #030303; box-shadow: 0 25px 60px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; padding: 10px; }
+    .screen { width: 100%; height: 100%; background: linear-gradient(145deg, #0a0a0a, #161616); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid #333; }
+    .screen .big-eb { font-size: 50px; font-weight: 900; color: #fff; line-height: 1.1; }
+    .screen .big-eb b { color: var(--gold); }
+    .screen .brand-title { font-size: 12px; letter-spacing: 1.5px; color: #fff; font-weight: 700; margin-top: 4px; }
+
+    .stats { margin-top: -35px; position: relative; z-index: 10; }
+    .stats-box { background: #fff; border-radius: 14px; box-shadow: var(--shadow); display: grid; grid-template-columns: repeat(2, 1fr); padding: 18px; border: 1px solid var(--line); max-width: 550px; margin: auto; }
+    .stat { text-align: center; border-left: 1px solid #eee; }
+    body[dir="ltr"] .stat { border-left: 0; border-right: 1px solid #eee; }
+    .stat:last-child { border: 0; }
+    .stat strong { display: block; font-size: 28px; font-weight: 900; color: #111; }
+    .stat span { color: var(--muted); font-size: 13.5px; font-weight: 600; }
+
+    section { padding: 65px 0; }
+    .section-head { text-align: center; margin-bottom: 30px; }
+    .section-head h2 { font-size: 30px; font-weight: 800; }
+    .section-head p { color: var(--muted); margin-top: 6px; font-size: 14.5px; }
     
-    .carousel-container{position:relative;width:100%;height:320px;background:#0d0d0d;overflow:hidden}
-    .carousel-track{
-      display:flex;width:100%;height:100%;
-      overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;
-      -webkit-overflow-scrolling:touch;scrollbar-width:none;
-    }
-    .carousel-track::-webkit-scrollbar{display:none}
-    .carousel-slide{
-      flex:0 0 100%;width:100%;height:100%;scroll-snap-align:start;
-      display:flex;align-items:center;justify-content:center;position:relative;background:#111;
-    }
-    .carousel-slide img{
-      width:100%;height:100%;object-fit:contain;padding:6px;display:block;
-    }
+    .services { background: var(--soft); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service-compact { background: #fff; border: 1px solid var(--card-border); border-radius: 14px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; transition: all .25s ease; }
+    .service-compact:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: var(--shadow); }
+    .service-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: #111; color: var(--gold); display: grid; place-items: center; font-size: 20px; }
+    .service-compact h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; color: #111; }
+    .service-compact p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+    .portfolio { background: #fff; }
+    .port-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+    .port-category-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); border-top: 4px solid var(--gold); display: flex; flex-direction: column; }
     
-    .slide-arrow{
-      position:absolute;top:50%;transform:translateY(-50%);
-      width:34px;height:34px;border-radius:50%;background:rgba(9,9,9,0.75);
-      color:var(--gold);border:1px solid rgba(212,175,55,0.4);
-      display:grid;place-items:center;cursor:pointer;z-index:5;transition:.2s;
-      font-size:15px;user-select:none;
-    }
-    .slide-arrow:hover{background:var(--gold);color:#111}
-    .slide-arrow.prev{right:10px}
-    .slide-arrow.next{left:10px}
-    body[dir="ltr"] .slide-arrow.prev{left:10px;right:auto}
-    body[dir="ltr"] .slide-arrow.next{right:10px;left:auto}
-
-    .swipe-hint{
-      position:absolute;bottom:10px;right:12px;background:rgba(0,0,0,0.75);
-      color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;
-      border:1px solid rgba(212,175,55,0.3);pointer-events:none;z-index:2;
-    }
-    body[dir="ltr"] .swipe-hint{right:auto;left:12px}
-
-    .port-category-body{padding:22px;display:flex;flex-direction:column;flex-grow:1}
-    .port-category-body h3{font-size:17.5px;font-weight:800;color:#111;margin-bottom:6px}
-    .port-category-body p{font-size:13.5px;color:var(--muted);margin-bottom:18px;line-height:1.6;flex-grow:1}
-
-    .about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center}
-    .about-box{background:#111;color:#fff;border-radius:16px;padding:35px;text-align:center;border:1px solid rgba(212,175,55,.25)}
-    .about-box .eb{font-size:64px;font-weight:900;color:#fff;line-height:1}.about-box .eb b{color:var(--gold)}
-    .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:20px}
-    .feature{padding:14px;border:1px solid var(--line);border-radius:10px;background:#fafafa}.feature b{display:block;color:#222;font-size:14px;margin-bottom:2px}.feature span{font-size:12px;color:var(--muted)}
-
-    /* آراء العملاء الواقعية ونموذج الإضافة */
-    .testimonials{background:var(--soft)}
-    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .testi-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;justify-content:space-between}
-    .testi-stars{color:var(--gold);font-size:15px;margin-bottom:8px}
-    .testi-card p{color:#333;font-size:13.5px;margin-bottom:12px;font-weight:600;line-height:1.6}
-    .testi-author b{display:block;font-size:13px;color:#111}.testi-author span{font-size:11.5px;color:var(--muted)}
-
-    .review-action-box{margin-top:35px;background:#fff;border:1px dashed var(--gold);padding:24px;border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-    .review-form-wrap{display:none;margin-top:20px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
-
-    /* نافذة الإدارة والموافقة */
-    .admin-badge-btn{font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;text-decoration:underline;margin-top:10px}
-    .admin-panel{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;place-items:center;padding:15px}
-    .admin-content{background:#fff;border-radius:14px;max-width:550px;width:100%;padding:25px;max-height:85vh;overflow-y:auto}
-
-    .contact{background:#0b0b0b;color:#fff}
-    .contact-box{border:1px solid rgba(212,175,55,.35);border-radius:16px;padding:35px;display:flex;flex-direction:column;gap:20px}
+    .carousel-container { position: relative; width: 100%; height: 320px; background: #141414; overflow: hidden; }
+    .carousel-track { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; position: relative; background: #141414; }
+    .carousel-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; padding: 8px; display: block; }
     
-    .service-form{
-      display:grid;grid-template-columns:1fr 1fr;gap:14px;background:#fff;color:#111;
-      padding:25px;border-radius:14px;
-    }
-    .service-form .full{grid-column:1/-1}
-    .service-form label{font-size:13px;font-weight:700;margin-bottom:4px;display:block}
-    .service-form input,.service-form select,.service-form textarea{
-      width:100%;padding:11px;border:1px solid #ddd;border-radius:8px;font:inherit;outline:none;background:#fafafa;
-    }
-    .service-form input:focus,.service-form select:focus,.service-form textarea:focus{
-      border-color:var(--gold);background:#fff;
-    }
-    .service-form textarea{min-height:90px;resize:vertical}
+    .slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(9,9,9,0.85); color: var(--gold); border: 1px solid var(--gold); display: grid; place-items: center; cursor: pointer; z-index: 5; transition: .2s; font-size: 15px; user-select: none; }
+    .slide-arrow:hover { background: var(--gold); color: #111; }
+    .slide-arrow.prev { right: 10px; }
+    .slide-arrow.next { left: 10px; }
+    body[dir="ltr"] .slide-arrow.prev { left: 10px; right: auto; }
+    body[dir="ltr"] .slide-arrow.next { right: 10px; left: auto; }
 
-    .float-wa{
-      position:fixed;bottom:20px;left:20px;z-index:99;
-      width:54px;height:54px;border-radius:50%;
-      display:grid;place-items:center;background:#25D366;color:#fff;
-      font-size:26px;box-shadow:0 10px 25px rgba(0,0,0,.3);border:2px solid #fff;
-    }
-    .float-wa svg{width:28px;height:28px;display:block}
+    .swipe-hint { position: absolute; bottom: 10px; right: 12px; background: rgba(0,0,0,0.8); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(212,175,55,0.4); pointer-events: none; z-index: 2; }
+    body[dir="ltr"] .swipe-hint { right: auto; left: 12px; }
 
-    footer{background:#050505;color:#aaa;padding:26px 0;border-top:1px solid #1a1a1a;font-size:13.5px}
-    .footer{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-    .creator-badge{color:var(--gold);font-weight:700}
+    .port-category-body { padding: 22px; display: flex; flex-direction: column; flex-grow: 1; }
+    .port-category-body h3 { font-size: 17.5px; font-weight: 800; color: #111; margin-bottom: 6px; }
+    .port-category-body p { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; flex-grow: 1; }
+
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
+    .about-box { background: #111; color: #fff; border-radius: 16px; padding: 35px; text-align: center; border: 1px solid rgba(212,175,55,.25); }
+    .about-box .eb { font-size: 64px; font-weight: 900; color: #fff; line-height: 1; }
+    .about-box .eb b { color: var(--gold); }
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .feature { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fafafa; }
+    .feature b { display: block; color: #222; font-size: 14px; margin-bottom: 2px; }
+    .feature span { font-size: 12px; color: var(--muted); }
+
+    .testimonials { background: var(--soft); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .testi-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
+    .testi-stars { color: var(--gold); font-size: 15px; margin-bottom: 8px; }
+    .testi-card p { color: #333; font-size: 13.5px; margin-bottom: 12px; font-weight: 600; line-height: 1.6; }
+    .testi-author b { display: block; font-size: 13px; color: #111; }
+    .testi-author span { font-size: 11.5px; color: var(--muted); }
+
+    .review-action-box { margin-top: 35px; background: #fff; border: 1px dashed var(--gold); padding: 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+
+    .admin-badge-btn { font-size: 11px; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; margin-top: 10px; }
+    .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; place-items: center; padding: 15px; }
+    .admin-content { background: #fff; border-radius: 14px; max-width: 550px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
+
+    .contact { background: #0b0b0b; color: #fff; }
+    .contact-box { border: 1px solid rgba(212,175,55,.35); border-radius: 16px; padding: 35px; display: flex; flex-direction: column; gap: 20px; }
+    
+    .service-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: #fff; color: #111; padding: 25px; border-radius: 14px; }
+    .service-form .full { grid-column: 1/-1; }
+    .service-form label { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: block; }
+    .service-form input, .service-form select, .service-form textarea { width: 100%; padding: 11px; border: 1px solid #ddd; border-radius: 8px; font: inherit; outline: none; background: #fafafa; }
+    .service-form input:focus, .service-form select:focus, .service-form textarea:focus { border-color: var(--gold); background: #fff; }
+    .service-form textarea { min-height: 90px; resize: vertical; }
+
+    .float-wa { position: fixed; bottom: 20px; left: 20px; z-index: 99; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: #25D366; color: #fff; font-size: 26px; box-shadow: 0 10px 25px rgba(0,0,0,.3); border: 2px solid #fff; }
+    .float-wa svg { width: 28px; height: 28px; display: block; }
+
+    footer { background: #050505; color: #aaa; padding: 26px 0; border-top: 1px solid #1a1a1a; font-size: 13.5px; }
+    .footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
+    .creator-badge { color: var(--gold); font-weight: 700; }
 
     @media(max-width:850px){
-      nav{display:none}
-      nav.mobile-open{
-        display:flex;position:absolute;top:68px;right:4%;left:4%;
-        flex-direction:column;gap:0;background:#111;border:1px solid rgba(212,175,55,.35);border-radius:12px;padding:10px;z-index:101;
-      }
-      nav.mobile-open a{padding:10px 14px;border-bottom:1px solid #222}
-      nav.mobile-open a:last-child{border-bottom:0}
-      .nav-actions>.btn{display:none}.menu{display:block}
-      .hero-grid{grid-template-columns:1fr;text-align:center}
-      .actions{justify-content:center}
-      .services-grid,.port-categories,.testi-grid,.about-grid{grid-template-columns:1fr}
-      .carousel-container{height:280px}
-      .service-form{grid-template-columns:1fr;padding:18px}
-      .service-form .full{grid-column:auto}
-      .features{grid-template-columns:1fr}
-      .footer{flex-direction:column;text-align:center;gap:10px}
+      nav { display: none; }
+      nav.mobile-open { display: flex; position: absolute; top: 68px; right: 4%; left: 4%; flex-direction: column; gap: 0; background: #111; border: 1px solid rgba(212,175,55,.35); border-radius: 12px; padding: 10px; z-index: 101; }
+      nav.mobile-open a { padding: 10px 14px; border-bottom: 1px solid #222; }
+      nav.mobile-open a:last-child { border-bottom: 0; }
+      .nav-actions > .btn { display: none; }
+      .menu { display: block; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .actions { justify-content: center; }
+      .services-grid, .port-categories, .testi-grid, .about-grid { grid-template-columns: 1fr; }
+      .carousel-container { height: 280px; }
+      .service-form { grid-template-columns: 1fr; padding: 18px; }
+      .service-form .full { grid-column: auto; }
+      .features { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; text-align: center; gap: 10px; }
     }
   </style>
 </head>
@@ -221,7 +185,7 @@
       <a href="#contact" data-i18n="nav_contact">تواصل معنا</a>
     </nav>
     <div class="nav-actions">
-      <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+      <button class="lang-btn" type="button" onclick="toggleLanguage()" id="langBtn">English</button>
       <a class="btn btn-gold" href="#contact" data-i18n="btn_order">طلب خدمة</a>
       <button class="menu" aria-label="القائمة">☰</button>
     </div>
@@ -303,14 +267,15 @@
 
       <div class="port-categories">
         
+        <!-- 1. أنظمة المحاسبة والداشبورد -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="excel-1.jpg" onerror="this.src='dashboard.jpg.jpg'" alt="Daily Activity Dashboard"></div>
               <div class="carousel-slide"><img src="excel-2.jpg" onerror="this.src='excel-laptop.jpg.jpg'" alt="Cash Flow Statement"></div>
-              <div class="carousel-slide"><img src="excel-3.jpg" onerror="this.src='dashboard.jpg.jpg'" alt="تفقيط النقدية والموردين"></div>
+              <div class="carousel-slide"><img src="excel-3.jpg" onerror="this.src='dashboard.jpg.jpg'" alt="تفقيط النقدية وصرف فواتير الموردين"></div>
               <div class="carousel-slide"><img src="excel-4.jpg" onerror="this.src='excel-laptop.jpg.jpg'" alt="متابعة الشيكات والبنوك"></div>
             </div>
             <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
@@ -322,10 +287,11 @@
           </div>
         </article>
 
+        <!-- 2. السير الذاتية والمستندات -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="cv-1.jpg" onerror="this.src='cv-ats-1.jpg.jpg'" alt="CV ATS Eslam Elbanby"></div>
               <div class="carousel-slide"><img src="cv-2.jpg" onerror="this.src='cv-ats-2.jpg.jpg'" alt="CV Professional Mohamed Salah"></div>
@@ -341,10 +307,11 @@
           </div>
         </article>
 
+        <!-- 3. الهوية البصرية والتصميم -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="design-1.png" onerror="this.src='branding-mockup.png.png'" alt="موك آب الهوية البصرية"></div>
               <div class="carousel-slide"><img src="design-2.png" onerror="this.src='branding-mockup.png.png'" alt="لوجو EB الفاخر"></div>
@@ -358,10 +325,11 @@
           </div>
         </article>
 
+        <!-- 4. السوشيال ميديا -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="social-1.jpg" onerror="this.src='social-neon.jpg.jpg'" alt="نيون السوشيال ميديا"></div>
               <div class="carousel-slide"><img src="social-2.jpg" onerror="this.src='social-icons-3d.jpg.jpg'" alt="سحابة الأيقونات 3D"></div>
@@ -377,10 +345,11 @@
           </div>
         </article>
 
+        <!-- 5. تطوير المواقع -->
         <article class="port-category-card" style="grid-column:1/-1">
           <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" onclick="slidePort(this, 1)">❯</button>
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
             <div class="carousel-track">
               <div class="carousel-slide"><img src="web-1.png" onerror="this.src='design-1.png'" alt="موقع ويب متجاوب لابتوب وموبايل"></div>
               <div class="carousel-slide"><img src="web-2.png" onerror="this.src='branding-mockup.png.png'" alt="تصميم وبرمجة صفحات هبوط"></div>
@@ -410,7 +379,7 @@
         <p style="color:#555;font-size:15px" data-i18n="about_desc">مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
         <div class="features">
           <div class="feature"><b data-i18n="f1_t">دقة واحترافية</b><span data-i18n="f1_d">التزام تام بأدق المعايير والمخرجات.</span></div>
-          <div class="feature"><b data-i2_t="f2_t">تنفيذ سريع</b><span data-i18n="f2_d">تسليم المشروعات في المواعيد المحددة.</span></div>
+          <div class="feature"><b data-i18n="f2_t">تنفيذ سريع</b><span data-i18n="f2_d">تسليم المشروعات في المواعيد المحددة.</span></div>
           <div class="feature"><b data-i18n="f3_t">أسعار تنافسية</b><span data-i18n="f3_d">باقات تناسب المشروعات الناشئة والمتوسطة.</span></div>
           <div class="feature"><b data-i18n="f4_t">متابعة ودعم</b><span data-i18n="f4_d">دعم فني مستمر بعد تسليم المشروع.</span></div>
         </div>
@@ -448,7 +417,7 @@
           <h4 style="font-size:16px;font-weight:800" data-i18n="rev_box_title">تعاملت معنا من قبل؟</h4>
           <p style="color:var(--muted);font-size:13.5px" data-i18n="rev_box_desc">شاركنا رأيك وتجربتك بكل صراحة، رأيك يساعدنا ويساعد العملاء الجدد.</p>
         </div>
-        <button class="btn btn-gold" onclick="toggleReviewForm()" data-i18n="rev_box_btn">كتابة تقييم ورأي ✍️</button>
+        <button class="btn btn-gold" type="button" onclick="toggleReviewForm()" data-i18n="rev_box_btn">كتابة تقييم ورأي ✍️</button>
       </div>
 
       <div class="review-form-wrap" id="reviewFormWrap">
@@ -474,7 +443,7 @@
       </div>
 
       <div style="text-align:center;margin-top:15px">
-        <button class="admin-badge-btn" onclick="openAdminPanel()">لوحة إدارة واعتماد الآراء (خاص بك)</button>
+        <button class="admin-badge-btn" type="button" onclick="openAdminPanel()">لوحة إدارة واعتماد الآراء (خاص بك)</button>
       </div>
     </div>
   </section>
@@ -483,7 +452,7 @@
     <div class="admin-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
         <h3 style="font-size:18px">إدارة واعتماد آراء العملاء</h3>
-        <button onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
+        <button type="button" onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
       </div>
       <p style="font-size:13px;color:var(--muted);margin-bottom:15px">الآراء المعلقة التي أرسلها الزوار، يمكنك اعتماد نشرها أو حذفها:</p>
       <div id="pendingReviewsList" style="display:flex;flex-direction:column;gap:12px"></div>
@@ -560,53 +529,7 @@
 </footer>
 
 <script>
-  // تحريك السلايدر اليدوي
-  function slidePort(btn, direction) {
-    const container = btn.closest('.carousel-container');
-    const track = container.querySelector('.carousel-track');
-    const slideWidth = track.clientWidth;
-    const isRtl = document.documentElement.dir === 'rtl';
-    const move = isRtl ? -direction * slideWidth : direction * slideWidth;
-    track.scrollBy({ left: move, behavior: 'smooth' });
-  }
-
-  // تحريك تلقائي للسلايدر مع التوقف عند التفاعل
-  const autoCarousels = document.querySelectorAll('.carousel-container[data-autoplay="true"]');
-  autoCarousels.forEach(carousel => {
-    const track = carousel.querySelector('.carousel-track');
-    let autoPlayTimer;
-
-    function startScroll() {
-      autoPlayTimer = setInterval(() => {
-        const isRtl = document.documentElement.dir === 'rtl';
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        const current = Math.abs(track.scrollLeft);
-
-        if (current >= maxScroll - 10) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          const move = isRtl ? -track.clientWidth : track.clientWidth;
-          track.scrollBy({ left: move, behavior: 'smooth' });
-        }
-      }, 3500);
-    }
-
-    function stopScroll() { clearInterval(autoPlayTimer); }
-
-    startScroll();
-    carousel.addEventListener('mouseenter', stopScroll);
-    carousel.addEventListener('mouseleave', startScroll);
-    carousel.addEventListener('touchstart', stopScroll, {passive: true});
-    carousel.addEventListener('touchend', startScroll);
-  });
-
-  // قائمة الهاتف
-  const menuBtn = document.querySelector('.menu');
-  const nav = document.querySelector('nav');
-  menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
-  nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
-
-  // نظام اللغتين (العربية / الإنجليزية)
+  // نصوص الترجمة الثنائية
   const translations = {
     ar: {
       nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "خدماتنا", nav_portfolio: "معرض الأعمال",
@@ -682,31 +605,93 @@
     }
   };
 
-  let currentLang = 'ar';
-  function toggleLanguage() {
-    currentLang = currentLang === 'ar' ? 'en' : 'ar';
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-    document.getElementById('langBtn').textContent = currentLang === 'ar' ? 'English' : 'عربي';
+  // نظام تبديل اللغة وتخزينها
+  let currentLang = localStorage.getItem('eb_lang') || 'ar';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('eb_lang', lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    const btn = document.getElementById('langBtn');
+    if (btn) btn.textContent = lang === 'ar' ? 'English' : 'عربي';
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
-      if (translations[currentLang][key]) {
-        el.innerHTML = translations[currentLang][key];
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
       }
     });
   }
 
-  // التحكم بنموذج إضافة التقييم
+  function toggleLanguage() {
+    const next = currentLang === 'ar' ? 'en' : 'ar';
+    applyLanguage(next);
+  }
+
+  // تحريك السلايدر اليدوي
+  function slidePort(btn, direction) {
+    const container = btn.closest('.carousel-container');
+    const track = container.querySelector('.carousel-track');
+    const slideWidth = track.clientWidth;
+    const isRtl = document.documentElement.dir === 'rtl';
+    const move = isRtl ? -direction * slideWidth : direction * slideWidth;
+    track.scrollBy({ left: move, behavior: 'smooth' });
+  }
+
+  // تنفيذ الأكواد بعد تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', () => {
+    applyLanguage(currentLang);
+
+    // التحريك التلقائي للسلايدر
+    const autoCarousels = document.querySelectorAll('.carousel-container[data-autoplay="true"]');
+    autoCarousels.forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track');
+      let autoPlayTimer;
+
+      function startScroll() {
+        autoPlayTimer = setInterval(() => {
+          const isRtl = document.documentElement.dir === 'rtl';
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          const current = Math.abs(track.scrollLeft);
+
+          if (current >= maxScroll - 15) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            const move = isRtl ? -track.clientWidth : track.clientWidth;
+            track.scrollBy({ left: move, behavior: 'smooth' });
+          }
+        }, 3500);
+      }
+
+      function stopScroll() { clearInterval(autoPlayTimer); }
+
+      startScroll();
+      carousel.addEventListener('mouseenter', stopScroll);
+      carousel.addEventListener('mouseleave', startScroll);
+      carousel.addEventListener('touchstart', stopScroll, {passive: true});
+      carousel.addEventListener('touchend', startScroll);
+    });
+
+    renderApprovedReviews();
+  });
+
+  // قائمة الهاتف
+  const menuBtn = document.querySelector('.menu');
+  const nav = document.querySelector('nav');
+  menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
+  nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
+
+  // نموذج إضافة الرأي
   function toggleReviewForm() {
     const wrap = document.getElementById('reviewFormWrap');
     wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
     if(wrap.style.display === 'block') wrap.scrollIntoView({behavior:'smooth'});
   }
 
-  // إدارة الآراء واعتمادها عبر LocalStorage
-  const pendingReviewsKey = 'eb_pending_reviews';
-  const approvedReviewsKey = 'eb_approved_reviews';
+  const pendingKey = 'eb_pending_reviews';
+  const approvedKey = 'eb_approved_reviews';
 
   document.getElementById('addReviewForm')?.addEventListener('submit', function(e){
     e.preventDefault();
@@ -714,19 +699,18 @@
     const job = document.getElementById('revJob').value.trim();
     const text = document.getElementById('revText').value.trim();
 
-    const pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
+    const pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
     pending.push({ id: Date.now(), name, job, text });
-    localStorage.setItem(pendingReviewsKey, JSON.stringify(pending));
+    localStorage.setItem(pendingKey, JSON.stringify(pending));
 
-    alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك وسيظهر بعد مراجعة واعتماد الإدارة.' : 'Thank you! Your review was received and will appear after admin review.');
+    alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك وسينشر فور اعتماده.' : 'Thank you! Your review was submitted and will appear after moderation.');
     this.reset();
     document.getElementById('reviewFormWrap').style.display = 'none';
   });
 
   function renderApprovedReviews() {
-    const approved = JSON.parse(localStorage.getItem(approvedReviewsKey) || '[]');
+    const approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
     const container = document.getElementById('testiContainer');
-    // إبقاء الآراء الثلاثة الأساسية وإضافة المعتمد الجديد
     approved.forEach(item => {
       const card = document.createElement('div');
       card.className = 'testi-card';
@@ -738,17 +722,15 @@
       container.appendChild(card);
     });
   }
-  renderApprovedReviews();
 
-  // لوحة تحكم الأدمن برمز PIN (1234)
+  // لوحة الإدارة (PIN: 1234)
   function openAdminPanel() {
     const pin = prompt(currentLang === 'ar' ? 'أدخل الرمز السري للإدارة (PIN):' : 'Enter Admin PIN:');
     if (pin !== '1234') {
       alert(currentLang === 'ar' ? 'رمز سري غير صحيح!' : 'Invalid PIN!');
       return;
     }
-    const panel = document.getElementById('adminPanel');
-    panel.style.display = 'grid';
+    document.getElementById('adminPanel').style.display = 'grid';
     renderPendingList();
   }
 
@@ -758,15 +740,15 @@
 
   function renderPendingList() {
     const list = document.getElementById('pendingReviewsList');
-    const pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
+    const pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
     list.innerHTML = '';
 
     if (pending.length === 0) {
-      list.innerHTML = '<p style="font-size:13px;color:#888;text-align:center;padding:20px">لا توجد آراء جديدة معلقة حالياً.</p>';
+      list.innerHTML = '<p style="font-size:13px;color:#888;text-align:center;padding:20px">لا توجد آراء جديدة بانتظار الاعتماد.</p>';
       return;
     }
 
-    pending.forEach((rev, idx) => {
+    pending.forEach(rev => {
       const item = document.createElement('div');
       item.style.cssText = 'border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa';
       item.innerHTML = `
@@ -782,27 +764,27 @@
   }
 
   window.approveReview = function(id) {
-    let pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
-    let approved = JSON.parse(localStorage.getItem(approvedReviewsKey) || '[]');
+    let pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
+    let approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
     const target = pending.find(r => r.id === id);
     if(target){
       approved.push(target);
       pending = pending.filter(r => r.id !== id);
-      localStorage.setItem(approvedReviewsKey, JSON.stringify(approved));
-      localStorage.setItem(pendingReviewsKey, JSON.stringify(pending));
+      localStorage.setItem(approvedKey, JSON.stringify(approved));
+      localStorage.setItem(pendingKey, JSON.stringify(pending));
       renderPendingList();
       location.reload();
     }
   };
 
   window.rejectReview = function(id) {
-    let pending = JSON.parse(localStorage.getItem(pendingReviewsKey) || '[]');
+    let pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
     pending = pending.filter(r => r.id !== id);
-    localStorage.setItem(pendingReviewsKey, JSON.stringify(pending));
+    localStorage.setItem(pendingKey, JSON.stringify(pending));
     renderPendingList();
   };
 
-  // إرسال نموذج واتساب
+  // إرسال طلب الخدمة عبر واتساب
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
