@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EB OFFICE | حلول أعمال وخدمات احترافية</title>
+  <title>EB OFFICE | خدمات أعمال احترافية</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -15,54 +15,116 @@
       --text-main: #1E293B;
       --text-muted: #64748B;
       --border: #E2E8F0;
+      --success: #10B981;
+      --danger: #EF4444;
       --gold: #F59E0B;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Cairo', sans-serif; background-color: var(--bg-light); color: var(--text-main); line-height: 1.6; }
+    body {
+      font-family: 'Cairo', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      transition: all 0.3s ease;
+    }
     body.en { font-family: 'Poppins', sans-serif; direction: ltr; }
-    
-    header { background: var(--card-bg); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-    .header-container { max-width: 1200px; margin: auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: 900; color: var(--primary); text-decoration: none; }
+
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
     .logo span { color: var(--accent); }
-    
-    .btn { padding: 0.6rem 1.25rem; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: 0.2s; display: inline-block; }
+    .nav-actions { display: flex; gap: 0.75rem; align-items: center; }
+
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-family: inherit;
+      transition: 0.2s;
+    }
     .btn-primary { background: var(--accent); color: #fff; }
     .btn-primary:hover { background: var(--accent-hover); }
     .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
+    .btn-outline:hover { background: var(--border); }
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-success { background: var(--success); color: #fff; }
 
-    .hero { padding: 5rem 1.5rem; text-align: center; background: radial-gradient(circle at center, #EFF6FF 0%, var(--bg-light) 70%); }
-    .hero h1 { font-size: 2.8rem; font-weight: 900; color: var(--primary); margin-bottom: 1rem; }
-    .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 650px; margin: 0 auto 2rem auto; }
-    
+    .hero {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      background: radial-gradient(circle at center, #EFF6FF 0%, var(--bg-light) 70%);
+    }
+    .hero h1 { font-size: 2.5rem; font-weight: 900; color: var(--primary); margin-bottom: 1rem; }
+    .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 2rem auto; }
+
     .section { max-width: 1200px; margin: auto; padding: 4rem 1.5rem; }
-    .section-title { text-align: center; font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 2.5rem; }
-    
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
-    .service-card { background: var(--card-bg); border: 1px solid var(--border); padding: 2rem; border-radius: 12px; text-align: center; }
-    .service-card h3 { margin-bottom: 0.75rem; color: var(--primary); }
-
-    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-    .gallery-item { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--card-bg); }
-    .gallery-item img { width: 100%; height: 260px; object-fit: cover; display: block; }
-    .gallery-item p { padding: 0.75rem; text-align: center; font-weight: 600; }
+    .section-title { text-align: center; font-size: 2rem; font-weight: 700; color: var(--primary); margin-bottom: 2.5rem; }
 
     .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
-    .testi-card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .testi-card {
+      background: var(--card-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      position: relative;
+    }
     .testi-stars { color: var(--gold); margin-bottom: 0.75rem; font-size: 1.1rem; }
     .testi-author { margin-top: 1rem; display: flex; flex-direction: column; }
     .testi-author b { color: var(--primary); }
     .testi-author span { font-size: 0.85rem; color: var(--text-muted); }
 
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
-    .modal-content { background: var(--card-bg); width: 100%; max-width: 500px; border-radius: 12px; padding: 2rem; }
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 1rem; backdrop-filter: blur(4px);
+    }
+    .modal-content {
+      background: var(--card-bg); width: 100%; max-width: 500px;
+      border-radius: 12px; padding: 2rem; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+      position: relative; max-height: 90vh; overflow-y: auto;
+    }
     .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
-    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-    .form-group { margin-bottom: 1.25rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; }
-    .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 0.95rem; }
+    .close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); }
 
-    footer { text-align: center; padding: 2.5rem 1rem; border-top: 1px solid var(--border); background: var(--card-bg); color: var(--text-muted); }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 8px; font-family: inherit;
+    }
+
+    .admin-review-item {
+      border: 1px solid var(--border); padding: 1rem; border-radius: 8px; margin-bottom: 1rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -70,83 +132,47 @@
   <header>
     <div class="header-container">
       <a href="#" class="logo">EB <span>OFFICE</span></a>
-      <button id="langToggle" class="btn btn-outline">English</button>
+      <div class="nav-actions">
+        <button id="langToggle" class="btn btn-outline">English</button>
+        <button id="openAdminBtn" class="btn btn-outline">🔒</button>
+      </div>
     </div>
   </header>
 
   <section class="hero">
-    <h1 id="heroTitle">EB OFFICE للحلول الإدارية والمحاسبية</h1>
-    <p id="heroDesc">نقدم خدمات مهنية متخصصة تشمل إعداد السير الذاتية الاحترافية، الأنظمة المالية والمكتبية، والتصاميم الإعلانية بدقة وكفاءة عالية.</p>
-    <a href="https://wa.me/201000000000" target="_blank" class="btn btn-primary" id="heroCta">تواصل معنا عبر واتساب</a>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title" id="servicesHeading">خدمات المكتب</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <h3>📄 السير الذاتية (CV)</h3>
-        <p>صياغة وتصميم سير ذاتية احترافية تتطابق مع معايير الـ ATS لمختلف التخصصات.</p>
-      </div>
-      <div class="service-card">
-        <h3>📊 الأنظمة المحاسبية</h3>
-        <p>تنظيم الجداول والملفات المالية وإعداد التقارير الدورية بكفاءة وسرعة.</p>
-      </div>
-      <div class="service-card">
-        <h3>🎨 خدمات التصميم</h3>
-        <p>تصميم بوسترات وهويات تجارية وإعلانات تسويقية ملفتة للأنظار.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" style="background: #FFF; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-    <h2 class="section-title" id="workHeading">نماذج من أعمالنا</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="cv-1.jpg" alt="نموذج سيرة ذاتية" onerror="this.src='https://via.placeholder.com/300x400?text=CV+Sample'">
-        <p>نماذج السير الذاتية</p>
-      </div>
-      <div class="gallery-item">
-        <img src="design-1.png" alt="نموذج تصميم" onerror="this.src='https://via.placeholder.com/300x400?text=Design+Sample'">
-        <p>التصاميم الإعلانية</p>
-      </div>
-      <div class="gallery-item">
-        <img src="cv-2.jpg" alt="نموذج عمل" onerror="this.src='https://via.placeholder.com/300x400?text=Professional+Work'">
-        <p>حلول مكتبية متكاملة</p>
-      </div>
-      <div class="gallery-item">
-        <img src="design-2.png" alt="تصميم جرافيك" onerror="this.src='https://via.placeholder.com/300x400?text=Graphic+Work'">
-        <p>تصاميم السوشيال ميديا</p>
-      </div>
-    </div>
+    <h1 id="heroTitle">خدمات أعمال احترافية ومتكاملة</h1>
+    <p id="heroDesc">نساعدك في تحويل وتطوير أعمالك بحلول إلكترونية وحسابية دقيقة.</p>
+    <a href="https://wa.me/201000000000" target="_blank" id="heroBtn" class="btn btn-primary">تواصل عبر واتساب</a>
   </section>
 
   <section class="section">
     <h2 class="section-title" id="testiHeading">آراء عملائنا</h2>
-    <div style="text-align: center; margin-bottom: 2.5rem;">
+    <div style="text-align: center; margin-bottom: 2rem;">
       <button id="openAddReviewBtn" class="btn btn-primary">أضف رأيك الآن</button>
     </div>
     <div class="testi-grid" id="testiContainer">
-      <p style="text-align: center; grid-column: 1/-1; color: var(--text-muted);">جاري تحميل الآراء...</p>
+      <p style="text-align: center; grid-column: 1/-1; color: var(--text-muted);" id="loadingText">جاري تحميل الآراء...</p>
     </div>
   </section>
 
+  <!-- نافذة إضافة تقييم -->
   <div class="modal-overlay" id="addReviewModal">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>أضف تقييمك</h3>
-        <button class="close-btn" onclick="document.getElementById('addReviewModal').style.display='none'">&times;</button>
+        <h3 id="modalAddTitle">أضف تقييمك</h3>
+        <button class="close-btn" onclick="closeModal('addReviewModal')">&times;</button>
       </div>
       <form id="reviewForm">
         <div class="form-group">
-          <label>الاسم بالكامل</label>
-          <input type="text" id="revName" required placeholder="مثال: محمد أحمد">
+          <label id="lblAuthor">الاسم</label>
+          <input type="text" id="revName" required placeholder="مثال: أحمد محمد">
         </div>
         <div class="form-group">
-          <label>الصفة / المسمى الوظيفي</label>
-          <input type="text" id="revRole" required placeholder="مثال: مدير شركة / عميل مستقل">
+          <label id="lblRole">الصفة / النشاط</label>
+          <input type="text" id="revRole" required placeholder="مثال: صاحب متجر">
         </div>
         <div class="form-group">
-          <label>التقييم</label>
+          <label id="lblStars">التقييم</label>
           <select id="revStars">
             <option value="5">★★★★★ (ممتاز)</option>
             <option value="4">★★★★☆ (جيد جداً)</option>
@@ -154,7 +180,7 @@
           </select>
         </div>
         <div class="form-group">
-          <label>رأيك وتجربتك معنا</label>
+          <label id="lblText">رأيك بالتفصيل</label>
           <textarea id="revText" rows="3" required placeholder="اكتب تقييمك هنا..."></textarea>
         </div>
         <button type="submit" id="btnSubmitRev" class="btn btn-primary" style="width: 100%;">إرسال التقييم للمراجعة</button>
@@ -162,15 +188,34 @@
     </div>
   </div>
 
-  <footer>
-    <p>© 2026 EB OFFICE. جميع الحقوق محفوظة.</p>
-  </footer>
+  <!-- لوحة الإدارة -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="adminModalTitle">لوحة مراجعة التقييمات</h3>
+        <button class="close-btn" onclick="closeModal('adminModal')">&times;</button>
+      </div>
+      <div id="adminAuthSection">
+        <div class="form-group">
+          <label>رمز الدخول السري (PIN)</label>
+          <input type="password" id="adminPin" placeholder="أدخل رمز الـ PIN">
+        </div>
+        <button id="adminLoginBtn" class="btn btn-primary" style="width: 100%;">دخول</button>
+      </div>
+      <div id="adminPanelSection" style="display: none;">
+        <h4 style="margin-bottom: 1rem;">التقييمات المسجلة في السحاب:</h4>
+        <div id="adminReviewsList"></div>
+      </div>
+    </div>
+  </div>
 
+  <!-- مكتبات Firebase وتفعيل Firestore -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, query, orderBy } 
+    import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, orderBy } 
       from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
+    // مفاتيح الربط المستخرجة من حسابك
     const firebaseConfig = {
       apiKey: "AIzaSyCOYYorZLlEJ9ctnFrw8I3fGkK_y5yN50",
       authDomain: "eb-office-29420.firebaseapp.com",
@@ -184,39 +229,48 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
+    // تحميل التقييمات المعتمدة لعرضها للزوار
     async function loadPublicReviews() {
       const container = document.getElementById("testiContainer");
       try {
         const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
-        const approved = [];
+        const approvedReviews = [];
+        
         snapshot.forEach(docSnap => {
           const data = docSnap.data();
-          if (data.approved) approved.push(data);
+          if (data.approved) {
+            approvedReviews.push(data);
+          }
         });
 
-        if (approved.length === 0) {
-          container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:var(--text-muted);">لا توجد آراء معتمدة بعد، كن أول من يضيف تقييماً!</p>`;
+        if (approvedReviews.length === 0) {
+          container.innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: var(--text-muted);">لا توجد آراء معتمدة بعد.</p>`;
           return;
         }
 
-        container.innerHTML = approved.map(r => `
+        container.innerHTML = approvedReviews.map(rev => `
           <div class="testi-card">
-            <div class="testi-stars">${"★".repeat(r.stars)}${"☆".repeat(5 - r.stars)}</div>
-            <p>"${r.text}"</p>
-            <div class="testi-author"><b>${r.name}</b><span>${r.role}</span></div>
+            <div class="testi-stars">${"★".repeat(rev.stars)}${"☆".repeat(5 - rev.stars)}</div>
+            <p>"${rev.text}"</p>
+            <div class="testi-author">
+              <b>${rev.name}</b>
+              <span>${rev.role}</span>
+            </div>
           </div>
         `).join('');
-      } catch (e) {
-        container.innerHTML = `<p style="text-align:center; grid-column: 1/-1; color:red;">تعذر جلب الآراء حالياً.</p>`;
+      } catch (err) {
+        container.innerHTML = `<p style="text-align: center; grid-column: 1/-1; color: var(--danger);">حدث خطأ في جلب الآراء من قاعدة البيانات.</p>`;
       }
     }
 
+    // إرسال رأي جديد
     document.getElementById("reviewForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const btn = document.getElementById("btnSubmitRev");
-      btn.disabled = true;
-      btn.innerText = "جاري الإرسال...";
+      const submitBtn = document.getElementById("btnSubmitRev");
+      submitBtn.disabled = true;
+      submitBtn.innerText = "جاري الإرسال...";
+
       try {
         await addDoc(collection(db, "reviews"), {
           name: document.getElementById("revName").value,
@@ -226,25 +280,108 @@
           approved: false,
           createdAt: Date.now()
         });
-        alert("تم إرسال تقييمك بنجاح! سيتم نشره بعد المراجعة.");
+
+        alert("تم إرسال تقييمك بنجاح وسيظهر فور اعتماده من الإدارة!");
         document.getElementById("reviewForm").reset();
-        document.getElementById("addReviewModal").style.display = "none";
+        window.closeModal('addReviewModal');
       } catch (err) {
-        alert("حدث خطأ أثناء الإرسال، تأكد من اتصال الإنترنت أو قواعد Firebase.");
+        alert("تعذر الإرسال: " + err.message);
       } finally {
-        btn.disabled = false;
-        btn.innerText = "إرسال التقييم للمراجعة";
+        submitBtn.disabled = false;
+        submitBtn.innerText = "إرسال التقييم للمراجعة";
       }
     });
+
+    // لوحة الأدمن: التحقق من PIN
+    document.getElementById("adminLoginBtn").addEventListener("click", () => {
+      const pin = document.getElementById("adminPin").value;
+      if (pin === "1234") {
+        document.getElementById("adminAuthSection").style.display = "none";
+        document.getElementById("adminPanelSection").style.display = "block";
+        loadAdminReviews();
+      } else {
+        alert("رمز PIN غير صحيح!");
+      }
+    });
+
+    // جلب كل التقييمات للأدمن
+    async function loadAdminReviews() {
+      const list = document.getElementById("adminReviewsList");
+      list.innerHTML = "<p>جاري تحميل المراجعات...</p>";
+
+      try {
+        const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+        
+        if (snapshot.empty) {
+          list.innerHTML = "<p>لا توجد تقييمات مسجلة.</p>";
+          return;
+        }
+
+        list.innerHTML = "";
+        snapshot.forEach(docSnap => {
+          const rev = docSnap.data();
+          const id = docSnap.id;
+
+          const item = document.createElement("div");
+          item.className = "admin-review-item";
+          item.innerHTML = `
+            <div>
+              <b>${rev.name}</b> (${rev.role}) - ${"★".repeat(rev.stars)}<br>
+              <small>${rev.text}</small><br>
+              <span style="font-size:0.8rem; color:${rev.approved ? 'var(--success)' : 'var(--gold)'};">
+                ${rev.approved ? '● معتمد ومنشور' : '● معلق بانتظار الموافقة'}
+              </span>
+            </div>
+            <div style="display:flex; gap:0.5rem;">
+              ${!rev.approved ? `<button class="btn btn-success" data-action="approve" data-id="${id}">موافقة</button>` : ''}
+              <button class="btn btn-danger" data-action="delete" data-id="${id}">حذف</button>
+            </div>
+          `;
+          list.appendChild(item);
+        });
+
+        // إضافة مستمعي الأحداث للأزرار
+        list.querySelectorAll("button").forEach(btn => {
+          btn.addEventListener("click", async (e) => {
+            const action = e.target.getAttribute("data-action");
+            const docId = e.target.getAttribute("data-id");
+
+            if (action === "approve") {
+              await updateDoc(doc(db, "reviews", docId), { approved: true });
+              loadAdminReviews();
+              loadPublicReviews();
+            } else if (action === "delete") {
+              if (confirm("هل أنت متأكد من حذف هذا التقييم نهائياً؟")) {
+                await deleteDoc(doc(db, "reviews", docId));
+                loadAdminReviews();
+                loadPublicReviews();
+              }
+            }
+          });
+        });
+
+      } catch (err) {
+        list.innerHTML = "<p style='color:red;'>خطأ في تحميل البيانات.</p>";
+      }
+    }
 
     loadPublicReviews();
   </script>
 
   <script>
-    document.getElementById("openAddReviewBtn").onclick = () => {
-      document.getElementById("addReviewModal").style.display = "flex";
+    // النوافذ المنبثقة
+    window.closeModal = function(id) {
+      document.getElementById(id).style.display = "none";
     };
+    document.getElementById("openAddReviewBtn").addEventListener("click", () => {
+      document.getElementById("addReviewModal").style.display = "flex";
+    });
+    document.getElementById("openAdminBtn").addEventListener("click", () => {
+      document.getElementById("adminModal").style.display = "flex";
+    });
 
+    // تبديل اللغة (عربي / إنجليزي)
     const langBtn = document.getElementById("langToggle");
     let isEn = false;
     langBtn.addEventListener("click", () => {
@@ -254,10 +391,9 @@
       document.documentElement.lang = isEn ? "en" : "ar";
       langBtn.innerText = isEn ? "العربية" : "English";
 
-      document.getElementById("heroTitle").innerText = isEn ? "EB OFFICE | Professional Business & Office Solutions" : "EB OFFICE للحلول الإدارية والمحاسبية";
-      document.getElementById("heroDesc").innerText = isEn ? "Delivering high-standard CV writing, financial reporting, and graphic design services." : "نقدم خدمات مهنية متخصصة تشمل إعداد السير الذاتية الاحترافية، الأنظمة المالية والمكتبية، والتصاميم الإعلانية بدقة وكفاءة عالية.";
-      document.getElementById("servicesHeading").innerText = isEn ? "Our Services" : "خدمات المكتب";
-      document.getElementById("workHeading").innerText = isEn ? "Our Portfolio" : "نماذج من أعمالنا";
+      document.getElementById("heroTitle").innerText = isEn ? "Professional Business Solutions" : "خدمات أعمال احترافية ومتكاملة";
+      document.getElementById("heroDesc").innerText = isEn ? "Helping you grow with precise electronic and financial services." : "نساعدك في تحويل وتطوير أعمالك بحلول إلكترونية وحسابية دقيقة.";
+      document.getElementById("heroBtn").innerText = isEn ? "Contact via WhatsApp" : "تواصل عبر واتساب";
       document.getElementById("testiHeading").innerText = isEn ? "Client Testimonials" : "آراء عملائنا";
       document.getElementById("openAddReviewBtn").innerText = isEn ? "Add Your Review" : "أضف رأيك الآن";
     });
