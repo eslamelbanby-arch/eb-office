@@ -268,7 +268,6 @@
       </div>
 
       <div class="port-categories">
-        
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
@@ -356,7 +355,6 @@
             <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20وبرمجة%20موقع%20إلكتروني" target="_blank" class="btn btn-gold" style="width:min(320px,100%);margin:auto;font-size:13.5px;padding:11px 0" data-i18n="btn_req_web">طلب تصميم وبرمجة موقع ↗</a>
           </div>
         </article>
-
       </div>
     </div>
   </section>
@@ -389,21 +387,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p>"شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام."</p>
-          <div class="testi-author"><b>محمود عثمان</b><span>صاحب محل ملابس - طنطا</span></div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p>"الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة."</p>
-          <div class="testi-author"><b>أحمد البدري</b><span>محاسب مالي</span></div>
-        </div>
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p>"تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل."</p>
-          <div class="testi-author"><b>م/ طارق خليل</b><span>مدير شركة استيراد</span></div>
-        </div>
+        <!-- سيتم جلب الآراء من قاعدة البيانات السحابية وعرضها هنا -->
       </div>
 
       <div class="review-action-box">
@@ -430,7 +414,7 @@
             <textarea id="revText" required placeholder="اكتب رأيك بكل صراحة..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:70px"></textarea>
           </div>
           <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center">
-            <button class="btn btn-gold" type="submit" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
+            <button class="btn btn-gold" type="submit" id="btnSubmitReview" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
             <span style="font-size:11.5px;color:var(--muted)" data-i18n="rf_hint">يخضع التقييم لموافقة الإدارة قبل النشر.</span>
           </div>
         </form>
@@ -438,7 +422,7 @@
     </div>
   </section>
 
-  <!-- لوحة الإدارة المخفية (إدارة المعلقة والمنشورة) -->
+  <!-- لوحة الإدارة المخفية السحابية -->
   <div class="admin-panel" id="adminPanel">
     <div class="admin-content">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
@@ -446,11 +430,9 @@
         <button type="button" onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
       </div>
       
-      <!-- قسم الآراء بانتظار الاعتماد -->
       <h4 style="font-size:14px;color:var(--gold);margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المعلقة (بانتظار الموافقة):</h4>
       <div id="pendingReviewsList" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px"></div>
 
-      <!-- قسم الآراء المنشورة في الموقع بالفعل -->
       <h4 style="font-size:14px;color:#111;margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المنشورة حالياً بالموقع:</h4>
       <div id="approvedReviewsList" style="display:flex;flex-direction:column;gap:10px"></div>
     </div>
@@ -524,6 +506,182 @@
     <div>+201207641934 · eslam.elbanby@gmail.com</div>
   </div>
 </footer>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, orderBy } 
+    from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCOYYorZLlEJ9ctnFrw8I3fGkK_y5yN50",
+    authDomain: "eb-office-29420.firebaseapp.com",
+    projectId: "eb-office-29420",
+    storageBucket: "eb-office-29420.firebasestorage.app",
+    messagingSenderId: "390372927142",
+    appId: "1:390372927142:web:bfe321db80f2d70cb99478",
+    measurementId: "G-Z4FWKVPZ24"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // الآراء الافتراضية
+  const defaultReviews = [
+    { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
+    { name: "أحمد البدري", role: "محاسب مالي", text: "الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة." },
+    { name: "م/ طارق خليل", role: "مدير شركة استيراد", text: "تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل." }
+  ];
+
+  // جلب الآراء المنشورة وعرضها للزوار من السيرفر
+  window.loadPublicReviews = async function() {
+    const container = document.getElementById("testiContainer");
+    container.innerHTML = "";
+    
+    // عرض الافتراضية أولاً
+    defaultReviews.forEach(r => {
+      const card = document.createElement("div");
+      card.className = "testi-card";
+      card.innerHTML = `
+        <div class="testi-stars">★★★★★</div>
+        <p>"${r.text}"</p>
+        <div class="testi-author"><b>${r.name}</b><span>${r.role}</span></div>
+      `;
+      container.appendChild(card);
+    });
+
+    try {
+      const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      snapshot.forEach(docSnap => {
+        const d = docSnap.data();
+        if (d.approved) {
+          const card = document.createElement("div");
+          card.className = "testi-card";
+          card.innerHTML = `
+            <div class="testi-stars">★★★★★</div>
+            <p>"${d.text}"</p>
+            <div class="testi-author"><b>${d.name}</b><span>${d.role}</span></div>
+          `;
+          container.appendChild(card);
+        }
+      });
+    } catch(e) {
+      console.error("Firebase fetch error:", e);
+    }
+  };
+
+  // إرسال الرأي الجديد إلى Firebase
+  document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById("btnSubmitReview");
+    btn.disabled = true;
+    btn.innerText = "...";
+
+    const name = document.getElementById("revName").value.trim();
+    const role = document.getElementById("revJob").value.trim();
+    const text = document.getElementById("revText").value.trim();
+
+    try {
+      await addDoc(collection(db, "reviews"), {
+        name,
+        role,
+        text,
+        approved: false,
+        createdAt: Date.now()
+      });
+      alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك بنجاح وسينشر فور اعتماده من الإدارة.' : 'Thank you! Your review was received and will be published after moderation.');
+      this.reset();
+      document.getElementById("reviewFormWrap").style.display = "none";
+    } catch(err) {
+      alert("حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت أو قواعد Firebase.");
+    } finally {
+      btn.disabled = false;
+      btn.innerText = translations[currentLang].rf_submit;
+    }
+  });
+
+  // إدارة الآراء (المعلقة والمنشورة)
+  window.renderAdminLists = async function() {
+    const pendingList = document.getElementById("pendingReviewsList");
+    const approvedList = document.getElementById("approvedReviewsList");
+    pendingList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
+    approvedList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
+
+    try {
+      const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      
+      pendingList.innerHTML = "";
+      approvedList.innerHTML = "";
+
+      let pendingCount = 0;
+      let approvedCount = 0;
+
+      snapshot.forEach(docSnap => {
+        const rev = docSnap.data();
+        const id = docSnap.id;
+
+        if (!rev.approved) {
+          pendingCount++;
+          const item = document.createElement("div");
+          item.style.cssText = "border:1px solid #ffeeba;padding:12px;border-radius:8px;background:#fffdf5";
+          item.innerHTML = `
+            <strong>${rev.name}</strong> (${rev.role})
+            <p style="font-size:13px;color:#444;margin:6px 0">"${rev.text}"</p>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="approveReview('${id}')">موافقة ونشر ✅</button>
+              <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
+            </div>
+          `;
+          pendingList.appendChild(item);
+        } else {
+          approvedCount++;
+          const item = document.createElement("div");
+          item.style.cssText = "border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:10px";
+          item.innerHTML = `
+            <div style="flex-grow:1">
+              <strong>${rev.name}</strong> <small style="color:var(--muted)">(${rev.role})</small>
+              <p style="font-size:13px;color:#444;margin-top:4px">"${rev.text}"</p>
+            </div>
+            <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteReview('${id}')">حذف ✕</button>
+          `;
+          approvedList.appendChild(item);
+        }
+      });
+
+      if (pendingCount === 0) pendingList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء معلقة بانتظار الاعتماد.</p>";
+      if (approvedCount === 0) approvedList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء إضافية منشورة بعد.</p>";
+
+    } catch(err) {
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
+      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
+    }
+  };
+
+  window.approveReview = async function(id) {
+    try {
+      await updateDoc(doc(db, "reviews", id), { approved: true });
+      renderAdminLists();
+      loadPublicReviews();
+    } catch(e) {
+      alert("حدث خطأ أثناء الاعتماد.");
+    }
+  };
+
+  window.deleteReview = async function(id) {
+    if(confirm("هل تريد حذف هذا التقييم نهائياً؟")) {
+      try {
+        await deleteDoc(doc(db, "reviews", id));
+        renderAdminLists();
+        loadPublicReviews();
+      } catch(e) {
+        alert("حدث خطأ أثناء الحذف.");
+      }
+    }
+  };
+
+  loadPublicReviews();
+</script>
 
 <script>
   const translations = {
@@ -667,9 +825,7 @@
       carousel.addEventListener('touchend', startScroll);
     });
 
-    renderApprovedReviews();
-
-    // طريقة الدخول السرية: الضغط 5 مرات متتالية وسريعة على اللوجو
+    // 5 ضغطات سريعة على اللوجو لفتح الإدارة
     let clickCount = 0;
     let clickTimer = null;
     const trigger = document.getElementById('adminSecretTrigger');
@@ -697,44 +853,6 @@
     if(wrap.style.display === 'block') wrap.scrollIntoView({behavior:'smooth'});
   }
 
-  const pendingKey = 'eb_pending_reviews';
-  const approvedKey = 'eb_approved_reviews';
-
-  document.getElementById('addReviewForm')?.addEventListener('submit', function(e){
-    e.preventDefault();
-    const name = document.getElementById('revName').value.trim();
-    const job = document.getElementById('revJob').value.trim();
-    const text = document.getElementById('revText').value.trim();
-
-    const pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
-    pending.push({ id: Date.now(), name, job, text });
-    localStorage.setItem(pendingKey, JSON.stringify(pending));
-
-    alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك وسينشر فور اعتماده.' : 'Thank you! Your review was submitted and will appear after moderation.');
-    this.reset();
-    document.getElementById('reviewFormWrap').style.display = 'none';
-  });
-
-  function renderApprovedReviews() {
-    const approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
-    const container = document.getElementById('testiContainer');
-    
-    // إزالة التعليقات المضافة مسبقاً لمنع التكرار عند إعادة الرسم
-    const dynamicCards = container.querySelectorAll('.dynamic-review-card');
-    dynamicCards.forEach(c => c.remove());
-
-    approved.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'testi-card dynamic-review-card';
-      card.innerHTML = `
-        <div class="testi-stars">★★★★★</div>
-        <p>"${item.text}"</p>
-        <div class="testi-author"><b>${item.name}</b><span>${item.job}</span></div>
-      `;
-      container.appendChild(card);
-    });
-  }
-
   function openAdminPanel() {
     const pin = prompt(currentLang === 'ar' ? 'أدخل الرمز السري للإدارة:' : 'Enter Admin Password:');
     if (pin !== 'Eslam1712199678') {
@@ -742,93 +860,12 @@
       return;
     }
     document.getElementById('adminPanel').style.display = 'grid';
-    renderAdminLists();
+    window.renderAdminLists();
   }
 
   function closeAdminPanel() {
     document.getElementById('adminPanel').style.display = 'none';
   }
-
-  function renderAdminLists() {
-    // 1. عرض الآراء المعلقة
-    const pendingList = document.getElementById('pendingReviewsList');
-    const pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
-    pendingList.innerHTML = '';
-
-    if (pending.length === 0) {
-      pendingList.innerHTML = '<p style="font-size:12.5px;color:#888;padding:8px">لا توجد آراء جديدة معلقة.</p>';
-    } else {
-      pending.forEach(rev => {
-        const item = document.createElement('div');
-        item.style.cssText = 'border:1px solid #ffeeba;padding:12px;border-radius:8px;background:#fffdf5';
-        item.innerHTML = `
-          <strong>${rev.name}</strong> (${rev.job})
-          <p style="font-size:13px;color:#444;margin:6px 0">"${rev.text}"</p>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="approveReview(${rev.id})">موافقة ونشر ✅</button>
-            <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="rejectPendingReview(${rev.id})">حذف ✕</button>
-          </div>
-        `;
-        pendingList.appendChild(item);
-      });
-    }
-
-    // 2. عرض الآراء المنشورة مسبقاً لإمكانية حذف أي منها
-    const approvedList = document.getElementById('approvedReviewsList');
-    const approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
-    approvedList.innerHTML = '';
-
-    if (approved.length === 0) {
-      approvedList.innerHTML = '<p style="font-size:12.5px;color:#888;padding:8px">لا توجد آراء منشورة بعد.</p>';
-    } else {
-      approved.forEach(rev => {
-        const item = document.createElement('div');
-        item.style.cssText = 'border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:10px';
-        item.innerHTML = `
-          <div style="flex-grow:1">
-            <strong>${rev.name}</strong> <small style="color:var(--muted)">(${rev.job})</small>
-            <p style="font-size:13px;color:#444;margin-top:4px">"${rev.text}"</p>
-          </div>
-          <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteApprovedReview(${rev.id})">حذف ✕</button>
-        `;
-        approvedList.appendChild(item);
-      });
-    }
-  }
-
-  // موافقة على رأي معلق ونشره
-  window.approveReview = function(id) {
-    let pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
-    let approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
-    const target = pending.find(r => r.id === id);
-    if(target){
-      approved.push(target);
-      pending = pending.filter(r => r.id !== id);
-      localStorage.setItem(approvedKey, JSON.stringify(approved));
-      localStorage.setItem(pendingKey, JSON.stringify(pending));
-      renderAdminLists();
-      renderApprovedReviews();
-    }
-  };
-
-  // حذف رأي من قائمة المعلق
-  window.rejectPendingReview = function(id) {
-    let pending = JSON.parse(localStorage.getItem(pendingKey) || '[]');
-    pending = pending.filter(r => r.id !== id);
-    localStorage.setItem(pendingKey, JSON.stringify(pending));
-    renderAdminLists();
-  };
-
-  // حذف رأي منشور بالفعل في الموقع
-  window.deleteApprovedReview = function(id) {
-    if(confirm('هل تريد حذف هذا التقييم المنشور من الموقع نهائياً؟')) {
-      let approved = JSON.parse(localStorage.getItem(approvedKey) || '[]');
-      approved = approved.filter(r => r.id !== id);
-      localStorage.setItem(approvedKey, JSON.stringify(approved));
-      renderAdminLists();
-      renderApprovedReviews();
-    }
-  };
 
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
