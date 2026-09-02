@@ -1,3 +1,5 @@
+الكود النهائي 💪🏻
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -5,14 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EB OFFICE | Business & Digital Solutions</title>
   
-  <!-- أيقونة الموقع (Favicon) وتوسيع المعاينة التلقائية للرابط -->
-  <link rel="icon" type="image/png" href="logo.png">
-  <meta property="og:title" content="EB OFFICE | Business & Digital Solutions">
-  <meta property="og:description" content="نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.">
-  <meta property="og:image" content="https://eslamelbanby-arch.github.io/eboffice/logo.png">
-  <meta property="og:url" content="https://eslamelbanby-arch.github.io/eboffice/">
-  <meta property="og:type" content="website">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -120,14 +114,22 @@
     .port-category-body h3 { font-size: 17.5px; font-weight: 800; color: #111; margin-bottom: 6px; }
     .port-category-body p { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; flex-grow: 1; }
 
-    /* تصميم قسم التقييمات الأفقي الجديد الموفر للمساحة */
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
+    .about-box { background: #111; color: #fff; border-radius: 16px; padding: 35px; text-align: center; border: 1px solid rgba(212,175,55,.25); }
+    .about-box .eb { font-size: 64px; font-weight: 900; color: #fff; line-height: 1; }
+    .about-box .eb b { color: var(--gold); }
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .feature { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fafafa; }
+    .feature b { display: block; color: #222; font-size: 14px; margin-bottom: 2px; }
+    .feature span { font-size: 12px; color: var(--muted); }
+
     .testimonials { background: var(--soft); }
-    .testi-carousel-wrapper { position: relative; max-width: 800px; margin: auto; }
-    .testi-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); border-top: 4px solid var(--gold); width: 100%; height: 100%; }
-    .testi-stars { color: var(--gold); font-size: 16px; margin-bottom: 10px; }
-    .testi-card p { color: #222; font-size: 14.5px; margin-bottom: 16px; font-weight: 600; line-height: 1.7; }
-    .testi-author b { display: block; font-size: 14px; color: #111; font-weight: 800; }
-    .testi-author span { font-size: 12px; color: var(--muted); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .testi-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
+    .testi-stars { color: var(--gold); font-size: 15px; margin-bottom: 8px; }
+    .testi-card p { color: #333; font-size: 13.5px; margin-bottom: 12px; font-weight: 600; line-height: 1.6; }
+    .testi-author b { display: block; font-size: 13px; color: #111; }
+    .testi-author span { font-size: 11.5px; color: var(--muted); }
 
     .review-action-box { margin-top: 35px; background: #fff; border: 1px dashed var(--gold); padding: 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
@@ -162,7 +164,7 @@
       .hero-grid { grid-template-columns: 1fr; text-align: center; }
       .actions { justify-content: center; }
       .services-grid, .port-categories, .testi-grid, .about-grid { grid-template-columns: 1fr; }
-      .carousel-container { height: 260px; }
+      .carousel-container { height: 280px; }
       .service-form { grid-template-columns: 1fr; padding: 18px; }
       .service-form .full { grid-column: auto; }
       .features { grid-template-columns: 1fr; }
@@ -384,19 +386,10 @@
       <div class="section-head">
         <div class="eyebrow" data-i18n="testi_sub">آراء العملاء</div>
         <h2 data-i18n="testi_title">تجارب حقيقية لعملاء تعاملوا معنا</h2>
-        <p style="color:var(--muted);font-size:13.5px">يمكنك سحب الكروت يميناً ويساراً ⟷ لقراءة باقي آراء العملاء بكل سهولة.</p>
       </div>
 
-      <!-- قسم التقييمات الأفقي الجديد (Slider) -->
-      <div class="testi-carousel-wrapper">
-        <div class="carousel-container" data-autoplay="true" style="height: 220px; border-radius: 16px; background: transparent;">
-          <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
-          <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
-          <div class="carousel-track" id="testiContainer">
-            <!-- سيتم جلب وعرض الآراء هنا كشرائح أفقية متجاوبة -->
-          </div>
-          <div class="swipe-hint" data-i18n="swipe_hint">اسحب للتنقل ⟷</div>
-        </div>
+      <div class="testi-grid" id="testiContainer">
+        <!-- سيتم جلب الآراء من قاعدة البيانات السحابية وعرضها هنا -->
       </div>
 
       <div class="review-action-box">
@@ -534,27 +527,28 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  // الآراء الافتراضية
   const defaultReviews = [
     { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
     { name: "أحمد البدري", role: "محاسب مالي", text: "الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة." },
     { name: "م/ طارق خليل", role: "مدير شركة استيراد", text: "تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل." }
   ];
 
+  // جلب الآراء المنشورة وعرضها للزوار من السيرفر
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
     container.innerHTML = "";
     
+    // عرض الافتراضية أولاً
     defaultReviews.forEach(r => {
-      const slide = document.createElement("div");
-      slide.className = "carousel-slide";
-      slide.innerHTML = `
-        <div class="testi-card">
-          <div class="testi-stars">★★★★★</div>
-          <p>"${r.text}"</p>
-          <div class="testi-author"><b>${r.name}</b><span>${r.role}</span></div>
-        </div>
+      const card = document.createElement("div");
+      card.className = "testi-card";
+      card.innerHTML = `
+        <div class="testi-stars">★★★★★</div>
+        <p>"${r.text}"</p>
+        <div class="testi-author"><b>${r.name}</b><span>${r.role}</span></div>
       `;
-      container.appendChild(slide);
+      container.appendChild(card);
     });
 
     try {
@@ -563,16 +557,14 @@
       snapshot.forEach(docSnap => {
         const d = docSnap.data();
         if (d.approved) {
-          const slide = document.createElement("div");
-          slide.className = "carousel-slide";
-          slide.innerHTML = `
-            <div class="testi-card">
-              <div class="testi-stars">★★★★★</div>
-              <p>"${d.text}"</p>
-              <div class="testi-author"><b>${d.name}</b><span>${d.role}</span></div>
-            </div>
+          const card = document.createElement("div");
+          card.className = "testi-card";
+          card.innerHTML = `
+            <div class="testi-stars">★★★★★</div>
+            <p>"${d.text}"</p>
+            <div class="testi-author"><b>${d.name}</b><span>${d.role}</span></div>
           `;
-          container.appendChild(slide);
+          container.appendChild(card);
         }
       });
     } catch(e) {
@@ -580,6 +572,7 @@
     }
   };
 
+  // إرسال الرأي الجديد إلى Firebase
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
@@ -609,6 +602,7 @@
     }
   });
 
+  // إدارة الآراء (المعلقة والمنشورة)
   window.renderAdminLists = async function() {
     const pendingList = document.getElementById("pendingReviewsList");
     const approvedList = document.getElementById("approvedReviewsList");
@@ -710,7 +704,7 @@
       s6_t: "AI & Digital Solutions", s6_d: "دمج أدوات الذكاء الاصطناعي لأتمتة المهام وتوفير الوقت وزيادة الإنتاجية.",
       port_sub: "معرض الأعمال المنفذة", port_title: "نماذج من مشاريعنا حسب التخصص",
       port_desc: "تتحرك الصور تلقائياً ويمكنك السحب يميناً ويساراً ⟷ لمعاينة كافة النماذج كاملة.",
-      swipe_hint: "اسحب للتنقل ⟷",
+      swipe_hint: "اسحب للصور ⟷",
       p1_t: "أنظمة المحاسبة وشيتات Excel و Dashboard", p1_d: "لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة النقدية والشيكات بدقة.", btn_req_excel: "طلب نظام محاسبي ↗",
       p2_t: "السير الذاتية الاحترافية (ATS) والمستندات", p2_d: "تصميم وتنسيق سيرة ذاتية مهيكلة بدقة لاجتياز الفرز الإلكتروني (ATS) وزيادة فرص القبول، وفواتير وسندات مالية رسمية.", btn_req_cv: "طلب تصميم CV / مستندات ↗",
       p3_t: "الهوية البصرية وتصاميم الشعارات والبراندينج", p3_d: "تصميم شعارات مبتكرة، كروت عمل فاخرة، موك آب الشاشات، وهوية بصرية متكاملة تعكس قوة علامتك التجارية في السوق.", btn_req_design: "طلب تصميم هوية / براند ↗",
@@ -746,7 +740,7 @@
       s6_t: "AI & Digital Solutions", s6_d: "Workflow automation using modern AI tools to boost your daily output.",
       port_sub: "Featured Projects", port_title: "Showcase of Our Works",
       port_desc: "Sliders scroll automatically; swipe left or right ⟷ to browse all projects.",
-      swipe_hint: "Swipe to navigate ⟷",
+      swipe_hint: "Swipe for more ⟷",
       p1_t: "Accounting Systems & Excel Dashboards", p1_d: "Interactive KPIs, automated income/expense sheets, checkbooks & cash tracking.", btn_req_excel: "Request Accounting Sheet ↗",
       p2_t: "ATS Resumes & Corporate Documents", p2_d: "Structured CVs tailored to pass ATS screeners, plus clean bilingual invoices.", btn_req_cv: "Order ATS Resume ↗",
       p3_t: "Visual Identity, Logos & Branding", p3_d: "Distinctive brand identities, premium business cards, and marketing mockups.", btn_req_design: "Order Visual Branding ↗",
@@ -821,7 +815,7 @@
             const move = isRtl ? -track.clientWidth : track.clientWidth;
             track.scrollBy({ left: move, behavior: 'smooth' });
           }
-        }, 4000);
+        }, 3500);
       }
 
       function stopScroll() { clearInterval(autoPlayTimer); }
@@ -833,6 +827,7 @@
       carousel.addEventListener('touchend', startScroll);
     });
 
+    // 5 ضغطات سريعة على اللوجو لفتح الإدارة
     let clickCount = 0;
     let clickTimer = null;
     const trigger = document.getElementById('adminSecretTrigger');
