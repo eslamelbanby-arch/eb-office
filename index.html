@@ -95,6 +95,9 @@
     .carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; position: relative; background: #141414; }
     .carousel-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; padding: 8px; display: block; }
     
+    .single-banner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #141414; }
+    .single-banner img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; padding: 8px; display: block; }
+
     .slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(9,9,9,0.85); color: var(--gold); border: 1px solid var(--gold); display: grid; place-items: center; cursor: pointer; z-index: 5; transition: .2s; font-size: 15px; user-select: none; }
     .slide-arrow:hover { background: var(--gold); color: #111; }
     .slide-arrow.prev { right: 10px; }
@@ -267,7 +270,6 @@
 
       <div class="port-categories">
         
-        <!-- 1. أنظمة المحاسبة والداشبورد -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
@@ -288,7 +290,6 @@
           </div>
         </article>
 
-        <!-- 2. السير الذاتية والمستندات -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
@@ -308,7 +309,6 @@
           </div>
         </article>
 
-        <!-- 3. الهوية البصرية والتصميم -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
@@ -326,7 +326,6 @@
           </div>
         </article>
 
-        <!-- 4. السوشيال ميديا -->
         <article class="port-category-card">
           <div class="carousel-container" data-autoplay="true">
             <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
@@ -346,18 +345,11 @@
           </div>
         </article>
 
-        <!-- 5. تطوير المواقع -->
         <article class="port-category-card" style="grid-column:1/-1">
-          <div class="carousel-container" data-autoplay="true">
-            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)">❮</button>
-            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)">❯</button>
-            <div class="carousel-track">
-              <div class="carousel-slide"><img src="web-1.jpg" alt="تصميم وتطوير مواقع 1"></div>
-              <div class="carousel-slide"><img src="web-2.jpg" alt="تصميم وتطوير مواقع 2"></div>
-              <div class="carousel-slide"><img src="web-3.jpg" alt="تصميم وتطوير مواقع 3"></div>
-              <div class="carousel-slide"><img src="web-4.jpg" alt="تصميم وتطوير مواقع 4"></div>
+          <div class="carousel-container" style="display:flex;align-items:center;justify-content:center">
+            <div class="single-banner">
+              <img src="web-1.jpg" alt="تصميم وتطوير وبرمجة المواقع">
             </div>
-            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
           </div>
           <div class="port-category-body">
             <h3 data-i18n="p5_t">تطوير المواقع وصفحات الهبوط (Websites)</h3>
@@ -647,10 +639,11 @@
   document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(currentLang);
 
-    // التحريك التلقائي للسلايدر
+    // التحريك التلقائي للسلايدر للأقسام التي تحتوي على تراك
     const autoCarousels = document.querySelectorAll('.carousel-container[data-autoplay="true"]');
     autoCarousels.forEach(carousel => {
       const track = carousel.querySelector('.carousel-track');
+      if (!track) return;
       let autoPlayTimer;
 
       function startScroll() {
