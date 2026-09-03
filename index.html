@@ -428,7 +428,7 @@
             <label style="font-size:12.5px;font-weight:700" data-i18n="rf_text">رأيك وتجربتك في الشغل معنا</label>
             <textarea id="revText" required placeholder="اكتب رأيك بكل صراحة..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:70px"></textarea>
           </div>
-          <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center">
+          <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px">
             <button class="btn btn-gold" type="submit" id="btnSubmitReview" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
             <span style="font-size:11.5px;color:var(--muted)" data-i18n="rf_hint">يخضع التقييم لموافقة الإدارة قبل النشر.</span>
           </div>
@@ -618,15 +618,13 @@
     }
   };
 
-  // دالة الإرسال مع كشف الخطأ الفوري لضمان معرفة سبب المشكلة
+  // معالجة نموذج إرسال التقييم مع حماية كاملة ضد التعليق وإظهار حالة الإرسال
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
-    if (!btn || btn.disabled) return;
-    
-    btn.disabled = true;
     const originalText = btn.innerText;
-    btn.innerText = 'جاري الإرسال...';
+    btn.disabled = true;
+    btn.innerText = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
 
     const name = document.getElementById("revName").value.trim();
     const role = document.getElementById("revJob").value.trim();
@@ -634,18 +632,18 @@
 
     try {
       await addDoc(collection(db, "reviews"), {
-        name: name,
-        role: role,
-        text: text,
+        name,
+        role,
+        text,
         approved: false,
         createdAt: Date.now()
       });
-      alert('تم إرسال التقييم بنجاح!');
+      alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك بنجاح وسينشر فور اعتماده من الإدارة.' : 'Thank you! Your review was received and will be published after moderation.');
       this.reset();
       document.getElementById("reviewFormWrap").style.display = "none";
     } catch(err) {
-      alert('خطأ فايربيس: ' + err.message);
       console.error(err);
+      alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت أو قواعد Firebase.' : 'Error sending review. Check your connection or rules.');
     } finally {
       btn.disabled = false;
       btn.innerText = originalText;
@@ -706,8 +704,8 @@
       if (approvedCount === 0) approvedList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء إضافية منشورة بعد.</p>";
 
     } catch(err) {
-      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
-      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر (تأكد من تسجيل الدخول).</p>";
+      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر (تأكد من تسجيل الدخول).</p>";
     }
   };
 
@@ -756,25 +754,19 @@
     const errorBox = document.getElementById('loginError');
     const btn = document.getElementById('loginSubmitBtn');
     if (errorBox) errorBox.textContent = '';
-    if (btn) {
-      btn.disabled = true;
-      btn.textContent = '...';
-    }
+    btn.disabled = true;
+    btn.textContent = '...';
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      const overlay = document.getElementById('loginOverlay');
-      if (overlay) overlay.style.display = 'none';
-      const panel = document.getElementById('adminPanel');
-      if (panel) panel.style.display = 'grid';
+      document.getElementById('loginOverlay').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
-      if (errorBox) errorBox.textContent = 'بيانات الدخول غير صحيحة!';
+      if (errorBox) errorBox.textContent = currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!';
     } finally {
-      if (btn) {
-        btn.disabled = false;
-        btn.textContent = 'LOGIN';
-      }
+      btn.disabled = false;
+      btn.textContent = 'LOGIN';
     }
   });
 
@@ -952,7 +944,6 @@
 
   function toggleReviewForm() {
     const wrap = document.getElementById('reviewFormWrap');
-    if (!wrap) return;
     wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
     if(wrap.style.display === 'block') wrap.scrollIntoView({behavior:'smooth'});
   }
