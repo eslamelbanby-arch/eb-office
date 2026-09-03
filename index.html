@@ -618,7 +618,7 @@
     }
   };
 
-  // دالة الإرسال المُحصنة لمنع أي تعليق وإظهار الأخطاء واضحة إن وجدت
+  // دالة الإرسال مع كشف الخطأ الفوري لضمان معرفة سبب المشكلة
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
@@ -626,22 +626,11 @@
     
     btn.disabled = true;
     const originalText = btn.innerText;
-    btn.innerText = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
+    btn.innerText = 'جاري الإرسال...';
 
-    const nameInput = document.getElementById("revName");
-    const jobInput = document.getElementById("revJob");
-    const textInput = document.getElementById("revText");
-
-    if (!nameInput || !jobInput || !textInput) {
-      alert("خطأ: حقول الفورم غير مطابقة!");
-      btn.disabled = false;
-      btn.innerText = originalText;
-      return;
-    }
-
-    const name = nameInput.value.trim();
-    const role = jobInput.value.trim();
-    const text = textInput.value.trim();
+    const name = document.getElementById("revName").value.trim();
+    const role = document.getElementById("revJob").value.trim();
+    const text = document.getElementById("revText").value.trim();
 
     try {
       await addDoc(collection(db, "reviews"), {
@@ -651,12 +640,12 @@
         approved: false,
         createdAt: Date.now()
       });
-      alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك بنجاح وسينشر فور اعتماده من الإدارة.' : 'Thank you! Your review was received and will be published after moderation.');
+      alert('تم إرسال التقييم بنجاح!');
       this.reset();
       document.getElementById("reviewFormWrap").style.display = "none";
     } catch(err) {
-      console.error("Review submission error:", err);
-      alert((currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال: ' : 'Error sending: ') + err.message);
+      alert('خطأ فايربيس: ' + err.message);
+      console.error(err);
     } finally {
       btn.disabled = false;
       btn.innerText = originalText;
@@ -780,7 +769,7 @@
       if (panel) panel.style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
-      if (errorBox) errorBox.textContent = currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!';
+      if (errorBox) errorBox.textContent = 'بيانات الدخول غير صحيحة!';
     } finally {
       if (btn) {
         btn.disabled = false;
