@@ -702,7 +702,7 @@
       document.getElementById('adminPanel').style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
-      alert(currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!');
+      alert('خطأ حقيقي من Firebase (للتشخيص فقط): ' + err.code + ' - ' + err.message);
     }
   };
 
