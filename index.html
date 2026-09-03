@@ -133,6 +133,21 @@
     .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
 
     .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; place-items: center; padding: 15px; }
+
+    .login-overlay { display: none; position: fixed; inset: 0; background: rgba(5,8,5,0.55); backdrop-filter: blur(3px); z-index: 250; place-items: center; padding: 20px; }
+    .login-card { width: min(360px, 100%); background: rgba(60,70,55,0.35); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.25); border-radius: 22px; padding: 55px 26px 26px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.45); text-align: center; }
+    .login-avatar { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); width: 68px; height: 68px; border-radius: 50%; background: #0e140e; border: 3px solid rgba(255,255,255,0.3); display: grid; place-items: center; }
+    .login-avatar svg { width: 30px; height: 30px; }
+    .login-field { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.85); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; }
+    .login-field svg { width: 17px; height: 17px; color: #333; flex-shrink: 0; }
+    .login-field input { border: none; background: none; outline: none; font: inherit; font-size: 14px; width: 100%; color: #111; direction: ltr; text-align: left; }
+    .login-field input::placeholder { color: #888; }
+    .login-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #eee; margin: 10px 2px 20px; }
+    .login-row label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .login-btn { width: 100%; padding: 13px; border: none; border-radius: 8px; background: #10160f; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: 1px; cursor: pointer; transition: .2s; }
+    .login-btn:hover { background: #1b2419; }
+    .login-close { position: absolute; top: 12px; left: 12px; background: none; border: none; color: #eee; font-size: 20px; cursor: pointer; line-height: 1; }
+    .login-error { color: #ffb4b4; font-size: 12px; margin: -6px 0 12px; min-height: 14px; }
     .admin-content { background: #fff; border-radius: 14px; max-width: 580px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
 
     .contact { background: #0b0b0b; color: #fff; }
@@ -422,6 +437,32 @@
     </div>
   </section>
 
+  <!-- نافذة تسجيل دخول الأدمن -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <button type="button" class="login-close" onclick="closeLoginCard()" aria-label="إغلاق">✕</button>
+      <div class="login-avatar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </div>
+      <form id="adminLoginForm">
+        <div class="login-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <input id="loginEmail" type="email" placeholder="Email ID" autocomplete="username" required>
+        </div>
+        <div class="login-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          <input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" required>
+        </div>
+        <div class="login-error" id="loginError"></div>
+        <div class="login-row">
+          <label><input type="checkbox" id="loginRemember"> Remember me</label>
+          <span></span>
+        </div>
+        <button type="submit" class="login-btn" id="loginSubmitBtn">LOGIN</button>
+      </form>
+    </div>
+  </div>
+
   <!-- لوحة الإدارة المخفية السحابية -->
   <div class="admin-panel" id="adminPanel">
     <div class="admin-content">
@@ -690,21 +731,40 @@
     }
   };
 
-  // فتح لوحة الأدمن بتسجيل دخول حقيقي عبر Firebase Authentication
-  window.openAdminPanel = async function() {
-    const email = prompt(currentLang === 'ar' ? 'إيميل الأدمن:' : 'Admin Email:');
-    if (!email) return;
-    const password = prompt(currentLang === 'ar' ? 'كلمة المرور:' : 'Password:');
-    if (!password) return;
+  // فتح نافذة تسجيل الدخول (تظهر النافذة الزجاجية بدل prompt)
+  window.openAdminPanel = function() {
+    document.getElementById('loginError').textContent = '';
+    document.getElementById('adminLoginForm').reset();
+    document.getElementById('loginOverlay').style.display = 'grid';
+    document.getElementById('loginEmail').focus();
+  };
+
+  window.closeLoginCard = function() {
+    document.getElementById('loginOverlay').style.display = 'none';
+  };
+
+  document.getElementById('adminLoginForm')?.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+    const errorBox = document.getElementById('loginError');
+    const btn = document.getElementById('loginSubmitBtn');
+    errorBox.textContent = '';
+    btn.disabled = true;
+    btn.textContent = '...';
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      document.getElementById('loginOverlay').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
-      alert(currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!');
+      errorBox.textContent = currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'LOGIN';
     }
-  };
+  });
 
   window.closeAdminPanel = function() {
     document.getElementById('adminPanel').style.display = 'none';
