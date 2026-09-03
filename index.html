@@ -14,68 +14,81 @@
             --text-color: #333;
         }
         body { font-family: Tahoma, sans-serif; background-color: var(--light-bg); margin: 0; padding: 0; color: var(--text-color); text-align: right; direction: rtl; }
-        header { background-color: var(--dark-bg); color: #fff; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary-color); }
-        .logo { font-size: 20px; font-weight: bold; color: var(--primary-color); }
-        .container { max-width: 800px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h2 { color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .service-box, .review-form-box { margin-bottom: 30px; }
+        header { background-color: var(--dark-bg); color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--primary-color); }
+        .logo { font-size: 22px; font-weight: bold; color: var(--primary-color); }
+        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80') center/cover; color: #fff; text-align: center; padding: 60px 20px; }
+        .hero h1 { font-size: 32px; color: var(--primary-color); margin-bottom: 10px; }
+        .container { max-width: 900px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
+        .section { margin-bottom: 40px; }
         input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
         button { background-color: var(--primary-color); color: #fff; border: none; padding: 14px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; transition: background 0.3s; }
         button:hover { background-color: #bfa130; }
         #form-status { margin-top: 12px; font-weight: bold; text-align: center; }
         .reviews-list { margin-top: 20px; }
-        .review-card { background: #fdfdfd; border: 1px solid #eee; padding: 15px; border-radius: 6px; margin-bottom: 15px; }
-        .review-card h4 { margin: 0 0 5px 0; color: #444; }
-        .review-card span { font-size: 12px; color: #777; }
+        .review-card { background: #fdfdfd; border: 1px solid #eee; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-right: 4px solid var(--primary-color); }
+        .review-card h4 { margin: 0 0 5px 0; color: #333; }
+        .review-card span { font-size: 12px; color: #777; font-weight: normal; }
+        .review-card p { margin: 5px 0 0 0; color: #555; line-height: 1.5; }
+        footer { text-align: center; padding: 20px; background: var(--dark-bg); color: #aaa; font-size: 14px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">EB OFFICE</div>
-        <div>حلول أعمالك الرقمية باحترافية</div>
+        <div style="color: #ccc; font-size: 14px;">حلول الأعمال والخدمات الرقمية المتكاملة</div>
     </header>
 
+    <div class="hero">
+        <h1>مرحباً بك في EB OFFICE</h1>
+        <p>نقدم لك أفضل الحلول الاحترافية لإدارة وتطوير أعمالك بكل سهولة ووثوقية</p>
+    </div>
+
     <div class="container">
-        <!-- قسم طلبات الخدمات (واتساب المباشر السريع) -->
-        <div class="service-box">
-            <h2>طلب خدمة أو استشارة</h2>
+        <!-- قسم طلبات الخدمات المباشرة عبر واتساب -->
+        <div class="section">
+            <h2>طلب خدمة أو استشارة سريعة</h2>
             <form id="serviceOrderForm" onsubmit="sendWhatsAppOrder(event)">
-                <input type="tel" id="whatsappPhone" placeholder="رقم الهاتف / واتساب" required>
+                <input type="tel" id="whatsappPhone" placeholder="رقم الهاتف / واتساب للتواصل" required>
                 <select id="serviceType" required>
                     <option value="">اختر الخدمة المطلوبة</option>
-                    <option value="تصميم وبرمجة مواقع">تصميم وبرمجة مواقع</option>
-                    <option value="حلول رقمية ومحاسبية">حلول رقمية ومحاسبية</option>
-                    <option value="استشارة أعمال">استشارة أعمال</option>
+                    <option value="تصميم وبرمجة مواقع وتطبيقات">تصميم وبرمجة مواقع وتطبيقات</option>
+                    <option value="خدمات المحاسبة وإدارة الأعمال">خدمات المحاسبة وإدارة الأعمال</option>
+                    <option value="استشارات رقمية متقدمة">استشارات رقمية متقدمة</option>
                 </select>
-                <textarea id="projectDetails" rows="3" placeholder="توضيح طبيعة المشروع وأهم المتطلبات..." required></textarea>
+                <textarea id="projectDetails" rows="3" placeholder="اكتب تفاصيل طلبك أو مشروعك هنا..." required></textarea>
                 <button type="submit">إرسال الطلب مباشـرة عبر واتساب</button>
             </form>
         </div>
 
         <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
 
-        <!-- قسم التقييمات الآمن (عبر Supabase) -->
-        <div class="review-form-box">
+        <!-- قسم التقييمات الآمن عبر Supabase -->
+        <div class="section">
             <h2>أضف تقييمك ورأيك في الخدمة</h2>
             <form id="reviewForm">
                 <input type="text" id="reviewerName" placeholder="اسمك الكريم" required>
                 <input type="text" id="reviewerRole" placeholder="صفتك أو مجالك (مثلاً: محاسب عام)" required>
-                <textarea id="reviewText" rows="4" placeholder="رأيك وتجربتك في الشغل معنا" required></textarea>
+                <textarea id="reviewText" rows="4" placeholder="اكتب رأيك وتجربتك معنا..." required></textarea>
                 <button type="submit" id="submitBtn">إرسال التقييم للمراجعة</button>
                 <div id="form-status"></div>
             </form>
         </div>
 
         <!-- عرض التقييمات المعتمدة -->
-        <div class="reviews-list">
+        <div class="section">
             <h2>آراء العملاء</h2>
             <div id="reviewsContainer">جاري تحميل الآراء...</div>
         </div>
     </div>
 
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 EB OFFICE</p>
+    </footer>
+
     <script>
-        // إعدادات اتصال Supabase
+        // إعدادات اتصال Supabase للمشروع
         const SUPABASE_URL = 'https://mvmwhrgaeftjxazwfklg.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_8R0LqM7AbuPZiGJCyx0hwA_Bi0Xe5eH';
         
@@ -91,7 +104,7 @@
             
             const message = `مرحباً EB OFFICE، أود طلب خدمة:\n*الخدمة:* ${service}\n*رقم التواصل:* ${phone}\n*التفاصيل:* ${details}`;
             const encodedMessage = encodeURIComponent(message);
-            // استبدل الرقم برقم الواتساب الخاص بك
+            // استبدل الرقم برقم الواتساب الخاص بك عند الحاجة
             window.open(`https://wa.me/201000000000?text=${encodedMessage}`, '_blank');
         }
 
@@ -119,12 +132,12 @@
                 if (error) throw error;
 
                 formStatus.style.color = 'green';
-                formStatus.textContent = 'تم إرسال تقييمك بنجاح، في انتظار مراجعة الإدارة ونشره.';
+                formStatus.textContent = 'تم إرسال تقييمك بنجاح، شكراً لك في انتظار مراجعة الإدارة ونشره.';
                 reviewForm.reset();
             } catch (err) {
                 console.error(err);
                 formStatus.style.color = 'red';
-                formStatus.textContent = 'حدث خطأ أثناء الإرسال، تأكد من الاتصال ومحاولة مجدداً.';
+                formStatus.textContent = 'حدث خطأ أثناء الإرسال، حاول مرة أخرى.';
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'إرسال التقييم للمراجعة';
@@ -164,7 +177,7 @@
             }
         }
 
-        // تشغيل دالة جلب الآراء عند فتح الموقع
+        // تشغيل دالة جلب الآراء عند تحميل الصفحة
         fetchApprovedReviews();
     </script>
 </body>
