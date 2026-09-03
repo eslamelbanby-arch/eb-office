@@ -134,7 +134,6 @@
     .review-action-box { margin-top: 35px; background: #fff; border: 1px dashed var(--gold); padding: 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
     .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
 
-    /* Toast Notification أنيق وبدون روابط */
     #eb-toast {
       position: fixed;
       bottom: 30px;
@@ -159,7 +158,6 @@
       opacity: 1;
     }
 
-    /* نافذة تسجيل الدخول الزجاجية */
     .login-overlay { display: none; position: fixed; inset: 0; background: rgba(5,8,5,0.55); backdrop-filter: blur(3px); z-index: 250; place-items: center; padding: 20px; }
     .login-card { width: min(360px, 100%); background: rgba(60,70,55,0.35); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.25); border-radius: 22px; padding: 55px 26px 26px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.45); text-align: center; }
     .login-avatar { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); width: 68px; height: 68px; border-radius: 50%; background: #0e140e; border: 3px solid rgba(255,255,255,0.3); display: grid; place-items: center; }
@@ -178,7 +176,6 @@
     .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; place-items: center; padding: 15px; }
     .admin-content { background: #fff; border-radius: 14px; max-width: 580px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
 
-    /* مودال السياسات والخصوصية */
     .policy-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 300; place-items: center; padding: 20px; }
     .policy-content { background: #fff; border-radius: 14px; max-width: 650px; width: 100%; padding: 30px; max-height: 85vh; overflow-y: auto; text-align: right; }
     .policy-content h3 { color: var(--gold); margin-bottom: 15px; font-size: 20px; }
@@ -558,12 +555,12 @@
           <label for="service" data-i18n="f_service">الخدمة المطلوبة</label>
           <select id="service" name="service" required>
             <option value="" data-i18n="opt_select">اختر الخدمة</option>
-            <option>Excel & Accounting</option>
-            <option>Websites Development</option>
-            <option>CV & ATS Documents</option>
-            <option>Graphic Design & Branding</option>
-            <option>Social Media</option>
-            <option>AI & Digital Solutions</option>
+            <option value="Excel & Accounting" data-i18n="opt_s1">Excel & Accounting</option>
+            <option value="Websites Development" data-i18n="opt_s2">Websites Development</option>
+            <option value="CV & ATS Documents" data-i18n="opt_s3">CV & ATS Documents</option>
+            <option value="Graphic Design & Branding" data-i18n="opt_s4">Graphic Design & Branding</option>
+            <option value="Social Media" data-i18n="opt_s5">Social Media Management</option>
+            <option value="AI & Digital Solutions" data-i18n="opt_s6">AI & Digital Solutions</option>
           </select>
         </div>
         <div>
@@ -571,14 +568,14 @@
           <div style="display:grid;grid-template-columns:1fr 130px;gap:8px">
             <input id="budget" name="budget" inputmode="decimal" data-placeholder-key="ph_budget" placeholder="المبلغ">
             <select id="currency" name="currency">
-              <option value="EGP">جنيه (EGP)</option>
-              <option value="SAR">ريال (SAR)</option>
-              <option value="AED">درهم (AED)</option>
-              <option value="USD">دولار (USD)</option>
-              <option value="EUR">يورو (EUR)</option>
-              <option value="KWD">دينار (KWD)</option>
-              <option value="QAR">ريال (QAR)</option>
-              <option value="Other">أخرى</option>
+              <option value="EGP" data-i18n="cur_egp">جنيه (EGP)</option>
+              <option value="SAR" data-i18n="cur_sar">ريال (SAR)</option>
+              <option value="AED" data-i18n="cur_aed">درهم (AED)</option>
+              <option value="USD" data-i18n="cur_usd">دولار (USD)</option>
+              <option value="EUR" data-i18n="cur_eur">يورو (EUR)</option>
+              <option value="KWD" data-i18n="cur_kwd">دينار (KWD)</option>
+              <option value="QAR" data-i18n="cur_qar">ريال (QAR)</option>
+              <option value="Other" data-i18n="cur_other">أخرى</option>
             </select>
           </div>
         </div>
@@ -594,7 +591,6 @@
   </section>
 </main>
 
-<!-- إشعار Toast المخصص -->
 <div id="eb-toast"></div>
 
 <a class="float-wa" href="https://wa.me/201207641934" target="_blank" rel="noopener" aria-label="واتساب">
@@ -614,7 +610,6 @@
   </div>
 </footer>
 
-<!-- مكتبة Supabase للاتصال السريع -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   const SUPABASE_URL = 'https://mvmwhrgaeftjxazwfklg.supabase.co';
@@ -629,7 +624,6 @@
     return div.innerHTML;
   }
 
-  // دالة عرض إشعار Toast احترافي بدون روابط
   function showToast(message) {
     const toast = document.getElementById('eb-toast');
     toast.textContent = message;
@@ -913,6 +907,8 @@
       contact_sub: "تواصل معنا", contact_title: "جاهز لتطوير أعمالك اليوم؟", contact_desc: "املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.",
       f_name: "الاسم بالكامل", f_phone: "رقم الهاتف / واتساب", f_service: "الخدمة المطلوبة", opt_select: "اختر الخدمة", f_budget: "الميزانية المقترحة والعملة", f_details: "تفاصيل المشروع والطلب", f_submit: "إرسال الطلب مباشرة عبر واتساب ↗",
       ph_name: "اكتب اسمك", ph_phone: "رقم التواصل", ph_budget: "المبلغ", ph_details: "وضح طبيعة المشروع وأهم المتطلبات...",
+      opt_s1: "Excel & Accounting", opt_s2: "Websites Development", opt_s3: "CV & ATS Documents", opt_s4: "Graphic Design & Branding", opt_s5: "Social Media Management", opt_s6: "AI & Digital Solutions",
+      cur_egp: "جنيه (EGP)", cur_sar: "ريال (SAR)", cur_aed: "درهم (AED)", cur_usd: "دولار (USD)", cur_eur: "يورو (EUR)", cur_kwd: "دينار (KWD)", cur_qar: "ريال (QAR)", cur_other: "أخرى",
       footer_privacy: "سياسة الخصوصية", footer_terms: "الشروط والأحكام",
       modal_privacy_title: "سياسة الخصوصية", modal_privacy_p1: "نحن في EB OFFICE نلتزم بحماية خصوصية بياناتك الشخصية ومعلوماتك التجارية بكل أمان وسرية تامة.", modal_privacy_p2: "نستخدم البيانات فقط لتحسين جودة الخدمات وتسهيل التواصل معك عبر قنواتنا الرسمية مثل واتساب.",
       modal_terms_title: "الشروط والأحكام", modal_terms_p1: "استخدامك لموقع وخدمات EB OFFICE يعني موافقتك التامة على الالتزام بكافة الشروط والقواعد المعمول بها.", modal_terms_p2: "جميع حقوق التصميم والتطوير والمحتوى محفوظة © 2026 EB OFFICE.",
@@ -955,6 +951,8 @@
       contact_sub: "Contact Us", contact_title: "Ready to Upgrade Your Business?", contact_desc: "Fill the form and we'll reply right away on WhatsApp with the best plan.",
       f_name: "Full Name", f_phone: "Phone / WhatsApp", f_service: "Required Service", opt_select: "Select Service", f_budget: "Estimated Budget & Currency", f_details: "Project Requirements", f_submit: "Send on WhatsApp ↗",
       ph_name: "Enter your name", ph_phone: "Contact number", ph_budget: "Amount", ph_details: "Describe project requirements...",
+      opt_s1: "Excel & Accounting", opt_s2: "Websites Development", opt_s3: "CV & ATS Documents", opt_s4: "Graphic Design & Branding", opt_s5: "Social Media Management", opt_s6: "AI & Digital Solutions",
+      cur_egp: "EGP", cur_sar: "SAR", cur_aed: "AED", cur_usd: "USD", cur_eur: "EUR", cur_kwd: "KWD", cur_qar: "QAR", cur_other: "Other",
       footer_privacy: "Privacy Policy", footer_terms: "Terms & Conditions",
       modal_privacy_title: "Privacy Policy", modal_privacy_p1: "At EB OFFICE, we are committed to protecting your personal data and commercial information with absolute security.", modal_privacy_p2: "We use data solely to improve service quality and facilitate official communication via WhatsApp.",
       modal_terms_title: "Terms & Conditions", modal_terms_p1: "Using EB OFFICE website and services implies your full agreement to adhere to all governing rules.", modal_terms_p2: "All design, development, and content rights reserved © 2026 EB OFFICE.",
