@@ -569,26 +569,23 @@
   const db = getFirestore(app);
   const auth = getAuth(app);
 
-  // دالة تنظيف النصوص لمنع حقن أكواد HTML/JS خبيثة (حماية من XSS)
   function escapeHTML(str) {
     const div = document.createElement('div');
     div.textContent = str == null ? '' : String(str);
     return div.innerHTML;
   }
 
-  // الآراء الافتراضية
   const defaultReviews = [
     { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
     { name: "أحمد البدري", role: "محاسب مالي", text: "الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة." },
     { name: "م/ طارق خليل", role: "مدير شركة استيراد", text: "تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل." }
   ];
 
-  // جلب الآراء المنشورة وعرضها للزوار من السيرفر
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
+    if (!container) return;
     container.innerHTML = "";
     
-    // عرض الافتراضية أولاً
     defaultReviews.forEach(r => {
       const card = document.createElement("div");
       card.className = "testi-card";
@@ -621,12 +618,15 @@
     }
   };
 
-  // إرسال الرأي الجديد إلى Firebase
+  // معالجة إرسال التقييم بأمان وتفادي أي تعليق
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
+    if (!btn || btn.disabled) return;
+    
     btn.disabled = true;
-    btn.innerText = "...";
+    const originalText = btn.innerText;
+    btn.innerText = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
 
     const name = document.getElementById("revName").value.trim();
     const role = document.getElementById("revJob").value.trim();
@@ -634,9 +634,9 @@
 
     try {
       await addDoc(collection(db, "reviews"), {
-        name,
-        role,
-        text,
+        name: name,
+        role: role,
+        text: text,
         approved: false,
         createdAt: Date.now()
       });
@@ -644,17 +644,19 @@
       this.reset();
       document.getElementById("reviewFormWrap").style.display = "none";
     } catch(err) {
-      alert("حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت أو قواعد Firebase.");
+      console.error("Review submission error:", err);
+      alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت وقواعد الصلاحيات في فايربيس.' : 'An error occurred while sending. Please check your connection.');
     } finally {
       btn.disabled = false;
-      btn.innerText = translations[currentLang].rf_submit;
+      btn.innerText = originalText;
     }
   });
 
-  // إدارة الآراء (المعلقة والمنشورة)
   window.renderAdminLists = async function() {
     const pendingList = document.getElementById("pendingReviewsList");
     const approvedList = document.getElementById("approvedReviewsList");
+    if (!pendingList || !approvedList) return;
+
     pendingList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
     approvedList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
 
@@ -704,8 +706,8 @@
       if (approvedCount === 0) approvedList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء إضافية منشورة بعد.</p>";
 
     } catch(err) {
-      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر (تأكد من تسجيل الدخول).</p>";
-      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر (تأكد من تسجيل الدخول).</p>";
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
+      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من السيرفر.</p>";
     }
   };
 
@@ -731,16 +733,20 @@
     }
   };
 
-  // فتح نافذة تسجيل الدخول (تظهر النافذة الزجاجية بدل prompt)
   window.openAdminPanel = function() {
-    document.getElementById('loginError').textContent = '';
-    document.getElementById('adminLoginForm').reset();
-    document.getElementById('loginOverlay').style.display = 'grid';
-    document.getElementById('loginEmail').focus();
+    const errorBox = document.getElementById('loginError');
+    if (errorBox) errorBox.textContent = '';
+    const form = document.getElementById('adminLoginForm');
+    if (form) form.reset();
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.style.display = 'grid';
+    const emailInput = document.getElementById('loginEmail');
+    if (emailInput) emailInput.focus();
   };
 
   window.closeLoginCard = function() {
-    document.getElementById('loginOverlay').style.display = 'none';
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) overlay.style.display = 'none';
   };
 
   document.getElementById('adminLoginForm')?.addEventListener('submit', async function(e) {
@@ -749,25 +755,32 @@
     const password = document.getElementById('loginPassword').value;
     const errorBox = document.getElementById('loginError');
     const btn = document.getElementById('loginSubmitBtn');
-    errorBox.textContent = '';
-    btn.disabled = true;
-    btn.textContent = '...';
+    if (errorBox) errorBox.textContent = '';
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = '...';
+    }
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      document.getElementById('loginOverlay').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'grid';
+      const overlay = document.getElementById('loginOverlay');
+      if (overlay) overlay.style.display = 'none';
+      const panel = document.getElementById('adminPanel');
+      if (panel) panel.style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
-      errorBox.textContent = currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!';
+      if (errorBox) errorBox.textContent = currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!';
     } finally {
-      btn.disabled = false;
-      btn.textContent = 'LOGIN';
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = 'LOGIN';
+      }
     }
   });
 
   window.closeAdminPanel = function() {
-    document.getElementById('adminPanel').style.display = 'none';
+    const panel = document.getElementById('adminPanel');
+    if (panel) panel.style.display = 'none';
     signOut(auth).catch(() => {});
   };
 
@@ -916,7 +929,6 @@
       carousel.addEventListener('touchend', startScroll);
     });
 
-    // 5 ضغطات سريعة على اللوجو لفتح الإدارة
     let clickCount = 0;
     let clickTimer = null;
     const trigger = document.getElementById('adminSecretTrigger');
@@ -940,6 +952,7 @@
 
   function toggleReviewForm() {
     const wrap = document.getElementById('reviewFormWrap');
+    if (!wrap) return;
     wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
     if(wrap.style.display === 'block') wrap.scrollIntoView({behavior:'smooth'});
   }
