@@ -618,7 +618,7 @@
     }
   };
 
-  // دالة الإرسال الآمنة التي تمنع تعليق الزر وتنفذ الطلب بدقة
+  // دالة الإرسال المُحصنة لمنع أي تعليق وإظهار الأخطاء واضحة إن وجدت
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
@@ -628,9 +628,20 @@
     const originalText = btn.innerText;
     btn.innerText = currentLang === 'ar' ? 'جاري الإرسال...' : 'Sending...';
 
-    const name = document.getElementById("revName").value.trim();
-    const role = document.getElementById("revJob").value.trim();
-    const text = document.getElementById("revText").value.trim();
+    const nameInput = document.getElementById("revName");
+    const jobInput = document.getElementById("revJob");
+    const textInput = document.getElementById("revText");
+
+    if (!nameInput || !jobInput || !textInput) {
+      alert("خطأ: حقول الفورم غير مطابقة!");
+      btn.disabled = false;
+      btn.innerText = originalText;
+      return;
+    }
+
+    const name = nameInput.value.trim();
+    const role = jobInput.value.trim();
+    const text = textInput.value.trim();
 
     try {
       await addDoc(collection(db, "reviews"), {
@@ -645,7 +656,7 @@
       document.getElementById("reviewFormWrap").style.display = "none";
     } catch(err) {
       console.error("Review submission error:", err);
-      alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت وحاول مرة أخرى.' : 'An error occurred while sending. Please check your connection.');
+      alert((currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال: ' : 'Error sending: ') + err.message);
     } finally {
       btn.disabled = false;
       btn.innerText = originalText;
