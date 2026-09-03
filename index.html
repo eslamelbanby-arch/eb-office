@@ -550,7 +550,7 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, orderBy, where } 
+  import { getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, query, orderBy } 
     from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
   import { getAuth, signInWithEmailAndPassword, signOut }
     from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
@@ -598,26 +598,27 @@
     });
 
     try {
-      // جلب الآراء المعتمدة فقط بما يتوافق مع قواعد الأمان الجديدة
-      const q = query(collection(db, "reviews"), where("approved", "==", true), orderBy("createdAt", "desc"));
+      const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
       const snapshot = await getDocs(q);
       snapshot.forEach(docSnap => {
         const d = docSnap.data();
-        const card = document.createElement("div");
-        card.className = "testi-card";
-        card.innerHTML = `
-          <div class="testi-stars">★★★★★</div>
-          <p>"${escapeHTML(d.text)}"</p>
-          <div class="testi-author"><b>${escapeHTML(d.name)}</b><span>${escapeHTML(d.role)}</span></div>
-        `;
-        container.appendChild(card);
+        if (d.approved) {
+          const card = document.createElement("div");
+          card.className = "testi-card";
+          card.innerHTML = `
+            <div class="testi-stars">★★★★★</div>
+            <p>"${escapeHTML(d.text)}"</p>
+            <div class="testi-author"><b>${escapeHTML(d.name)}</b><span>${escapeHTML(d.role)}</span></div>
+          `;
+          container.appendChild(card);
+        }
       });
     } catch(e) {
       console.error("Firebase fetch error:", e);
     }
   };
 
-  // معالجة إرسال التقييم بأمان وتفادي أي تعليق
+  // دالة الإرسال الآمنة التي تمنع تعليق الزر وتنفذ الطلب بدقة
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
@@ -644,7 +645,7 @@
       document.getElementById("reviewFormWrap").style.display = "none";
     } catch(err) {
       console.error("Review submission error:", err);
-      alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت وقواعد الصلاحيات في فايربيس.' : 'An error occurred while sending. Please check your connection.');
+      alert(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت وحاول مرة أخرى.' : 'An error occurred while sending. Please check your connection.');
     } finally {
       btn.disabled = false;
       btn.innerText = originalText;
