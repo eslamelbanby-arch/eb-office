@@ -1,184 +1,911 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EB OFFICE | Business & Digital Solutions</title>
-    <!-- مكتبة Supabase JS -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        :root {
-            --primary-color: #d4af37;
-            --dark-bg: #111;
-            --light-bg: #f9f9f9;
-            --text-color: #333;
-        }
-        body { font-family: Tahoma, sans-serif; background-color: var(--light-bg); margin: 0; padding: 0; color: var(--text-color); text-align: right; direction: rtl; }
-        header { background-color: var(--dark-bg); color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--primary-color); }
-        .logo { font-size: 22px; font-weight: bold; color: var(--primary-color); }
-        .hero { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80') center/cover; color: #fff; text-align: center; padding: 60px 20px; }
-        .hero h1 { font-size: 32px; color: var(--primary-color); margin-bottom: 10px; }
-        .container { max-width: 900px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h2 { color: var(--primary-color); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 0; }
-        .section { margin-bottom: 40px; }
-        input, textarea, select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-        button { background-color: var(--primary-color); color: #fff; border: none; padding: 14px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; width: 100%; font-weight: bold; transition: background 0.3s; }
-        button:hover { background-color: #bfa130; }
-        #form-status { margin-top: 12px; font-weight: bold; text-align: center; }
-        .reviews-list { margin-top: 20px; }
-        .review-card { background: #fdfdfd; border: 1px solid #eee; padding: 15px; border-radius: 6px; margin-bottom: 15px; border-right: 4px solid var(--primary-color); }
-        .review-card h4 { margin: 0 0 5px 0; color: #333; }
-        .review-card span { font-size: 12px; color: #777; font-weight: normal; }
-        .review-card p { margin: 5px 0 0 0; color: #555; line-height: 1.5; }
-        footer { text-align: center; padding: 20px; background: var(--dark-bg); color: #aaa; font-size: 14px; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EB OFFICE | Business & Digital Solutions</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #090909;
+      --dark: #121316;
+      --gold: #d4af37;
+      --gold2: #f0cf68;
+      --white: #ffffff;
+      --soft: #f8f9fa;
+      --muted: #6c757d;
+      --line: #e9ecef;
+      --shadow: 0 10px 25px rgba(0,0,0,0.06);
+      --card-border: rgba(212,175,55,0.22);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Cairo", sans-serif; color: #1a1a1a; background: #fff; line-height: 1.7; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    .container { width: min(1180px, 92%); margin: auto; }
+    
+    header { position: sticky; top: 0; z-index: 100; background: #090909; border-bottom: 1px solid rgba(212,175,55,.25); }
+    .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 900; user-select: none; }
+    .brand-mark { width: 42px; height: 36px; display: grid; place-items: center; font-size: 22px; font-weight: 900; border-left: 3px solid var(--gold); transform: skew(-10deg); background: rgba(212,175,55,0.1); border-radius: 4px; }
+    .brand-mark span { color: var(--gold); }
+    .brand small { display: block; font-size: 9px; letter-spacing: 1px; color: #bbb; margin-top: -2px; }
+    
+    nav { display: flex; gap: 18px; color: #ddd; font-size: 14.5px; font-weight: 600; }
+    nav a { transition: .25s; padding: 6px 0; }
+    nav a:hover, nav a.active { color: var(--gold); }
+    
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-btn { background: #1a1a1a; color: var(--gold); border: 1.5px solid var(--gold); padding: 6px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 13px; font-family: inherit; transition: .25s; }
+    .lang-btn:hover { background: var(--gold); color: #111; }
+
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 10px; border: 1px solid var(--gold); font-weight: 700; font-size: 14px; cursor: pointer; transition: all .25s ease; }
+    .btn-gold { background: var(--gold); color: #111; }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-dark { background: transparent; color: #fff; }
+    .btn-dark:hover { background: rgba(212,175,55,.12); }
+    .menu { display: none; background: none; border: 0; color: #fff; font-size: 28px; cursor: pointer; }
+
+    .hero { background: radial-gradient(circle at 75% 30%, #202020 0, #101113 50%, #080808 100%); color: #fff; padding: 45px 0 65px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 30px; }
+    .eyebrow { color: var(--gold); font-size: 13px; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 8px; }
+    h1 { font-size: clamp(28px, 3.8vw, 50px); line-height: 1.3; margin-bottom: 16px; font-weight: 900; }
+    h1 span { color: var(--gold); }
+    .hero-copy p { color: #d6d6d6; font-size: 15.5px; max-width: 540px; margin-bottom: 24px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-art { display: flex; align-items: center; justify-content: center; }
+    .laptop { width: min(440px, 100%); height: 240px; border: 9px solid #252525; border-radius: 16px; background: #030303; box-shadow: 0 25px 60px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; padding: 10px; }
+    .screen { width: 100%; height: 100%; background: linear-gradient(145deg, #0a0a0a, #161616); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid #333; }
+    .screen .big-eb { font-size: 50px; font-weight: 900; color: #fff; line-height: 1.1; }
+    .screen .big-eb b { color: var(--gold); }
+    .screen .brand-title { font-size: 12px; letter-spacing: 1.5px; color: #fff; font-weight: 700; margin-top: 4px; }
+
+    .stats { margin-top: -35px; position: relative; z-index: 10; }
+    .stats-box { background: #fff; border-radius: 14px; box-shadow: var(--shadow); display: grid; grid-template-columns: repeat(2, 1fr); padding: 18px; border: 1px solid var(--line); max-width: 550px; margin: auto; }
+    .stat { text-align: center; border-left: 1px solid #eee; }
+    body[dir="ltr"] .stat { border-left: 0; border-right: 1px solid #eee; }
+    .stat:last-child { border: 0; }
+    .stat strong { display: block; font-size: 28px; font-weight: 900; color: #111; }
+    .stat span { color: var(--muted); font-size: 13.5px; font-weight: 600; }
+
+    section { padding: 65px 0; }
+    .section-head { text-align: center; margin-bottom: 30px; }
+    .section-head h2 { font-size: 30px; font-weight: 800; }
+    .section-head p { color: var(--muted); margin-top: 6px; font-size: 14.5px; }
+    
+    .services { background: var(--soft); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service-compact { background: #fff; border: 1px solid var(--card-border); border-radius: 14px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; transition: all .25s ease; }
+    .service-compact:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: var(--shadow); }
+    .service-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: #111; color: var(--gold); display: grid; place-items: center; font-size: 20px; }
+    .service-compact h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; color: #111; }
+    .service-compact p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+    .portfolio { background: #fff; }
+    .port-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+    .port-category-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); border-top: 4px solid var(--gold); display: flex; flex-direction: column; }
+    
+    .carousel-container { position: relative; width: 100%; height: 320px; background: #141414; overflow: hidden; }
+    .carousel-track { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; position: relative; background: #141414; }
+    .carousel-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; padding: 8px; display: block; }
+    
+    .single-banner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #141414; }
+    .single-banner img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; padding: 8px; display: block; }
+
+    .slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(9,9,9,0.85); color: var(--gold); border: 1px solid var(--gold); display: grid; place-items: center; cursor: pointer; z-index: 5; transition: .2s; font-size: 15px; user-select: none; }
+    .slide-arrow:hover { background: var(--gold); color: #111; }
+    .slide-arrow.prev { right: 10px; }
+    .slide-arrow.next { left: 10px; }
+    body[dir="ltr"] .slide-arrow.prev { left: 10px; right: auto; }
+    body[dir="ltr"] .slide-arrow.next { right: 10px; left: auto; }
+
+    .swipe-hint { position: absolute; bottom: 10px; right: 12px; background: rgba(0,0,0,0.8); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(212,175,55,0.4); pointer-events: none; z-index: 2; }
+    body[dir="ltr"] .swipe-hint { right: auto; left: 12px; }
+
+    .port-category-body { padding: 22px; display: flex; flex-direction: column; flex-grow: 1; }
+    .port-category-body h3 { font-size: 17.5px; font-weight: 800; color: #111; margin-bottom: 6px; }
+    .port-category-body p { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; flex-grow: 1; }
+
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 40px; align-items: center; }
+    .about-box { background: #111; color: #fff; border-radius: 16px; padding: 35px; text-align: center; border: 1px solid rgba(212,175,55,.25); }
+    .about-box .eb { font-size: 64px; font-weight: 900; color: #fff; line-height: 1; }
+    .about-box .eb b { color: var(--gold); }
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .feature { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fafafa; }
+    .feature b { display: block; color: #222; font-size: 14px; margin-bottom: 2px; }
+    .feature span { font-size: 12px; color: var(--muted); }
+
+    .testimonials { background: var(--soft); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .testi-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
+    .testi-stars { color: var(--gold); font-size: 15px; margin-bottom: 8px; }
+    .testi-card p { color: #333; font-size: 13.5px; margin-bottom: 12px; font-weight: 600; line-height: 1.6; }
+    .testi-author b { display: block; font-size: 13px; color: #111; }
+    .testi-author span { font-size: 11.5px; color: var(--muted); }
+
+    .review-action-box { margin-top: 35px; background: #fff; border: 1px dashed var(--gold); padding: 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+
+    .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; place-items: center; padding: 15px; }
+    .admin-content { background: #fff; border-radius: 14px; max-width: 580px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
+
+    .contact { background: #0b0b0b; color: #fff; }
+    .contact-box { border: 1px solid rgba(212,175,55,.35); border-radius: 16px; padding: 35px; display: flex; flex-direction: column; gap: 20px; }
+    
+    .service-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: #fff; color: #111; padding: 25px; border-radius: 14px; }
+    .service-form .full { grid-column: 1/-1; }
+    .service-form label { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: block; }
+    .service-form input, .service-form select, .service-form textarea { width: 100%; padding: 11px; border: 1px solid #ddd; border-radius: 8px; font: inherit; outline: none; background: #fafafa; }
+    .service-form input:focus, .service-form select:focus, .service-form textarea:focus { border-color: var(--gold); background: #fff; }
+    .service-form textarea { min-height: 90px; resize: vertical; }
+
+    .float-wa { position: fixed; bottom: 20px; left: 20px; z-index: 99; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: #25D366; color: #fff; font-size: 26px; box-shadow: 0 10px 25px rgba(0,0,0,.3); border: 2px solid #fff; }
+    .float-wa svg { width: 28px; height: 28px; display: block; }
+
+    footer { background: #050505; color: #aaa; padding: 26px 0; border-top: 1px solid #1a1a1a; font-size: 13.5px; }
+    .footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; }
+    .creator-badge { color: var(--gold); font-weight: 700; }
+
+    @media(max-width:850px){
+      nav { display: none; }
+      nav.mobile-open { display: flex; position: absolute; top: 68px; right: 4%; left: 4%; flex-direction: column; gap: 0; background: #111; border: 1px solid rgba(212,175,55,.35); border-radius: 12px; padding: 10px; z-index: 101; }
+      nav.mobile-open a { padding: 10px 14px; border-bottom: 1px solid #222; }
+      nav.mobile-open a:last-child { border-bottom: 0; }
+      .nav-actions > .btn { display: none; }
+      .menu { display: block; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .actions { justify-content: center; }
+      .services-grid, .port-categories, .testi-grid, .about-grid { grid-template-columns: 1fr; }
+      .carousel-container { height: 280px; }
+      .service-form { grid-template-columns: 1fr; padding: 18px; }
+      .service-form .full { grid-column: auto; }
+      .features { grid-template-columns: 1fr; }
+      .footer { flex-direction: column; text-align: center; gap: 10px; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">EB OFFICE</div>
-        <div style="color: #ccc; font-size: 14px;">حلول الأعمال والخدمات الرقمية المتكاملة</div>
-    </header>
-
-    <div class="hero">
-        <h1>مرحباً بك في EB OFFICE</h1>
-        <p>نقدم لك أفضل الحلول الاحترافية لإدارة وتطوير أعمالك بكل سهولة ووثوقية</p>
+<header>
+  <div class="container nav">
+    <div class="brand" id="adminSecretTrigger" style="cursor: pointer;">
+      <div class="brand-mark">E<span>B</span></div>
+      <div>EB OFFICE<small>BUSINESS & DIGITAL SOLUTIONS</small></div>
     </div>
+    <nav>
+      <a class="active" href="#home" data-i18n="nav_home">الرئيسية</a>
+      <a href="#about" data-i18n="nav_about">من نحن</a>
+      <a href="#services" data-i18n="nav_services">خدماتنا</a>
+      <a href="#portfolio" data-i18n="nav_portfolio">معرض الأعمال</a>
+      <a href="#testimonials" data-i18n="nav_reviews">آراء العملاء</a>
+      <a href="#contact" data-i18n="nav_contact">تواصل معنا</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="lang-btn" type="button" onclick="toggleLanguage()" id="langBtn">English</button>
+      <a class="btn btn-gold" href="#contact" data-i18n="btn_order">طلب خدمة</a>
+      <button class="menu" aria-label="القائمة">☰</button>
+    </div>
+  </div>
+</header>
 
+<main id="home">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow" data-i18n="hero_eyebrow">EB OFFICE — الشريك الرقمي لمشروعك</div>
+        <h1 data-i18n="hero_title">حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span></h1>
+        <p data-i18n="hero_desc">نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#portfolio" data-i18n="hero_btn_port">معرض الأعمال ←</a>
+          <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener" data-i18n="hero_btn_wa">محادثة مباشرة عبر واتساب</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="laptop">
+          <div class="screen">
+            <div class="big-eb">E<b>B</b></div>
+            <div class="brand-title">EB OFFICE</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container stats">
+    <div class="stats-box">
+      <div class="stat"><strong data-i18n="stat_exp_val">+3</strong><span data-i18n="stat_exp_lbl">سنوات خبرة</span></div>
+      <div class="stat"><strong data-i18n="stat_sup_val">24/7</strong><span data-i18n="stat_sup_lbl">دعم مستمر</span></div>
+    </div>
+  </div>
+
+  <section class="services" id="services">
     <div class="container">
-        <!-- قسم طلبات الخدمات المباشرة عبر واتساب -->
-        <div class="section">
-            <h2>طلب خدمة أو استشارة سريعة</h2>
-            <form id="serviceOrderForm" onsubmit="sendWhatsAppOrder(event)">
-                <input type="tel" id="whatsappPhone" placeholder="رقم الهاتف / واتساب للتواصل" required>
-                <select id="serviceType" required>
-                    <option value="">اختر الخدمة المطلوبة</option>
-                    <option value="تصميم وبرمجة مواقع وتطبيقات">تصميم وبرمجة مواقع وتطبيقات</option>
-                    <option value="خدمات المحاسبة وإدارة الأعمال">خدمات المحاسبة وإدارة الأعمال</option>
-                    <option value="استشارات رقمية متقدمة">استشارات رقمية متقدمة</option>
-                </select>
-                <textarea id="projectDetails" rows="3" placeholder="اكتب تفاصيل طلبك أو مشروعك هنا..." required></textarea>
-                <button type="submit">إرسال الطلب مباشـرة عبر واتساب</button>
-            </form>
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="services_sub">خدمات متخصصة</div>
+        <h2 data-i18n="services_title">حلول ذكية تلبي كافة احتياجاتك</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-compact">
+          <div class="service-icon">📊</div>
+          <div><h3 data-i18n="s1_t">Excel & Accounting</h3><p data-i18n="s1_d">تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.</p></div>
         </div>
-
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;">
-
-        <!-- قسم التقييمات الآمن عبر Supabase -->
-        <div class="section">
-            <h2>أضف تقييمك ورأيك في الخدمة</h2>
-            <form id="reviewForm">
-                <input type="text" id="reviewerName" placeholder="اسمك الكريم" required>
-                <input type="text" id="reviewerRole" placeholder="صفتك أو مجالك (مثلاً: محاسب عام)" required>
-                <textarea id="reviewText" rows="4" placeholder="اكتب رأيك وتجربتك معنا..." required></textarea>
-                <button type="submit" id="submitBtn">إرسال التقييم للمراجعة</button>
-                <div id="form-status"></div>
-            </form>
+        <div class="service-compact">
+          <div class="service-icon">🌐</div>
+          <div><h3 data-i18n="s2_t">Websites Development</h3><p data-i18n="s2_d">برمجة صفحات هبوط ومواقع تعريفية سريعة ومتجاوبة مع الجوال والمحركات.</p></div>
         </div>
-
-        <!-- عرض التقييمات المعتمدة -->
-        <div class="section">
-            <h2>آراء العملاء</h2>
-            <div id="reviewsContainer">جاري تحميل الآراء...</div>
+        <div class="service-compact">
+          <div class="service-icon">📄</div>
+          <div><h3 data-i18n="s3_t">CV & ATS Documents</h3><p data-i18n="s3_d">صياغة وتصميم CV متوافق مع ATS، وفواتير وسندات مالية رسمية.</p></div>
         </div>
+        <div class="service-compact">
+          <div class="service-icon">🎨</div>
+          <div><h3 data-i18n="s4_t">Graphic Design & Branding</h3><p data-i18n="s4_d">تصميم شعارات احترافية، بوسترات تسويقية، وباقات براندينج متكاملة.</p></div>
+        </div>
+        <div class="service-compact">
+          <div class="service-icon">📱</div>
+          <div><h3 data-i18n="s5_t">Social Media Management</h3><p data-i18n="s5_d">صناعة محتوى جذاب، جدولة النشر الدوري، وإدارة التفاعل والنمو.</p></div>
+        </div>
+        <div class="service-compact">
+          <div class="service-icon">🤖</div>
+          <div><h3 data-i18n="s6_t">AI & Digital Solutions</h3><p data-i18n="s6_d">دمج أدوات الذكاء الاصطناعي لأتمتة المهام وتوفير الوقت وزيادة الإنتاجية.</p></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 EB OFFICE</p>
-    </footer>
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="port_sub">معرض الأعمال المنفذة</div>
+        <h2 data-i18n="port_title">نماذج من مشاريعنا حسب التخصص</h2>
+        <p data-i18n="port_desc">تتحرك الصور تلقائياً ويمكنك السحب يميناً ويساراً ⟷ لمعاينة كافة النماذج كاملة.</p>
+      </div>
 
-    <script>
-        // إعدادات اتصال Supabase للمشروع
-        const SUPABASE_URL = 'https://mvmwhrgaeftjxazwfklg.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_8R0LqM7AbuPZiGJCyx0hwA_Bi0Xe5eH';
-        
-        const { createClient } = supabase;
-        const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+      <div class="port-categories">
+        <article class="port-category-card">
+          <div class="carousel-container" data-autoplay="true">
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
+            <div class="carousel-track">
+              <div class="carousel-slide"><img src="excel-1.jpg" alt="Daily Activity Dashboard"></div>
+              <div class="carousel-slide"><img src="excel-2.jpg" alt="Cash Flow Statement"></div>
+              <div class="carousel-slide"><img src="excel-3.jpg" alt="تفقيط النقدية وصرف فواتير الموردين"></div>
+              <div class="carousel-slide"><img src="excel-4.jpg" alt="متابعة الشيكات والبنوك"></div>
+              <div class="carousel-slide"><img src="excel-5.jpg" alt="نظام محاسبي متكامل"></div>
+            </div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
+          </div>
+          <div class="port-category-body">
+            <h3 data-i18n="p1_t">أنظمة المحاسبة وشيتات Excel و Dashboard</h3>
+            <p data-i18n="p1_d">لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة النقدية والشيكات بدقة.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20أنظمة%20محاسبية%20وشيتات%20إكسيل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_excel">طلب نظام محاسبي ↗</a>
+          </div>
+        </article>
 
-        // إرسال طلب الخدمة عبر واتساب
-        function sendWhatsAppOrder(e) {
-            e.preventDefault();
-            const phone = document.getElementById('whatsappPhone').value;
-            const service = document.getElementById('serviceType').value;
-            const details = document.getElementById('projectDetails').value;
-            
-            const message = `مرحباً EB OFFICE، أود طلب خدمة:\n*الخدمة:* ${service}\n*رقم التواصل:* ${phone}\n*التفاصيل:* ${details}`;
-            const encodedMessage = encodeURIComponent(message);
-            // استبدل الرقم برقم الواتساب الخاص بك عند الحاجة
-            window.open(`https://wa.me/201000000000?text=${encodedMessage}`, '_blank');
-        }
+        <article class="port-category-card">
+          <div class="carousel-container" data-autoplay="true">
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
+            <div class="carousel-track">
+              <div class="carousel-slide"><img src="cv-1.jpg" alt="CV ATS Eslam Elbanby"></div>
+              <div class="carousel-slide"><img src="cv-2.jpg" alt="CV Professional Mohamed Salah"></div>
+              <div class="carousel-slide"><img src="cv-3.jpg" alt="فاتورة مبيعات جاهزة"></div>
+              <div class="carousel-slide"><img src="cv-4.jpg" alt="فاتورة ضريبية رسمية TRN"></div>
+            </div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
+          </div>
+          <div class="port-category-body">
+            <h3 data-i18n="p2_t">السير الذاتية الاحترافية (ATS) والمستندات</h3>
+            <p data-i18n="p2_d">تصميم وتنسيق سيرة ذاتية مهيكلة بدقة لاجتياز الفرز الإلكتروني (ATS) وزيادة فرص القبول، وفواتير وسندات مالية رسمية.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20ATS%20أو%20مستندات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_cv">طلب تصميم CV / مستندات ↗</a>
+          </div>
+        </article>
 
-        // التعامل مع إرسال التقييم وسلاسة الزرار
-        const reviewForm = document.getElementById('reviewForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const formStatus = document.getElementById('form-status');
+        <article class="port-category-card">
+          <div class="carousel-container" data-autoplay="true">
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
+            <div class="carousel-track">
+              <div class="carousel-slide"><img src="design-1.png" alt="موك آب الهوية البصرية"></div>
+              <div class="carousel-slide"><img src="design-2.png" alt="لوجو EB الفاخر"></div>
+            </div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
+          </div>
+          <div class="port-category-body">
+            <h3 data-i18n="p3_t">الهوية البصرية وتصاميم الشعارات والبراندينج</h3>
+            <p data-i18n="p3_d">تصميم شعارات مبتكرة، كروت عمل فاخرة، موك آب الشاشات، وهوية بصرية متكاملة تعكس قوة علامتك التجارية في السوق.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وشعارات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_design">طلب تصميم هوية / براند ↗</a>
+          </div>
+        </article>
 
-        reviewForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'جاري الإرسال...';
-            formStatus.textContent = '';
+        <article class="port-category-card">
+          <div class="carousel-container" data-autoplay="true">
+            <button class="slide-arrow prev" type="button" onclick="slidePort(this, -1)" aria-label="السابق">❮</button>
+            <button class="slide-arrow next" type="button" onclick="slidePort(this, 1)" aria-label="التالي">❯</button>
+            <div class="carousel-track">
+              <div class="carousel-slide"><img src="social-1.jpg" alt="نيون السوشيال ميديا"></div>
+              <div class="carousel-slide"><img src="social-2.jpg" alt="سحابة الأيقونات 3D"></div>
+              <div class="carousel-slide"><img src="social-3.jpg" alt="التحكم بالمنصات والعقل"></div>
+              <div class="carousel-slide"><img src="social-4.jpg" alt="إدارة الوقت والمنصات"></div>
+            </div>
+            <div class="swipe-hint" data-i18n="swipe_hint">اسحب للصور ⟷</div>
+          </div>
+          <div class="port-category-body">
+            <h3 data-i18n="p4_t">إدارة منصات السوشيال ميديا وصناعة المحتوى</h3>
+            <p data-i18n="p4_d">إدارة الحسابات على فيسبوك وإنستجرام وتيك توك، نشر المحتوى الدوري، جدولة المواعيد، وتنمية التفاعل والمبيعات باحترافية.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20باقة%20إدارة%20سوشيال%20ميديا%20وصناعة%20محتوى" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_social">طلب باقة سوشيال ميديا ↗</a>
+          </div>
+        </article>
 
-            const name = document.getElementById('reviewerName').value.trim();
-            const role = document.getElementById('reviewerRole').value.trim();
-            const text = document.getElementById('reviewText').value.trim();
+        <article class="port-category-card" style="grid-column:1/-1">
+          <div class="carousel-container" style="display:flex;align-items:center;justify-content:center">
+            <div class="single-banner">
+              <img src="web-1.jpg" alt="تصميم وتطوير وبرمجة المواقع">
+            </div>
+          </div>
+          <div class="port-category-body">
+            <h3 data-i18n="p5_t">تطوير المواقع وصفحات الهبوط (Websites)</h3>
+            <p data-i18n="p5_d">بناء وتطوير مواقع ويب سريعة جداً، بتصميم حديث متجاوب 100% مع كافة الشاشات والموبايل ومربوطة مباشرة بالواتساب.</p>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20وبرمجة%20موقع%20إلكتروني" target="_blank" class="btn btn-gold" style="width:min(320px,100%);margin:auto;font-size:13.5px;padding:11px 0" data-i18n="btn_req_web">طلب تصميم وبرمجة موقع ↗</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
 
-            try {
-                const { error } = await _supabase
-                    .from('reviews')
-                    .insert([{ name: name, role: role, text: text, approved: false }]);
+  <section id="about">
+    <div class="container about-grid">
+      <div class="about-box">
+        <div class="eb">E<b>B</b></div>
+        <p style="color:#bbb;margin-top:8px;font-size:13.5px">BUSINESS & DIGITAL SOLUTIONS</p>
+      </div>
+      <div>
+        <div class="eyebrow" data-i18n="about_sub">من نحن</div>
+        <h2 data-i18n="about_title">نبتكر الحلول لتنمية عملك</h2>
+        <p style="color:#555;font-size:15px" data-i18n="about_desc">مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
+        <div class="features">
+          <div class="feature"><b data-i18n="f1_t">دقة واحترافية</b><span data-i18n="f1_d">التزام تام بأدق المعايير والمخرجات.</span></div>
+          <div class="feature"><b data-i18n="f2_t">تنفيذ سريع</b><span data-i18n="f2_d">تسليم المشروعات في المواعيد المحددة.</span></div>
+          <div class="feature"><b data-i18n="f3_t">أسعار تنافسية</b><span data-i18n="f3_d">باقات تناسب المشروعات الناشئة والمتوسطة.</span></div>
+          <div class="feature"><b data-i18n="f4_t">متابعة ودعم</b><span data-i18n="f4_d">دعم فني مستمر بعد تسليم المشروع.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                if (error) throw error;
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="testi_sub">آراء العملاء</div>
+        <h2 data-i18n="testi_title">تجارب حقيقية لعملاء تعاملوا معنا</h2>
+      </div>
 
-                formStatus.style.color = 'green';
-                formStatus.textContent = 'تم إرسال تقييمك بنجاح، شكراً لك في انتظار مراجعة الإدارة ونشره.';
-                reviewForm.reset();
-            } catch (err) {
-                console.error(err);
-                formStatus.style.color = 'red';
-                formStatus.textContent = 'حدث خطأ أثناء الإرسال، حاول مرة أخرى.';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'إرسال التقييم للمراجعة';
-            }
+      <div class="testi-grid" id="testiContainer">
+        <!-- سيتم جلب الآراء من قاعدة البيانات السحابية وعرضها هنا -->
+      </div>
+
+      <div class="review-action-box">
+        <div>
+          <h4 style="font-size:16px;font-weight:800" data-i18n="rev_box_title">تعاملت معنا من قبل؟</h4>
+          <p style="color:var(--muted);font-size:13.5px" data-i18n="rev_box_desc">شاركنا رأيك وتجربتك بكل صراحة، رأيك يساعدنا ويساعد العملاء الجدد.</p>
+        </div>
+        <button class="btn btn-gold" type="button" onclick="toggleReviewForm()" data-i18n="rev_box_btn">كتابة تقييم ورأي ✍️</button>
+      </div>
+
+      <div class="review-form-wrap" id="reviewFormWrap">
+        <h3 style="font-size:17px;margin-bottom:12px" data-i18n="rf_title">أضف تقييمك ورأيك في الخدمة</h3>
+        <form id="addReviewForm" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div>
+            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_name">اسمك الكريم</label>
+            <input id="revName" required placeholder="مثال: أحمد مصطفى" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
+          </div>
+          <div>
+            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_job">صفتك أو مجالك</label>
+            <input id="revJob" required placeholder="مثال: صاحب بيزنس / مهندس" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
+          </div>
+          <div style="grid-column:1/-1">
+            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_text">رأيك وتجربتك في الشغل معنا</label>
+            <textarea id="revText" required placeholder="اكتب رأيك بكل صراحة..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:70px"></textarea>
+          </div>
+          <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center">
+            <button class="btn btn-gold" type="submit" id="btnSubmitReview" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
+            <span style="font-size:11.5px;color:var(--muted)" data-i18n="rf_hint">يخضع التقييم لموافقة الإدارة قبل النشر.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- لوحة الإدارة السحابية المبسطة أو وضع القراءة -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-content">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px">
+        <h3 style="font-size:18px">لوحة إدارة واعتماد الآراء</h3>
+        <button type="button" onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
+      </div>
+      
+      <h4 style="font-size:14px;color:var(--gold);margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المعلقة (بانتظار الموافقة):</h4>
+      <div id="pendingReviewsList" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px"></div>
+
+      <h4 style="font-size:14px;color:#111;margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المنشورة حالياً بالموقع:</h4>
+      <div id="approvedReviewsList" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>
+  </div>
+
+  <section class="contact" id="contact">
+    <div class="container contact-box">
+      <div>
+        <div class="eyebrow" data-i18n="contact_sub">تواصل معنا</div>
+        <h2 data-i18n="contact_title">جاهز لتطوير أعمالك اليوم؟</h2>
+        <p style="color:#bbb;margin-top:6px;font-size:14px" data-i18n="contact_desc">املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.</p>
+      </div>
+
+      <form class="service-form" id="serviceForm">
+        <div>
+          <label for="name" data-i18n="f_name">الاسم بالكامل</label>
+          <input id="name" name="name" required placeholder="اكتب اسمك">
+        </div>
+        <div>
+          <label for="phone" data-i18n="f_phone">رقم الهاتف / واتساب</label>
+          <input id="phone" name="phone" required placeholder="رقم التواصل">
+        </div>
+        <div>
+          <label for="service" data-i18n="f_service">الخدمة المطلوبة</label>
+          <select id="service" name="service" required>
+            <option value="" data-i18n="opt_select">اختر الخدمة</option>
+            <option>Excel & Accounting</option>
+            <option>Websites Development</option>
+            <option>CV & ATS Documents</option>
+            <option>Graphic Design & Branding</option>
+            <option>Social Media</option>
+            <option>AI & Digital Solutions</option>
+          </select>
+        </div>
+        <div>
+          <label for="budget" data-i18n="f_budget">الميزانية المقترحة والعملة</label>
+          <div style="display:grid;grid-template-columns:1fr 130px;gap:8px">
+            <input id="budget" name="budget" inputmode="decimal" placeholder="المبلغ">
+            <select id="currency" name="currency">
+              <option value="EGP">جنيه (EGP)</option>
+              <option value="SAR">ريال (SAR)</option>
+              <option value="AED">درهم (AED)</option>
+              <option value="USD">دولار (USD)</option>
+              <option value="EUR">يورو (EUR)</option>
+              <option value="KWD">دينار (KWD)</option>
+              <option value="QAR">ريال (QAR)</option>
+              <option value="Other">أخرى</option>
+            </select>
+          </div>
+        </div>
+        <div class="full">
+          <label for="details" data-i18n="f_details">تفاصيل المشروع والطلب</label>
+          <textarea id="details" name="details" required placeholder="وضح طبيعة المشروع وأهم المتطلبات..."></textarea>
+        </div>
+        <div class="full">
+          <button class="btn btn-gold" type="submit" style="width:100%" data-i18n="f_submit">إرسال الطلب مباشرة عبر واتساب ↗</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<a class="float-wa" href="https://wa.me/201207641934" target="_blank" rel="noopener" aria-label="واتساب">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M19.11 17.2c-.27-.14-1.58-.78-1.83-.87-.25-.09-.43-.14-.61.14-.18.27-.7.87-.86 1.05-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.16-.27-.02-.42.12-.56.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47h-.52c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29s.98 2.66 1.12 2.84c.14.18 1.93 2.95 4.67 4.13.65.28 1.16.45 1.55.58.65.21 1.24.18 1.71.11.52-.08 1.58-.65 1.8-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32zM16.01 3.2c-7.08 0-12.82 5.74-12.82 12.82 0 2.26.59 4.39 1.63 6.24L3.2 28.8l6.72-1.58a12.77 12.77 0 0 0 6.09 1.55h.01c7.08 0 12.82-5.74 12.82-12.82S23.1 3.2 16.01 3.2zm0 23.35h-.01c-2.02 0-4-.54-5.72-1.57l-.41-.24-3.99.94.95-3.89-.27-.4a10.5 10.5 0 0 1-1.61-5.59c0-5.8 4.72-10.52 10.53-10.52 2.81 0 5.45 1.1 7.44 3.09a10.46 10.46 0 0 1 3.08 7.45c0 5.8-4.72 10.52-10.53 10.52z"/></svg>
+</a>
+
+<footer>
+  <div class="container footer">
+    <div><strong>EB OFFICE</strong> — BUSINESS & DIGITAL SOLUTIONS</div>
+    <div class="creator-badge" data-i18n="footer_credit">تم تصميم وتطوير الموقع بواسطة Eslam Elbanby</div>
+    <div>+201207641934 · eslam.elbanby@gmail.com</div>
+  </div>
+</footer>
+
+<!-- مكتبة Supabase للاتصال السريع والآمن -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // بيانات الاتصال بمشروع Supabase الخاص بك
+  const SUPABASE_URL = 'https://mvmwhrgaeftjxazwfklg.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_8R0LqM7AbuPZiGJCyx0hwA_Bi0Xe5eH';
+  
+  const { createClient } = supabase;
+  const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  // دالة تنظيف النصوص لمنع حقن أكواد HTML/JS خبيثة (حماية من XSS)
+  function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  // الآراء الافتراضية
+  const defaultReviews = [
+    { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
+    { name: "أحمد البدري", role: "محاسب مالي", text: "الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة." },
+    { name: "م/ طارق خليل", role: "مدير شركة استيراد", text: "تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل." }
+  ];
+
+  // جلب الآراء المنشورة وعرضها للزوار من Supabase
+  window.loadPublicReviews = async function() {
+    const container = document.getElementById("testiContainer");
+    if (!container) return;
+    container.innerHTML = "";
+    
+    // عرض الافتراضية أولاً
+    defaultReviews.forEach(r => {
+      const card = document.createElement("div");
+      card.className = "testi-card";
+      card.innerHTML = `
+        <div class="testi-stars">★★★★★</div>
+        <p>"${escapeHTML(r.text)}"</p>
+        <div class="testi-author"><b>${escapeHTML(r.name)}</b><span>${escapeHTML(r.role)}</span></div>
+      `;
+      container.appendChild(card);
+    });
+
+    try {
+      const { data, error } = await _supabase
+        .from('reviews')
+        .select('*')
+        .eq('approved', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      if (data && data.length > 0) {
+        data.forEach(d => {
+          const card = document.createElement("div");
+          card.className = "testi-card";
+          card.innerHTML = `
+            <div class="testi-stars">★★★★★</div>
+            <p>"${escapeHTML(d.text)}"</p>
+            <div class="testi-author"><b>${escapeHTML(d.name)}</b><span>${escapeHTML(d.role)}</span></div>
+          `;
+          container.appendChild(card);
         });
+      }
+    } catch(e) {
+      console.error("Supabase fetch error:", e);
+    }
+  };
 
-        // جلب وعرض التقييمات المعتمدة فقط
-        async function fetchApprovedReviews() {
-            const container = document.getElementById('reviewsContainer');
-            try {
-                const { data, error } = await _supabase
-                    .from('reviews')
-                    .select('*')
-                    .eq('approved', true)
-                    .order('created_at', { ascending: false });
+  // إرسال الرأي الجديد إلى Supabase
+  document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById("btnSubmitReview");
+    btn.disabled = true;
+    btn.innerText = "...";
 
-                if (error) throw error;
+    const name = document.getElementById("revName").value.trim();
+    const role = document.getElementById("revJob").value.trim();
+    const text = document.getElementById("revText").value.trim();
 
-                if (!data || data.length === 0) {
-                    container.innerHTML = '<p style="color: #777;">لا توجد تقييمات منشورة حتى الآن. كن أول من يقييم!</p>';
-                    return;
-                }
+    try {
+      const { error } = await _supabase
+        .from('reviews')
+        .insert([{ name: name, role: role, text: text, approved: false }]);
 
-                container.innerHTML = '';
-                data.forEach(rev => {
-                    const card = document.createElement('div');
-                    card.className = 'review-card';
-                    card.innerHTML = `
-                        <h4>${rev.name} <span>(${rev.role})</span></h4>
-                        <p>${rev.text}</p>
-                    `;
-                    container.appendChild(card);
-                });
-            } catch (err) {
-                console.error(err);
-                container.innerHTML = '<p style="color: red;">تعذر تحميل الآراء حالياً.</p>';
-            }
+      if (error) throw error;
+
+      alert(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك بنجاح وسينشر فور اعتماده من الإدارة.' : 'Thank you! Your review was received and will be published after moderation.');
+      this.reset();
+      document.getElementById("reviewFormWrap").style.display = "none";
+    } catch(err) {
+      console.error(err);
+      alert("حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت.");
+    } finally {
+      btn.disabled = false;
+      btn.innerText = translations[currentLang].rf_submit;
+    }
+  });
+
+  // إدارة الآراء (عرض المعلقة والمنشورة في لوحة الإدارة عند النقر السري على الشعار)
+  window.renderAdminLists = async function() {
+    const pendingList = document.getElementById("pendingReviewsList");
+    const approvedList = document.getElementById("approvedReviewsList");
+    if(!pendingList || !approvedList) return;
+
+    pendingList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
+    approvedList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
+
+    try {
+      const { data, error } = await _supabase
+        .from('reviews')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      
+      pendingList.innerHTML = "";
+      approvedList.innerHTML = "";
+
+      let pendingCount = 0;
+      let approvedCount = 0;
+
+      data.forEach(rev => {
+        const id = rev.id;
+
+        if (!rev.approved) {
+          pendingCount++;
+          const item = document.createElement("div");
+          item.style.cssText = "border:1px solid #ffeeba;padding:12px;border-radius:8px;background:#fffdf5";
+          item.innerHTML = `
+            <strong>${escapeHTML(rev.name)}</strong> (${escapeHTML(rev.role)})
+            <p style="font-size:13px;color:#444;margin:6px 0">"${escapeHTML(rev.text)}"</p>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="approveReview('${id}')">موافقة ونشر ✅</button>
+              <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
+            </div>
+          `;
+          pendingList.appendChild(item);
+        } else {
+          approvedCount++;
+          const item = document.createElement("div");
+          item.style.cssText = "border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:10px";
+          item.innerHTML = `
+            <div style="flex-grow:1">
+              <strong>${escapeHTML(rev.name)}</strong> <small style="color:var(--muted)">(${escapeHTML(rev.role)})</small>
+              <p style="font-size:13px;color:#444;margin-top:4px">"${escapeHTML(rev.text)}"</p>
+            </div>
+            <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteReview('${id}')">حذف ✕</button>
+          `;
+          approvedList.appendChild(item);
         }
+      });
 
-        // تشغيل دالة جلب الآراء عند تحميل الصفحة
-        fetchApprovedReviews();
-    </script>
+      if (pendingCount === 0) pendingList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء معلقة بانتظار الاعتماد.</p>";
+      if (approvedCount === 0) approvedList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء إضافية منشورة بعد.</p>";
+
+    } catch(err) {
+      console.error(err);
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من قاعدة البيانات.</p>";
+      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات من قاعدة البيانات.</p>";
+    }
+  };
+
+  window.approveReview = async function(id) {
+    try {
+      const { error } = await _supabase
+        .from('reviews')
+        .update({ approved: true })
+        .eq('id', id);
+
+      if (error) throw error;
+      renderAdminLists();
+      loadPublicReviews();
+    } catch(e) {
+      alert("حدث خطأ أثناء الاعتماد.");
+    }
+  };
+
+  window.deleteReview = async function(id) {
+    if(confirm("هل تريد حذف هذا التقييم نهائياً؟")) {
+      try {
+        const { error } = await _supabase
+          .from('reviews')
+          .delete()
+          .eq('id', id);
+
+        if (error) throw error;
+        renderAdminLists();
+        loadPublicReviews();
+      } catch(e) {
+        alert("حدث خطأ أثناء الحذف.");
+      }
+    }
+  };
+
+  // فتح لوحة الإدارة بالضغط 5 مرات على الشعار
+  window.openAdminPanel = function() {
+    document.getElementById('adminPanel').style.display = 'grid';
+    window.renderAdminLists();
+  };
+
+  window.closeAdminPanel = function() {
+    document.getElementById('adminPanel').style.display = 'none';
+  };
+
+  loadPublicReviews();
+</script>
+
+<script>
+  const translations = {
+    ar: {
+      nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "خدماتنا", nav_portfolio: "معرض الأعمال",
+      nav_reviews: "آراء العملاء", nav_contact: "تواصل معنا", btn_order: "طلب خدمة",
+      hero_eyebrow: "EB OFFICE — الشريك الرقمي لمشروعك",
+      hero_title: "حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span>",
+      hero_desc: "نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.",
+      hero_btn_port: "معرض الأعمال ←", hero_btn_wa: "محادثة مباشرة عبر واتساب",
+      stat_exp_val: "+3", stat_exp_lbl: "سنوات خبرة", stat_sup_val: "24/7", stat_sup_lbl: "دعم مستمر",
+      services_sub: "خدمات متخصصة", services_title: "حلول ذكية تلبي كافة احتياجاتك",
+      s1_t: "Excel & Accounting", s1_d: "تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.",
+      s2_t: "Websites Development", s2_d: "برمجة صفحات هبوط ومواقع تعريفية سريعة ومتجاوبة مع الجوال والمحركات.",
+      s3_t: "CV & ATS Documents", s3_d: "صياغة وتصميم CV متوافق مع ATS، وفواتير وسندات مالية رسمية.",
+      s4_t: "Graphic Design & Branding", s4_d: "تصميم شعارات احترافية، بوسترات تسويقية، وباقات براندينج متكاملة.",
+      s5_t: "Social Media Management", s5_d: "صناعة محتوى جذاب، جدولة النشر الدوري، وإدارة التفاعل والنمو.",
+      s6_t: "AI & Digital Solutions", s6_d: "دمج أدوات الذكاء الاصطناعي لأتمتة المهام وتوفير الوقت وزيادة الإنتاجية.",
+      port_sub: "معرض الأعمال المنفذة", port_title: "نماذج من مشاريعنا حسب التخصص",
+      port_desc: "تتحرك الصور تلقائياً ويمكنك السحب يميناً ويساراً ⟷ لمعاينة كافة النماذج كاملة.",
+      swipe_hint: "اسحب للصور ⟷",
+      p1_t: "أنظمة المحاسبة وشيتات Excel و Dashboard", p1_d: "لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة النقدية والشيكات بدقة.", btn_req_excel: "طلب نظام محاسبي ↗",
+      p2_t: "السير الذاتية الاحترافية (ATS) والمستندات", p2_d: "تصميم وتنسيق سيرة ذاتية مهيكلة بدقة لاجتياز الفرز الإلكتروني (ATS) وزيادة فرص القبول، وفواتير وسندات مالية رسمية.", btn_req_cv: "طلب تصميم CV / مستندات ↗",
+      p3_t: "الهوية البصرية وتصاميم الشعارات والبراندينج", p3_d: "تصميم شعارات مبتكرة، كروت عمل فاخرة، موك آب الشاشات، وهوية بصرية متكاملة تعكس قوة علامتك التجارية في السوق.", btn_req_design: "طلب تصميم هوية / براند ↗",
+      p4_t: "إدارة منصات السوشيال ميديا وصناعة المحتوى", p4_d: "إدارة الحسابات على فيسبوك وإنستجرام وتيك توك، نشر المحتوى الدوري، جدولة المواعيد، وتنمية التفاعل والمبيعات باحترافية.", btn_req_social: "طلب باقة سوشيال ميديا ↗",
+      p5_t: "تطوير المواقع وصفحات الهبوط (Websites)", p5_d: "بناء وتطوير مواقع ويب سريعة جداً، بتصميم حديث متجاوب 100% مع كافة الشاشات والموبايل ومربوطة مباشرة بالواتساب.", btn_req_web: "طلب تصميم وبرمجة موقع ↗",
+      about_sub: "من نحن", about_title: "نبتكر الحلول لتنمية عملك",
+      about_desc: "مكتب EB OFFICE يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.",
+      f1_t: "دقة واحترافية", f1_d: "التزام تام بأدق المعايير والمخرجات.",
+      f2_t: "تنفيذ سريع", f2_d: "تسليم المشروعات في المواعيد المحددة.",
+      f3_t: "أسعار تنافسية", f3_d: "باقات تناسب المشروعات الناشئة والمتوسطة.",
+      f4_t: "متابعة ودعم", f4_d: "دعم فني مستمر بعد تسليم المشروع.",
+      testi_sub: "آراء العملاء", testi_title: "تجارب حقيقية لعملاء تعاملوا معنا",
+      rev_box_title: "تعاملت معنا من قبل؟", rev_box_desc: "شاركنا رأيك وتجربتك بكل صراحة، رأيك يساعدنا ويساعد العملاء الجدد.", rev_box_btn: "كتابة تقييم ورأي ✍️",
+      rf_title: "أضف تقييمك ورأيك في الخدمة", rf_name: "اسمك الكريم", rf_job: "صفتك أو مجالك", rf_text: "رأيك وتجربتك في الشغل معنا", rf_submit: "إرسال التقييم للمراجعة ↗", rf_hint: "يخضع التقييم لموافقة الإدارة قبل النشر.",
+      contact_sub: "تواصل معنا", contact_title: "جاهز لتطوير أعمالك اليوم؟", contact_desc: "املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.",
+      f_name: "الاسم بالكامل", f_phone: "رقم الهاتف / واتساب", f_service: "الخدمة المطلوبة", opt_select: "اختر الخدمة", f_budget: "الميزانية المقترحة والعملة", f_details: "تفاصيل المشروع والطلب", f_submit: "إرسال الطلب مباشرة عبر واتساب ↗",
+      footer_credit: "تم تصميم وتطوير الموقع بواسطة Eslam Elbanby"
+    },
+    en: {
+      nav_home: "Home", nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio",
+      nav_reviews: "Reviews", nav_contact: "Contact", btn_order: "Get Started",
+      hero_eyebrow: "EB OFFICE — YOUR DIGITAL PARTNER",
+      hero_title: "Digital Business Solutions<br><span>With Utmost Mastery</span>",
+      hero_desc: "We provide integrated accounting, web, and design solutions to organize your workflow and scale your business efficiently.",
+      hero_btn_port: "View Portfolio ←", hero_btn_wa: "Chat on WhatsApp",
+      stat_exp_val: "+3", stat_exp_lbl: "Years of Experience", stat_sup_val: "24/7", stat_sup_lbl: "Constant Support",
+      services_sub: "Our Services", services_title: "Smart Solutions Tailored For You",
+      s1_t: "Excel & Accounting", s1_d: "Custom accounting models, cashflow tracking, and dynamic dashboards.",
+      s2_t: "Web Development", s2_d: "High-speed, SEO-friendly, mobile-responsive websites & landing pages.",
+      s3_t: "CV & ATS Documents", s3_d: "ATS-optimized resumes, official invoices, and commercial vouchers.",
+      s4_t: "Graphic Design & Branding", s4_d: "Professional logos, marketing posters, and full visual identities.",
+      s5_t: "Social Media Management", s5_d: "Engaging content creation, posting schedules, and community growth.",
+      s6_t: "AI & Digital Solutions", s6_d: "Workflow automation using modern AI tools to boost your daily output.",
+      port_sub: "Featured Projects", port_title: "Showcase of Our Works",
+      port_desc: "Sliders scroll automatically; swipe left or right ⟷ to browse all projects.",
+      swipe_hint: "Swipe for more ⟷",
+      p1_t: "Accounting Systems & Excel Dashboards", p1_d: "Interactive KPIs, automated income/expense sheets, checkbooks & cash tracking.", btn_req_excel: "Request Accounting Sheet ↗",
+      p2_t: "ATS Resumes & Corporate Documents", p2_d: "Structured CVs tailored to pass ATS screeners, plus clean bilingual invoices.", btn_req_cv: "Order ATS Resume ↗",
+      p3_t: "Visual Identity, Logos & Branding", p3_d: "Distinctive brand identities, premium business cards, and marketing mockups.", btn_req_design: "Order Visual Branding ↗",
+      p4_t: "Social Media & Content Creation", p4_d: "Managing Facebook, Instagram & TikTok channels to drive engagement and sales.", btn_req_social: "Order Social Package ↗",
+      p5_t: "Websites & Landing Pages", p5_d: "Ultra-fast, mobile-first websites connected directly with WhatsApp ordering.", btn_req_web: "Order Website ↗",
+      about_sub: "About Us", about_title: "Innovating Solutions For Your Growth",
+      about_desc: "EB OFFICE empowers businesses by blending real-world accounting discipline with digital design, web development, and AI tools.",
+      f1_t: "Precision & Quality", f1_d: "Meticulous attention to detail in every deliverable.",
+      f2_t: "Rapid Turnaround", f2_d: "Strict commitment to deadlines and agreed timelines.",
+      f3_t: "Competitive Rates", f3_d: "Budget-friendly packages suited for startups and growing businesses.",
+      f4_t: "Ongoing Support", f4_d: "Dedicated technical assistance even after handover.",
+      testi_sub: "Client Feedback", testi_title: "Real Experiences from Our Valued Clients",
+      rev_box_title: "Worked with us before?", rev_box_desc: "Share your honest feedback to help us and new clients.", rev_box_btn: "Write a Review ✍️",
+      rf_title: "Leave Your Rating & Review", rf_name: "Your Full Name", rf_job: "Title or Business", rf_text: "Your honest feedback", rf_submit: "Submit For Approval ↗", rf_hint: "Reviews undergo admin moderation before publishing.",
+      contact_sub: "Contact Us", contact_title: "Ready to Upgrade Your Business?", contact_desc: "Fill the form and we'll reply right away on WhatsApp with the best plan.",
+      f_name: "Full Name", f_phone: "Phone / WhatsApp", f_service: "Required Service", opt_select: "Select Service", f_budget: "Estimated Budget & Currency", f_details: "Project Requirements", f_submit: "Send on WhatsApp ↗",
+      footer_credit: "Designed & Developed by Eslam Elbanby"
+    }
+  };
+
+  let currentLang = localStorage.getItem('eb_lang') || 'ar';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('eb_lang', lang);
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    
+    const btn = document.getElementById('langBtn');
+    if (btn) btn.textContent = lang === 'ar' ? 'English' : 'عربي';
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[lang] && translations[lang][key]) {
+        el.innerHTML = translations[lang][key];
+      }
+    });
+  }
+
+  function toggleLanguage() {
+    const next = currentLang === 'ar' ? 'en' : 'ar';
+    applyLanguage(next);
+  }
+
+  function slidePort(btn, direction) {
+    const container = btn.closest('.carousel-container');
+    const track = container.querySelector('.carousel-track');
+    const slideWidth = track.clientWidth;
+    const isRtl = document.documentElement.dir === 'rtl';
+    const move = isRtl ? -direction * slideWidth : direction * slideWidth;
+    track.scrollBy({ left: move, behavior: 'smooth' });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    applyLanguage(currentLang);
+
+    const autoCarousels = document.querySelectorAll('.carousel-container[data-autoplay="true"]');
+    autoCarousels.forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track');
+      if (!track) return;
+      let autoPlayTimer;
+
+      function startScroll() {
+        autoPlayTimer = setInterval(() => {
+          const isRtl = document.documentElement.dir === 'rtl';
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          const current = Math.abs(track.scrollLeft);
+
+          if (current >= maxScroll - 15) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            const move = isRtl ? -track.clientWidth : track.clientWidth;
+            track.scrollBy({ left: move, behavior: 'smooth' });
+          }
+        }, 3500);
+      }
+
+      function stopScroll() { clearInterval(autoPlayTimer); }
+
+      startScroll();
+      carousel.addEventListener('mouseenter', stopScroll);
+      carousel.addEventListener('mouseleave', startScroll);
+      carousel.addEventListener('touchstart', stopScroll, {passive: true});
+      carousel.addEventListener('touchend', startScroll);
+    });
+
+    // 5 ضغطات سريعة على اللوجو لفتح لوحة الإدارة
+    let clickCount = 0;
+    let clickTimer = null;
+    const trigger = document.getElementById('adminSecretTrigger');
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+        if (clickCount >= 5) {
+          clickCount = 0;
+          window.openAdminPanel();
+        }
+      });
+    }
+  });
+
+  const menuBtn = document.querySelector('.menu');
+  const nav = document.querySelector('nav');
+  menuBtn?.addEventListener('click', () => nav.classList.toggle('mobile-open'));
+  nav?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => nav.classList.remove('mobile-open')));
+
+  function toggleReviewForm() {
+    const wrap = document.getElementById('reviewFormWrap');
+    wrap.style.display = wrap.style.display === 'block' ? 'none' : 'block';
+    if(wrap.style.display === 'block') wrap.scrollIntoView({behavior:'smooth'});
+  }
+
+  document.getElementById('serviceForm')?.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const budget = document.getElementById('budget').value.trim();
+    const currency = document.getElementById('currency').value;
+    const details = document.getElementById('details').value.trim();
+
+    const formattedBudget = budget ? `${budget} ${currency}` : (currentLang === 'ar' ? 'غير محددة' : 'Not specified');
+
+    const message =
+      `مرحباً EB OFFICE%0A` +
+      `أرغب في طلب خدمة جديدة.%0A%0A` +
+      `الاسم: ${encodeURIComponent(name)}%0A` +
+      `رقم الهاتف: ${encodeURIComponent(phone)}%0A` +
+      `الخدمة: ${encodeURIComponent(service)}%0A` +
+      `الميزانية: ${encodeURIComponent(formattedBudget)}%0A` +
+      `التفاصيل: ${encodeURIComponent(details)}`;
+
+    window.open(`https://wa.me/201207641934?text=${message}`, '_blank');
+  });
+</script>
 </body>
 </html>
