@@ -437,7 +437,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- سيتم جلب الآراء وعرضها مع نظام ترجمة ذكي فوري -->
+        <!-- سيتم جلب الآراء وعرضها مترجمة حسب اللغة -->
       </div>
 
       <div class="review-action-box">
@@ -633,26 +633,6 @@
     }, 3500);
   }
 
-  // قاموس ترجمة ذكي للتعليقات والأسماء والوظائف الواردة من قاعدة البيانات
-  const reviewTranslationsEn = {
-    "التصميم كويس": "The design is very good",
-    "اميره سعيد": "Amira Saeed",
-    "مستشار قانوني": "Legal Consultant",
-    "امجد": "Amgad",
-    "صاحب محل": "Store Owner",
-    "ناس محترمه جدا": "Very respectful people",
-    "ابراهيم عبدالرحمن": "Ibrahim Abdelrahman",
-    "مدرس لغه عربيه": "Arabic Teacher",
-    "شغل جميل ودقيق جدا والتزام بالموعد": "Great, precise work and commitment to deadlines"
-  };
-
-  function translateReviewText(text, lang) {
-    if (lang === 'en' && reviewTranslationsEn[text]) {
-      return reviewTranslationsEn[text];
-    }
-    return text;
-  }
-
   const defaultReviews = {
     ar: [
       { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
@@ -694,16 +674,12 @@
 
       if (data && data.length > 0) {
         data.forEach(d => {
-          const displayName = translateReviewText(d.name, currentLang);
-          const displayRole = translateReviewText(d.role, currentLang);
-          const displayText = translateReviewText(d.text, currentLang);
-
           const card = document.createElement("div");
           card.className = "testi-card";
           card.innerHTML = `
             <div class="testi-stars">★★★★★</div>
-            <p>"${escapeHTML(displayText)}"</p>
-            <div class="testi-author"><b>${escapeHTML(displayName)}</b><span>${escapeHTML(displayRole)}</span></div>
+            <p>"${escapeHTML(d.text)}"</p>
+            <div class="testi-author"><b>${escapeHTML(d.name)}</b><span>${escapeHTML(d.role)}</span></div>
           `;
           container.appendChild(card);
         });
