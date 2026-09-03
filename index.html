@@ -437,7 +437,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- سيتم جلب الآراء من قاعدة البيانات السحابية وعرضها هنا -->
+        <!-- سيتم جلب الآراء وعرضها مترجمة حسب اللغة -->
       </div>
 
       <div class="review-action-box">
@@ -633,18 +633,26 @@
     }, 3500);
   }
 
-  const defaultReviews = [
-    { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
-    { name: "أحمد البدري", role: "محاسب مالي", text: "الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة." },
-    { name: "م/ طارق خليل", role: "مدير شركة استيراد", text: "تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل." }
-  ];
+  const defaultReviews = {
+    ar: [
+      { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
+      { name: "أحمد البدري", role: "محاسب مالي", text: "الـ CV الـ ATS اتعمل بطريقة رايقة ومحترمة.. والله أول ما قدمت بيه في شركة برة جالي رد وعملت المقابلة علطول، خدمة ممتازة وسريعة." },
+      { name: "م/ طارق خليل", role: "مدير شركة استيراد", text: "تصميم اللوجو والفواتير طلعوا أشيك مما كنت متخيل، ذوق عالي في اختيار الألوان وسرعة في التعديلات.. أكيد مش آخر تعامل." }
+    ],
+    en: [
+      { name: "Mahmoud Osman", role: "Clothing Store Owner - Tanta", text: "The Excel sheet for store and supplier accounts saved me a lot of trouble.. Calculations are instant and precise. Great job, Eslam." },
+      { name: "Ahmed Elbadry", role: "Financial Accountant", text: "The ATS resume was crafted professionally. As soon as I applied with it abroad, I got an interview call. Excellent and fast service." },
+      { name: "Eng. Tarek Khalil", role: "Import Company Manager", text: "The logo and invoice designs were more elegant than expected, great taste in colors and fast delivery. Definitely not our last collaboration." }
+    ]
+  };
 
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
     if (!container) return;
     container.innerHTML = "";
     
-    defaultReviews.forEach(r => {
+    const reviewsList = defaultReviews[currentLang] || defaultReviews.ar;
+    reviewsList.forEach(r => {
       const card = document.createElement("div");
       card.className = "testi-card";
       card.innerHTML = `
@@ -985,6 +993,8 @@
         el.setAttribute('placeholder', translations[lang][key]);
       }
     });
+
+    loadPublicReviews();
   }
 
   function toggleLanguage() {
