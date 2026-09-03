@@ -515,13 +515,13 @@
     from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyCOYYorZLlEJ9ctnFrw8I3fGkK_y5yN50",
-    authDomain: "eb-office-29420.firebaseapp.com",
-    projectId: "eb-office-29420",
-    storageBucket: "eb-office-29420.firebasestorage.app",
-    messagingSenderId: "390372927142",
-    appId: "1:390372927142:web:bfe321db80f2d70cb99478",
-    measurementId: "G-Z4FWKVPZ24"
+    apiKey: "AIzaSyCGWd5Cvz3F1hNr9H4vV-Gp8QKHb1yHVjY",
+    authDomain: "eb-office-v2.firebaseapp.com",
+    projectId: "eb-office-v2",
+    storageBucket: "eb-office-v2.firebasestorage.app",
+    messagingSenderId: "258340714684",
+    appId: "1:258340714684:web:a8add3092bd6762d3cb8b9",
+    measurementId: "G-55TLK47CR6"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -702,7 +702,7 @@
       document.getElementById('adminPanel').style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
-      alert('خطأ حقيقي من Firebase (للتشخيص فقط): ' + err.code + ' - ' + err.message);
+      alert(currentLang === 'ar' ? 'بيانات الدخول غير صحيحة!' : 'Invalid credentials!');
     }
   };
 
