@@ -458,7 +458,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- سيتم جلب الآراء وعرضها مترجمة حسب اللغة -->
+        <!-- سيتم جلب الآراء وعرضها بدون تكرار -->
       </div>
 
       <div class="review-action-box">
@@ -682,10 +682,8 @@
       const btnConfirm = document.createElement('button');
       btnConfirm.className = 'btn-modal-confirm';
       btnConfirm.textContent = currentLang === 'ar' ? 'تأكيد الحذف (Yes)' : 'Yes';
-      btnConfirm.onclick = () => {
-        overlay.style.display = 'none';
-        if (onConfirm) onConfirm();
-      };
+      btnConfirm.onclick = () => overlay.style.display = 'none';
+      if (onConfirm) onConfirm();
 
       actionsEl.appendChild(btnCancel);
       actionsEl.appendChild(btnConfirm);
@@ -700,14 +698,15 @@
     overlay.style.display = 'grid';
   }
 
-  /* خريطة ترجمة دقيقة للأسماء والوظائف والتعليقات لعرضها باللغة الإنجليزية تلقائياً عندما يكون الموقع بالإنجليزية */
+  /* قاموس ترجمة ذكي ونظيف للأسماء والوظائف والتعليقات في وضع الإنجليزية بدون تعقيد العميل */
   const reviewTranslationsMap = {
     "محمود عثمان": { name: "Mahmoud Osman", role: "Clothing Store Owner - Tanta", text: "The Excel sheet for store and supplier accounts saved me a lot of trouble.. Calculations are instant and precise. Great job, Eslam." },
     "أحمد البدري": { name: "Ahmed Elbadry", role: "Financial Accountant", text: "The ATS resume was crafted professionally. As soon as I applied with it abroad, I got an interview call. Excellent and fast service." },
     "م/ طارق خليل": { name: "Eng. Tarek Khalil", role: "Import Company Manager", text: "The logo and invoice designs were more elegant than expected, great taste in colors and fast delivery. Definitely not our last collaboration." },
     "امجد": { name: "Amgad", role: "Store Owner", text: "The design is very neat and clean!" },
     "إبراهيم عبدالرحمن": { name: "Ibrahim Abdelrahman", role: "Arabic Language Teacher", text: "Very respectful people and professional service." },
-    "رحمه جابر": { name: "Rahma Gaber", role: "Real Estate Sales", text: "The designs are beautiful, thank you so much!" }
+    "رحمه جابر": { name: "Rahma Gaber", role: "Real Estate Sales", text: "The designs are beautiful, thank you so much!" },
+    "احمد مصطفي": { name: "Ahmed Mostafa", role: "Store Owner", text: "The work is beautiful and precise." }
   };
 
   const defaultReviews = {
@@ -728,7 +727,7 @@
     if (!container) return;
     container.innerHTML = "";
     
-    let hasSupabaseReviews = false;
+    let fetchedData = [];
 
     try {
       const { data, error } = await _supabase
@@ -738,70 +737,44 @@
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-
       if (data && data.length > 0) {
-        hasSupabaseReviews = true;
-        data.forEach(d => {
-          let displayName = d.name;
-          let displayRole = d.role;
-          let displayText = d.text;
-
-          if (currentLang === 'en') {
-            const mapped = reviewTranslationsMap[d.name] || reviewTranslationsMap[d.name?.trim()];
-            if (mapped) {
-              displayName = mapped.name;
-              displayRole = mapped.role;
-              displayText = mapped.text;
-            } else if (d.text_en && d.text_en.trim() !== "") {
-              displayText = d.text_en;
-            } else {
-              displayText = "Professional service and exceptional quality, highly recommended!";
-            }
-          }
-
-          const card = document.createElement("div");
-          card.className = "testi-card";
-          card.innerHTML = `
-            <div class="testi-stars">★★★★★</div>
-            <p>"${escapeHTML(displayText)}"</p>
-            <div class="testi-author"><b>${escapeHTML(displayName)}</b><span>${escapeHTML(displayRole)}</span></div>
-          `;
-          container.appendChild(card);
-        });
+        fetchedData = data;
       }
     } catch(e) {
       console.error("Supabase fetch error:", e);
     }
 
-    if (!hasSupabaseReviews) {
-      const reviewsList = defaultReviews[currentLang] || defaultReviews.ar;
-      reviewsList.forEach(r => {
-        let displayName = r.name;
-        let displayRole = r.role;
-        let displayText = r.text;
+    // إذا لم تتوفر بيانات من سوبابيس، نستخدم الافتراضية منعاً للفراغ
+    const reviewsToDisplay = fetchedData.length > 0 ? fetchedData : (defaultReviews[currentLang] || defaultReviews.ar);
 
-        if (currentLang === 'en') {
-          const mapped = reviewTranslationsMap[r.name];
-          if (mapped) {
-            displayName = mapped.name;
-            displayRole = mapped.role;
-            displayText = mapped.text;
-          }
+    reviewsToDisplay.forEach(d => {
+      let displayName = d.name;
+      let displayRole = d.role;
+      let displayText = d.text;
+
+      if (currentLang === 'en') {
+        const mapped = reviewTranslationsMap[d.name] || reviewTranslationsMap[d.name?.trim()];
+        if (mapped) {
+          displayName = mapped.name;
+          displayRole = mapped.role;
+          displayText = mapped.text;
+        } else {
+          // ترجمة ذكية تلقائية أو نص افتراضي متناسق لأي تعليق جديد
+          displayText = d.text_en || d.text;
         }
+      }
 
-        const card = document.createElement("div");
-        card.className = "testi-card";
-        card.innerHTML = `
-          <div class="testi-stars">★★★★★</div>
-          <p>"${escapeHTML(displayText)}"</p>
-          <div class="testi-author"><b>${escapeHTML(displayName)}</b><span>${escapeHTML(displayRole)}</span></div>
-        `;
-        container.appendChild(card);
-      });
-    }
+      const card = document.createElement("div");
+      card.className = "testi-card";
+      card.innerHTML = `
+        <div class="testi-stars">★★★★★</div>
+        <p>"${escapeHTML(displayText)}"</p>
+        <div class="testi-author"><b>${escapeHTML(displayName)}</b><span>${escapeHTML(displayRole)}</span></div>
+      `;
+      container.appendChild(card);
+    });
   };
 
-  /* معالجة إرسال التقييم الجديد بدون حقل إنجليزي وبدون تعقيد للعميل */
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
