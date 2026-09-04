@@ -158,6 +158,20 @@
       opacity: 1;
     }
 
+    /* Modal مخصص أنيق بدلاً من رسائل المتصفح التقليدية */
+    .custom-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 999; place-items: center; padding: 20px; }
+    .custom-modal-box { background: #141414; border: 1.5px solid var(--gold); width: min(380px, 90%); border-radius: 16px; padding: 28px 22px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #fff; }
+    .custom-modal-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--gold); }
+    .custom-modal-box p { font-size: 14px; color: #ddd; margin-bottom: 24px; line-height: 1.6; }
+    .custom-modal-actions { display: flex; gap: 10px; justify-content: center; }
+    .custom-modal-actions button { flex: 1; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px; cursor: pointer; border: none; transition: .2s; }
+    .btn-modal-confirm { background: #e63946; color: #fff; }
+    .btn-modal-confirm:hover { background: #d90429; }
+    .btn-modal-cancel { background: #333; color: #fff; }
+    .btn-modal-cancel:hover { background: #444; }
+    .btn-modal-ok { background: var(--gold); color: #111; width: 100%; }
+    .btn-modal-ok:hover { background: var(--gold2); }
+
     .login-overlay { display: none; position: fixed; inset: 0; background: rgba(5,8,5,0.55); backdrop-filter: blur(3px); z-index: 250; place-items: center; padding: 20px; }
     .login-card { width: min(360px, 100%); background: rgba(60,70,55,0.35); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.25); border-radius: 22px; padding: 55px 26px 26px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.45); text-align: center; }
     .login-avatar { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); width: 68px; height: 68px; border-radius: 50%; background: #0e140e; border: 3px solid rgba(255,255,255,0.3); display: grid; place-items: center; }
@@ -460,8 +474,12 @@
             <input id="revJob" required data-placeholder-key="ph_rev_job" placeholder="مثال: صاحب بيزنس / مهندس" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
           </div>
           <div style="grid-column:1/-1">
-            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_text">رأيك وتجربتك في الشغل معنا</label>
-            <textarea id="revText" required data-placeholder-key="ph_rev_text" placeholder="اكتب رأيك بكل صراحة..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:70px"></textarea>
+            <label style="font-size:12.5px;font-weight:700" data-i18n="rf_text">رأيك وتجربتك في الشغل معنا (عربي)</label>
+            <textarea id="revText" required data-placeholder-key="ph_rev_text" placeholder="اكتب رأيك بكل صراحة..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:60px"></textarea>
+          </div>
+          <div style="grid-column:1/-1">
+            <label style="font-size:12.5px;font-weight:700">رأيك باللغة الإنجليزية (English Translation)</label>
+            <textarea id="revTextEn" required placeholder="Write your review in English..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:60px;direction:ltr;text-align:left;"></textarea>
           </div>
           <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center">
             <button class="btn btn-gold" type="submit" id="btnSubmitReview" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
@@ -511,6 +529,17 @@
 
       <h4 style="font-size:14px;color:#111;margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المنشورة حالياً بالموقع:</h4>
       <div id="approvedReviewsList" style="display:flex;flex-direction:column;gap:10px"></div>
+    </div>
+  </div>
+
+  <!-- Modal مخصص وأنيق لتأكيد أو تنبيهات الحذف -->
+  <div class="custom-modal-overlay" id="customModalOverlay">
+    <div class="custom-modal-box">
+      <h3 id="customModalTitle">تأكيد عملية</h3>
+      <p id="customModalText">هل أنت متأكد من تنفيذ هذا الإجراء؟</p>
+      <div class="custom-modal-actions" id="customModalActions">
+        <!-- سيتم تعبئة الأزرار ديناميكياً -->
+      </div>
     </div>
   </div>
 
@@ -605,7 +634,7 @@
       <span>|</span>
       <a onclick="openPolicyModal('termsModal')" data-i18n="footer_terms">الشروط والأحكام</a>
     </div>
-    <div class="creator-badge" data-i18n="footer_credit">تم تصميم وتطوير الموقع بواسطة Eslam Elbanby</div>
+    <div class="creator-badge">تم تصميم وتطوير الموقع بواسطة - إسلام البنبي</div>
     <div>+201207641934 · eslam.elbanby@gmail.com</div>
   </div>
 </footer>
@@ -631,6 +660,44 @@
     setTimeout(() => {
       toast.classList.remove('show');
     }, 3500);
+  }
+
+  // نظام المودال العصري والشيك بدلاً من الـ alert/confirm التقليدية
+  function showCustomModal(title, text, type, onConfirm) {
+    const overlay = document.getElementById('customModalOverlay');
+    const titleEl = document.getElementById('customModalTitle');
+    const textEl = document.getElementById('customModalText');
+    const actionsEl = document.getElementById('customModalActions');
+
+    titleEl.textContent = title;
+    textEl.textContent = text;
+    actionsEl.innerHTML = '';
+
+    if (type === 'confirm') {
+      const btnCancel = document.createElement('button');
+      btnCancel.className = 'btn-modal-cancel';
+      btnCancel.textContent = currentLang === 'ar' ? 'إلغاء (No)' : 'No';
+      btnCancel.onclick = () => overlay.style.display = 'none';
+
+      const btnConfirm = document.createElement('button');
+      btnConfirm.className = 'btn-modal-confirm';
+      btnConfirm.textContent = currentLang === 'ar' ? 'تأكيد الحذف (Yes)' : 'Yes';
+      btnConfirm.onclick = () => {
+        overlay.style.display = 'none';
+        if (onConfirm) onConfirm();
+      };
+
+      actionsEl.appendChild(btnCancel);
+      actionsEl.appendChild(btnConfirm);
+    } else {
+      const btnOk = document.createElement('button');
+      btnOk.className = 'btn-modal-ok btn btn-gold';
+      btnOk.textContent = 'حسناً (OK)';
+      btnOk.onclick = () => overlay.style.display = 'none';
+      actionsEl.appendChild(btnOk);
+    }
+
+    overlay.style.display = 'grid';
   }
 
   const defaultReviews = {
@@ -674,11 +741,12 @@
 
       if (data && data.length > 0) {
         data.forEach(d => {
+          const displayText = (currentLang === 'en' && d.text_en) ? d.text_en : d.text;
           const card = document.createElement("div");
           card.className = "testi-card";
           card.innerHTML = `
             <div class="testi-stars">★★★★★</div>
-            <p>"${escapeHTML(d.text)}"</p>
+            <p>"${escapeHTML(displayText)}"</p>
             <div class="testi-author"><b>${escapeHTML(d.name)}</b><span>${escapeHTML(d.role)}</span></div>
           `;
           container.appendChild(card);
@@ -698,11 +766,12 @@
     const name = document.getElementById("revName").value.trim();
     const role = document.getElementById("revJob").value.trim();
     const text = document.getElementById("revText").value.trim();
+    const textEn = document.getElementById("revTextEn").value.trim();
 
     try {
       const { error } = await _supabase
         .from('reviews')
-        .insert([{ name: name, role: role, text: text, approved: false }]);
+        .insert([{ name: name, role: role, text: text, text_en: textEn, approved: false }]);
 
       if (error) throw error;
 
@@ -749,7 +818,8 @@
           item.style.cssText = "border:1px solid #ffeeba;padding:12px;border-radius:8px;background:#fffdf5";
           item.innerHTML = `
             <strong>${escapeHTML(rev.name)}</strong> (${escapeHTML(rev.role)})
-            <p style="font-size:13px;color:#444;margin:6px 0">"${escapeHTML(rev.text)}"</p>
+            <p style="font-size:13px;color:#444;margin:6px 0">AR: "${escapeHTML(rev.text)}"</p>
+            <p style="font-size:13px;color:#444;margin:6px 0">EN: "${escapeHTML(rev.text_en || 'Not provided')}"</p>
             <div style="display:flex;gap:8px;margin-top:8px">
               <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="approveReview('${id}')">موافقة ونشر ✅</button>
               <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
@@ -785,20 +855,22 @@
     try {
       const { error } = await _supabase.from('reviews').update({ approved: true }).eq('id', id);
       if (error) throw error;
+      showCustomModal("نجاح", "تم نشر التقييم بنجاح!", "alert");
       renderAdminLists();
       loadPublicReviews();
-    } catch(e) { showToast("حدث خطأ أثناء الاعتماد."); }
+    } catch(e) { showCustomModal("خطأ", "حدث خطأ أثناء الاعتماد.", "alert"); }
   };
 
   window.deleteReview = async function(id) {
-    if(confirm("هل تريد حذف هذا التقييم نهائياً؟")) {
+    showCustomModal("تأكيد الحذف", "هل تريد بالفعل حذف هذا التقييم نهائياً؟", "confirm", async () => {
       try {
         const { error } = await _supabase.from('reviews').delete().eq('id', id);
         if (error) throw error;
+        showCustomModal("نجاح", "تم الحذف بنجاح", "alert");
         renderAdminLists();
         loadPublicReviews();
-      } catch(e) { showToast("حدث خطأ أثناء الحذف."); }
-    }
+      } catch(e) { showCustomModal("خطأ", "حدث خطأ أثناء الحذف.", "alert"); }
+    });
   };
 
   window.openLoginCard = function() {
@@ -819,7 +891,6 @@
     document.getElementById(id).style.display = 'none';
   };
 
-  // تعديل كود تسجيل الدخول لينادي دالة الأمان الـ RPC بدلاً من القراءة المباشرة
   document.getElementById('adminLoginForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     const emailInput = document.getElementById('loginEmail').value.trim();
@@ -919,8 +990,7 @@
       footer_privacy: "سياسة الخصوصية", footer_terms: "الشروط والأحكام",
       modal_privacy_title: "سياسة الخصوصية", modal_privacy_p1: "نحن في EB OFFICE نلتزم بحماية خصوصية بياناتك الشخصية ومعلوماتك التجارية بكل أمان وسرية تامة.", modal_privacy_p2: "نستخدم البيانات فقط لتحسين جودة الخدمات وتسهيل التواصل معك عبر قنواتنا الرسمية مثل واتساب.",
       modal_terms_title: "الشروط والأحكام", modal_terms_p1: "استخدامك لموقع وخدمات EB OFFICE يعني موافقتك التامة على الالتزام بكافة الشروط والقواعد المعمول بها.", modal_terms_p2: "جميع حقوق التصميم والتطوير والمحتوى محفوظة © 2026 EB OFFICE.",
-      modal_close: "إغلاق",
-      footer_credit: "تم تصميم وتطوير الموقع بواسطة Eslam Elbanby"
+      modal_close: "إغلاق"
     },
     en: {
       nav_home: "Home", nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio",
@@ -963,8 +1033,7 @@
       footer_privacy: "Privacy Policy", footer_terms: "Terms & Conditions",
       modal_privacy_title: "Privacy Policy", modal_privacy_p1: "At EB OFFICE, we are committed to protecting your personal data and commercial information with absolute security.", modal_privacy_p2: "We use data solely to improve service quality and facilitate official communication via WhatsApp.",
       modal_terms_title: "Terms & Conditions", modal_terms_p1: "Using EB OFFICE website and services implies your full agreement to adhere to all governing rules.", modal_terms_p2: "All design, development, and content rights reserved © 2026 EB OFFICE.",
-      modal_close: "Close",
-      footer_credit: "Designed & Developed by Eslam Elbanby"
+      modal_close: "Close"
     }
   };
 
