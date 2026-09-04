@@ -458,7 +458,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- سيتم جلب الآراء وعرضها بدون تكرار -->
+        <!-- يتم جلب الآراء وعرضها بدون تكرار -->
       </div>
 
       <div class="review-action-box">
@@ -682,8 +682,10 @@
       const btnConfirm = document.createElement('button');
       btnConfirm.className = 'btn-modal-confirm';
       btnConfirm.textContent = currentLang === 'ar' ? 'تأكيد الحذف (Yes)' : 'Yes';
-      btnConfirm.onclick = () => overlay.style.display = 'none';
-      if (onConfirm) onConfirm();
+      btnConfirm.onclick = () => {
+        overlay.style.display = 'none';
+        if (onConfirm) onConfirm();
+      };
 
       actionsEl.appendChild(btnCancel);
       actionsEl.appendChild(btnConfirm);
@@ -698,7 +700,7 @@
     overlay.style.display = 'grid';
   }
 
-  /* قاموس ترجمة ذكي ونظيف للأسماء والوظائف والتعليقات في وضع الإنجليزية بدون تعقيد العميل */
+  /* قاموس ترجمة ذكي وشامل للأسماء والوظائف والتعليقات لعرضها تلقائياً باللغة الإنجليزية بدون تعقيد العميل */
   const reviewTranslationsMap = {
     "محمود عثمان": { name: "Mahmoud Osman", role: "Clothing Store Owner - Tanta", text: "The Excel sheet for store and supplier accounts saved me a lot of trouble.. Calculations are instant and precise. Great job, Eslam." },
     "أحمد البدري": { name: "Ahmed Elbadry", role: "Financial Accountant", text: "The ATS resume was crafted professionally. As soon as I applied with it abroad, I got an interview call. Excellent and fast service." },
@@ -706,7 +708,8 @@
     "امجد": { name: "Amgad", role: "Store Owner", text: "The design is very neat and clean!" },
     "إبراهيم عبدالرحمن": { name: "Ibrahim Abdelrahman", role: "Arabic Language Teacher", text: "Very respectful people and professional service." },
     "رحمه جابر": { name: "Rahma Gaber", role: "Real Estate Sales", text: "The designs are beautiful, thank you so much!" },
-    "احمد مصطفي": { name: "Ahmed Mostafa", role: "Store Owner", text: "The work is beautiful and precise." }
+    "احمد مصطفي": { name: "Ahmed Mostafa", role: "Store Owner", text: "The work is beautiful and precise." },
+    "كريم": { name: "Karim", role: "Lawyer", text: "Wonderful service and great execution!" }
   };
 
   const defaultReviews = {
@@ -738,13 +741,20 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
-        fetchedData = data;
+        // تصفية فريدة لمنع أي تكرار للتعليقات في العرض
+        const uniqueMap = new Map();
+        data.forEach(item => {
+          const key = (item.name + "_" + item.text).trim();
+          if (!uniqueMap.has(key)) {
+            uniqueMap.set(key, item);
+          }
+        });
+        fetchedData = Array.from(uniqueMap.values());
       }
     } catch(e) {
       console.error("Supabase fetch error:", e);
     }
 
-    // إذا لم تتوفر بيانات من سوبابيس، نستخدم الافتراضية منعاً للفراغ
     const reviewsToDisplay = fetchedData.length > 0 ? fetchedData : (defaultReviews[currentLang] || defaultReviews.ar);
 
     reviewsToDisplay.forEach(d => {
@@ -759,8 +769,10 @@
           displayRole = mapped.role;
           displayText = mapped.text;
         } else {
-          // ترجمة ذكية تلقائية أو نص افتراضي متناسق لأي تعليق جديد
-          displayText = d.text_en || d.text;
+          // دالة ترجمة افتراضية ذكية للوظائف والكلمات الشائعة لو لم تكن موجودة بالقاموس
+          if (displayRole === "محامي") displayRole = "Lawyer";
+          else if (displayRole === "محاسب") displayRole = "Accountant";
+          else if (displayRole === "مهندس") displayRole = "Engineer";
         }
       }
 
