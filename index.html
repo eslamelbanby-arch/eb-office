@@ -819,6 +819,7 @@
     document.getElementById(id).style.display = 'none';
   };
 
+  // تعديل كود تسجيل الدخول لينادي دالة الأمان الـ RPC بدلاً من القراءة المباشرة
   document.getElementById('adminLoginForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     const emailInput = document.getElementById('loginEmail').value.trim();
@@ -831,14 +832,12 @@
     submitBtn.textContent = '...';
 
     try {
-      const { data, error } = await _supabase
-        .from('admins')
-        .select('*')
-        .eq('email', emailInput)
-        .eq('password', passInput)
-        .single();
+      const { data: isValid, error } = await _supabase.rpc('verify_admin_login', {
+        p_email: emailInput,
+        p_password: passInput
+      });
 
-      if (error || !data) {
+      if (error || !isValid) {
         throw new Error('بيانات الدخول غير صحيحة');
       }
 
