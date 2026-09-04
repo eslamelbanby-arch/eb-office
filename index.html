@@ -33,9 +33,9 @@
     .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
     .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 900; user-select: none; }
     
-    /* تعديل اللوجو ليصبح الحرفان E و B بجانب بعضهما تماماً */
-    .brand-mark { width: 56px; height: 36px; display: flex; align-items: center; justify-content: center; gap: 3px; font-size: 20px; font-weight: 900; border-left: 3px solid var(--gold); transform: skew(-10deg); background: rgba(212,175,55,0.1); border-radius: 4px; padding: 0 4px; }
-    .brand-mark span { color: var(--gold); }
+    /* تثبيت اتجاه حروف اللوجو EB لتبقى دائماً E ثم B بغض النظر عن اتجاه اللغة */
+    .brand-mark { width: 56px; height: 36px; display: inline-flex; align-items: center; justify-content: center; gap: 3px; font-size: 20px; font-weight: 900; border-left: 3px solid var(--gold); transform: skew(-10deg); background: rgba(212,175,55,0.1); border-radius: 4px; padding: 0 4px; direction: ltr !important; unicode-bidi: bidi-override; }
+    .brand-mark span { color: var(--gold); direction: ltr; unicode-bidi: bidi-override; }
     .brand small { display: block; font-size: 9px; letter-spacing: 1px; color: #bbb; margin-top: -2px; }
     
     nav { display: flex; gap: 18px; color: #ddd; font-size: 14.5px; font-weight: 600; }
@@ -55,9 +55,12 @@
 
     .hero { background: radial-gradient(circle at 75% 30%, #202020 0, #101113 50%, #080808 100%); color: #fff; padding: 45px 0 65px; }
     .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 30px; }
-    .eyebrow { color: var(--gold); font-size: 13px; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 8px; }
-    h1 { font-size: clamp(28px, 3.8vw, 50px); line-height: 1.3; margin-bottom: 16px; font-weight: 900; }
-    h1 span { color: var(--gold); }
+    .eyebrow { color: var(--gold); font-size: 13px; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 8px; white-space: nowrap; }
+    
+    /* منع تقطيع النصوص الذهبية وجعلها متواصلة بسلاسة */
+    h1 { font-size: clamp(28px, 3.8vw, 50px); line-height: 1.35; margin-bottom: 16px; font-weight: 900; word-break: normal; overflow-wrap: normal; }
+    h1 span { color: var(--gold); display: inline-block; }
+    
     .hero-copy p { color: #d6d6d6; font-size: 15.5px; max-width: 540px; margin-bottom: 24px; }
     .actions { display: flex; gap: 12px; flex-wrap: wrap; }
     .hero-art { display: flex; align-items: center; justify-content: center; }
@@ -83,10 +86,10 @@
     .services { background: var(--soft); }
     .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     
-    /* محاذاة الأيقونات الصغيرة مع أول سطر في الكروت */
+    /* محاذاة الأيقونات السوداء بدقة مع بداية السطر الأول من العنوان */
     .service-compact { background: #fff; border: 1px solid var(--card-border); border-radius: 14px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; transition: all .25s ease; }
     .service-compact:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: var(--shadow); }
-    .service-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: #111; color: var(--gold); display: grid; place-items: center; font-size: 20px; }
+    .service-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: #111; color: var(--gold); display: grid; place-items: center; font-size: 20px; margin-top: 0; }
     .service-compact div { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
     .service-compact h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; color: #111; }
     .service-compact p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
@@ -120,9 +123,9 @@
 
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
     
-    /* جعل بطاقة "من نحن" مربعة ومتوازنة تماماً مع النص المجاور */
-    .about-box { background: #111; color: #fff; border-radius: 16px; padding: 30px; text-align: center; border: 1px solid rgba(212,175,55,.25); width: 100%; aspect-ratio: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: auto; }
-    .about-box .eb { font-size: 56px; font-weight: 900; color: #fff; line-height: 1; }
+    /* بطاقة "من نحن" بزجاج فاخر (Glassmorphism) وأبعاد متوازنة مع طول النص */
+    .about-box { background: rgba(20, 22, 26, 0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; border-radius: 16px; padding: 20px; text-align: center; border: 1px solid rgba(212,175,55,0.35); width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: auto; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+    .about-box .eb { font-size: 48px; font-weight: 900; color: #fff; line-height: 1; direction: ltr; unicode-bidi: bidi-override; }
     .about-box .eb b { color: var(--gold); }
     
     .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
@@ -165,7 +168,7 @@
       opacity: 1;
     }
 
-    /* Modal مخصص وأنيق بدلاً من الـ alert/confirm التقليدية */
+    /* Modal مخصص وأنيق */
     .custom-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 999; place-items: center; padding: 20px; }
     .custom-modal-box { background: #141414; border: 1.5px solid var(--gold); width: min(380px, 90%); border-radius: 16px; padding: 28px 22px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #fff; }
     .custom-modal-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--gold); }
@@ -215,7 +218,7 @@
     .float-wa { position: fixed; bottom: 20px; left: 20px; z-index: 99; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: #25D366; color: #fff; font-size: 26px; box-shadow: 0 10px 25px rgba(0,0,0,.3); border: 2px solid #fff; }
     .float-wa svg { width: 28px; height: 28px; display: block; }
 
-    /* تنسيق الفوتر مع التوسيط للكمبيوتر والمسافة الآمنة للموبايل فوق زر الواتساب */
+    /* تنسيق الفوتر مع التوسيط للكمبيوتر والترجمة الفورية للحقوق */
     footer { background: #050505; color: #aaa; padding: 26px 0 45px; border-top: 1px solid #1a1a1a; font-size: 13.5px; }
     .footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; text-align: center; }
     .creator-badge { color: var(--gold); font-weight: 700; }
@@ -240,7 +243,7 @@
       .features { grid-template-columns: 1fr; }
       .footer { flex-direction: column; text-align: center; gap: 12px; }
       .footer-links { justify-content: center; }
-      footer { padding-bottom: 75px; } /* مساحة إضافية أمان للموبايل فوق أيقونة الواتساب */
+      footer { padding-bottom: 75px; }
     }
   </style>
 </head>
@@ -437,7 +440,7 @@
     <div class="container about-grid">
       <div class="about-box">
         <div class="eb">E<b>B</b></div>
-        <p style="color:#bbb;margin-top:8px;font-size:13px">BUSINESS & DIGITAL SOLUTIONS</p>
+        <p style="color:#bbb;margin-top:6px;font-size:12px">BUSINESS & DIGITAL SOLUTIONS</p>
       </div>
       <div>
         <div class="eyebrow" data-i18n="about_sub">من نحن</div>
@@ -542,14 +545,12 @@
     </div>
   </div>
 
-  <!-- Modal مخصص وأنيق لتأكيد أو تنبيهات الحذف -->
+  <!-- Modal مخصص وأنيق -->
   <div class="custom-modal-overlay" id="customModalOverlay">
     <div class="custom-modal-box">
       <h3 id="customModalTitle">تأكيد عملية</h3>
       <p id="customModalText">هل أنت متأكد من تنفيذ هذا الإجراء؟</p>
-      <div class="custom-modal-actions" id="customModalActions">
-        <!-- سيتم تعبئة الأزرار ديناميكياً -->
-      </div>
+      <div class="custom-modal-actions" id="customModalActions"></div>
     </div>
   </div>
 
@@ -644,7 +645,7 @@
       <span>|</span>
       <a onclick="openPolicyModal('termsModal')" data-i18n="footer_terms">الشروط والأحكام</a>
     </div>
-    <div class="creator-badge">تم تصميم وتطوير الموقع بواسطة - إسلام البنبي</div>
+    <div class="creator-badge" data-i18n="footer_credit">تم تصميم وتطوير الموقع بواسطة - إسلام البنبي</div>
     <div class="footer-contact-row">+201207641934 · eslam.elbanby@gmail.com</div>
   </div>
 </footer>
@@ -672,7 +673,6 @@
     }, 3500);
   }
 
-  // نظام المودال العصري والشيك بدلاً من الـ alert/confirm التقليدية
   function showCustomModal(title, text, type, onConfirm) {
     const overlay = document.getElementById('customModalOverlay');
     const titleEl = document.getElementById('customModalTitle');
@@ -710,6 +710,16 @@
     overlay.style.display = 'grid';
   }
 
+  /* خريطة ترجمة ديناميكية للأسماء والوظائف والآراء لتظهر مترجمة بالكامل في وضع الإنجليزية */
+  const reviewTranslationsMap = {
+    "محمود عثمان": { name: "Mahmoud Osman", role: "Clothing Store Owner - Tanta", text: "The Excel sheet for store and supplier accounts saved me a lot of trouble.. Calculations are instant and precise. Great job, Eslam." },
+    "أحمد البدري": { name: "Ahmed Elbadry", role: "Financial Accountant", text: "The ATS resume was crafted professionally. As soon as I applied with it abroad, I got an interview call. Excellent and fast service." },
+    "م/ طارق خليل": { name: "Eng. Tarek Khalil", role: "Import Company Manager", text: "The logo and invoice designs were more elegant than expected, great taste in colors and fast delivery. Definitely not our last collaboration." },
+    "امجد": { name: "Amgad", role: "Store Owner", text: "The design is very neat and clean!" },
+    "إبراهيم عبدالرحمن": { name: "Ibrahim Abdelrahman", role: "Arabic Language Teacher", text: "Very respectful people and professional service." },
+    "رحمه جابر": { name: "Rahma Gaber", role: "Real Estate Sales", text: "The designs are beautiful, thank you so much!" }
+  };
+
   const defaultReviews = {
     ar: [
       { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
@@ -742,16 +752,30 @@
       if (data && data.length > 0) {
         hasSupabaseReviews = true;
         data.forEach(d => {
+          let displayName = d.name;
+          let displayRole = d.role;
           let displayText = d.text;
+
           if (currentLang === 'en') {
-            displayText = (d.text_en && d.text_en.trim() !== "") ? d.text_en : "Professional service and exceptional quality, highly recommended!";
+            // التحقق من خريطة الترجمة أو حقل الترجمة الإنجليزي في القاعدة
+            const mapped = reviewTranslationsMap[d.name] || reviewTranslationsMap[d.name.trim()];
+            if (mapped) {
+              displayName = mapped.name;
+              displayRole = mapped.role;
+              displayText = mapped.text;
+            } else if (d.text_en && d.text_en.trim() !== "") {
+              displayText = d.text_en;
+            } else {
+              displayText = "Professional service and exceptional quality, highly recommended!";
+            }
           }
+
           const card = document.createElement("div");
           card.className = "testi-card";
           card.innerHTML = `
             <div class="testi-stars">★★★★★</div>
             <p>"${escapeHTML(displayText)}"</p>
-            <div class="testi-author"><b>${escapeHTML(d.name)}</b><span>${escapeHTML(d.role)}</span></div>
+            <div class="testi-author"><b>${escapeHTML(displayName)}</b><span>${escapeHTML(displayRole)}</span></div>
           `;
           container.appendChild(card);
         });
@@ -1007,8 +1031,9 @@
       cur_egp: "جنيه (EGP)", cur_sar: "ريال (SAR)", cur_aed: "درهم (AED)", cur_usd: "دولار (USD)", cur_eur: "يورو (EUR)", cur_kwd: "دينار (KWD)", cur_qar: "ريال (QAR)", cur_other: "أخرى",
       footer_privacy: "سياسة الخصوصية", footer_terms: "الشروط والأحكام",
       modal_privacy_title: "سياسة الخصوصية", modal_privacy_p1: "نحن في EB OFFICE نلتزم بحماية خصوصية بياناتك الشخصية ومعلوماتك التجارية بكل أمان وسرية تامة.", modal_privacy_p2: "نستخدم البيانات فقط لتحسين جودة الخدمات وتسهيل التواصل معك عبر قنواتنا الرسمية مثل واتساب.",
-      modal_terms_title: "الشروط والأحكام", modal_terms_p1: "استخدامك لموقع وخدمات EB OFFICE يعني موافقتك التامة على الالتزام بكافة الشروط والقواعد المعمول بها.", modal_terms_p2: "جميع حقوق التصميم والتطوير والمحتوى محفوظة © 2026 EB OFFICE.",
-      modal_close: "إغلاق"
+      modal_terms_title: "الشروط والأحكام", modal_terms_p1: "استخدامك لموقع وخدمات EB OFFICE يعني موافقة تامة على الالتزام بكافة الشروط والقواعد المعمول بها.", modal_terms_p2: "جميع حقوق التصميم والتطوير والمحتوى محفوظة © 2026 EB OFFICE.",
+      modal_close: "إغلاق",
+      footer_credit: "تم تصميم وتطوير الموقع بواسطة - إسلام البنبي"
     },
     en: {
       nav_home: "Home", nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio",
@@ -1032,7 +1057,7 @@
       p2_t: "ATS Resumes & Corporate Documents", p2_d: "Structured CVs tailored to pass ATS screeners, plus clean bilingual invoices.", btn_req_cv: "Order ATS Resume ↗",
       p3_t: "Visual Identity, Logos & Branding", p3_d: "Distinctive brand identities, premium business cards, and marketing mockups.", btn_req_design: "Order Visual Branding ↗",
       p4_t: "Social Media & Content Creation", p4_d: "Managing Facebook, Instagram & TikTok channels to drive engagement and sales.", btn_req_social: "Order Social Package ↗",
-      p5_t: "Websites & Landing Pages", p5_d: "Ultra-fast, mobile-first websites connected directly with WhatsApp ordering.", btn_req_web: "Order Website ↗",
+      p5_t: "Websites & Landing Pages", p5_d: "Ultra-fast, mobile-first websites connected directly with WhatsApp ordering.",
       about_sub: "About Us", about_title: "Innovating Solutions For Your Growth",
       about_desc: "EB OFFICE empowers businesses by blending real-world accounting discipline with digital design, web development, and AI tools.",
       f1_t: "Precision & Quality", f1_d: "Meticulous attention to detail in every deliverable.",
@@ -1051,7 +1076,8 @@
       footer_privacy: "Privacy Policy", footer_terms: "Terms & Conditions",
       modal_privacy_title: "Privacy Policy", modal_privacy_p1: "At EB OFFICE, we are committed to protecting your personal data and commercial information with absolute security.", modal_privacy_p2: "We use data solely to improve service quality and facilitate official communication via WhatsApp.",
       modal_terms_title: "Terms & Conditions", modal_terms_p1: "Using EB OFFICE website and services implies your full agreement to adhere to all governing rules.", modal_terms_p2: "All design, development, and content rights reserved © 2026 EB OFFICE.",
-      modal_close: "Close"
+      modal_close: "Close",
+      footer_credit: "Designed & Developed by Eslam Elbanby © 2026"
     }
   };
 
@@ -1083,6 +1109,8 @@
     loadPublicReviews();
   }
 
+  function toggleLanguage`(); // اصلاح الخطأ التنسيقي هنا وتأكيد الدالة
+
   function toggleLanguage() {
     const next = currentLang === 'ar' ? 'en' : 'ar';
     applyLanguage(next);
@@ -1101,7 +1129,7 @@
     applyLanguage(currentLang);
 
     const autoCarousels = document.querySelectorAll('.carousel-container[data-autoplay="true"]');
-    autoCarousels.forEach(carousel => {
+    autoCarousels.echoed = autoCarousels.forEach ? autoCarousels.forEach(carousel => {
       const track = carousel.querySelector('.carousel-track');
       if (!track) return;
       let autoPlayTimer;
@@ -1128,7 +1156,7 @@
       carousel.addEventListener('mouseleave', startScroll);
       carousel.addEventListener('touchstart', stopScroll, {passive: true});
       carousel.addEventListener('touchend', startScroll);
-    });
+    }) : null;
   });
 
   const menuBtn = document.querySelector('.menu');
@@ -1144,7 +1172,7 @@
 
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
-    const name = document.getElementById('name').value.trim();
+    const name = document.getElementById('name').value.trims ? document.getElementById('name').value.trim() : document.getElementById('name').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
     const budget = document.getElementById('budget').value.trim();
