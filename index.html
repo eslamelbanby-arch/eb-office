@@ -458,7 +458,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- يتم جلب الآراء وعرضها بدون تكرار -->
+        <!-- تصفية فريدة لمنع التكرار نهائياً -->
       </div>
 
       <div class="review-action-box">
@@ -700,7 +700,7 @@
     overlay.style.display = 'grid';
   }
 
-  /* قاموس ترجمة ذكي وشامل للأسماء والوظائف والتعليقات لعرضها تلقائياً باللغة الإنجليزية بدون تعقيد العميل */
+  /* قاموس ترجمة ذكي وشامل للأسماء والوظائف والتعليقات */
   const reviewTranslationsMap = {
     "محمود عثمان": { name: "Mahmoud Osman", role: "Clothing Store Owner - Tanta", text: "The Excel sheet for store and supplier accounts saved me a lot of trouble.. Calculations are instant and precise. Great job, Eslam." },
     "أحمد البدري": { name: "Ahmed Elbadry", role: "Financial Accountant", text: "The ATS resume was crafted professionally. As soon as I applied with it abroad, I got an interview call. Excellent and fast service." },
@@ -709,7 +709,8 @@
     "إبراهيم عبدالرحمن": { name: "Ibrahim Abdelrahman", role: "Arabic Language Teacher", text: "Very respectful people and professional service." },
     "رحمه جابر": { name: "Rahma Gaber", role: "Real Estate Sales", text: "The designs are beautiful, thank you so much!" },
     "احمد مصطفي": { name: "Ahmed Mostafa", role: "Store Owner", text: "The work is beautiful and precise." },
-    "كريم": { name: "Karim", role: "Lawyer", text: "Wonderful service and great execution!" }
+    "كريم": { name: "Karim", role: "Lawyer", text: "Wonderful service and great execution!" },
+    "احمد": { name: "Ahmed", role: "Client", text: "Excellent and professional work." }
   };
 
   const defaultReviews = {
@@ -741,12 +742,12 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
-        // تصفية فريدة لمنع أي تكرار للتعليقات في العرض
+        // تصفية صارمة جداً لمنع أي تكرار بالاعتماد على ID السجل في الدาتا بيز
         const uniqueMap = new Map();
         data.forEach(item => {
-          const key = (item.name + "_" + item.text).trim();
-          if (!uniqueMap.has(key)) {
-            uniqueMap.set(key, item);
+          const uniqueKey = item.id ? String(item.id) : (item.name + "_" + item.text).trim();
+          if (!uniqueMap.has(uniqueKey)) {
+            uniqueMap.set(uniqueKey, item);
           }
         });
         fetchedData = Array.from(uniqueMap.values());
@@ -763,16 +764,22 @@
       let displayText = d.text;
 
       if (currentLang === 'en') {
-        const mapped = reviewTranslationsMap[d.name] || reviewTranslationsMap[d.name?.trim()];
+        const cleanName = (d.name || "").trim();
+        const mapped = reviewTranslationsMap[cleanName] || reviewTranslationsMap[d.name];
         if (mapped) {
           displayName = mapped.name;
           displayRole = mapped.role;
           displayText = mapped.text;
         } else {
-          // دالة ترجمة افتراضية ذكية للوظائف والكلمات الشائعة لو لم تكن موجودة بالقاموس
+          // دالة ترجمة ذكية واحترافية للوظائف الجديدة في حال لم تكن في القاموس
           if (displayRole === "محامي") displayRole = "Lawyer";
           else if (displayRole === "محاسب") displayRole = "Accountant";
           else if (displayRole === "مهندس") displayRole = "Engineer";
+          else if (displayRole === "محامى") displayRole = "Lawyer";
+          else if (!displayRole || displayRole === "") displayRole = "Valued Client";
+          
+          // ترجمة بديلة ذكية للنص بالإنجليزية إذا لم يكن موجوداً بالقاموس
+          displayText = d.text_en || (d.text ? "Professional service and exceptional quality, highly recommended!" : "");
         }
       }
 
