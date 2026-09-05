@@ -700,6 +700,11 @@
     overlay.style.display = 'grid';
   }
 
+  // Holds the admin's credentials ONLY in memory for the current admin panel
+  // session (never saved to localStorage). Every privileged action below
+  // sends these along and the database re-checks them before doing anything.
+  let adminSession = null;
+
   const defaultReviews = {
     ar: [
       { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
@@ -882,11 +887,17 @@
     pendingList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
     approvedList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
 
+    if (!adminSession) {
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>انتهت الجلسة، سجّل الدخول تاني.</p>";
+      approvedList.innerHTML = "";
+      return;
+    }
+
     try {
-      const { data, error } = await _supabase
-        .from('reviews')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const { data, error } = await _supabase.rpc('admin_list_reviews', {
+        p_email: adminSession.email,
+        p_password: adminSession.password
+      });
 
       if (error) throw error;
       
@@ -953,13 +964,16 @@
     const textEn = document.getElementById(`en_text_${id}`).value.trim();
     const roleEn = document.getElementById(`en_role_${id}`).value.trim();
     const nameEn = document.getElementById(`en_name_${id}`).value.trim();
+    if (!adminSession) { showCustomModal("خطأ", "انتهت الجلسة، سجّل الدخول تاني.", "alert"); return; }
     try {
-      const { error } = await _supabase.from('reviews').update({ 
-        approved: true,
-        text_en: textEn,
-        role_en: roleEn,
-        name_en: nameEn
-      }).eq('id', id);
+      const { error } = await _supabase.rpc('admin_approve_review', {
+        p_email: adminSession.email,
+        p_password: adminSession.password,
+        p_id: String(id),
+        p_text_en: textEn,
+        p_role_en: roleEn,
+        p_name_en: nameEn
+      });
       if (error) throw error;
       showCustomModal("نجاح", "تم حفظ الترجمة ونشر التقييم بنجاح!", "alert");
       renderAdminLists();
@@ -971,12 +985,16 @@
     const textEn = document.getElementById(`edit_en_text_${id}`).value.trim();
     const roleEn = document.getElementById(`edit_en_role_${id}`).value.trim();
     const nameEn = document.getElementById(`edit_en_name_${id}`).value.trim();
+    if (!adminSession) { showToast("انتهت الجلسة، سجّل الدخول تاني."); return; }
     try {
-      const { error } = await _supabase.from('reviews').update({ 
-        text_en: textEn,
-        role_en: roleEn,
-        name_en: nameEn
-      }).eq('id', id);
+      const { error } = await _supabase.rpc('admin_update_translation', {
+        p_email: adminSession.email,
+        p_password: adminSession.password,
+        p_id: String(id),
+        p_text_en: textEn,
+        p_role_en: roleEn,
+        p_name_en: nameEn
+      });
       if (error) throw error;
       showToast("تم تحديث الترجمة بنجاح");
       loadPublicReviews();
@@ -985,8 +1003,13 @@
 
   window.deleteReview = async function(id) {
     showCustomModal("تأكيد الحذف", "هل تريد بالفعل حذف هذا التقييم نهائياً؟", "confirm", async () => {
+      if (!adminSession) { showCustomModal("خطأ", "انتهت الجلسة، سجّل الدخول تاني.", "alert"); return; }
       try {
-        const { error } = await _supabase.from('reviews').delete().eq('id', id);
+        const { error } = await _supabase.rpc('admin_delete_review', {
+          p_email: adminSession.email,
+          p_password: adminSession.password,
+          p_id: String(id)
+        });
         if (error) throw error;
         showCustomModal("نجاح", "تم الحذف بنجاح", "alert");
         renderAdminLists();
@@ -1034,10 +1057,16 @@
         throw new Error('بيانات الدخول غير صحيحة');
       }
 
+      // Keep credentials in memory only (never in localStorage). Every
+      // protected admin action re-sends these and the database re-checks
+      // them before doing anything.
+      adminSession = { email: emailInput, password: passInput };
+
       closeLoginCard();
       document.getElementById('adminPanel').style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
+      adminSession = null;
       errorBox.textContent = currentLang === 'ar' ? 'البريد أو كلمة المرور غير صحيحة!' : 'Invalid email or password!';
     } finally {
       submitBtn.disabled = false;
@@ -1047,6 +1076,9 @@
 
   window.closeAdminPanel = function() {
     document.getElementById('adminPanel').style.display = 'none';
+    // Log the admin out when they close the panel, so the credentials
+    // don't stay sitting in memory longer than needed.
+    adminSession = null;
   };
 
   document.addEventListener('DOMContentLoaded', () => {
