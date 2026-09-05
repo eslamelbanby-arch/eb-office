@@ -713,6 +713,10 @@
     ]
   };
 
+  // Session-only cache: avoids re-calling the translation API every time the
+  // visitor toggles the language switch back and forth.
+  const reviewTranslationCache = new Map();
+
   // ---- FIXED: deduplicate reliably by normalized name+text, and never show
   // untranslated Arabic reviews while the site is in English mode ----
   window.loadPublicReviews = async function() {
@@ -752,10 +756,28 @@
     let reviewsToDisplay;
 
     if (currentLang === 'en') {
-      // Only show reviews that actually have an English translation filled in
-      // by the admin. Otherwise fall back to the built-in English samples,
-      // instead of leaking untranslated Arabic text onto the English page.
-      const translatedOnly = fetchedData.filter(d => d.text_en && d.text_en.trim() !== "");
+      // For English mode: use the stored translation if the admin already
+      // saved one; otherwise translate on the fly right now (live, when the
+      // visitor switches the language), and cache the result in memory so
+      // toggling the language back and forth doesn't re-call the API.
+      const translatedList = await Promise.all(fetchedData.map(async (d) => {
+        if (d.text_en && d.text_en.trim() !== "") return d;
+
+        const cacheKey = d.id != null ? String(d.id) : (d.name + '|' + d.text);
+        if (reviewTranslationCache.has(cacheKey)) {
+          return reviewTranslationCache.get(cacheKey);
+        }
+
+        const [textEn, roleEn] = await Promise.all([
+          translateText(d.text, 'ar', 'en'),
+          translateText(d.role, 'ar', 'en')
+        ]);
+        const translated = { ...d, text_en: textEn, role_en: roleEn };
+        reviewTranslationCache.set(cacheKey, translated);
+        return translated;
+      }));
+
+      const translatedOnly = translatedList.filter(d => d.text_en && d.text_en.trim() !== "");
       reviewsToDisplay = translatedOnly.length > 0 ? translatedOnly : defaultReviews.en;
     } else {
       reviewsToDisplay = fetchedData.length > 0 ? fetchedData : defaultReviews.ar;
