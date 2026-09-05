@@ -713,11 +713,13 @@
     ]
   };
 
+  // ---- FIXED: deduplicate reliably by normalized name+text, and never show
+  // untranslated Arabic reviews while the site is in English mode ----
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
     if (!container) return;
     container.innerHTML = "";
-    
+
     let fetchedData = [];
 
     try {
@@ -729,9 +731,14 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
+        // Dedupe strictly by normalized (name + text) content, regardless of id.
+        // This catches duplicate rows in the database that were submitted more
+        // than once with the same content but different ids.
         const uniqueMap = new Map();
         data.forEach(item => {
-          const uniqueKey = item.id ? String(item.id) : (item.name + "_" + item.text).trim();
+          const normName = (item.name || '').trim().replace(/\s+/g, ' ').toLowerCase();
+          const normText = (item.text || '').trim().replace(/\s+/g, ' ').toLowerCase();
+          const uniqueKey = normName + '||' + normText;
           if (!uniqueMap.has(uniqueKey)) {
             uniqueMap.set(uniqueKey, item);
           }
@@ -742,7 +749,17 @@
       console.error("Supabase fetch error:", e);
     }
 
-    const reviewsToDisplay = fetchedData.length > 0 ? fetchedData : (defaultReviews[currentLang] || defaultReviews.ar);
+    let reviewsToDisplay;
+
+    if (currentLang === 'en') {
+      // Only show reviews that actually have an English translation filled in
+      // by the admin. Otherwise fall back to the built-in English samples,
+      // instead of leaking untranslated Arabic text onto the English page.
+      const translatedOnly = fetchedData.filter(d => d.text_en && d.text_en.trim() !== "");
+      reviewsToDisplay = translatedOnly.length > 0 ? translatedOnly : defaultReviews.en;
+    } else {
+      reviewsToDisplay = fetchedData.length > 0 ? fetchedData : defaultReviews.ar;
+    }
 
     reviewsToDisplay.forEach(d => {
       let displayName = d.name;
@@ -750,12 +767,11 @@
       let displayText = d.text;
 
       if (currentLang === 'en') {
-        if (d.text_en && d.text_en.trim() !== "") {
-          displayText = d.text_en;
-        }
-        if (d.role_en && d.role_en.trim() !== "") {
-          displayRole = d.role_en;
-        }
+        // At this point every item in reviewsToDisplay (when it came from the
+        // DB) is guaranteed to have text_en filled in (see filter above).
+        // Default review samples already have plain English text/role.
+        displayText = d.text_en || d.text;
+        displayRole = (d.role_en && d.role_en.trim() !== "") ? d.role_en : d.role;
       }
 
       const card = document.createElement("div");
@@ -769,20 +785,52 @@
     });
   };
 
+  // ---- AUTO TRANSLATION (free, no API key) ----
+  // Uses the public MyMemory translation API to translate Arabic review text
+  // to English automatically at submission time, so the admin only needs to
+  // click "approve" - no manual typing of the translation is required.
+  // If the API fails or is rate-limited, text_en/role_en are left empty and
+  // the admin can still fill them manually from the panel as a fallback.
+  async function translateText(text, sourceLang, targetLang) {
+    const trimmed = (text || '').trim();
+    if (!trimmed) return '';
+    try {
+      const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(trimmed)}&langpair=${sourceLang}|${targetLang}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error('Translation request failed');
+      const data = await res.json();
+      let translated = data?.responseData?.translatedText || '';
+      // MyMemory sometimes returns a quota warning instead of a translation
+      if (!translated || /MYMEMORY WARNING/i.test(translated)) return '';
+      return translated;
+    } catch (e) {
+      console.error('Translation error:', e);
+      return '';
+    }
+  }
+
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
+    if (btn.disabled) return; // guard against double-submit (double tap / double click)
     btn.disabled = true;
-    btn.innerText = "...";
+    btn.innerText = currentLang === 'ar' ? "جاري الترجمة..." : "Translating...";
 
     const name = document.getElementById("revName").value.trim();
     const role = document.getElementById("revJob").value.trim();
     const text = document.getElementById("revText").value.trim();
 
     try {
+      // Auto-translate role & text to English before saving, so the review
+      // arrives in the admin panel already translated and ready to approve.
+      const [textEn, roleEn] = await Promise.all([
+        translateText(text, 'ar', 'en'),
+        translateText(role, 'ar', 'en')
+      ]);
+
       const { error } = await _supabase
         .from('reviews')
-        .insert([{ name: name, role: role, text: text, approved: false }]);
+        .insert([{ name: name, role: role, text: text, text_en: textEn, role_en: roleEn, approved: false }]);
 
       if (error) throw error;
 
@@ -984,7 +1032,10 @@
     }
   });
 
-  loadPublicReviews();
+  // NOTE: the initial call to loadPublicReviews() was removed from here.
+  // It's now called once, safely, from applyLanguage() after currentLang
+  // is known (see the second script block below) - this avoids a double
+  // fetch/render race at page load.
 </script>
 
 <script>
