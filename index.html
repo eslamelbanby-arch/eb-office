@@ -458,7 +458,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- تصفية فريدة لمنع التكرار نهائياً -->
+        <!-- جلب البيانات من سوبابيس ومنع التكرار جذرياً -->
       </div>
 
       <div class="review-action-box">
@@ -700,19 +700,6 @@
     overlay.style.display = 'grid';
   }
 
-  /* قاموس ترجمة ذكي وشامل للأسماء والوظائف والتعليقات */
-  const reviewTranslationsMap = {
-    "محمود عثمان": { name: "Mahmoud Osman", role: "Clothing Store Owner - Tanta", text: "The Excel sheet for store and supplier accounts saved me a lot of trouble.. Calculations are instant and precise. Great job, Eslam." },
-    "أحمد البدري": { name: "Ahmed Elbadry", role: "Financial Accountant", text: "The ATS resume was crafted professionally. As soon as I applied with it abroad, I got an interview call. Excellent and fast service." },
-    "م/ طارق خليل": { name: "Eng. Tarek Khalil", role: "Import Company Manager", text: "The logo and invoice designs were more elegant than expected, great taste in colors and fast delivery. Definitely not our last collaboration." },
-    "امجد": { name: "Amgad", role: "Store Owner", text: "The design is very neat and clean!" },
-    "إبراهيم عبدالرحمن": { name: "Ibrahim Abdelrahman", role: "Arabic Language Teacher", text: "Very respectful people and professional service." },
-    "رحمه جابر": { name: "Rahma Gaber", role: "Real Estate Sales", text: "The designs are beautiful, thank you so much!" },
-    "احمد مصطفي": { name: "Ahmed Mostafa", role: "Store Owner", text: "The work is beautiful and precise." },
-    "كريم": { name: "Karim", role: "Lawyer", text: "Wonderful service and great execution!" },
-    "احمد": { name: "Ahmed", role: "Client", text: "Excellent and professional work." }
-  };
-
   const defaultReviews = {
     ar: [
       { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
@@ -742,7 +729,7 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
-        // تصفية صارمة جداً لمنع أي تكرار بالاعتماد على ID السجل في الدาتا بيز
+        // تصفية فريدة تامة تعتمد على ID السجل لمنع التكرار نهائياً
         const uniqueMap = new Map();
         data.forEach(item => {
           const uniqueKey = item.id ? String(item.id) : (item.name + "_" + item.text).trim();
@@ -763,23 +750,13 @@
       let displayRole = d.role;
       let displayText = d.text;
 
+      // إذا كان الموقع باللغة الإنجليزية، نقوم بجلب الحقول المترجمة من سوبابيس مباشرة
       if (currentLang === 'en') {
-        const cleanName = (d.name || "").trim();
-        const mapped = reviewTranslationsMap[cleanName] || reviewTranslationsMap[d.name];
-        if (mapped) {
-          displayName = mapped.name;
-          displayRole = mapped.role;
-          displayText = mapped.text;
-        } else {
-          // دالة ترجمة ذكية واحترافية للوظائف الجديدة في حال لم تكن في القاموس
-          if (displayRole === "محامي") displayRole = "Lawyer";
-          else if (displayRole === "محاسب") displayRole = "Accountant";
-          else if (displayRole === "مهندس") displayRole = "Engineer";
-          else if (displayRole === "محامى") displayRole = "Lawyer";
-          else if (!displayRole || displayRole === "") displayRole = "Valued Client";
-          
-          // ترجمة بديلة ذكية للنص بالإنجليزية إذا لم يكن موجوداً بالقاموس
-          displayText = d.text_en || (d.text ? "Professional service and exceptional quality, highly recommended!" : "");
+        if (d.text_en && d.text_en.trim() !== "") {
+          displayText = d.text_en;
+        }
+        if (d.role_en && d.role_en.trim() !== "") {
+          displayRole = d.role_en;
         }
       }
 
@@ -854,9 +831,11 @@
           item.style.cssText = "border:1px solid #ffeeba;padding:12px;border-radius:8px;background:#fffdf5";
           item.innerHTML = `
             <strong>${escapeHTML(rev.name)}</strong> (${escapeHTML(rev.role)})
-            <p style="font-size:13px;color:#444;margin:6px 0">"${escapeHTML(rev.text)}"</p>
+            <p style="font-size:13px;color:#444;margin:6px 0">AR: "${escapeHTML(rev.text)}"</p>
+            <p style="font-size:13px;color:#444;margin:6px 0">EN Text: <input type="text" id="en_text_${id}" value="${escapeHTML(rev.text_en || '')}" placeholder="English translation..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
+            <p style="font-size:13px;color:#444;margin:6px 0">EN Role: <input type="text" id="en_role_${id}" value="${escapeHTML(rev.role_en || '')}" placeholder="English role..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
             <div style="display:flex;gap:8px;margin-top:8px">
-              <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="approveReview('${id}')">موافقة ونشر ✅</button>
+              <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="saveAndApproveReview('${id}')">حفظ وموافقة ونشر ✅</button>
               <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
             </div>
           `;
@@ -864,13 +843,21 @@
         } else {
           approvedCount++;
           const item = document.createElement("div");
-          item.style.cssText = "border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa;display:flex;justify-content:space-between;align-items:center;gap:10px";
+          item.style.cssText = "border:1px solid #eee;padding:12px;border-radius:8px;background:#fafafa;display:flex;flex-direction:column;gap:8px";
           item.innerHTML = `
-            <div style="flex-grow:1">
-              <strong>${escapeHTML(rev.name)}</strong> <small style="color:var(--muted)">(${escapeHTML(rev.role)})</small>
-              <p style="font-size:13px;color:#444;margin-top:4px">"${escapeHTML(rev.text)}"</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <strong>${escapeHTML(rev.name)}</strong> <small style="color:var(--muted)">(${escapeHTML(rev.role)})</small>
+                <p style="font-size:13px;color:#444;margin-top:4px">AR: "${escapeHTML(rev.text)}"</p>
+                <p style="font-size:12px;color:#666">EN: "${escapeHTML(rev.text_en || 'Not translated')}" / "${escapeHTML(rev.role_en || '')}"</p>
+              </div>
+              <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteReview('${id}')">حذف ✕</button>
             </div>
-            <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteReview('${id}')">حذف ✕</button>
+            <div style="display:flex;gap:6px;margin-top:4px;">
+              <input type="text" id="edit_en_text_${id}" value="${escapeHTML(rev.text_en || '')}" placeholder="EN text" style="flex:1;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
+              <input type="text" id="edit_en_role_${id}" value="${escapeHTML(rev.role_en || '')}" placeholder="EN role" style="width:110px;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
+              <button class="btn btn-gold" style="padding:5px 10px;font-size:12px;" onclick="updateTranslationOnly('${id}')">حفظ التعديل</button>
+            </div>
           `;
           approvedList.appendChild(item);
         }
@@ -886,14 +873,34 @@
     }
   };
 
-  window.approveReview = async function(id) {
+  window.saveAndApproveReview = async function(id) {
+    const textEn = document.getElementById(`en_text_${id}`).value.trim();
+    const roleEn = document.getElementById(`en_role_${id}`).value.trim();
     try {
-      const { error } = await _supabase.from('reviews').update({ approved: true }).eq('id', id);
+      const { error } = await _supabase.from('reviews').update({ 
+        approved: true,
+        text_en: textEn,
+        role_en: roleEn
+      }).eq('id', id);
       if (error) throw error;
-      showCustomModal("نجاح", "تم نشر التقييم بنجاح!", "alert");
+      showCustomModal("نجاح", "تم حفظ الترجمة ونشر التقييم بنجاح!", "alert");
       renderAdminLists();
       loadPublicReviews();
-    } catch(e) { showCustomModal("خطأ", "حدث خطأ أثناء الاعتماد.", "alert"); }
+    } catch(e) { showCustomModal("خطأ", "حدث خطأ أثناء الحفظ.", "alert"); }
+  };
+
+  window.updateTranslationOnly = async function(id) {
+    const textEn = document.getElementById(`edit_en_text_${id}`).value.trim();
+    const roleEn = document.getElementById(`edit_en_role_${id}`).value.trim();
+    try {
+      const { error } = await _supabase.from('reviews').update({ 
+        text_en: textEn,
+        role_en: roleEn
+      }).eq('id', id);
+      if (error) throw error;
+      showToast("تم تحديث الترجمة بنجاح");
+      loadPublicReviews();
+    } catch(e) { showToast("حدث خطأ أثناء التحديث"); }
   };
 
   window.deleteReview = async function(id) {
@@ -1095,7 +1102,7 @@
     document.querySelectorAll('[data-placeholder-key]').forEach(el => {
       const key = el.getAttribute('data-placeholder-key');
       if (translations[lang] && translations[lang][key]) {
-        el.setAttribute('placeholder', translations[lang][key]);
+        el.setAttribute('placeholder',translations[lang][key]);
       }
     });
 
@@ -1164,7 +1171,7 @@
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
+    comst phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
     const budget = document.getElementById('budget').value.trim();
     const currency = document.getElementById('currency').value;
