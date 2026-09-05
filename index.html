@@ -761,18 +761,21 @@
       // visitor switches the language), and cache the result in memory so
       // toggling the language back and forth doesn't re-call the API.
       const translatedList = await Promise.all(fetchedData.map(async (d) => {
-        if (d.text_en && d.text_en.trim() !== "") return d;
+        // If everything is already translated and stored, use it as-is.
+        const hasFullTranslation = d.text_en && d.text_en.trim() !== "" && d.name_en && d.name_en.trim() !== "";
+        if (hasFullTranslation) return d;
 
         const cacheKey = d.id != null ? String(d.id) : (d.name + '|' + d.text);
         if (reviewTranslationCache.has(cacheKey)) {
           return reviewTranslationCache.get(cacheKey);
         }
 
-        const [textEn, roleEn] = await Promise.all([
-          translateText(d.text, 'ar', 'en'),
-          translateText(d.role, 'ar', 'en')
+        const [textEn, roleEn, nameEn] = await Promise.all([
+          (d.text_en && d.text_en.trim() !== "") ? d.text_en : translateText(d.text, 'ar', 'en'),
+          (d.role_en && d.role_en.trim() !== "") ? d.role_en : translateText(d.role, 'ar', 'en'),
+          (d.name_en && d.name_en.trim() !== "") ? d.name_en : translateText(d.name, 'ar', 'en')
         ]);
-        const translated = { ...d, text_en: textEn, role_en: roleEn };
+        const translated = { ...d, text_en: textEn, role_en: roleEn, name_en: nameEn };
         reviewTranslationCache.set(cacheKey, translated);
         return translated;
       }));
@@ -791,9 +794,10 @@
       if (currentLang === 'en') {
         // At this point every item in reviewsToDisplay (when it came from the
         // DB) is guaranteed to have text_en filled in (see filter above).
-        // Default review samples already have plain English text/role.
+        // Default review samples already have plain English text/role/name.
         displayText = d.text_en || d.text;
         displayRole = (d.role_en && d.role_en.trim() !== "") ? d.role_en : d.role;
+        displayName = (d.name_en && d.name_en.trim() !== "") ? d.name_en : d.name;
       }
 
       const card = document.createElement("div");
@@ -843,16 +847,18 @@
     const text = document.getElementById("revText").value.trim();
 
     try {
-      // Auto-translate role & text to English before saving, so the review
-      // arrives in the admin panel already translated and ready to approve.
-      const [textEn, roleEn] = await Promise.all([
+      // Auto-translate name, role & text to English before saving, so the
+      // review arrives in the admin panel already translated and ready to
+      // approve.
+      const [textEn, roleEn, nameEn] = await Promise.all([
         translateText(text, 'ar', 'en'),
-        translateText(role, 'ar', 'en')
+        translateText(role, 'ar', 'en'),
+        translateText(name, 'ar', 'en')
       ]);
 
       const { error } = await _supabase
         .from('reviews')
-        .insert([{ name: name, role: role, text: text, text_en: textEn, role_en: roleEn, approved: false }]);
+        .insert([{ name: name, role: role, text: text, text_en: textEn, role_en: roleEn, name_en: nameEn, approved: false }]);
 
       if (error) throw error;
 
@@ -900,6 +906,7 @@
           item.innerHTML = `
             <strong>${escapeHTML(rev.name)}</strong> (${escapeHTML(rev.role)})
             <p style="font-size:13px;color:#444;margin:6px 0">AR: "${escapeHTML(rev.text)}"</p>
+            <p style="font-size:13px;color:#444;margin:6px 0">EN Name: <input type="text" id="en_name_${id}" value="${escapeHTML(rev.name_en || '')}" placeholder="English name..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
             <p style="font-size:13px;color:#444;margin:6px 0">EN Text: <input type="text" id="en_text_${id}" value="${escapeHTML(rev.text_en || '')}" placeholder="English translation..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
             <p style="font-size:13px;color:#444;margin:6px 0">EN Role: <input type="text" id="en_role_${id}" value="${escapeHTML(rev.role_en || '')}" placeholder="English role..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
             <div style="display:flex;gap:8px;margin-top:8px">
@@ -917,11 +924,12 @@
               <div>
                 <strong>${escapeHTML(rev.name)}</strong> <small style="color:var(--muted)">(${escapeHTML(rev.role)})</small>
                 <p style="font-size:13px;color:#444;margin-top:4px">AR: "${escapeHTML(rev.text)}"</p>
-                <p style="font-size:12px;color:#666">EN: "${escapeHTML(rev.text_en || 'Not translated')}" / "${escapeHTML(rev.role_en || '')}"</p>
+                <p style="font-size:12px;color:#666">EN: "${escapeHTML(rev.name_en || 'Not translated')}" — "${escapeHTML(rev.text_en || 'Not translated')}" / "${escapeHTML(rev.role_en || '')}"</p>
               </div>
               <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteReview('${id}')">حذف ✕</button>
             </div>
             <div style="display:flex;gap:6px;margin-top:4px;">
+              <input type="text" id="edit_en_name_${id}" value="${escapeHTML(rev.name_en || '')}" placeholder="EN name" style="width:100px;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
               <input type="text" id="edit_en_text_${id}" value="${escapeHTML(rev.text_en || '')}" placeholder="EN text" style="flex:1;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
               <input type="text" id="edit_en_role_${id}" value="${escapeHTML(rev.role_en || '')}" placeholder="EN role" style="width:110px;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
               <button class="btn btn-gold" style="padding:5px 10px;font-size:12px;" onclick="updateTranslationOnly('${id}')">حفظ التعديل</button>
@@ -944,11 +952,13 @@
   window.saveAndApproveReview = async function(id) {
     const textEn = document.getElementById(`en_text_${id}`).value.trim();
     const roleEn = document.getElementById(`en_role_${id}`).value.trim();
+    const nameEn = document.getElementById(`en_name_${id}`).value.trim();
     try {
       const { error } = await _supabase.from('reviews').update({ 
         approved: true,
         text_en: textEn,
-        role_en: roleEn
+        role_en: roleEn,
+        name_en: nameEn
       }).eq('id', id);
       if (error) throw error;
       showCustomModal("نجاح", "تم حفظ الترجمة ونشر التقييم بنجاح!", "alert");
@@ -960,10 +970,12 @@
   window.updateTranslationOnly = async function(id) {
     const textEn = document.getElementById(`edit_en_text_${id}`).value.trim();
     const roleEn = document.getElementById(`edit_en_role_${id}`).value.trim();
+    const nameEn = document.getElementById(`edit_en_name_${id}`).value.trim();
     try {
       const { error } = await _supabase.from('reviews').update({ 
         text_en: textEn,
-        role_en: roleEn
+        role_en: roleEn,
+        name_en: nameEn
       }).eq('id', id);
       if (error) throw error;
       showToast("تم تحديث الترجمة بنجاح");
