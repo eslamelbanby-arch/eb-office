@@ -458,7 +458,7 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- جلب البيانات من سوبابيس ومنع التكرار جذرياً -->
+        <!-- جلب البيانات بدون تكرار -->
       </div>
 
       <div class="review-action-box">
@@ -729,7 +729,6 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
-        // تصفية فريدة تامة تعتمد على ID السجل لمنع التكرار نهائياً
         const uniqueMap = new Map();
         data.forEach(item => {
           const uniqueKey = item.id ? String(item.id) : (item.name + "_" + item.text).trim();
@@ -750,7 +749,6 @@
       let displayRole = d.role;
       let displayText = d.text;
 
-      // إذا كان الموقع باللغة الإنجليزية، نقوم بجلب الحقول المترجمة من سوبابيس مباشرة
       if (currentLang === 'en') {
         if (d.text_en && d.text_en.trim() !== "") {
           displayText = d.text_en;
@@ -1102,7 +1100,7 @@
     document.querySelectorAll('[data-placeholder-key]').forEach(el => {
       const key = el.getAttribute('data-placeholder-key');
       if (translations[lang] && translations[lang][key]) {
-        el.setAttribute('placeholder',translations[lang][key]);
+        el.setAttribute('placeholder', translations[lang][key]);
       }
     });
 
@@ -1171,7 +1169,7 @@
   document.getElementById('serviceForm')?.addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('name').value.trim();
-    comst phone = document.getElementById('phone').value.trim();
+    const phone = document.getElementById('phone').value.trim();
     const service = document.getElementById('service').value;
     const budget = document.getElementById('budget').value.trim();
     const currency = document.getElementById('currency').value;
