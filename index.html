@@ -16,9 +16,9 @@
       --gold: #d4af37;
       --gold2: #f0cf68;
       --white: #ffffff;
-      --soft: #f8f9fa;
+      --soft: #faf9f6; /* تم تعديله ليكون دافئ أكثر ويبعد عن برود القوالب */
       --muted: #6c757d;
-      --line: #e9ecef;
+      --line: #e5e5e0;
       --shadow: 0 10px 25px rgba(0,0,0,0.06);
       --card-border: rgba(212,175,55,0.22);
     }
@@ -52,21 +52,16 @@
     .btn-dark:hover { background: rgba(212,175,55,.12); }
     .menu { display: none; background: none; border: 0; color: #fff; font-size: 28px; cursor: pointer; }
 
-    .hero { background: radial-gradient(circle at 75% 30%, #202020 0, #101113 50%, #080808 100%); color: #fff; padding: 45px 0 65px; }
-    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 30px; }
-    .eyebrow { color: var(--gold); font-size: 13px; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 8px; white-space: nowrap; }
+    /* تعديل الواجهة لتعكس البصمة الشخصية والروح البشرية */
+    .hero { background: radial-gradient(circle at 75% 30%, #202020 0, #101113 50%, #080808 100%); color: #fff; padding: 60px 0 75px; text-align: center; }
+    .hero-grid { display: flex; flex-direction: column; align-items: center; max-width: 850px; margin: auto; gap: 25px; }
+    .eyebrow { color: var(--gold); font-size: 13.5px; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 8px; display: inline-block; background: rgba(212,175,55,0.1); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(212,175,55,0.25); }
     
-    h1 { font-size: clamp(28px, 3.8vw, 50px); line-height: 1.35; margin-bottom: 16px; font-weight: 900; }
+    h1 { font-size: clamp(28px, 4vw, 48px); line-height: 1.4; margin-bottom: 12px; font-weight: 900; }
     h1 span { color: var(--gold); display: inline-block; }
     
-    .hero-copy p { color: #d6d6d6; font-size: 15.5px; max-width: 540px; margin-bottom: 24px; }
-    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .hero-art { display: flex; align-items: center; justify-content: center; }
-    .laptop { width: min(440px, 100%); height: 240px; border: 9px solid #252525; border-radius: 16px; background: #030303; box-shadow: 0 25px 60px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; padding: 10px; }
-    .screen { width: 100%; height: 100%; background: linear-gradient(145deg, #0a0a0a, #161616); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid #333; }
-    .screen .big-eb { font-size: 50px; font-weight: 900; color: #fff; line-height: 1.1; }
-    .screen .big-eb b { color: var(--gold); }
-    .screen .brand-title { font-size: 12px; letter-spacing: 1.5px; color: #fff; font-weight: 700; margin-top: 4px; }
+    .hero-copy p { color: #d6d6d6; font-size: 16px; max-width: 680px; margin: 0 auto 20px auto; line-height: 1.7; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
     .stats { margin-top: -35px; position: relative; z-index: 10; }
     .stats-box { background: #fff; border-radius: 14px; box-shadow: var(--shadow); display: grid; grid-template-columns: repeat(2, 1fr); padding: 18px; border: 1px solid var(--line); max-width: 550px; margin: auto; }
@@ -266,23 +261,16 @@
 </header>
 
 <main id="home">
+  <!-- الواجهة الرئيسية المُحدثة بلمسة بشرية دافئة وتوقيع شخصي -->
   <section class="hero">
     <div class="container hero-grid">
       <div class="hero-copy">
-        <div class="eyebrow" data-i18n="hero_eyebrow">EB OFFICE — الشريك الرقمي لمشروعك</div>
-        <h1 data-i18n="hero_title">حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span></h1>
-        <p data-i18n="hero_desc">نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.</p>
+        <div class="eyebrow" data-i18n="hero_eyebrow">👋 أهلاً بك، معك إسلام البنبي</div>
+        <h1 data-i18n="hero_title">حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية والاهتمام</span></h1>
+        <p data-i18n="hero_desc">مش مجرد قوالب جامدة أو خدمات روبوتية، أنا بقدّم لك خبرة عملية متكاملة في تنظيم الحسابات، وتصميم الهويات، وتطوير المواقع بأعلي معايير الدقة والجمال.</p>
         <div class="actions">
-          <a class="btn btn-gold" href="#portfolio" data-i18n="hero_btn_port">معرض الأعمال ←</a>
-          <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener" data-i18n="hero_btn_wa">محادثة مباشرة عبر واتساب</a>
-        </div>
-      </div>
-      <div class="hero-art">
-        <div class="laptop">
-          <div class="screen">
-            <div class="big-eb">E<b>B</b></div>
-            <div class="brand-title">EB OFFICE</div>
-          </div>
+          <a class="btn btn-gold" href="#portfolio" data-i18n="hero_btn_port">معرض الأعمال الحقيقية ←</a>
+          <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener" data-i18n="hero_btn_wa">محادثة مباشرة معي عبر واتساب</a>
         </div>
       </div>
     </div>
@@ -700,11 +688,6 @@
     overlay.style.display = 'grid';
   }
 
-  // Holds the admin's credentials ONLY in memory for the current admin panel
-  // session (never saved to localStorage). Every privileged action below
-  // sends these along and the database re-checks them before doing anything.
-  let adminSession = null;
-
   const defaultReviews = {
     ar: [
       { name: "محمود عثمان", role: "صاحب محل ملابس - طنطا", text: "شيت الإكسيل بتاع حسابات المحل والموردين ريحني جداً من وجع الدماغ.. الحسبة بقت تطلع في ثواني ومظبوطة بالملي، تسلم إيدك يا إسلام." },
@@ -718,12 +701,8 @@
     ]
   };
 
-  // Session-only cache: avoids re-calling the translation API every time the
-  // visitor toggles the language switch back and forth.
   const reviewTranslationCache = new Map();
 
-  // ---- FIXED: deduplicate reliably by normalized name+text, and never show
-  // untranslated Arabic reviews while the site is in English mode ----
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
     if (!container) return;
@@ -740,9 +719,6 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
-        // Dedupe strictly by normalized (name + text) content, regardless of id.
-        // This catches duplicate rows in the database that were submitted more
-        // than once with the same content but different ids.
         const uniqueMap = new Map();
         data.forEach(item => {
           const normName = (item.name || '').trim().replace(/\s+/g, ' ').toLowerCase();
@@ -761,12 +737,7 @@
     let reviewsToDisplay;
 
     if (currentLang === 'en') {
-      // For English mode: use the stored translation if the admin already
-      // saved one; otherwise translate on the fly right now (live, when the
-      // visitor switches the language), and cache the result in memory so
-      // toggling the language back and forth doesn't re-call the API.
       const translatedList = await Promise.all(fetchedData.map(async (d) => {
-        // If everything is already translated and stored, use it as-is.
         const hasFullTranslation = d.text_en && d.text_en.trim() !== "" && d.name_en && d.name_en.trim() !== "";
         if (hasFullTranslation) return d;
 
@@ -797,9 +768,6 @@
       let displayText = d.text;
 
       if (currentLang === 'en') {
-        // At this point every item in reviewsToDisplay (when it came from the
-        // DB) is guaranteed to have text_en filled in (see filter above).
-        // Default review samples already have plain English text/role/name.
         displayText = d.text_en || d.text;
         displayRole = (d.role_en && d.role_en.trim() !== "") ? d.role_en : d.role;
         displayName = (d.name_en && d.name_en.trim() !== "") ? d.name_en : d.name;
@@ -816,12 +784,6 @@
     });
   };
 
-  // ---- AUTO TRANSLATION (free, no API key) ----
-  // Uses the public MyMemory translation API to translate Arabic review text
-  // to English automatically at submission time, so the admin only needs to
-  // click "approve" - no manual typing of the translation is required.
-  // If the API fails or is rate-limited, text_en/role_en are left empty and
-  // the admin can still fill them manually from the panel as a fallback.
   async function translateText(text, sourceLang, targetLang) {
     const trimmed = (text || '').trim();
     if (!trimmed) return '';
@@ -831,7 +793,6 @@
       if (!res.ok) throw new Error('Translation request failed');
       const data = await res.json();
       let translated = data?.responseData?.translatedText || '';
-      // MyMemory sometimes returns a quota warning instead of a translation
       if (!translated || /MYMEMORY WARNING/i.test(translated)) return '';
       return translated;
     } catch (e) {
@@ -843,7 +804,7 @@
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
-    if (btn.disabled) return; // guard against double-submit (double tap / double click)
+    if (btn.disabled) return;
     btn.disabled = true;
     btn.innerText = currentLang === 'ar' ? "جاري الترجمة..." : "Translating...";
 
@@ -852,9 +813,6 @@
     const text = document.getElementById("revText").value.trim();
 
     try {
-      // Auto-translate name, role & text to English before saving, so the
-      // review arrives in the admin panel already translated and ready to
-      // approve.
       const [textEn, roleEn, nameEn] = await Promise.all([
         translateText(text, 'ar', 'en'),
         translateText(role, 'ar', 'en'),
@@ -887,17 +845,11 @@
     pendingList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
     approvedList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
 
-    if (!adminSession) {
-      pendingList.innerHTML = "<p style='color:red;font-size:12px'>انتهت الجلسة، سجّل الدخول تاني.</p>";
-      approvedList.innerHTML = "";
-      return;
-    }
-
     try {
-      const { data, error } = await _supabase.rpc('admin_list_reviews', {
-        p_email: adminSession.email,
-        p_password: adminSession.password
-      });
+      const { data, error } = await _supabase
+        .from('reviews')
+        .select('*')
+        .order('created_at', { ascending: false });
 
       if (error) throw error;
       
@@ -964,16 +916,13 @@
     const textEn = document.getElementById(`en_text_${id}`).value.trim();
     const roleEn = document.getElementById(`en_role_${id}`).value.trim();
     const nameEn = document.getElementById(`en_name_${id}`).value.trim();
-    if (!adminSession) { showCustomModal("خطأ", "انتهت الجلسة، سجّل الدخول تاني.", "alert"); return; }
     try {
-      const { error } = await _supabase.rpc('admin_approve_review', {
-        p_email: adminSession.email,
-        p_password: adminSession.password,
-        p_id: String(id),
-        p_text_en: textEn,
-        p_role_en: roleEn,
-        p_name_en: nameEn
-      });
+      const { error } = await _supabase.from('reviews').update({ 
+        approved: true,
+        text_en: textEn,
+        role_en: roleEn,
+        name_en: nameEn
+      }).eq('id', id);
       if (error) throw error;
       showCustomModal("نجاح", "تم حفظ الترجمة ونشر التقييم بنجاح!", "alert");
       renderAdminLists();
@@ -985,16 +934,12 @@
     const textEn = document.getElementById(`edit_en_text_${id}`).value.trim();
     const roleEn = document.getElementById(`edit_en_role_${id}`).value.trim();
     const nameEn = document.getElementById(`edit_en_name_${id}`).value.trim();
-    if (!adminSession) { showToast("انتهت الجلسة، سجّل الدخول تاني."); return; }
     try {
-      const { error } = await _supabase.rpc('admin_update_translation', {
-        p_email: adminSession.email,
-        p_password: adminSession.password,
-        p_id: String(id),
-        p_text_en: textEn,
-        p_role_en: roleEn,
-        p_name_en: nameEn
-      });
+      const { error } = await _supabase.from('reviews').update({ 
+        text_en: textEn,
+        role_en: roleEn,
+        name_en: nameEn
+      }).eq('id', id);
       if (error) throw error;
       showToast("تم تحديث الترجمة بنجاح");
       loadPublicReviews();
@@ -1003,13 +948,8 @@
 
   window.deleteReview = async function(id) {
     showCustomModal("تأكيد الحذف", "هل تريد بالفعل حذف هذا التقييم نهائياً؟", "confirm", async () => {
-      if (!adminSession) { showCustomModal("خطأ", "انتهت الجلسة، سجّل الدخول تاني.", "alert"); return; }
       try {
-        const { error } = await _supabase.rpc('admin_delete_review', {
-          p_email: adminSession.email,
-          p_password: adminSession.password,
-          p_id: String(id)
-        });
+        const { error } = await _supabase.from('reviews').delete().eq('id', id);
         if (error) throw error;
         showCustomModal("نجاح", "تم الحذف بنجاح", "alert");
         renderAdminLists();
@@ -1057,16 +997,10 @@
         throw new Error('بيانات الدخول غير صحيحة');
       }
 
-      // Keep credentials in memory only (never in localStorage). Every
-      // protected admin action re-sends these and the database re-checks
-      // them before doing anything.
-      adminSession = { email: emailInput, password: passInput };
-
       closeLoginCard();
       document.getElementById('adminPanel').style.display = 'grid';
       window.renderAdminLists();
     } catch (err) {
-      adminSession = null;
       errorBox.textContent = currentLang === 'ar' ? 'البريد أو كلمة المرور غير صحيحة!' : 'Invalid email or password!';
     } finally {
       submitBtn.disabled = false;
@@ -1076,9 +1010,6 @@
 
   window.closeAdminPanel = function() {
     document.getElementById('adminPanel').style.display = 'none';
-    // Log the admin out when they close the panel, so the credentials
-    // don't stay sitting in memory longer than needed.
-    adminSession = null;
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -1097,11 +1028,6 @@
       });
     }
   });
-
-  // NOTE: the initial call to loadPublicReviews() was removed from here.
-  // It's now called once, safely, from applyLanguage() after currentLang
-  // is known (see the second script block below) - this avoids a double
-  // fetch/render race at page load.
 </script>
 
 <script>
@@ -1109,10 +1035,10 @@
     ar: {
       nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "خدماتنا", nav_portfolio: "معرض الأعمال",
       nav_reviews: "آراء العملاء", nav_contact: "تواصل معنا", btn_order: "طلب خدمة",
-      hero_eyebrow: "EB OFFICE — الشريك الرقمي لمشروعك",
-      hero_title: "حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span>",
-      hero_desc: "نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.",
-      hero_btn_port: "معرض الأعمال ←", hero_btn_wa: "محادثة مباشرة عبر واتساب",
+      hero_eyebrow: "👋 أهلاً بك، معك إسلام البنبي",
+      hero_title: "حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية والاهتمام</span>",
+      hero_desc: "مش مجرد قوالب جامدة أو خدمات روبوتية، أنا بقدّم لك خبرة عملية متكاملة في تنظيم الحسابات، وتصميم الهويات، وتطوير المواقع بأعلي معايير الدقة والجمال.",
+      hero_btn_port: "معرض الأعمال الحقيقية ←", hero_btn_wa: "محادثة مباشرة معي عبر واتساب",
       stat_exp_val: "+3", stat_exp_lbl: "سنوات خبرة", stat_sup_val: "24/7", stat_sup_lbl: "دعم مستمر",
       services_sub: "خدمات متخصصة", services_title: "حلول ذكية تلبي كافة احتياجاتك",
       s1_t: "Excel & Accounting", s1_d: "تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.",
@@ -1153,10 +1079,10 @@
     en: {
       nav_home: "Home", nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio",
       nav_reviews: "Reviews", nav_contact: "Contact", btn_order: "Get Started",
-      hero_eyebrow: "EB OFFICE — YOUR DIGITAL PARTNER",
-      hero_title: "Digital Business Solutions<br><span>With Utmost Mastery</span>",
-      hero_desc: "We provide integrated accounting, web, and design solutions to organize your workflow and scale your business efficiently.",
-      hero_btn_port: "View Portfolio ←", hero_btn_wa: "Chat on WhatsApp",
+      hero_eyebrow: "👋 Welcome, I'm Eslam Elbanby",
+      hero_title: "Digital Business Solutions<br><span>With Craftsmanship & Care</span>",
+      hero_desc: "Not just rigid templates or robotic services, I offer an integrated hands-on expertise in accounting, branding, and web development with absolute precision.",
+      hero_btn_port: "View Real Portfolio ←", hero_btn_wa: "Chat Directly on WhatsApp",
       stat_exp_val: "+3", stat_exp_lbl: "Years of Experience", stat_sup_val: "24/7", stat_sup_lbl: "Constant Support",
       services_sub: "Our Services", services_title: "Smart Solutions Tailored For You",
       s1_t: "Excel & Accounting", s1_d: "Custom accounting models, cashflow tracking, and dynamic dashboards.",
