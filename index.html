@@ -7,297 +7,237 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-color: #f7f6f2; /* خلفية دافئة وراقية تكسر بياض الصفحات التقليدية */
-      --surface: #ffffff;
-      --text-main: #141414;
-      --text-muted: #666666;
-      --accent: #b89742; /* درجة نحاسية دافئة بعيدة عن الفجاجة */
-      --accent-hover: #9c7f35;
-      --border-subtle: #e4e2db;
-      --radius: 12px;
-      --shadow-soft: 0 12px 32px rgba(0,0,0,0.04);
+      --black: #090909;
+      --dark: #121316;
+      --gold: #d4af37;
+      --gold2: #f0cf68;
+      --white: #ffffff;
+      --soft: #f8f9fa;
+      --muted: #6c757d;
+      --line: #e9ecef;
+      --shadow: 0 10px 25px rgba(0,0,0,0.06);
+      --card-border: rgba(212,175,55,0.22);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; }
     input, textarea, select { user-select: text; -webkit-user-select: text; }
     html { scroll-behavior: smooth; }
-    
-    body {
-      font-family: "Cairo", sans-serif;
-      color: var(--text-main);
-      background: var(--bg-color);
-      line-height: 1.8;
-      overflow-x: hidden;
-    }
-
+    body { font-family: "Cairo", sans-serif; color: #1a1a1a; background: #fff; line-height: 1.7; overflow-x: hidden; }
     a { text-decoration: none; color: inherit; }
-    .container { width: min(1140px, 90%); margin: auto; }
-
-    /* الهيدر الأنيق والبسيط */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(247, 246, 242, 0.9);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .nav { height: 80px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .container { width: min(1180px, 92%); margin: auto; }
     
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; }
-    .brand-mark {
-      width: 48px; height: 38px; display: inline-flex; align-items: center; justify-content: center;
-      gap: 2px; font-size: 18px; font-weight: 900; background: var(--text-main); color: #fff;
-      border-radius: 6px; direction: ltr !important; unicode-bidi: bidi-override;
-    }
-    .brand-mark span { color: var(--accent); }
-    .brand small { display: block; font-size: 9px; letter-spacing: 1.5px; color: var(--text-muted); margin-top: -3px; font-weight: 600; }
-
-    nav { display: flex; gap: 24px; color: var(--text-muted); font-size: 14px; font-weight: 600; }
-    nav a { transition: .2s; }
-    nav a:hover, nav a.active { color: var(--text-main); }
-
-    .nav-actions { display: flex; align-items: center; gap: 12px; }
-    .lang-btn {
-      background: transparent; color: var(--text-main); border: 1px solid var(--border-subtle);
-      padding: 6px 14px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 12.5px;
-      font-family: inherit; transition: .2s;
-    }
-    .lang-btn:hover { border-color: var(--text-main); }
-
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 24px; border-radius: var(--radius); font-weight: 700; font-size: 14px;
-      cursor: pointer; transition: all .25s ease; border: none;
-    }
-    .btn-primary { background: var(--text-main); color: #fff; }
-    .btn-primary:hover { background: #333; transform: translateY(-2px); }
+    header { position: sticky; top: 0; z-index: 100; background: #090909; border-bottom: 1px solid rgba(212,175,55,.25); }
+    .nav { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
+    .brand { display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 900; user-select: none; }
     
-    .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border-subtle); }
-    .btn-outline:hover { border-color: var(--text-main); background: rgba(0,0,0,0.02); }
-
-    .menu { display: none; background: none; border: 0; font-size: 26px; cursor: pointer; }
-
-    /* الواجهة الجديدة (Editorial Hero) */
-    .hero { padding: 80px 0 60px; text-align: center; }
-    .hero-content { max-width: 800px; margin: auto; }
+    .brand-mark { width: 56px; height: 36px; display: inline-flex; align-items: center; justify-content: center; gap: 3px; font-size: 20px; font-weight: 900; border-left: 3px solid var(--gold); transform: skew(-10deg); background: rgba(212,175,55,0.1); border-radius: 4px; padding: 0 4px; direction: ltr !important; unicode-bidi: bidi-override; }
+    .brand-mark span { color: var(--gold); direction: ltr; unicode-bidi: bidi-override; }
+    .brand small { display: block; font-size: 9px; letter-spacing: 1px; color: #bbb; margin-top: -2px; }
     
-    .eyebrow {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(184, 151, 66, 0.1); color: var(--accent);
-      font-size: 13px; font-weight: 700; padding: 6px 16px; border-radius: 20px;
-      margin-bottom: 24px; border: 1px solid rgba(184, 151, 66, 0.2);
-    }
+    nav { display: flex; gap: 18px; color: #ddd; font-size: 14.5px; font-weight: 600; }
+    nav a { transition: .25s; padding: 6px 0; }
+    nav a:hover, nav a.active { color: var(--gold); }
     
-    h1 {
-      font-size: clamp(32px, 4.5vw, 56px); line-height: 1.25;
-      font-weight: 900; margin-bottom: 20px; letter-spacing: -0.5px;
-    }
-    h1 span { color: var(--accent); font-weight: inherit; }
-    
-    .hero-desc {
-      font-size: 17px; color: var(--text-muted); max-width: 640px;
-      margin: 0 auto 36px auto; line-height: 1.8;
-    }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .lang-btn { background: #1a1a1a; color: var(--gold); border: 1.5px solid var(--gold); padding: 6px 14px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 13px; font-family: inherit; transition: .25s; }
+    .lang-btn:hover { background: var(--gold); color: #111; }
 
-    /* إحصائيات بتصميم نظيف */
-    .stats { margin: 20px 0 60px; }
-    .stats-box {
-      background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow-soft);
-      display: grid; grid-template-columns: repeat(2, 1fr); padding: 24px;
-      border: 1px solid var(--border-subtle); max-width: 480px; margin: auto;
-    }
-    .stat { text-align: center; border-left: 1px solid var(--border-subtle); }
-    body[dir="ltr"] .stat { border-left: 0; border-right: 1px solid var(--border-subtle); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 22px; border-radius: 10px; border: 1px solid var(--gold); font-weight: 700; font-size: 14px; cursor: pointer; transition: all .25s ease; }
+    .btn-gold { background: var(--gold); color: #111; }
+    .btn-gold:hover { background: var(--gold2); transform: translateY(-2px); }
+    .btn-dark { background: transparent; color: #fff; }
+    .btn-dark:hover { background: rgba(212,175,55,.12); }
+    .menu { display: none; background: none; border: 0; color: #fff; font-size: 28px; cursor: pointer; }
+
+    .hero { background: radial-gradient(circle at 75% 30%, #202020 0, #101113 50%, #080808 100%); color: #fff; padding: 45px 0 65px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 30px; }
+    .eyebrow { color: var(--gold); font-size: 13px; letter-spacing: 1.5px; font-weight: 800; margin-bottom: 8px; white-space: nowrap; }
+    
+    h1 { font-size: clamp(28px, 3.8vw, 50px); line-height: 1.35; margin-bottom: 16px; font-weight: 900; }
+    h1 span { color: var(--gold); display: inline-block; }
+    
+    .hero-copy p { color: #d6d6d6; font-size: 15.5px; max-width: 540px; margin-bottom: 24px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-art { display: flex; align-items: center; justify-content: center; }
+    .laptop { width: min(440px, 100%); height: 240px; border: 9px solid #252525; border-radius: 16px; background: #030303; box-shadow: 0 25px 60px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; padding: 10px; }
+    .screen { width: 100%; height: 100%; background: linear-gradient(145deg, #0a0a0a, #161616); border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid #333; }
+    .screen .big-eb { font-size: 50px; font-weight: 900; color: #fff; line-height: 1.1; }
+    .screen .big-eb b { color: var(--gold); }
+    .screen .brand-title { font-size: 12px; letter-spacing: 1.5px; color: #fff; font-weight: 700; margin-top: 4px; }
+
+    .stats { margin-top: -35px; position: relative; z-index: 10; }
+    .stats-box { background: #fff; border-radius: 14px; box-shadow: var(--shadow); display: grid; grid-template-columns: repeat(2, 1fr); padding: 18px; border: 1px solid var(--line); max-width: 550px; margin: auto; }
+    .stat { text-align: center; border-left: 1px solid #eee; }
+    body[dir="ltr"] .stat { border-left: 0; border-right: 1px solid #eee; }
     .stat:last-child { border: 0; }
-    .stat strong { display: block; font-size: 32px; font-weight: 900; color: var(--text-main); }
-    .stat span { color: var(--text-muted); font-size: 13px; font-weight: 600; }
+    .stat strong { display: block; font-size: 28px; font-weight: 900; color: #111; }
+    .stat span { color: var(--muted); font-size: 13.5px; font-weight: 600; }
 
-    section { padding: 70px 0; border-top: 1px solid var(--border-subtle); }
-    .section-head { text-align: center; margin-bottom: 40px; }
-    .section-head h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; }
-    .section-head p { color: var(--text-muted); margin-top: 8px; font-size: 15px; }
-
-    /* الخدمات بأسلوب نظيف وراقي */
-    .services { background: var(--surface); }
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    section { padding: 65px 0; }
+    .section-head { text-align: center; margin-bottom: 30px; }
+    .section-head h2 { font-size: 30px; font-weight: 800; }
+    .section-head p { color: var(--muted); margin-top: 6px; font-size: 14.5px; }
     
-    .service-card {
-      background: var(--bg-color); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius); padding: 28px; transition: all .3s ease;
-      display: flex; flex-direction: column; gap: 14px;
-    }
-    .service-card:hover { transform: translateY(-4px); border-color: var(--accent); background: var(--surface); box-shadow: var(--shadow-soft); }
-    .service-icon {
-      width: 48px; height: 48px; border-radius: 10px; background: var(--surface);
-      border: 1px solid var(--border-subtle); display: grid; place-items: center; font-size: 22px;
-    }
-    .service-card h3 { font-size: 17px; font-weight: 800; }
-    .service-card p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
-
-    /* معرض الأعمال (Portfolio) */
-    .port-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
-    .port-category-card {
-      background: var(--surface); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft);
-      display: flex; flex-direction: column;
-    }
+    .services { background: var(--soft); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     
-    .carousel-container { position: relative; width: 100%; height: 300px; background: #111; overflow: hidden; }
-    .carousel-track { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; scrollbar-width: none; }
+    .service-compact { background: #fff; border: 1px solid var(--card-border); border-radius: 14px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 14px; transition: all .25s ease; }
+    .service-compact:hover { transform: translateY(-4px); border-color: var(--gold); box-shadow: var(--shadow); }
+    .service-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; background: #111; color: var(--gold); display: grid; place-items: center; font-size: 20px; margin-top: 0; }
+    .service-compact div { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; }
+    .service-compact h3 { font-size: 16px; font-weight: 800; margin-bottom: 4px; color: #111; }
+    .service-compact p { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; }
+
+    .portfolio { background: #fff; }
+    .port-categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+    .port-category-card { background: #fff; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); border-top: 4px solid var(--gold); display: flex; flex-direction: column; }
+    
+    .carousel-container { position: relative; width: 100%; height: 320px; background: #141414; overflow: hidden; }
+    .carousel-track { display: flex; width: 100%; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
     .carousel-track::-webkit-scrollbar { display: none; }
-    .carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; }
-    .carousel-slide img { max-width: 100%; max-height: 100%; object-fit: contain; padding: 10px; display: block; }
+    .carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; position: relative; background: #141414; }
+    .carousel-slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; padding: 8px; display: block; }
     
-    .single-banner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #111; }
-    .single-banner img { max-width: 100%; max-height: 100%; object-fit: contain; padding: 10px; display: block; }
+    .single-banner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #141414; }
+    .single-banner img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; padding: 8px; display: block; }
 
-    .slide-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px;
-      border-radius: 50%; background: rgba(20,20,20,0.8); color: #fff; border: 1px solid rgba(255,255,255,0.2);
-      display: grid; place-items: center; cursor: pointer; z-index: 5; transition: .2s; font-size: 14px;
-    }
-    .slide-arrow:hover { background: var(--accent); border-color: var(--accent); color: #111; }
-    .slide-arrow.prev { right: 12px; }
-    .slide-arrow.next { left: 12px; }
-    body[dir="ltr"] .slide-arrow.prev { left: 12px; right: auto; }
-    body[dir="ltr"] .slide-arrow.next { right: 12px; left: auto; }
+    .slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: rgba(9,9,9,0.85); color: var(--gold); border: 1px solid var(--gold); display: grid; place-items: center; cursor: pointer; z-index: 5; transition: .2s; font-size: 15px; user-select: none; }
+    .slide-arrow:hover { background: var(--gold); color: #111; }
+    .slide-arrow.prev { right: 10px; }
+    .slide-arrow.next { left: 10px; }
+    body[dir="ltr"] .slide-arrow.prev { left: 10px; right: auto; }
+    body[dir="ltr"] .slide-arrow.next { right: 10px; left: auto; }
 
-    .swipe-hint {
-      position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.75);
-      color: #fff; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px;
-      border: 1px solid rgba(255,255,255,0.15); pointer-events: none;
-    }
+    .swipe-hint { position: absolute; bottom: 10px; right: 12px; background: rgba(0,0,0,0.8); color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(212,175,55,0.4); pointer-events: none; z-index: 2; }
     body[dir="ltr"] .swipe-hint { right: auto; left: 12px; }
 
-    .port-category-body { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
-    .port-category-body h3 { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
-    .port-category-body p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; flex-grow: 1; }
+    .port-category-body { padding: 22px; display: flex; flex-direction: column; flex-grow: 1; }
+    .port-category-body h3 { font-size: 17.5px; font-weight: 800; color: #111; margin-bottom: 6px; }
+    .port-category-body p { font-size: 13.5px; color: var(--muted); margin-bottom: 18px; line-height: 1.6; flex-grow: 1; }
 
-    /* من نحن */
-    .about { background: var(--surface); }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
     
-    .about-box {
-      background: var(--text-main); color: #fff; border-radius: var(--radius);
-      padding: 40px; text-align: center; height: 100%; display: flex;
-      flex-direction: column; align-items: center; justify-content: center; min-height: 280px;
-    }
-    .about-box .eb { font-size: 56px; font-weight: 900; line-height: 1; direction: ltr; unicode-bidi: bidi-override; }
-    .about-box .eb span { color: var(--accent); }
+    .about-box { background: #111; color: #fff; border-radius: 16px; padding: 25px; text-align: center; border: 1px solid rgba(212,175,55,.25); width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: auto; }
+    .about-box .eb { font-size: 48px; font-weight: 900; color: #fff; line-height: 1; direction: ltr; unicode-bidi: bidi-override; }
+    .about-box .eb b { color: var(--gold); }
     
-    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
-    .feature { padding: 16px; border: 1px solid var(--border-subtle); border-radius: var(--radius); background: var(--bg-color); }
-    .feature b { display: block; color: var(--text-main); font-size: 14px; margin-bottom: 4px; }
-    .feature span { font-size: 12.5px; color: var(--text-muted); }
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+    .feature { padding: 14px; border: 1px solid var(--line); border-radius: 10px; background: #fafafa; }
+    .feature b { display: block; color: #222; font-size: 14px; margin-bottom: 2px; }
+    .feature span { font-size: 12px; color: var(--muted); }
 
-    /* آراء العملاء */
-    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .testi-card {
-      background: var(--surface); border: 1px solid var(--border-subtle);
-      border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column;
-      justify-content: space-between; box-shadow: var(--shadow-soft);
-    }
-    .testi-stars { color: var(--accent); font-size: 15px; margin-bottom: 12px; }
-    .testi-card p { color: var(--text-main); font-size: 14px; margin-bottom: 16px; font-weight: 600; line-height: 1.7; }
-    .testi-author b { display: block; font-size: 13.5px; color: var(--text-main); }
-    .testi-author span { font-size: 12px; color: var(--text-muted); }
+    .testimonials { background: var(--soft); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .testi-card { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
+    .testi-stars { color: var(--gold); font-size: 15px; margin-bottom: 8px; }
+    .testi-card p { color: #333; font-size: 13.5px; margin-bottom: 12px; font-weight: 600; line-height: 1.6; }
+    .testi-author b { display: block; font-size: 13px; color: #111; }
+    .testi-author span { font-size: 11.5px; color: var(--muted); }
 
-    .review-action-box {
-      margin-top: 40px; background: var(--surface); border: 1px dashed var(--accent);
-      padding: 28px; border-radius: var(--radius); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;
-    }
-    .review-form-wrap { display: none; margin-top: 20px; background: var(--surface); border: 1px solid var(--border-subtle); border-radius: var(--radius); padding: 28px; }
+    .review-action-box { margin-top: 35px; background: #fff; border: 1px dashed var(--gold); padding: 24px; border-radius: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .review-form-wrap { display: none; margin-top: 20px; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
 
-    /* تواصل معنا */
-    .contact { background: #141414; color: #fff; border-top: none; }
-    .contact-box { border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); padding: 40px; display: flex; flex-direction: column; gap: 24px; }
-    .contact-box .eyebrow { background: rgba(184, 151, 66, 0.15); }
-    .contact-box p { color: #aaa; }
-    
-    .service-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--surface); color: var(--text-main); padding: 30px; border-radius: var(--radius); }
-    .service-form .full { grid-column: 1/-1; }
-    .service-form label { font-size: 13px; font-weight: 700; margin-bottom: 6px; display: block; }
-    .service-form input, .service-form select, .service-form textarea {
-      width: 100%; padding: 12px; border: 1px solid var(--border-subtle);
-      border-radius: 8px; font: inherit; outline: none; background: var(--bg-color); color: var(--text-main);
-    }
-    .service-form input:focus, .service-form select:focus, .service-form textarea:focus { border-color: var(--accent); background: var(--surface); }
-    .service-form textarea { min-height: 110px; resize: vertical; }
-
-    /* الإشعارات والنافذة */
     #eb-toast {
-      position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-      background: var(--text-main); color: var(--accent); border: 1px solid var(--accent);
-      padding: 14px 28px; border-radius: var(--radius); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      font-size: 14px; font-weight: 700; z-index: 9999; transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; text-align: center;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #111;
+      color: var(--gold);
+      border: 1.5px solid var(--gold);
+      padding: 14px 26px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      font-size: 14.5px;
+      font-weight: 700;
+      z-index: 9999;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      text-align: center;
+      max-width: 90%;
     }
-    #eb-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    #eb-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
 
-    .custom-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 999; place-items: center; padding: 20px; }
-    .custom-modal-box { background: var(--surface); border: 1px solid var(--border-subtle); width: min(400px, 90%); border-radius: var(--radius); padding: 32px 24px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-    .custom-modal-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--text-main); }
-    .custom-modal-box p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+    .custom-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 999; place-items: center; padding: 20px; }
+    .custom-modal-box { background: #141414; border: 1.5px solid var(--gold); width: min(380px, 90%); border-radius: 16px; padding: 28px 22px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.6); color: #fff; }
+    .custom-modal-box h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; color: var(--gold); }
+    .custom-modal-box p { font-size: 14px; color: #ddd; margin-bottom: 24px; line-height: 1.6; }
     .custom-modal-actions { display: flex; gap: 10px; justify-content: center; }
-    .custom-modal-actions button { flex: 1; padding: 10px; border-radius: 8px; font-weight: 700; font-size: 13.5px; cursor: pointer; border: none; }
+    .custom-modal-actions button { flex: 1; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 13.5px; cursor: pointer; border: none; transition: .2s; }
     .btn-modal-confirm { background: #e63946; color: #fff; }
-    .btn-modal-cancel { background: #eee; color: #333; }
-    .btn-modal-ok { background: var(--text-main); color: #fff; width: 100%; }
+    .btn-modal-confirm:hover { background: #d90429; }
+    .btn-modal-cancel { background: #333; color: #fff; }
+    .btn-modal-cancel:hover { background: #444; }
+    .btn-modal-ok { background: var(--gold); color: #111; width: 100%; }
+    .btn-modal-ok:hover { background: var(--gold2); }
 
-    .login-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 250; place-items: center; padding: 20px; }
-    .login-card { width: min(380px, 100%); background: var(--surface); border: 1px solid var(--border-subtle); border-radius: 20px; padding: 50px 24px 28px; position: relative; box-shadow: 0 25px 50px rgba(0,0,0,0.2); text-align: center; }
-    .login-avatar { position: absolute; top: -32px; left: 50%; transform: translateX(-50%); width: 64px; height: 64px; border-radius: 50%; background: var(--text-main); color: #fff; border: 3px solid var(--surface); display: grid; place-items: center; }
-    .login-field { display: flex; align-items: center; gap: 10px; background: var(--bg-color); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px; margin-bottom: 14px; }
-    .login-field input { border: none; background: none; outline: none; font: inherit; font-size: 14px; width: 100%; direction: ltr; text-align: left; }
-    .login-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-muted); margin: 10px 2px 20px; }
-    .login-btn { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--text-main); color: #fff; font-weight: 800; cursor: pointer; }
-    .login-close { position: absolute; top: 12px; left: 12px; background: none; border: none; font-size: 20px; cursor: pointer; }
-    .login-error { color: #e63946; font-size: 12px; margin-bottom: 10px; min-height: 14px; }
+    .login-overlay { display: none; position: fixed; inset: 0; background: rgba(5,8,5,0.55); backdrop-filter: blur(3px); z-index: 250; place-items: center; padding: 20px; }
+    .login-card { width: min(360px, 100%); background: rgba(60,70,55,0.35); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.25); border-radius: 22px; padding: 55px 26px 26px; position: relative; box-shadow: 0 25px 60px rgba(0,0,0,0.45); text-align: center; }
+    .login-avatar { position: absolute; top: -34px; left: 50%; transform: translateX(-50%); width: 68px; height: 68px; border-radius: 50%; background: #0e140e; border: 3px solid rgba(255,255,255,0.3); display: grid; place-items: center; }
+    .login-avatar svg { width: 30px; height: 30px; }
+    .login-field { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.85); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; }
+    .login-field svg { width: 17px; height: 17px; color: #333; flex-shrink: 0; }
+    .login-field input { border: none; background: none; outline: none; font: inherit; font-size: 14px; width: 100%; color: #111; direction: ltr; text-align: left; }
+    .login-field input::placeholder { color: #888; }
+    .login-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #eee; margin: 10px 2px 20px; }
+    .login-row label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .login-btn { width: 100%; padding: 13px; border: none; border-radius: 8px; background: #10160f; color: #fff; font-weight: 800; font-size: 14px; letter-spacing: 1px; cursor: pointer; transition: .2s; }
+    .login-btn:hover { background: #1b2419; }
+    .login-close { position: absolute; top: 12px; left: 12px; background: none; border: none; color: #eee; font-size: 20px; cursor: pointer; line-height: 1; }
+    .login-error { color: #ffb4b4; font-size: 12px; margin: -6px 0 12px; min-height: 14px; }
 
-    .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 200; place-items: center; padding: 15px; }
-    .admin-content { background: var(--surface); border-radius: var(--radius); max-width: 600px; width: 100%; padding: 30px; max-height: 85vh; overflow-y: auto; }
+    .admin-panel { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.75); z-index: 200; place-items: center; padding: 15px; }
+    .admin-content { background: #fff; border-radius: 14px; max-width: 580px; width: 100%; padding: 25px; max-height: 85vh; overflow-y: auto; }
 
-    .policy-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 300; place-items: center; padding: 20px; }
-    .policy-content { background: var(--surface); border-radius: var(--radius); max-width: 650px; width: 100%; padding: 35px; max-height: 85vh; overflow-y: auto; text-align: right; }
-    .policy-content h3 { color: var(--accent); margin-bottom: 16px; font-size: 20px; }
-    .policy-content p { color: var(--text-muted); font-size: 14px; margin-bottom: 12px; line-height: 1.8; }
+    .policy-modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 300; place-items: center; padding: 20px; }
+    .policy-content { background: #fff; border-radius: 14px; max-width: 650px; width: 100%; padding: 30px; max-height: 85vh; overflow-y: auto; text-align: right; }
+    .policy-content h3 { color: var(--gold); margin-bottom: 15px; font-size: 20px; }
+    .policy-content p { color: #555; font-size: 14px; margin-bottom: 12px; line-height: 1.8; }
 
-    .float-wa {
-      position: fixed; bottom: 24px; left: 24px; z-index: 99; width: 56px; height: 56px;
-      border-radius: 50%; display: grid; place-items: center; background: #25D366; color: #fff;
-      box-shadow: 0 10px 25px rgba(37,211,102,0.3); border: 2px solid #fff; transition: transform .2s;
-    }
-    .float-wa:hover { transform: scale(1.08); }
-    .float-wa svg { width: 30px; height: 30px; display: block; }
+    .contact { background: #0b0b0b; color: #fff; }
+    .contact-box { border: 1px solid rgba(212,175,55,.35); border-radius: 16px; padding: 35px; display: flex; flex-direction: column; gap: 20px; }
+    
+    .service-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; background: #fff; color: #111; padding: 25px; border-radius: 14px; }
+    .service-form .full { grid-column: 1/-1; }
+    .service-form label { font-size: 13px; font-weight: 700; margin-bottom: 4px; display: block; }
+    .service-form input, .service-form select, .service-form textarea { width: 100%; padding: 11px; border: 1px solid #ddd; border-radius: 8px; font: inherit; outline: none; background: #fafafa; }
+    .service-form input:focus, .service-form select:focus, .service-form textarea:focus { border-color: var(--gold); background: #fff; }
+    .service-form textarea { min-height: 90px; resize: vertical; }
 
-    footer { background: #0d0d0d; color: #888; padding: 30px 0 50px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 13.5px; }
+    .float-wa { position: fixed; bottom: 20px; left: 20px; z-index: 99; width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; background: #25D366; color: #fff; font-size: 26px; box-shadow: 0 10px 25px rgba(0,0,0,.3); border: 2px solid #fff; }
+    .float-wa svg { width: 28px; height: 28px; display: block; }
+
+    footer { background: #050505; color: #aaa; padding: 26px 0 45px; border-top: 1px solid #1a1a1a; font-size: 13.5px; }
     .footer { display: flex; justify-content: space-between; align-items: center; gap: 15px; flex-wrap: wrap; text-align: center; }
-    .creator-badge { color: var(--accent); font-weight: 700; }
+    .creator-badge { color: var(--gold); font-weight: 700; }
     .footer-links { display: flex; gap: 15px; font-size: 13px; justify-content: center; }
-    .footer-links a { color: #aaa; cursor: pointer; transition: color .2s; }
-    .footer-links a:hover { color: #fff; }
+    .footer-links a { color: #bbb; cursor: pointer; transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-contact-row { width: 100%; text-align: center; margin-top: 8px; color: #bbb; }
 
     @media(max-width:850px){
       nav { display: none; }
-      nav.mobile-open {
-        display: flex; position: absolute; top: 80px; right: 5%; left: 5%; flex-direction: column;
-        gap: 0; background: var(--surface); border: 1px solid var(--border-subtle);
-        border-radius: var(--radius); padding: 12px; z-index: 101; box-shadow: var(--shadow-soft);
-      }
-      nav.mobile-open a { padding: 12px 16px; border-bottom: 1px solid var(--border-subtle); color: var(--text-main); }
+      nav.mobile-open { display: flex; position: absolute; top: 68px; right: 4%; left: 4%; flex-direction: column; gap: 0; background: #111; border: 1px solid rgba(212,175,55,.35); border-radius: 12px; padding: 10px; z-index: 101; }
+      nav.mobile-open a { padding: 10px 14px; border-bottom: 1px solid #222; }
       nav.mobile-open a:last-child { border-bottom: 0; }
       .nav-actions > .btn { display: none; }
       .menu { display: block; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .actions { justify-content: center; }
       .services-grid, .port-categories, .testi-grid, .about-grid { grid-template-columns: 1fr; }
-      .service-form { grid-template-columns: 1fr; padding: 20px; }
+      .carousel-container { height: 280px; }
+      .service-form { grid-template-columns: 1fr; padding: 18px; }
       .service-form .full { grid-column: auto; }
       .features { grid-template-columns: 1fr; }
       .footer { flex-direction: column; text-align: center; gap: 12px; }
+      .footer-links { justify-content: center; }
+      footer { padding-bottom: 75px; }
     }
   </style>
 </head>
@@ -319,22 +259,31 @@
     </nav>
     <div class="nav-actions">
       <button class="lang-btn" type="button" onclick="toggleLanguage()" id="langBtn">English</button>
-      <a class="btn btn-primary" href="#contact" data-i18n="btn_order" style="padding: 8px 18px; font-size: 13px;">طلب خدمة</a>
+      <a class="btn btn-gold" href="#contact" data-i18n="btn_order">طلب خدمة</a>
       <button class="menu" aria-label="القائمة">☰</button>
     </div>
   </div>
 </header>
 
 <main id="home">
-  <!-- الواجهة الفخمة الجديدة -->
   <section class="hero">
-    <div class="container hero-content">
-      <div class="eyebrow" data-i18n="hero_eyebrow">✨ خبرة ودقة تليق بطموح مشروعك</div>
-      <h1 data-i18n="hero_title">حلول أعمالك الرقمية والمحاسبية<br><span>بلمسة هندسية فريدة</span></h1>
-      <p class="hero-desc" data-i18n="hero_desc">مش مجرد قوالب جامدة ولا خدمات مكررة. أنا أقدم لك خبرة عملية متكاملة تجمع بين هندسة الأرقام، إبداع التصميم، وسرعة البرمجة لتطوير نشاطك بثقة.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="#portfolio" data-i18n="hero_btn_port">تصفح معرض الأعمال ←</a>
-        <a class="btn btn-outline" href="https://wa.me/201207641934" target="_blank" rel="noopener" data-i18n="hero_btn_wa">تواصل معي مباشرة</a>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow" data-i18n="hero_eyebrow">EB OFFICE — الشريك الرقمي لمشروعك</div>
+        <h1 data-i18n="hero_title">حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span></h1>
+        <p data-i18n="hero_desc">نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#portfolio" data-i18n="hero_btn_port">معرض الأعمال ←</a>
+          <a class="btn btn-dark" href="https://wa.me/201207641934" target="_blank" rel="noopener" data-i18n="hero_btn_wa">محادثة مباشرة عبر واتساب</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="laptop">
+          <div class="screen">
+            <div class="big-eb">E<b>B</b></div>
+            <div class="brand-title">EB OFFICE</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -349,32 +298,31 @@
   <section class="services" id="services">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow" data-i18n="services_sub">تخصصاتنا الاحترافية</div>
+        <div class="eyebrow" data-i18n="services_sub">خدمات متخصصة</div>
         <h2 data-i18n="services_title">حلول ذكية تلبي كافة احتياجاتك</h2>
-        <p data-i18n="services_desc">منظومة متكاملة لدعم نمو الشركات الناشئة ورواد الأعمال</p>
       </div>
       <div class="services-grid">
-        <div class="service-card">
+        <div class="service-compact">
           <div class="service-icon">📊</div>
           <div><h3 data-i18n="s1_t">Excel & Accounting</h3><p data-i18n="s1_d">تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.</p></div>
         </div>
-        <div class="service-card">
+        <div class="service-compact">
           <div class="service-icon">🌐</div>
           <div><h3 data-i18n="s2_t">Websites Development</h3><p data-i18n="s2_d">برمجة صفحات هبوط ومواقع تعريفية سريعة ومتجاوبة مع الجوال والمحركات.</p></div>
         </div>
-        <div class="service-card">
+        <div class="service-compact">
           <div class="service-icon">📄</div>
           <div><h3 data-i18n="s3_t">CV & ATS Documents</h3><p data-i18n="s3_d">صياغة وتصميم CV متوافق مع ATS، وفواتير وسندات مالية رسمية.</p></div>
         </div>
-        <div class="service-card">
+        <div class="service-compact">
           <div class="service-icon">🎨</div>
           <div><h3 data-i18n="s4_t">Graphic Design & Branding</h3><p data-i18n="s4_d">تصميم شعارات احترافية، بوسترات تسويقية، وباقات براندينج متكاملة.</p></div>
         </div>
-        <div class="service-card">
+        <div class="service-compact">
           <div class="service-icon">📱</div>
           <div><h3 data-i18n="s5_t">Social Media Management</h3><p data-i18n="s5_d">صناعة محتوى جذاب، جدولة النشر الدوري، وإدارة التفاعل والنمو.</p></div>
         </div>
-        <div class="service-card">
+        <div class="service-compact">
           <div class="service-icon">🤖</div>
           <div><h3 data-i18n="s6_t">AI & Digital Solutions</h3><p data-i18n="s6_d">دمج أدوات الذكاء الاصطناعي لأتمتة المهام وتوفير الوقت وزيادة الإنتاجية.</p></div>
         </div>
@@ -385,7 +333,7 @@
   <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-head">
-        <div class="eyebrow" data-i18n="port_sub">سجل الأعمال</div>
+        <div class="eyebrow" data-i18n="port_sub">معرض الأعمال المنفذة</div>
         <h2 data-i18n="port_title">نماذج من مشاريعنا حسب التخصص</h2>
         <p data-i18n="port_desc">تتحرك الصور تلقائياً ويمكنك السحب يميناً ويساراً ⟷ لمعاينة كافة النماذج كاملة.</p>
       </div>
@@ -407,7 +355,7 @@
           <div class="port-category-body">
             <h3 data-i18n="p1_t">أنظمة المحاسبة وشيتات Excel و Dashboard</h3>
             <p data-i18n="p1_d">لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة النقدية والشيكات بدقة.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20أنظمة%20محاسبية%20وشيتات%20إكسيل" target="_blank" class="btn btn-primary" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_excel">طلب نظام محاسبي ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20طلب%20أنظمة%20محاسبية%20وشيتات%20إكسيل" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_excel">طلب نظام محاسبي ↗</a>
           </div>
         </article>
 
@@ -426,7 +374,7 @@
           <div class="port-category-body">
             <h3 data-i18n="p2_t">السير الذاتية الاحترافية (ATS) والمستندات</h3>
             <p data-i18n="p2_d">تصميم وتنسيق سيرة ذاتية مهيكلة بدقة لاجتياز الفرز الإلكتروني (ATS) وزيادة فرص القبول، وفواتير وسندات مالية رسمية.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20ATS%20أو%20مستندات" target="_blank" class="btn btn-primary" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_cv">طلب تصميم CV / مستندات ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20سيرة%20ذاتية%20ATS%20أو%20مستندات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_cv">طلب تصميم CV / مستندات ↗</a>
           </div>
         </article>
 
@@ -443,7 +391,7 @@
           <div class="port-category-body">
             <h3 data-i18n="p3_t">الهوية البصرية وتصاميم الشعارات والبراندينج</h3>
             <p data-i18n="p3_d">تصميم شعارات مبتكرة، كروت عمل فاخرة، موك آب الشاشات، وهوية بصرية متكاملة تعكس قوة علامتك التجارية في السوق.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وشعارات" target="_blank" class="btn btn-primary" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_design">طلب تصميم هوية / براند ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20هوية%20بصرية%20وشعارات" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_design">طلب تصميم هوية / براند ↗</a>
           </div>
         </article>
 
@@ -462,7 +410,7 @@
           <div class="port-category-body">
             <h3 data-i18n="p4_t">إدارة منصات السوشيال ميديا وصناعة المحتوى</h3>
             <p data-i18n="p4_d">إدارة الحسابات على فيسبوك وإنستجرام وتيك توك، نشر المحتوى الدوري، جدولة المواعيد، وتنمية التفاعل والمبيعات باحترافية.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20باقة%20إدارة%20سوشيال%20ميديا%20وصناعة%20محتوى" target="_blank" class="btn btn-primary" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_social">طلب باقة سوشيال ميديا ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20باقة%20إدارة%20سوشيال%20ميديا%20وصناعة%20محتوى" target="_blank" class="btn btn-gold" style="width:100%;font-size:13.5px;padding:11px 0" data-i18n="btn_req_social">طلب باقة سوشيال ميديا ↗</a>
           </div>
         </article>
 
@@ -475,23 +423,23 @@
           <div class="port-category-body">
             <h3 data-i18n="p5_t">تطوير المواقع وصفحات الهبوط (Websites)</h3>
             <p data-i18n="p5_d">بناء وتطوير مواقع ويب سريعة جداً، بتصميم حديث متجاوب 100% مع كافة الشاشات والموبايل ومربوطة مباشرة بالواتساب.</p>
-            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20وبرمجة%20موقع%20إلكتروني" target="_blank" class="btn btn-primary" style="width:min(320px,100%);margin:auto;font-size:13.5px;padding:11px 0" data-i18n="btn_req_web">طلب تصميم وبرمجة موقع ↗</a>
+            <a href="https://wa.me/201207641934?text=أرغب%20في%20تصميم%20وبرمجة%20موقع%20إلكتروني" target="_blank" class="btn btn-gold" style="width:min(320px,100%);margin:auto;font-size:13.5px;padding:11px 0" data-i18n="btn_req_web">طلب تصميم وبرمجة موقع ↗</a>
           </div>
         </article>
       </div>
     </div>
   </section>
 
-  <section class="about" id="about">
+  <section id="about">
     <div class="container about-grid">
       <div class="about-box">
-        <div class="eb">E<span>B</span></div>
-        <p style="color:#aaa;margin-top:8px;font-size:12px;letter-spacing:1px">BUSINESS & DIGITAL SOLUTIONS</p>
+        <div class="eb">E<b>B</b></div>
+        <p style="color:#bbb;margin-top:6px;font-size:12px">BUSINESS & DIGITAL SOLUTIONS</p>
       </div>
       <div>
         <div class="eyebrow" data-i18n="about_sub">من نحن</div>
         <h2 data-i18n="about_title">نبتكر الحلول لتنمية عملك</h2>
-        <p style="color:var(--text-muted);font-size:15px;line-height:1.8" data-i18n="about_desc">مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
+        <p style="color:#555;font-size:15px" data-i18n="about_desc">مكتب <strong>EB OFFICE</strong> يركز على مساعدة رواد الأعمال والشركات في تبسيط أعمالهم وتطويرها، عبر دمج الخبرة المحاسبية بالحلول الرقمية والتصميمية وأدوات الذكاء الاصطناعي.</p>
         <div class="features">
           <div class="feature"><b data-i18n="f1_t">دقة واحترافية</b><span data-i18n="f1_d">التزام تام بأدق المعايير والمخرجات.</span></div>
           <div class="feature"><b data-i18n="f2_t">تنفيذ سريع</b><span data-i18n="f2_d">تسليم المشروعات في المواعيد المحددة.</span></div>
@@ -510,53 +458,55 @@
       </div>
 
       <div class="testi-grid" id="testiContainer">
-        <!-- جلب البيانات -->
+        <!-- جلب البيانات بدون تكرار -->
       </div>
 
       <div class="review-action-box">
         <div>
           <h4 style="font-size:16px;font-weight:800" data-i18n="rev_box_title">تعاملت معنا من قبل؟</h4>
-          <p style="color:var(--text-muted);font-size:13.5px" data-i18n="rev_box_desc">شاركنا رأيك وتجربتك بكل صراحة، رأيك يساعدنا ويساعد العملاء الجدد.</p>
+          <p style="color:var(--muted);font-size:13.5px" data-i18n="rev_box_desc">شاركنا رأيك وتجربتك بكل صراحة، رأيك يساعدنا ويساعد العملاء الجدد.</p>
         </div>
-        <button class="btn btn-primary" type="button" onclick="toggleReviewForm()" data-i18n="rev_box_btn">كتابة تقييم ورأي ✍️</button>
+        <button class="btn btn-gold" type="button" onclick="toggleReviewForm()" data-i18n="rev_box_btn">كتابة تقييم ورأي ✍️</button>
       </div>
 
       <div class="review-form-wrap" id="reviewFormWrap">
-        <h3 style="font-size:17px;margin-bottom:14px" data-i18n="rf_title">أضف تقييمك ورأيك في الخدمة</h3>
-        <form id="addReviewForm" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <h3 style="font-size:17px;margin-bottom:12px" data-i18n="rf_title">أضف تقييمك ورأيك في الخدمة</h3>
+        <form id="addReviewForm" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
           <div>
             <label style="font-size:12.5px;font-weight:700" data-i18n="rf_name">اسمك الكريم</label>
-            <input id="revName" required data-placeholder-key="ph_rev_name" placeholder="مثال: أحمد مصطفى">
+            <input id="revName" required data-placeholder-key="ph_rev_name" placeholder="مثال: أحمد مصطفى" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
           </div>
           <div>
             <label style="font-size:12.5px;font-weight:700" data-i18n="rf_job">صفتك أو مجالك</label>
-            <input id="revJob" required data-placeholder-key="ph_rev_job" placeholder="مثال: صاحب بيزنس / مهندس">
+            <input id="revJob" required data-placeholder-key="ph_rev_job" placeholder="مثال: صاحب بيزنس / مهندس" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px">
           </div>
           <div style="grid-column:1/-1">
             <label style="font-size:12.5px;font-weight:700" data-i18n="rf_text">رأيك وتجربتك في الشغل معنا</label>
-            <textarea id="revText" required data-placeholder-key="ph_rev_text" placeholder="اكتب رأيك بكل صراحة..."></textarea>
+            <textarea id="revText" required data-placeholder-key="ph_rev_text" placeholder="اكتب رأيك بكل صراحة..." style="width:100%;padding:10px;border:1px solid #ddd;border-radius:8px;min-height:80px"></textarea>
           </div>
           <div style="grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
-            <button class="btn btn-primary" type="submit" id="btnSubmitReview" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
-            <span style="font-size:11.5px;color:var(--text-muted)" data-i18n="rf_hint">يخضع التقييم لموافقة الإدارة قبل النشر.</span>
+            <button class="btn btn-gold" type="submit" id="btnSubmitReview" data-i18n="rf_submit">إرسال التقييم للمراجعة ↗</button>
+            <span style="font-size:11.5px;color:var(--muted)" data-i18n="rf_hint">يخضع التقييم لموافقة الإدارة قبل النشر.</span>
           </div>
         </form>
       </div>
     </div>
   </section>
 
-  <!-- نافذة تسجيل دخول الأدمن -->
+  <!-- نافذة تسجيل دخول الأدمن الزجاجية -->
   <div class="login-overlay" id="loginOverlay">
     <div class="login-card">
       <button type="button" class="login-close" onclick="closeLoginCard()" aria-label="إغلاق">✕</button>
       <div class="login-avatar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" style="width:28px;height:28px"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
       </div>
       <form id="adminLoginForm">
         <div class="login-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
           <input id="loginEmail" type="text" placeholder="Email ID / Username" autocomplete="username" required>
         </div>
         <div class="login-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
           <input id="loginPassword" type="password" placeholder="Password" autocomplete="current-password" required>
         </div>
         <div class="login-error" id="loginError"></div>
@@ -577,15 +527,15 @@
         <button type="button" onclick="closeAdminPanel()" style="background:none;border:none;font-size:22px;cursor:pointer">✕</button>
       </div>
       
-      <h4 style="font-size:14px;color:var(--accent);margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المعلقة (بانتظار الموافقة):</h4>
+      <h4 style="font-size:14px;color:var(--gold);margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المعلقة (بانتظار الموافقة):</h4>
       <div id="pendingReviewsList" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px"></div>
 
-      <h4 style="font-size:14px;color:var(--text-main);margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المنشورة حالياً بالموقع:</h4>
+      <h4 style="font-size:14px;color:#111;margin-bottom:8px;border-bottom:1px solid #eee;padding-bottom:4px">الآراء المنشورة حالياً بالموقع:</h4>
       <div id="approvedReviewsList" style="display:flex;flex-direction:column;gap:10px"></div>
     </div>
   </div>
 
-  <!-- مودال مخصص -->
+  <!-- Modal مخصص وأنيق -->
   <div class="custom-modal-overlay" id="customModalOverlay">
     <div class="custom-modal-box">
       <h3 id="customModalTitle">تأكيد عملية</h3>
@@ -600,7 +550,7 @@
       <h3 data-i18n="modal_privacy_title">سياسة الخصوصية</h3>
       <p data-i18n="modal_privacy_p1">نحن في EB OFFICE نلتزم بحماية خصوصية بياناتك الشخصية ومعلوماتك التجارية بكل أمان وسرية تامة.</p>
       <p data-i18n="modal_privacy_p2">نستخدم البيانات فقط لتحسين جودة الخدمات وتسهيل التواصل معك عبر قنواتنا الرسمية مثل واتساب.</p>
-      <button class="btn btn-primary" type="button" onclick="closePolicyModal('privacyModal')" style="margin-top:15px;width:100%" data-i18n="modal_close">إغلاق</button>
+      <button class="btn btn-gold" type="button" onclick="closePolicyModal('privacyModal')" style="margin-top:15px;width:100%" data-i18n="modal_close">إغلاق</button>
     </div>
   </div>
 
@@ -610,7 +560,7 @@
       <h3 data-i18n="modal_terms_title">الشروط والأحكام</h3>
       <p data-i18n="modal_terms_p1">استخدامك لموقع وخدمات EB OFFICE يعني موافقتك التامة على الالتزام بكافة الشروط والقواعد المعمول بها.</p>
       <p data-i18n="modal_terms_p2">جميع حقوق التصميم والتطوير والمحتوى محفوظة © 2026 EB OFFICE.</p>
-      <button class="btn btn-primary" type="button" onclick="closePolicyModal('termsModal')" style="margin-top:15px;width:100%" data-i18n="modal_close">إغلاق</button>
+      <button class="btn btn-gold" type="button" onclick="closePolicyModal('termsModal')" style="margin-top:15px;width:100%" data-i18n="modal_close">إغلاق</button>
     </div>
   </div>
 
@@ -619,7 +569,7 @@
       <div>
         <div class="eyebrow" data-i18n="contact_sub">تواصل معنا</div>
         <h2 data-i18n="contact_title">جاهز لتطوير أعمالك اليوم؟</h2>
-        <p style="margin-top:6px;font-size:14px" data-i18n="contact_desc">املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.</p>
+        <p style="color:#bbb;margin-top:6px;font-size:14px" data-i18n="contact_desc">املأ النموذج وسنتواصل معك مباشرة عبر واتساب لاقتراح خطة العمل المناسبة.</p>
       </div>
 
       <form class="service-form" id="serviceForm">
@@ -664,7 +614,7 @@
           <textarea id="details" name="details" required data-placeholder-key="ph_details" placeholder="وضح طبيعة المشروع وأهم المتطلبات..."></textarea>
         </div>
         <div class="full">
-          <button class="btn btn-primary" type="submit" style="width:100%" data-i18n="f_submit">إرسال الطلب مباشرة عبر واتساب ↗</button>
+          <button class="btn btn-gold" type="submit" style="width:100%" data-i18n="f_submit">إرسال الطلب مباشرة عبر واتساب ↗</button>
         </div>
       </form>
     </div>
@@ -708,7 +658,9 @@
     const toast = document.getElementById('eb-toast');
     toast.textContent = message;
     toast.classList.add('show');
-    setTimeout(() => { toast.classList.remove('show'); }, 3500);
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3500);
   }
 
   function showCustomModal(title, text, type, onConfirm) {
@@ -724,12 +676,12 @@
     if (type === 'confirm') {
       const btnCancel = document.createElement('button');
       btnCancel.className = 'btn-modal-cancel';
-      btnCancel.textContent = currentLang === 'ar' ? 'إلغاء' : 'No';
+      btnCancel.textContent = currentLang === 'ar' ? 'إلغاء (No)' : 'No';
       btnCancel.onclick = () => overlay.style.display = 'none';
 
       const btnConfirm = document.createElement('button');
       btnConfirm.className = 'btn-modal-confirm';
-      btnConfirm.textContent = currentLang === 'ar' ? 'تأكيد الحذف' : 'Yes';
+      btnConfirm.textContent = currentLang === 'ar' ? 'تأكيد الحذف (Yes)' : 'Yes';
       btnConfirm.onclick = () => {
         overlay.style.display = 'none';
         if (onConfirm) onConfirm();
@@ -739,14 +691,19 @@
       actionsEl.appendChild(btnConfirm);
     } else {
       const btnOk = document.createElement('button');
-      btnOk.className = 'btn-modal-ok btn btn-primary';
-      btnOk.textContent = 'حسناً';
+      btnOk.className = 'btn-modal-ok btn btn-gold';
+      btnOk.textContent = 'حسناً (OK)';
       btnOk.onclick = () => overlay.style.display = 'none';
       actionsEl.appendChild(btnOk);
     }
 
     overlay.style.display = 'grid';
   }
+
+  // Holds the admin's credentials ONLY in memory for the current admin panel
+  // session (never saved to localStorage). Every privileged action below
+  // sends these along and the database re-checks them before doing anything.
+  let adminSession = null;
 
   const defaultReviews = {
     ar: [
@@ -761,8 +718,12 @@
     ]
   };
 
+  // Session-only cache: avoids re-calling the translation API every time the
+  // visitor toggles the language switch back and forth.
   const reviewTranslationCache = new Map();
 
+  // ---- FIXED: deduplicate reliably by normalized name+text, and never show
+  // untranslated Arabic reviews while the site is in English mode ----
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
     if (!container) return;
@@ -779,12 +740,17 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
+        // Dedupe strictly by normalized (name + text) content, regardless of id.
+        // This catches duplicate rows in the database that were submitted more
+        // than once with the same content but different ids.
         const uniqueMap = new Map();
         data.forEach(item => {
           const normName = (item.name || '').trim().replace(/\s+/g, ' ').toLowerCase();
           const normText = (item.text || '').trim().replace(/\s+/g, ' ').toLowerCase();
           const uniqueKey = normName + '||' + normText;
-          if (!uniqueMap.has(uniqueKey)) { uniqueMap.set(uniqueKey, item); }
+          if (!uniqueMap.has(uniqueKey)) {
+            uniqueMap.set(uniqueKey, item);
+          }
         });
         fetchedData = Array.from(uniqueMap.values());
       }
@@ -795,12 +761,19 @@
     let reviewsToDisplay;
 
     if (currentLang === 'en') {
+      // For English mode: use the stored translation if the admin already
+      // saved one; otherwise translate on the fly right now (live, when the
+      // visitor switches the language), and cache the result in memory so
+      // toggling the language back and forth doesn't re-call the API.
       const translatedList = await Promise.all(fetchedData.map(async (d) => {
+        // If everything is already translated and stored, use it as-is.
         const hasFullTranslation = d.text_en && d.text_en.trim() !== "" && d.name_en && d.name_en.trim() !== "";
         if (hasFullTranslation) return d;
 
         const cacheKey = d.id != null ? String(d.id) : (d.name + '|' + d.text);
-        if (reviewTranslationCache.has(cacheKey)) { return reviewTranslationCache.get(cacheKey); }
+        if (reviewTranslationCache.has(cacheKey)) {
+          return reviewTranslationCache.get(cacheKey);
+        }
 
         const [textEn, roleEn, nameEn] = await Promise.all([
           (d.text_en && d.text_en.trim() !== "") ? d.text_en : translateText(d.text, 'ar', 'en'),
@@ -824,6 +797,9 @@
       let displayText = d.text;
 
       if (currentLang === 'en') {
+        // At this point every item in reviewsToDisplay (when it came from the
+        // DB) is guaranteed to have text_en filled in (see filter above).
+        // Default review samples already have plain English text/role/name.
         displayText = d.text_en || d.text;
         displayRole = (d.role_en && d.role_en.trim() !== "") ? d.role_en : d.role;
         displayName = (d.name_en && d.name_en.trim() !== "") ? d.name_en : d.name;
@@ -840,6 +816,12 @@
     });
   };
 
+  // ---- AUTO TRANSLATION (free, no API key) ----
+  // Uses the public MyMemory translation API to translate Arabic review text
+  // to English automatically at submission time, so the admin only needs to
+  // click "approve" - no manual typing of the translation is required.
+  // If the API fails or is rate-limited, text_en/role_en are left empty and
+  // the admin can still fill them manually from the panel as a fallback.
   async function translateText(text, sourceLang, targetLang) {
     const trimmed = (text || '').trim();
     if (!trimmed) return '';
@@ -849,15 +831,19 @@
       if (!res.ok) throw new Error('Translation request failed');
       const data = await res.json();
       let translated = data?.responseData?.translatedText || '';
+      // MyMemory sometimes returns a quota warning instead of a translation
       if (!translated || /MYMEMORY WARNING/i.test(translated)) return '';
       return translated;
-    } catch (e) { return ''; }
+    } catch (e) {
+      console.error('Translation error:', e);
+      return '';
+    }
   }
 
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
-    if (btn.disabled) return;
+    if (btn.disabled) return; // guard against double-submit (double tap / double click)
     btn.disabled = true;
     btn.innerText = currentLang === 'ar' ? "جاري الترجمة..." : "Translating...";
 
@@ -866,6 +852,9 @@
     const text = document.getElementById("revText").value.trim();
 
     try {
+      // Auto-translate name, role & text to English before saving, so the
+      // review arrives in the admin panel already translated and ready to
+      // approve.
       const [textEn, roleEn, nameEn] = await Promise.all([
         translateText(text, 'ar', 'en'),
         translateText(role, 'ar', 'en'),
@@ -878,11 +867,12 @@
 
       if (error) throw error;
 
-      showToast(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك بنجاح وسينشر فور اعتماده.' : 'Thank you! Your review was received.');
+      showToast(currentLang === 'ar' ? 'شكراً لك! تم استلام تقييمك بنجاح وسينشر فور اعتماده من الإدارة.' : 'Thank you! Your review was received and will be published after moderation.');
       this.reset();
       document.getElementById("reviewFormWrap").style.display = "none";
     } catch(err) {
-      showToast(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال.' : 'An error occurred.');
+      console.error(err);
+      showToast(currentLang === 'ar' ? 'حدث خطأ أثناء الإرسال. تأكد من اتصال الإنترنت.' : 'An error occurred. Check your connection.');
     } finally {
       btn.disabled = false;
       btn.innerText = translations[currentLang].rf_submit;
@@ -894,20 +884,32 @@
     const approvedList = document.getElementById("approvedReviewsList");
     if(!pendingList || !approvedList) return;
 
-    pendingList.innerHTML = "<p style='font-size:12px;color:#888'>جاري التحميل...</p>";
-    approvedList.innerHTML = "<p style='font-size:12px;color:#888'>جاري التحميل...</p>";
+    pendingList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
+    approvedList.innerHTML = "<p style='font-size:12px;color:#888'>جاري تحميل البيانات...</p>";
+
+    if (!adminSession) {
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>انتهت الجلسة، سجّل الدخول تاني.</p>";
+      approvedList.innerHTML = "";
+      return;
+    }
 
     try {
-      const { data, error } = await _supabase.from('reviews').select('*').order('created_at', { ascending: false });
+      const { data, error } = await _supabase.rpc('admin_list_reviews', {
+        p_email: adminSession.email,
+        p_password: adminSession.password
+      });
+
       if (error) throw error;
       
       pendingList.innerHTML = "";
       approvedList.innerHTML = "";
 
-      let pendingCount = 0, approvedCount = 0;
+      let pendingCount = 0;
+      let approvedCount = 0;
 
       data.forEach(rev => {
         const id = rev.id;
+
         if (!rev.approved) {
           pendingCount++;
           const item = document.createElement("div");
@@ -915,12 +917,12 @@
           item.innerHTML = `
             <strong>${escapeHTML(rev.name)}</strong> (${escapeHTML(rev.role)})
             <p style="font-size:13px;color:#444;margin:6px 0">AR: "${escapeHTML(rev.text)}"</p>
-            <p style="font-size:13px;color:#444;margin:6px 0">EN Name: <input type="text" id="en_name_${id}" value="${escapeHTML(rev.name_en || '')}" style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;direction:ltr;text-align:left;"></p>
-            <p style="font-size:13px;color:#444;margin:6px 0">EN Text: <input type="text" id="en_text_${id}" value="${escapeHTML(rev.text_en || '')}" style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;direction:ltr;text-align:left;"></p>
-            <p style="font-size:13px;color:#444;margin:6px 0">EN Role: <input type="text" id="en_role_${id}" value="${escapeHTML(rev.role_en || '')}" style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;direction:ltr;text-align:left;"></p>
+            <p style="font-size:13px;color:#444;margin:6px 0">EN Name: <input type="text" id="en_name_${id}" value="${escapeHTML(rev.name_en || '')}" placeholder="English name..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
+            <p style="font-size:13px;color:#444;margin:6px 0">EN Text: <input type="text" id="en_text_${id}" value="${escapeHTML(rev.text_en || '')}" placeholder="English translation..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
+            <p style="font-size:13px;color:#444;margin:6px 0">EN Role: <input type="text" id="en_role_${id}" value="${escapeHTML(rev.role_en || '')}" placeholder="English role..." style="width:100%;padding:6px;border:1px solid #ddd;border-radius:6px;margin-top:4px;direction:ltr;text-align:left;"></p>
             <div style="display:flex;gap:8px;margin-top:8px">
-              <button class="btn btn-primary" style="padding:6px 14px;font-size:12px" onclick="saveAndApproveReview('${id}')">موافقة ونشر ✅</button>
-              <button style="padding:6px 14px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
+              <button class="btn btn-gold" style="padding:5px 12px;font-size:12px" onclick="saveAndApproveReview('${id}')">حفظ وموافقة ونشر ✅</button>
+              <button style="padding:5px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
             </div>
           `;
           pendingList.appendChild(item);
@@ -931,20 +933,30 @@
           item.innerHTML = `
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <div>
-                <strong>${escapeHTML(rev.name)}</strong> <small style="color:var(--text-muted)">(${escapeHTML(rev.role)})</small>
+                <strong>${escapeHTML(rev.name)}</strong> <small style="color:var(--muted)">(${escapeHTML(rev.role)})</small>
                 <p style="font-size:13px;color:#444;margin-top:4px">AR: "${escapeHTML(rev.text)}"</p>
+                <p style="font-size:12px;color:#666">EN: "${escapeHTML(rev.name_en || 'Not translated')}" — "${escapeHTML(rev.text_en || 'Not translated')}" / "${escapeHTML(rev.role_en || '')}"</p>
               </div>
-              <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer" onclick="deleteReview('${id}')">حذف ✕</button>
+              <button style="padding:6px 12px;font-size:12px;background:#e63946;color:#fff;border:none;border-radius:8px;cursor:pointer;white-space:nowrap" onclick="deleteReview('${id}')">حذف ✕</button>
+            </div>
+            <div style="display:flex;gap:6px;margin-top:4px;">
+              <input type="text" id="edit_en_name_${id}" value="${escapeHTML(rev.name_en || '')}" placeholder="EN name" style="width:100px;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
+              <input type="text" id="edit_en_text_${id}" value="${escapeHTML(rev.text_en || '')}" placeholder="EN text" style="flex:1;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
+              <input type="text" id="edit_en_role_${id}" value="${escapeHTML(rev.role_en || '')}" placeholder="EN role" style="width:110px;padding:5px;font-size:12px;border:1px solid #ddd;border-radius:4px;direction:ltr;text-align:left;">
+              <button class="btn btn-gold" style="padding:5px 10px;font-size:12px;" onclick="updateTranslationOnly('${id}')">حفظ التعديل</button>
             </div>
           `;
           approvedList.appendChild(item);
         }
       });
 
-      if (pendingCount === 0) pendingList.innerHTML = "<p style='font-size:12.5px;color:#888'>لا توجد آراء معلقة.</p>";
-      if (approvedCount === 0) approvedList.innerHTML = "<p style='font-size:12.5px;color:#888'>لا توجد آراء منشورة.</p>";
+      if (pendingCount === 0) pendingList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء معلقة بانتظار الاعتماد.</p>";
+      if (approvedCount === 0) approvedList.innerHTML = "<p style='font-size:12.5px;color:#888;padding:8px'>لا توجد آراء إضافية منشورة بعد.</p>";
+
     } catch(err) {
-      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر الجلب.</p>";
+      console.error(err);
+      pendingList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات.</p>";
+      approvedList.innerHTML = "<p style='color:red;font-size:12px'>تعذر جلب البيانات.</p>";
     }
   };
 
@@ -952,47 +964,144 @@
     const textEn = document.getElementById(`en_text_${id}`).value.trim();
     const roleEn = document.getElementById(`en_role_${id}`).value.trim();
     const nameEn = document.getElementById(`en_name_${id}`).value.trim();
+    if (!adminSession) { showCustomModal("خطأ", "انتهت الجلسة، سجّل الدخول تاني.", "alert"); return; }
     try {
-      await _supabase.from('reviews').update({ approved: true, text_en: textEn, role_en: roleEn, name_en: nameEn }).eq('id', id);
-      showCustomModal("نجاح", "تم نشر التقييم بنجاح!", "alert");
-      renderAdminLists(); loadPublicReviews();
-    } catch(e) { showCustomModal("خطأ", "حدث خطأ.", "alert"); }
+      const { error } = await _supabase.rpc('admin_approve_review', {
+        p_email: adminSession.email,
+        p_password: adminSession.password,
+        p_id: String(id),
+        p_text_en: textEn,
+        p_role_en: roleEn,
+        p_name_en: nameEn
+      });
+      if (error) throw error;
+      showCustomModal("نجاح", "تم حفظ الترجمة ونشر التقييم بنجاح!", "alert");
+      renderAdminLists();
+      loadPublicReviews();
+    } catch(e) { showCustomModal("خطأ", "حدث خطأ أثناء الحفظ.", "alert"); }
+  };
+
+  window.updateTranslationOnly = async function(id) {
+    const textEn = document.getElementById(`edit_en_text_${id}`).value.trim();
+    const roleEn = document.getElementById(`edit_en_role_${id}`).value.trim();
+    const nameEn = document.getElementById(`edit_en_name_${id}`).value.trim();
+    if (!adminSession) { showToast("انتهت الجلسة، سجّل الدخول تاني."); return; }
+    try {
+      const { error } = await _supabase.rpc('admin_update_translation', {
+        p_email: adminSession.email,
+        p_password: adminSession.password,
+        p_id: String(id),
+        p_text_en: textEn,
+        p_role_en: roleEn,
+        p_name_en: nameEn
+      });
+      if (error) throw error;
+      showToast("تم تحديث الترجمة بنجاح");
+      loadPublicReviews();
+    } catch(e) { showToast("حدث خطأ أثناء التحديث"); }
   };
 
   window.deleteReview = async function(id) {
-    showCustomModal("تأكيد الحذف", "هل تريد حذف هذا التقييم نهائياً؟", "confirm", async () => {
-      await _supabase.from('reviews').delete().eq('id', id);
-      renderAdminLists(); loadPublicReviews();
+    showCustomModal("تأكيد الحذف", "هل تريد بالفعل حذف هذا التقييم نهائياً؟", "confirm", async () => {
+      if (!adminSession) { showCustomModal("خطأ", "انتهت الجلسة، سجّل الدخول تاني.", "alert"); return; }
+      try {
+        const { error } = await _supabase.rpc('admin_delete_review', {
+          p_email: adminSession.email,
+          p_password: adminSession.password,
+          p_id: String(id)
+        });
+        if (error) throw error;
+        showCustomModal("نجاح", "تم الحذف بنجاح", "alert");
+        renderAdminLists();
+        loadPublicReviews();
+      } catch(e) { showCustomModal("خطأ", "حدث خطأ أثناء الحذف.", "alert"); }
     });
   };
 
-  window.openLoginCard = function() { document.getElementById('loginOverlay').style.display = 'grid'; document.getElementById('adminLoginForm').reset(); document.getElementById('loginError').textContent = ''; };
-  window.closeLoginCard = function() { document.getElementById('loginOverlay').style.display = 'none'; };
-  window.openPolicyModal = function(id) { document.getElementById(id).style.display = 'grid'; };
-  window.closePolicyModal = function(id) { document.getElementById(id).style.display = 'none'; };
+  window.openLoginCard = function() {
+    document.getElementById('loginOverlay').style.display = 'grid';
+    document.getElementById('adminLoginForm').reset();
+    document.getElementById('loginError').textContent = '';
+  };
+
+  window.closeLoginCard = function() {
+    document.getElementById('loginOverlay').style.display = 'none';
+  };
+
+  window.openPolicyModal = function(id) {
+    document.getElementById(id).style.display = 'grid';
+  };
+
+  window.closePolicyModal = function(id) {
+    document.getElementById(id).style.display = 'none';
+  };
 
   document.getElementById('adminLoginForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     const emailInput = document.getElementById('loginEmail').value.trim();
     const passInput = document.getElementById('loginPassword').value;
     const errorBox = document.getElementById('loginError');
+    const submitBtn = document.getElementById('loginSubmitBtn');
+    
+    errorBox.textContent = '';
+    submitBtn.disabled = true;
+    submitBtn.textContent = '...';
+
     try {
-      const { data: isValid } = await _supabase.rpc('verify_admin_login', { p_email: emailInput, p_password: passInput });
-      if (!isValid) throw new Error();
-      closeLoginCard(); document.getElementById('adminPanel').style.display = 'grid'; renderAdminLists();
-    } catch(err) { errorBox.textContent = 'بيانات الدخول غير صحيحة!'; }
+      const { data: isValid, error } = await _supabase.rpc('verify_admin_login', {
+        p_email: emailInput,
+        p_password: passInput
+      });
+
+      if (error || !isValid) {
+        throw new Error('بيانات الدخول غير صحيحة');
+      }
+
+      // Keep credentials in memory only (never in localStorage). Every
+      // protected admin action re-sends these and the database re-checks
+      // them before doing anything.
+      adminSession = { email: emailInput, password: passInput };
+
+      closeLoginCard();
+      document.getElementById('adminPanel').style.display = 'grid';
+      window.renderAdminLists();
+    } catch (err) {
+      adminSession = null;
+      errorBox.textContent = currentLang === 'ar' ? 'البريد أو كلمة المرور غير صحيحة!' : 'Invalid email or password!';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'LOGIN';
+    }
   });
 
-  window.closeAdminPanel = function() { document.getElementById('adminPanel').style.display = 'none'; };
+  window.closeAdminPanel = function() {
+    document.getElementById('adminPanel').style.display = 'none';
+    // Log the admin out when they close the panel, so the credentials
+    // don't stay sitting in memory longer than needed.
+    adminSession = null;
+  };
 
   document.addEventListener('DOMContentLoaded', () => {
-    let clickCount = 0, clickTimer = null;
-    document.getElementById('adminSecretTrigger')?.addEventListener('click', () => {
-      clickCount++; clearTimeout(clickTimer);
-      clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
-      if (clickCount >= 5) { clickCount = 0; window.openLoginCard(); }
-    });
+    let clickCount = 0;
+    let clickTimer = null;
+    const trigger = document.getElementById('adminSecretTrigger');
+    if (trigger) {
+      trigger.addEventListener('click', () => {
+        clickCount++;
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => { clickCount = 0; }, 1500);
+        if (clickCount >= 5) {
+          clickCount = 0;
+          window.openLoginCard();
+        }
+      });
+    }
   });
+
+  // NOTE: the initial call to loadPublicReviews() was removed from here.
+  // It's now called once, safely, from applyLanguage() after currentLang
+  // is known (see the second script block below) - this avoids a double
+  // fetch/render race at page load.
 </script>
 
 <script>
@@ -1000,19 +1109,19 @@
     ar: {
       nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "خدماتنا", nav_portfolio: "معرض الأعمال",
       nav_reviews: "آراء العملاء", nav_contact: "تواصل معنا", btn_order: "طلب خدمة",
-      hero_eyebrow: "✨ خبرة ودقة تليق بطموح مشروعك",
-      hero_title: "حلول أعمالك الرقمية والمحاسبية<br><span>بلمسة هندسية فريدة</span>",
-      hero_desc: "مش مجرد قوالب جامدة ولا خدمات مكررة. أنا أقدم لك خبرة عملية متكاملة تجمع بين هندسة الأرقام، إبداع التصميم، وسرعة البرمجة لتطوير نشاطك بثقة.",
-      hero_btn_port: "تصفح معرض الأعمال ←", hero_btn_wa: "تواصل معي مباشرة",
+      hero_eyebrow: "EB OFFICE — الشريك الرقمي لمشروعك",
+      hero_title: "حلول أعمالك الرقمية<br><span>بمنتهى الاحترافية</span>",
+      hero_desc: "نقدم لك حلولاً برمجية ومحاسبية وتصميمية متكاملة تساعدك على تنظيم أعمالك وتوسيع نشاطك التجاري بأعلى كفاءة.",
+      hero_btn_port: "معرض الأعمال ←", hero_btn_wa: "محادثة مباشرة عبر واتساب",
       stat_exp_val: "+3", stat_exp_lbl: "سنوات خبرة", stat_sup_val: "24/7", stat_sup_lbl: "دعم مستمر",
-      services_sub: "تخصصاتنا الاحترافية", services_title: "حلول ذكية تلبي كافة احتياجاتك", services_desc: "منظومة متكاملة لدعم نمو الشركات الناشئة ورواد الأعمال",
+      services_sub: "خدمات متخصصة", services_title: "حلول ذكية تلبي كافة احتياجاتك",
       s1_t: "Excel & Accounting", s1_d: "تصميم أنظمة محاسبية، شيتات إيرادات ومصروفات، وداشبورد تفاعلية.",
       s2_t: "Websites Development", s2_d: "برمجة صفحات هبوط ومواقع تعريفية سريعة ومتجاوبة مع الجوال والمحركات.",
       s3_t: "CV & ATS Documents", s3_d: "صياغة وتصميم CV متوافق مع ATS، وفواتير وسندات مالية رسمية.",
       s4_t: "Graphic Design & Branding", s4_d: "تصميم شعارات احترافية، بوسترات تسويقية، وباقات براندينج متكاملة.",
       s5_t: "Social Media Management", s5_d: "صناعة محتوى جذاب، جدولة النشر الدوري، وإدارة التفاعل والنمو.",
       s6_t: "AI & Digital Solutions", s6_d: "دمج أدوات الذكاء الاصطناعي لأتمتة المهام وتوفير الوقت وزيادة الإنتاجية.",
-      port_sub: "سجل الأعمال", port_title: "نماذج من مشاريعنا حسب التخصص",
+      port_sub: "معرض الأعمال المنفذة", port_title: "نماذج من مشاريعنا حسب التخصص",
       port_desc: "تتحرك الصور تلقائياً ويمكنك السحب يميناً ويساراً ⟷ لمعاينة كافة النماذج كاملة.",
       swipe_hint: "اسحب للصور ⟷",
       p1_t: "أنظمة المحاسبة وشيتات Excel و Dashboard", p1_d: "لوحات تحكم تفاعلية لمتابعة الإنجاز والوفر المالي، شيتات إيرادات ومصروفات أوتوماتيكية، وإدارة النقدية والشيكات بدقة.", btn_req_excel: "طلب نظام محاسبي ↗",
@@ -1044,19 +1153,19 @@
     en: {
       nav_home: "Home", nav_about: "About", nav_services: "Services", nav_portfolio: "Portfolio",
       nav_reviews: "Reviews", nav_contact: "Contact", btn_order: "Get Started",
-      hero_eyebrow: "✨ Expertise & Precision Tailored For You",
-      hero_title: "Digital & Accounting Solutions<br><span>With Unique Craftsmanship</span>",
-      hero_desc: "Not just rigid templates or generic services. I offer integrated hands-on expertise blending financial precision, creative design, and web development to scale your business.",
-      hero_btn_port: "View Portfolio ←", hero_btn_wa: "Chat Directly",
+      hero_eyebrow: "EB OFFICE — YOUR DIGITAL PARTNER",
+      hero_title: "Digital Business Solutions<br><span>With Utmost Mastery</span>",
+      hero_desc: "We provide integrated accounting, web, and design solutions to organize your workflow and scale your business efficiently.",
+      hero_btn_port: "View Portfolio ←", hero_btn_wa: "Chat on WhatsApp",
       stat_exp_val: "+3", stat_exp_lbl: "Years of Experience", stat_sup_val: "24/7", stat_sup_lbl: "Constant Support",
-      services_sub: "Our Expertise", services_title: "Smart Solutions Tailored For You", services_desc: "An integrated ecosystem to scale startups and growing businesses",
+      services_sub: "Our Services", services_title: "Smart Solutions Tailored For You",
       s1_t: "Excel & Accounting", s1_d: "Custom accounting models, cashflow tracking, and dynamic dashboards.",
       s2_t: "Web Development", s2_d: "High-speed, SEO-friendly, mobile-responsive websites & landing pages.",
       s3_t: "CV & ATS Documents", s3_d: "ATS-optimized resumes, official invoices, and commercial vouchers.",
       s4_t: "Graphic Design & Branding", s4_d: "Professional logos, marketing posters, and full visual identities.",
       s5_t: "Social Media Management", s5_d: "Engaging content creation, posting schedules, and community growth.",
       s6_t: "AI & Digital Solutions", s6_d: "Workflow automation using modern AI tools to boost your daily output.",
-      port_sub: "Portfolio", port_title: "Showcase of Our Works",
+      port_sub: "Featured Projects", port_title: "Showcase of Our Works",
       port_desc: "Sliders scroll automatically; swipe left or right ⟷ to browse all projects.",
       swipe_hint: "Swipe for more ⟷",
       p1_t: "Accounting Systems & Excel Dashboards", p1_d: "Interactive KPIs, automated income/expense sheets, checkbooks & cash tracking.", btn_req_excel: "Request Accounting Sheet ↗",
@@ -1078,6 +1187,7 @@
       f_name: "Full Name", f_phone: "Phone / WhatsApp", f_service: "Required Service", opt_select: "Select Service", f_budget: "Estimated Budget & Currency", f_details: "Project Requirements", f_submit: "Send on WhatsApp ↗",
       ph_name: "Enter your name", ph_phone: "Contact number", ph_budget: "Amount", ph_details: "Describe project requirements...",
       opt_s1: "Excel & Accounting", opt_s2: "Websites Development", opt_s3: "CV & ATS Documents", opt_s4: "Graphic Design & Branding", opt_s5: "Social Media Management", opt_s6: "AI & Digital Solutions",
+      cur_egp: "EGP", cur_sar: "SAR", cur_aed: "AED", cur_usd: "USD", cur_eur: "EUR", cur_kwd: "KWD", cur_qar: "QAR", cur_other: "Other",
       footer_privacy: "Privacy Policy", footer_terms: "Terms & Conditions",
       modal_privacy_title: "Privacy Policy", modal_privacy_p1: "At EB OFFICE, we are committed to protecting your personal data and commercial information with absolute security.", modal_privacy_p2: "We use data solely to improve service quality and facilitate official communication via WhatsApp.",
       modal_terms_title: "Terms & Conditions", modal_terms_p1: "Using EB OFFICE website and services implies your full agreement to adhere to all governing rules.", modal_terms_p2: "All design, development, and content rights reserved © 2026 EB OFFICE.",
