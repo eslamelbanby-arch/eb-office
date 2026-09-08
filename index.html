@@ -4,18 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EB OFFICE | Business & Digital Solutions</title>
-
-  <!-- Social preview (WhatsApp / Facebook / Twitter) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="EB OFFICE | Business & Digital Solutions" />
-  <meta property="og:description" content="حلول أعمال وحلول رقمية احترافية مع EB Office" />
-  <meta property="og:image" content="https://eslamelbanby-arch.github.io/eb-office/eb-office-cover.png" />
-  <meta property="og:url" content="https://eslamelbanby-arch.github.io/eb-office/" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="EB OFFICE | Business & Digital Solutions" />
-  <meta name="twitter:description" content="حلول أعمال وحلول رقمية احترافية مع EB Office" />
-  <meta name="twitter:image" content="https://eslamelbanby-arch.github.io/eb-office/eb-office-cover.png" />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -522,7 +510,7 @@
       <form id="adminLoginForm">
         <div class="login-field">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
-          <input id="loginEmail" type="text" placeholder="Email ID / Username" autocomplete="username" required>
+          <input id="loginEmail" type="email" placeholder="Admin Email" autocomplete="username" required>
         </div>
         <div class="login-field">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
@@ -732,12 +720,8 @@
     ]
   };
 
-  // Session-only cache: avoids re-calling the translation API every time the
-  // visitor toggles the language switch back and forth.
   const reviewTranslationCache = new Map();
 
-  // ---- FIXED: deduplicate reliably by normalized name+text, and never show
-  // untranslated Arabic reviews while the site is in English mode ----
   window.loadPublicReviews = async function() {
     const container = document.getElementById("testiContainer");
     if (!container) return;
@@ -754,9 +738,6 @@
 
       if (error) throw error;
       if (data && data.length > 0) {
-        // Dedupe strictly by normalized (name + text) content, regardless of id.
-        // This catches duplicate rows in the database that were submitted more
-        // than once with the same content but different ids.
         const uniqueMap = new Map();
         data.forEach(item => {
           const normName = (item.name || '').trim().replace(/\s+/g, ' ').toLowerCase();
@@ -775,12 +756,7 @@
     let reviewsToDisplay;
 
     if (currentLang === 'en') {
-      // For English mode: use the stored translation if the admin already
-      // saved one; otherwise translate on the fly right now (live, when the
-      // visitor switches the language), and cache the result in memory so
-      // toggling the language back and forth doesn't re-call the API.
       const translatedList = await Promise.all(fetchedData.map(async (d) => {
-        // If everything is already translated and stored, use it as-is.
         const hasFullTranslation = d.text_en && d.text_en.trim() !== "" && d.name_en && d.name_en.trim() !== "";
         if (hasFullTranslation) return d;
 
@@ -811,9 +787,6 @@
       let displayText = d.text;
 
       if (currentLang === 'en') {
-        // At this point every item in reviewsToDisplay (when it came from the
-        // DB) is guaranteed to have text_en filled in (see filter above).
-        // Default review samples already have plain English text/role/name.
         displayText = d.text_en || d.text;
         displayRole = (d.role_en && d.role_en.trim() !== "") ? d.role_en : d.role;
         displayName = (d.name_en && d.name_en.trim() !== "") ? d.name_en : d.name;
@@ -830,12 +803,6 @@
     });
   };
 
-  // ---- AUTO TRANSLATION (free, no API key) ----
-  // Uses the public MyMemory translation API to translate Arabic review text
-  // to English automatically at submission time, so the admin only needs to
-  // click "approve" - no manual typing of the translation is required.
-  // If the API fails or is rate-limited, text_en/role_en are left empty and
-  // the admin can still fill them manually from the panel as a fallback.
   async function translateText(text, sourceLang, targetLang) {
     const trimmed = (text || '').trim();
     if (!trimmed) return '';
@@ -845,7 +812,6 @@
       if (!res.ok) throw new Error('Translation request failed');
       const data = await res.json();
       let translated = data?.responseData?.translatedText || '';
-      // MyMemory sometimes returns a quota warning instead of a translation
       if (!translated || /MYMEMORY WARNING/i.test(translated)) return '';
       return translated;
     } catch (e) {
@@ -857,7 +823,7 @@
   document.getElementById("addReviewForm")?.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("btnSubmitReview");
-    if (btn.disabled) return; // guard against double-submit (double tap / double click)
+    if (btn.disabled) return;
     btn.disabled = true;
     btn.innerText = currentLang === 'ar' ? "جاري الترجمة..." : "Translating...";
 
@@ -866,9 +832,6 @@
     const text = document.getElementById("revText").value.trim();
 
     try {
-      // Auto-translate name, role & text to English before saving, so the
-      // review arrives in the admin panel already translated and ready to
-      // approve.
       const [textEn, roleEn, nameEn] = await Promise.all([
         translateText(text, 'ar', 'en'),
         translateText(role, 'ar', 'en'),
@@ -1032,6 +995,7 @@
     document.getElementById(id).style.display = 'none';
   };
 
+  // ---- الربط الحقيقي بـ Supabase Auth ----
   document.getElementById('adminLoginForm')?.addEventListener('submit', async function(e) {
     e.preventDefault();
     const emailInput = document.getElementById('loginEmail').value.trim();
@@ -1044,13 +1008,13 @@
     submitBtn.textContent = '...';
 
     try {
-      const { data: isValid, error } = await _supabase.rpc('verify_admin_login', {
-        p_email: emailInput,
-        p_password: passInput
+      const { data, error } = await _supabase.auth.signInWithPassword({
+        email: emailInput,
+        password: passInput
       });
 
-      if (error || !isValid) {
-        throw new Error('بيانات الدخول غير صحيحة');
+      if (error || !data.session) {
+        throw new Error(error ? error.message : 'Login failed');
       }
 
       closeLoginCard();
@@ -1064,8 +1028,14 @@
     }
   });
 
-  window.closeAdminPanel = function() {
+  // ---- إغلاق لوحة التحكم وإجراء تسجيل الخروج الفعلي الأمني ----
+  window.closeAdminPanel = async function() {
     document.getElementById('adminPanel').style.display = 'none';
+    try {
+      await _supabase.auth.signOut();
+    } catch (e) {
+      console.error("Sign out error:", e);
+    }
   };
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -1084,11 +1054,6 @@
       });
     }
   });
-
-  // NOTE: the initial call to loadPublicReviews() was removed from here.
-  // It's now called once, safely, from applyLanguage() after currentLang
-  // is known (see the second script block below) - this avoids a double
-  // fetch/render race at page load.
 </script>
 
 <script>
